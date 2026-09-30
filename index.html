@@ -168,6 +168,23 @@
       overflow: visible;
     }
 
+    .stage-text {
+      position: absolute;
+      top: 63%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0;
+      font-family: "Anton", "Impact", sans-serif;
+      font-weight: 400;
+      font-size: calc(var(--W) * 0.016);
+      white-space: nowrap;
+      color: var(--blanc);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-shadow: 0 1px 6px rgba(0,0,0,.85), 0 2px 18px rgba(0,0,0,.55);
+      z-index: 1;
+    }
+
     /* Quand la souris passe sur les lettres KYWO : main « attraper » */
     .panel { -webkit-user-drag: none; }
     body { touch-action: none; }
@@ -200,6 +217,7 @@
       .legende { text-shadow: 0 1px 12px rgba(0, 0, 0, .35); }
       .panel--archi .legende { top: 5vw; bottom: auto; left: 5vw; right: auto; text-align: left; }
       .panel--graphisme .legende { left: 5vw; }
+      .stage-text { font-size: 3.2vw; white-space: normal; text-align: center; width: 88%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -223,6 +241,8 @@
 
   <div class="logo" aria-hidden="true">
     <img class="kywo" src="/assets/accueil/kywo-studio.webp" alt="" draggable="false">
+
+    <p class="stage-text">Recherche un stage pour Janvier 2027</p>
 
     <!-- SIGNATURE DÉSACTIVÉE — retirer ces commentaires pour la remettre :
     <svg class="signature" viewBox="0 0 2000 1125">
