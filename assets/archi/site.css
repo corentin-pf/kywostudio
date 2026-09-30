@@ -1,0 +1,617 @@
+/* =========================================================
+   KYWO Studio — site Architecture d'intérieur
+   Styles communs à toutes les pages /architecture/
+   ========================================================= */
+
+@font-face {
+  font-family: "New Title";
+  src: url("/assets/fonts/new-title-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Switzer";
+  src: url("/assets/fonts/switzer-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --bleu: #000bc5;
+  --blanc: #ffffff;
+  --gris: #c7c7c7;
+  --gris-projet: #c2c2c2;
+  --marge: 40px;          /* marge gauche / droite de la page */
+  --arrondi: 20px;
+  --titre: "New Title", "Arial Narrow", sans-serif;
+  --texte: "Switzer", "Helvetica Neue", Arial, sans-serif;
+  --ressort: cubic-bezier(.19, 1, .22, 1);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  background: var(--bleu);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bleu);
+  color: var(--blanc);
+  font-family: var(--texte);
+  font-size: 17px;
+  line-height: 25px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+p, h1, h2, h3 { margin: 0; font-weight: inherit; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.page { padding: 0 var(--marge); }
+
+/* ---------------------------------------------------------
+   Menu du haut (fixe, se cache quand on descend)
+   --------------------------------------------------------- */
+.menu {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  mix-blend-mode: difference;           /* s'inverse selon le fond, comme sur Framer */
+  transition: transform .5s var(--ressort);
+}
+.menu--cache { transform: translateY(-100%); }
+
+.menu nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 20px var(--marge);
+}
+.menu .menu__mobile { display: none; }
+
+.menu nav a {
+  font-size: clamp(20px, 2.22vw, 32px);
+  line-height: 40px;
+  text-transform: uppercase;
+}
+/* Les mots du menu montent à l'ouverture de la page */
+.menu nav a span {
+  display: block;
+  transform: translateY(125%);
+  transition: transform 1s var(--ressort);
+}
+.pret .menu nav a span { transform: none; }
+.menu nav a:nth-child(2) span { transition-delay: .04s; }
+.menu nav a:nth-child(3) span { transition-delay: .08s; }
+.menu nav a:nth-child(4) span { transition-delay: .12s; }
+.menu nav a:nth-child(5) span { transition-delay: .16s; }
+
+/* ---------------------------------------------------------
+   Lien souligné : un trait blanc glisse sous le texte au survol
+   --------------------------------------------------------- */
+.souligne {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+.souligne::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 3px;
+  background: var(--blanc);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .6s var(--ressort);
+}
+.souligne:hover::after,
+.souligne:focus-visible::after { transform: scaleX(1); }
+
+/* ---------------------------------------------------------
+   Bouton arrondi : le fond blanc monte au survol
+   --------------------------------------------------------- */
+.bouton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  box-shadow: inset 0 0 0 1px var(--blanc);   /* contour fin, sans ajouter d'épaisseur */
+  border-radius: 100px;
+  overflow: hidden;
+  font-size: 17px;
+  line-height: 25px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  isolation: isolate;
+}
+.bouton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--blanc);
+  border-radius: 100px;
+  transform: translateY(101%);
+  transition: transform .5s var(--ressort);
+}
+.bouton span {
+  position: relative;
+  z-index: 1;
+  mix-blend-mode: difference;
+}
+.bouton:hover::before,
+.bouton:focus-visible::before { transform: none; }
+
+/* ---------------------------------------------------------
+   Grands titres : chaque ligne monte depuis un cache
+   --------------------------------------------------------- */
+.grand-titre {
+  display: flex;
+  flex-direction: column;
+  gap: min(14px, 1vw);
+  padding: min(24px, 1.7vw) 0;
+  font-family: var(--titre);
+  font-size: min(200px, 13.89vw);     /* 200 px sur un écran de 1440 px, plus petit en dessous */
+  line-height: .8;
+  text-transform: uppercase;
+  text-align: center;
+}
+.ligne { display: block; overflow: hidden; }
+.ligne > span {
+  display: block;
+  transform: translateY(100%);
+  transition: transform 1.1s var(--ressort);
+}
+.ligne:nth-child(2) > span { transition-delay: .08s; }
+.est-visible > .ligne > span,
+.ligne.est-visible > span { transform: none; }
+
+/* Titre de paragraphe (80 px) */
+.sous-titre {
+  font-family: var(--titre);
+  font-size: clamp(40px, 5.56vw, 80px);
+  line-height: .9;
+  text-transform: uppercase;
+}
+
+/* Texte qui ajuste sa taille pour remplir toute la largeur */
+.pleine-largeur {
+  display: block;
+  font-family: var(--titre);
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: .8;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------
+   Pied de page
+   --------------------------------------------------------- */
+.pied {
+  padding: 40px var(--marge);
+}
+.pied__titre {
+  display: block;
+  margin-bottom: 10px;
+}
+.pied__infos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  font-size: clamp(20px, 2.22vw, 32px);
+  line-height: 1.25;
+}
+.pied__infos p:nth-child(2) { text-align: center; }
+.pied__infos p:nth-child(3) { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------------------------------------------------------
+   Curseur rond qui suit la souris
+   --------------------------------------------------------- */
+.curseur {
+  position: fixed;
+  top: 0; left: 0;
+  width: 24px; height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  background: var(--blanc);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.curseur--actif { opacity: 1; }
+@media (hover: none) { .curseur { display: none; } }
+
+/* ---------------------------------------------------------
+   Médias
+   --------------------------------------------------------- */
+.media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.arrondi { border-radius: var(--arrondi); overflow: hidden; }
+
+/* Les images apparaissent en fondu en arrivant à l'écran */
+.apparait {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .9s ease, transform 1.1s var(--ressort);
+}
+.apparait.est-visible { opacity: 1; transform: none; }
+
+/* =========================================================
+   Page d'accueil archi
+   ========================================================= */
+.hero { padding: 0 var(--marge); }
+.hero__titre { padding-top: 84px; }   /* le titre commence sous le menu */
+.hero__infos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+  padding-bottom: min(80px, 5.5vw);
+  font-size: clamp(20px, 2.22vw, 32px);
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Vidéo affichée en entier (16:9) ; elle dézoome jusqu'à apparaître complètement */
+.video-zoom {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.video-zoom__cadre {
+  position: absolute;
+  inset: 0;
+  transform: scale(var(--zoom, 1.3));
+  will-change: transform;
+}
+
+.projets { padding: 61px var(--marge) 0; }
+.cartes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 21px;
+}
+.carte { display: block; padding-bottom: 40px; }
+.carte__image {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--arrondi);
+  overflow: hidden;
+  background: var(--bleu);
+}
+.carte__image img {
+  transition: transform 1s var(--ressort);
+}
+.carte:hover .carte__image img { transform: scale(1.04); }
+.carte__nom {
+  margin-top: 10px;
+  font-size: clamp(22px, 2.22vw, 32px);
+  line-height: 1;
+  text-transform: uppercase;
+}
+.carte__type {
+  font-size: 17px;
+  line-height: 25px;
+  text-transform: uppercase;
+}
+.projets__plus { margin-top: 21px; }
+.projets__bouton { display: flex; justify-content: center; margin-top: 16px; }
+.projets__bouton .bouton { min-width: 317px; }
+
+.services { padding: 70px var(--marge) 0; }
+.portrait {
+  width: calc(100% + 13px);
+  margin: 0 -6px 0 -7px;
+  padding: 13px 14px;
+  aspect-ratio: 1373 / 1306;
+}
+
+.apropos { padding: 37px var(--marge) 0; }
+.apropos__textes {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 40px;
+  font-size: clamp(20px, 2.22vw, 32px);
+  line-height: 1.25;
+}
+.apropos__anglais {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+  color: var(--gris);
+  font-size: 20px;
+  line-height: 24px;
+}
+.apropos__boutons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+.apropos__jaquettes {
+  position: relative;
+  width: 87%;
+  aspect-ratio: 2000 / 1583;
+  margin: 32px auto 0;
+  overflow: visible;
+}
+.jaquette-drag {
+  position: absolute;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+  transition: transform 1.4s cubic-bezier(.22, 1, .36, 1);
+  z-index: 1;
+}
+.jaquette-drag img {
+  width: 100%;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.jaquette-drag.en-main {
+  cursor: grabbing;
+  z-index: 20;
+  transition: none;
+}
+
+.competences {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 32px var(--marge) 70px;
+}
+.competences li {
+  list-style: none;
+  padding: min(20px, 1.4vw) min(40px, 2.8vw);
+  box-shadow: inset 0 0 0 1px var(--blanc);
+  border-radius: 100px;
+  font-size: clamp(24px, 3.33vw, 48px);
+  line-height: .85;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .3s ease, color .3s ease, box-shadow .3s ease;
+}
+.competences li:hover {
+  background: var(--blanc);
+  color: var(--bleu);
+  box-shadow: inset 0 0 0 1px var(--bleu);
+}
+.competences { margin: 0; }
+
+/* Plan 3D : affiché en entier, il dézoome en arrivant */
+.plan-3d {
+  position: relative;
+  padding: min(120px, 8vw) 0;
+  overflow: hidden;
+}
+.plan-3d video {
+  width: 100%;
+  aspect-ratio: 2706 / 960;
+  object-fit: cover;
+  transform: scale(var(--zoom, 1.5));
+  will-change: transform;
+}
+
+.contact { padding: 0 var(--marge); }
+.contact__colonnes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 80px;
+  text-align: center;
+}
+.contact__label { font-size: 17px; line-height: 25px; }
+.contact__liens {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 16px;
+  gap: 16px;
+}
+.contact__liens--reseaux { margin-top: 20px; gap: 5px; }
+.contact__liens > a {
+  font-family: var(--titre);
+  font-size: clamp(40px, 5.56vw, 80px);
+  line-height: .9;
+  text-transform: uppercase;
+}
+.contact__boutons {
+  display: flex;
+  justify-content: center;
+  gap: 17px;
+  margin-top: 0;
+}
+.contact__boutons .bouton { min-width: 226px; padding: 20px; }
+
+.defilant {
+  padding: 80px 0 0;
+  margin-bottom: -22px;
+  overflow: hidden;
+}
+.defilant__piste {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  padding-left: var(--marge);
+  animation: defiler var(--duree-defilement, 37s) linear infinite;
+}
+.defilant__piste img {
+  width: 440px;
+  height: 440px;
+  object-fit: cover;
+  border-radius: var(--arrondi);
+}
+@keyframes defiler {
+  to { transform: translateX(calc(-1 * var(--largeur-serie, 50%))); }
+}
+
+/* =========================================================
+   Pages projet
+   ========================================================= */
+.projet { padding: 100px var(--marge) 94px; }
+.projet__couverture { width: 100%; }
+/* La vidéo ou l'image d'en-tête s'affiche en entier (sans recadrage) */
+.projet__couverture video,
+.projet__couverture img {
+  width: 100%;
+  height: auto;
+  max-height: 85vh;
+  object-fit: contain;
+}
+
+.projet__colonnes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6.8%;
+  align-items: start;
+  margin-top: min(150px, 10vw);
+}
+.projet__colonnes + .projet__colonnes { margin-top: min(250px, 15vw); }
+.projet__images { display: flex; flex-direction: column; gap: 10px; }
+.projet__images img { width: 100%; height: auto; }   /* image entière, jamais recadrée */
+
+.projet__texte .sous-titre { margin-bottom: 40px; }
+.projet__paragraphes {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  font-size: clamp(20px, 2.22vw, 32px);
+  line-height: 1.25;
+}
+.projet__anglais {
+  margin-top: 40px;
+  color: var(--gris-projet);
+  font-size: 17px;
+  line-height: 25px;
+}
+/* Texte aligné selon sa place : à droite dans la colonne de droite, à gauche dans celle de gauche */
+.projet__colonnes > .projet__texte:last-child { text-align: right; }
+.projet__colonnes > .projet__texte:first-child { text-align: left; }
+.projet__texte .bouton { margin-top: 40px; }
+
+.projet__galerie {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: min(180px, 12vw);
+}
+.projet__galerie > img { width: 100%; height: auto; }
+/* Rangée d'images : même hauteur, chaque image garde ses proportions */
+.projet__rangee {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.projet__rangee img { min-width: 0; flex: var(--l, 1); height: auto; }
+.projet .grand-titre { margin-top: 4px; }
+.projet__colonnes .projet__images { padding-top: 24px; }
+
+.parcours { padding: 77px var(--marge) 76px; }
+.parcours img { width: 1234px; max-width: 100%; margin: 0 auto; }
+
+/* =========================================================
+   Tablette (810 – 1199 px)
+   ========================================================= */
+@media (max-width: 1199px) {
+  .defilant__piste img { width: 340px; height: 340px; }
+  .contact__boutons .bouton { min-width: 0; }
+}
+
+/* =========================================================
+   Téléphone (moins de 810 px)
+   ========================================================= */
+@media (max-width: 809px) {
+  :root { --marge: 20px; --arrondi: 10px; }
+  body { font-size: 20px; line-height: 24px; }
+
+  .menu nav { display: flex; justify-content: space-between; height: 72px; }
+  .menu nav a { font-size: 24px; line-height: 32px; }
+  .menu nav a:not(.menu__mobile) { display: none; }
+  .menu .menu__mobile { display: block; }
+
+  .grand-titre { font-size: 20vw; gap: 10px; padding: 20px 0; }
+  .sous-titre { font-size: 10vw; line-height: 1; }
+  .bouton { font-size: 20px; line-height: 24px; }
+
+  .hero__titre { padding-top: 84px; }
+  .hero__infos { grid-template-columns: 1fr; margin-top: 16px; padding-bottom: 32px; font-size: 20px; line-height: 24px; }
+  .hero__infos p:nth-child(2) { display: none; }
+
+  .plan-3d { padding: 40px 0; }
+
+  .projets { padding-top: 37px; }
+  .cartes { grid-template-columns: 1fr; gap: 40px; margin-top: 0; }
+  .carte { padding-bottom: 0; }
+  .carte__nom { font-size: 24px; line-height: 24px; }
+  .carte__type { font-size: 20px; line-height: 24px; }
+
+  .services { padding-top: 20px; }
+  .portrait { width: calc(100% + 46px); margin: 0 -23px; padding: 22px 14px; aspect-ratio: 396 / 392; }
+  .apropos { padding-top: 27px; }
+  .apropos__textes, .apropos__anglais { font-size: 20px; line-height: 24px; gap: 20px; }
+  .apropos__anglais { color: var(--gris); font-size: 15px; line-height: 20px; margin-top: 20px; }
+  .apropos__cartouches { width: 100%; margin-top: 48px; }
+  .competences { padding: 48px var(--marge) 20px; }
+  .competences li { font-size: 24px; line-height: 1; padding: 10px 18px; }
+
+  .contact__colonnes { grid-template-columns: 1fr; gap: 40px; }
+  .contact__label { font-size: 20px; line-height: 24px; }
+  .contact__liens > a { font-size: 9.5vw; line-height: 1; }
+  .contact__liens { gap: 16px; }
+  .contact__liens--reseaux { gap: 0; }
+  .contact__boutons { gap: 17px; margin-top: 16px; }
+  .contact__boutons .bouton { min-width: 149px; padding: 10px 20px; }
+
+  .defilant { padding: 40px 0; }
+  .defilant__piste { gap: 10px; }
+  .defilant__piste img { width: 240px; height: 240px; }
+
+  .pied__titre { padding: 0 0 10px; }
+  .pied__infos { grid-template-columns: 1fr 1fr; font-size: 20px; line-height: 24px; }
+  .pied__infos p:nth-child(2) { display: none; }
+
+  .projet { padding-top: 92px; }
+  .projet__colonnes { grid-template-columns: 1fr; gap: 40px; margin-top: 40px; }
+  .projet__colonnes + .projet__colonnes { margin-top: 60px; }
+  .projet__colonnes--inverse .projet__texte { order: -1; }
+  .projet__paragraphes { font-size: 20px; line-height: 24px; gap: 20px; }
+  .projet__colonnes > .projet__texte:last-child { text-align: left; }
+  .projet__couverture video, .projet__couverture img { max-height: none; }
+  .projet__texte .sous-titre { margin-bottom: 20px; }
+  .projet__galerie { margin-top: 60px; gap: 10px; }
+  .projet__rangee { flex-direction: column; }
+  .projet__rangee img { width: 100% !important; flex: none; }
+  .projet__colonnes .projet__images { padding-top: 0; }
+  .projet__rangee { padding: 0 !important; gap: 10px !important; }
+  .parcours { padding: 92px var(--marge) 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01s !important; animation-duration: .01s !important; }
+  .defilant__piste { animation: none; }
+}
+
+/* Page Parcours & compétences : une grande planche */
+.parcours__image { width: 1234px; max-width: 100%; margin: 0 auto; }

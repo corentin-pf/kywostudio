@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KywoStudio</title>
+  <meta name="description" content="KYWO Studio, le studio de Corentin Pelloux Fagot à Lyon : architecture d'intérieur, graphisme, design digital et direction artistique.">
+  <link rel="canonical" href="https://kywostudio.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="KYWO Studio">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:url" content="https://kywostudio.com/">
+  <meta property="og:title" content="KYWO Studio — Corentin Pelloux Fagot | Architecture d'intérieur & Graphisme à Lyon">
+  <meta property="og:description" content="KYWO Studio, le studio de Corentin Pelloux Fagot à Lyon : architecture d'intérieur, graphisme, design digital et direction artistique.">
+  <meta property="og:image" content="https://kywostudio.com/assets/accueil/partage.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#010dcd">
+  <link rel="icon" href="/assets/accueil/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/accueil/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/accueil/kywo-studio.webp" as="image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "KYWO Studio",
+    "url": "https://kywostudio.com/",
+    "image": "https://kywostudio.com/assets/accueil/partage.jpg",
+    "description": "Architecture d'intérieur, graphisme et design digital à Lyon.",
+    "email": "kywostudio@gmail.com",
+    "telephone": "+33 6 49 56 50 83",
+    "address": { "@type": "PostalAddress", "addressLocality": "Lyon", "addressCountry": "FR" },
+    "founder": {
+      "@type": "Person",
+      "name": "Corentin Pelloux Fagot",
+      "jobTitle": "Architecte d'intérieur et graphiste",
+      "sameAs": [
+        "https://www.instagram.com/corentinpllx/",
+        "https://www.youtube.com/@corentinplx",
+        "https://www.linkedin.com/in/corentin-pelloux-fagot-2a6111330/"
+      ]
+    }
+  }
+  </script>
+  <style>
+    @font-face {
+      font-family: "Anton";
+      src: url("/assets/fonts/anton.woff2") format("woff2");
+      font-display: swap;
+    }
+
+    :root {
+      --bleu: #010dcd;
+      --blanc: #ffffff;
+      /* Le logo garde les proportions de la maquette (16:9) et remplit l'écran */
+      --W: min(80vw, 142.22vh);
+      --H: calc(var(--W) * 0.5625);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bleu);
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    /* ---- Les deux moitiés cliquables ---- */
+    .panel {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      overflow: hidden;
+      display: block;
+      outline: none;
+    }
+    .panel--archi { left: 0; background: var(--bleu); }
+    .panel--graphisme { right: 0; background: var(--blanc); }
+
+    .panel img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.06);
+      transition: opacity .6s ease, transform 1.2s cubic-bezier(.2, .7, .2, 1);
+    }
+    .panel--archi img { object-position: 45% 50%; }
+    /* On cadre le bas de l'image pour garder l'ordinateur dans l'herbe */
+    .panel--graphisme img { object-position: 50% 100%; }
+
+    .panel:hover img,
+    .panel:focus-visible img {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ---- Textes qui apparaissent au survol ---- */
+    .legende {
+      position: absolute;
+      bottom: calc((100vh - var(--H)) / 2 + var(--H) * 0.05);
+      margin: 0;
+      font-family: "Anton", "Impact", sans-serif;
+      font-weight: 400;
+      font-size: calc(var(--W) * 0.0265);
+      line-height: 1.02;
+      color: var(--blanc);
+      text-transform: uppercase;
+      text-shadow: 0 2px 20px rgba(0,0,0,.55), 0 0 50px rgba(0,0,0,.35);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .5s ease .1s, transform .5s ease .1s;
+      z-index: 1;
+    }
+    .panel--archi .legende { right: calc(var(--W) * 0.037); text-align: right; }
+    .panel--graphisme .legende { left: calc(var(--W) * 0.033); }
+
+    .panel:hover .legende,
+    .panel:focus-visible .legende {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ---- Logo KYWO + signature, posé au-dessus des deux moitiés ---- */
+    .logo {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: var(--W);
+      height: var(--H);
+      transform: translate(-50%, -50%);
+      pointer-events: none; /* les clics passent aux moitiés en dessous */
+      z-index: 2;
+    }
+    .logo .kywo,
+    .logo .signature {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .logo .kywo {
+      will-change: transform;
+      -webkit-user-drag: none;
+      user-select: none;
+      pointer-events: auto;
+      cursor: grab;
+    }
+    .logo .kywo.en-main { cursor: grabbing; }
+    .logo .kywo.retour {
+      transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    /* La signature est décalée pour tomber sur le « WO », comme sur la maquette */
+    .logo .signature {
+      transform: translate(20.4%, 8.6%);
+      overflow: visible;
+    }
+
+    /* Quand la souris passe sur les lettres KYWO : main « attraper » */
+    .panel { -webkit-user-drag: none; }
+    body { touch-action: none; }
+
+
+    /* ---- Signature (en commentaire — retirer /* */ pour la remettre) ----
+    .trait {
+      fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round;
+      stroke-dasharray: 1; stroke-dashoffset: 1;
+    }
+    .pret .trait { animation: ecrire var(--duree) var(--delai) var(--rythme, ease-in-out) forwards; }
+    @keyframes ecrire { to { stroke-dashoffset: 0; } }
+    ---- Fin signature ---- */
+
+    /* ---- Téléphone / écran vertical : les moitiés s'empilent ---- */
+    @media (max-aspect-ratio: 4/5) {
+      :root { --W: 100vw; }
+      .panel { width: 100%; height: 50%; left: 0; right: auto; }
+      .panel--archi { top: 0; bottom: auto; }
+      .panel--graphisme { top: auto; bottom: 0; }
+
+      /* Pas de survol au doigt : photos et textes visibles d'emblée */
+      .panel img { opacity: 1; transform: none; }
+      .legende {
+        opacity: 1;
+        transform: none;
+        font-size: 7vw;
+        bottom: 4vw;
+      }
+      .legende { text-shadow: 0 1px 12px rgba(0, 0, 0, .35); }
+      .panel--archi .legende { top: 5vw; bottom: auto; left: 5vw; right: auto; text-align: left; }
+      .panel--graphisme .legende { left: 5vw; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .panel img, .legende { transition: opacity .3s ease; transform: none !important; }
+      .trait { stroke-dashoffset: 0; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="visually-hidden">KYWO Studio — Corentin Pelloux Fagot, architecture d'intérieur et graphisme à Lyon</h1>
+
+  <a class="panel panel--archi" href="/architecture/" aria-label="Architecture d'intérieur">
+    <img src="/assets/accueil/archi.jpg" alt="" loading="eager">
+    <p class="legende">Architecture<br>d'interieur</p>
+  </a>
+
+  <a class="panel panel--graphisme" href="/graphisme/" aria-label="Design digital et graphisme">
+    <img src="/assets/accueil/graphisme.webp" alt="" loading="eager">
+    <p class="legende">Design digital<br>Graphisme</p>
+  </a>
+
+  <div class="logo" aria-hidden="true">
+    <img class="kywo" src="/assets/accueil/kywo-studio.webp" alt="" draggable="false">
+
+    <!-- SIGNATURE DÉSACTIVÉE — retirer ces commentaires pour la remettre :
+    <svg class="signature" viewBox="0 0 2000 1125">
+      <mask id="masque-signature" maskUnits="userSpaceOnUse" x="0" y="0" width="2000" height="1125">
+        <path class="trait" pathLength="1" stroke-width="26" style="--duree:.95s; --delai:.35s"
+              d="M853 650 L872 527 L593 697 L627 704 L685 691 L771 675 L852 657 L884 652"/>
+        <path class="trait" pathLength="1" stroke-width="80" stroke-linecap="butt" style="--duree:.85s; --delai:1.3s; --rythme:linear"
+              d="M893 607 L1312 603"/>
+        <path class="trait" pathLength="1" stroke-width="24" style="--duree:.14s; --delai:2.2s"
+              d="M1147 512 L1153 572"/>
+        <path class="trait" pathLength="1" stroke-width="24" style="--duree:.08s; --delai:2.42s"
+              d="M1229 552 L1231 562"/>
+        <path class="trait" pathLength="1" stroke-width="26" style="--duree:.55s; --delai:2.58s; --rythme:cubic-bezier(.3,.1,.2,1)"
+              d="M880 653 L915 648 L1030 637 L1182 629 L1297 627 L1466 627"/>
+      </mask>
+      <image href="/assets/accueil/signature.webp" width="2000" height="1125" mask="url(#masque-signature)"/>
+    </svg>
+    FIN SIGNATURE -->
+  </div>
+
+  <script>
+    // SIGNATURE DÉSACTIVÉE — décommenter pour remettre :
+    // (function () {
+    //   const img = new Image();
+    //   img.src = "/assets/accueil/signature.webp";
+    //   const lancer = () => document.documentElement.classList.add("pret");
+    //   img.decode().then(lancer, lancer);
+    // })();
+
+    (function () {
+      const kywo = document.querySelector(".kywo");
+      if (!kywo) return;
+      let prise = null, dx = 0, dy = 0, rafId = null, wobbleT = 0;
+
+      // Canvas caché pour tester l'opacité pixel par pixel
+      let alphaCtx = null;
+      function initCanvas() {
+        const c = document.createElement("canvas");
+        c.width = kywo.naturalWidth;
+        c.height = kywo.naturalHeight;
+        const ctx = c.getContext("2d", { willReadFrequently: true });
+        ctx.drawImage(kywo, 0, 0);
+        alphaCtx = ctx;
+      }
+      if (kywo.complete) initCanvas();
+      else kywo.addEventListener("load", initCanvas, { once: true });
+
+      function estOpaque(clientX, clientY) {
+        if (!alphaCtx) return true;
+        const r = kywo.getBoundingClientRect();
+        const ix = Math.round((clientX - r.left) / r.width  * kywo.naturalWidth);
+        const iy = Math.round((clientY - r.top)  / r.height * kywo.naturalHeight);
+        try { return alphaCtx.getImageData(ix, iy, 1, 1).data[3] > 10; }
+        catch { return true; }
+      }
+
+      function boucle() {
+        wobbleT += 0.12;
+        const rot = Math.sin(wobbleT) * 1.8;
+        kywo.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
+        rafId = requestAnimationFrame(boucle);
+      }
+
+      kywo.addEventListener("pointermove", (e) => {
+        if (prise) { dx = e.clientX - prise.x; dy = e.clientY - prise.y; return; }
+        // Curseur adaptatif : main sur les lettres, flèche sur le vide
+        kywo.style.cursor = estOpaque(e.clientX, e.clientY) ? "grab" : "default";
+      });
+
+      kywo.addEventListener("pointerdown", (e) => {
+        if (e.button !== 0) return;
+        if (!estOpaque(e.clientX, e.clientY)) return; // pixel transparent → laisse passer
+        e.preventDefault();
+        kywo.classList.remove("retour");
+        prise = { x: e.clientX - dx, y: e.clientY - dy };
+        kywo.classList.add("en-main");
+        kywo.setPointerCapture(e.pointerId);
+        wobbleT = 0;
+        if (rafId) cancelAnimationFrame(rafId);
+        boucle();
+      });
+
+      const lacher = () => {
+        if (!prise) return;
+        prise = null;
+        cancelAnimationFrame(rafId);
+        rafId = null;
+        dx = 0; dy = 0;
+        kywo.classList.remove("en-main");
+        kywo.classList.add("retour");
+        kywo.style.transform = "";
+        kywo.addEventListener("transitionend", () => kywo.classList.remove("retour"), { once: true });
+      };
+
+      kywo.addEventListener("pointerup", lacher);
+      kywo.addEventListener("pointercancel", lacher);
+      kywo.addEventListener("lostpointercapture", lacher);
+
+      // Redirige les clics sur les zones transparentes vers le panneau en dessous
+      kywo.addEventListener("click", (e) => {
+        if (estOpaque(e.clientX, e.clientY)) return;
+        kywo.style.pointerEvents = "none";
+        const cible = document.elementFromPoint(e.clientX, e.clientY);
+        kywo.style.pointerEvents = "auto";
+        const lien = cible?.closest("a");
+        if (lien?.href) window.location.href = lien.href;
+      });
+    })();
+  </script>
+</body>
+</html>
