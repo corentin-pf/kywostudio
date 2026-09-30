@@ -152,37 +152,43 @@
       height: 100%;
     }
     .logo .kywo {
-      will-change: transform;
       -webkit-user-drag: none;
       user-select: none;
       pointer-events: auto;
       cursor: grab;
     }
     .logo .kywo.en-main { cursor: grabbing; }
-    .logo .kywo.retour {
-      transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
     /* La signature est décalée pour tomber sur le « WO », comme sur la maquette */
     .logo .signature {
       transform: translate(20.4%, 8.6%);
       overflow: visible;
     }
 
+    .kywo-bloc {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      will-change: transform;
+    }
+    .kywo-bloc.retour {
+      transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
     .stage-text {
       position: absolute;
       top: 63%;
-      left: 50%;
-      transform: translateX(-50%);
+      right: 5%;
       margin: 0;
       font-family: "Anton", "Impact", sans-serif;
       font-weight: 400;
-      font-size: calc(var(--W) * 0.016);
+      font-size: calc(var(--W) * 0.013);
       white-space: nowrap;
-      color: var(--blanc);
+      color: var(--bleu);
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      text-shadow: 0 1px 6px rgba(0,0,0,.85), 0 2px 18px rgba(0,0,0,.55);
-      z-index: 1;
+      text-align: right;
+      pointer-events: none;
     }
 
     /* Quand la souris passe sur les lettres KYWO : main « attraper » */
@@ -217,7 +223,7 @@
       .legende { text-shadow: 0 1px 12px rgba(0, 0, 0, .35); }
       .panel--archi .legende { top: 5vw; bottom: auto; left: 5vw; right: auto; text-align: left; }
       .panel--graphisme .legende { left: 5vw; }
-      .stage-text { font-size: 3.2vw; white-space: normal; text-align: center; width: 88%; }
+      .stage-text { font-size: 2.8vw; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -240,9 +246,10 @@
   </a>
 
   <div class="logo" aria-hidden="true">
-    <img class="kywo" src="/assets/accueil/kywo-studio.webp" alt="" draggable="false">
-
-    <p class="stage-text">Recherche un stage pour Janvier 2027</p>
+    <div class="kywo-bloc">
+      <img class="kywo" src="/assets/accueil/kywo-studio.webp" alt="" draggable="false">
+      <p class="stage-text">Recherche un stage pour Janvier 2027</p>
+    </div>
 
     <!-- SIGNATURE DÉSACTIVÉE — retirer ces commentaires pour la remettre :
     <svg class="signature" viewBox="0 0 2000 1125">
@@ -274,7 +281,8 @@
 
     (function () {
       const kywo = document.querySelector(".kywo");
-      if (!kywo) return;
+      const kywoBloc = document.querySelector(".kywo-bloc");
+      if (!kywo || !kywoBloc) return;
       let prise = null, dx = 0, dy = 0, rafId = null, wobbleT = 0;
 
       // Canvas caché pour tester l'opacité pixel par pixel
@@ -302,7 +310,7 @@
       function boucle() {
         wobbleT += 0.12;
         const rot = Math.sin(wobbleT) * 1.8;
-        kywo.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
+        kywoBloc.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
         rafId = requestAnimationFrame(boucle);
       }
 
@@ -316,7 +324,7 @@
         if (e.button !== 0) return;
         if (!estOpaque(e.clientX, e.clientY)) return; // pixel transparent → laisse passer
         e.preventDefault();
-        kywo.classList.remove("retour");
+        kywoBloc.classList.remove("retour");
         prise = { x: e.clientX - dx, y: e.clientY - dy };
         kywo.classList.add("en-main");
         kywo.setPointerCapture(e.pointerId);
@@ -332,9 +340,9 @@
         rafId = null;
         dx = 0; dy = 0;
         kywo.classList.remove("en-main");
-        kywo.classList.add("retour");
-        kywo.style.transform = "";
-        kywo.addEventListener("transitionend", () => kywo.classList.remove("retour"), { once: true });
+        kywoBloc.classList.add("retour");
+        kywoBloc.style.transform = "";
+        kywoBloc.addEventListener("transitionend", () => kywoBloc.classList.remove("retour"), { once: true });
       };
 
       kywo.addEventListener("pointerup", lacher);
