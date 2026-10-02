@@ -1,0 +1,15 @@
+{
+  "name": "KYWO Studio",
+  "short_name": "KYWO",
+  "icons": [
+    {
+      "src": "/assets/accueil/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#010dcd",
+  "background_color": "#010dcd",
+  "display": "standalone",
+  "start_url": "/"
+}
