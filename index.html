@@ -107,8 +107,8 @@
       z-index: 1;
       transition: opacity .5s ease;
     }
-    .panel--archi::after  { background: rgba(1, 13, 205, 0.55); }
-    .panel--graphisme::after { background: rgba(255, 255, 255, 0.55); }
+    .panel--archi::after  { background: rgba(1, 13, 205, 0.72); }
+    .panel--graphisme::after { background: rgba(255, 255, 255, 0.72); }
 
     .panel:hover::after,
     .panel:focus-visible::after,
@@ -128,20 +128,12 @@
       color: var(--blanc);
       text-transform: uppercase;
       text-shadow: 0 2px 20px rgba(0,0,0,.55), 0 0 50px rgba(0,0,0,.35);
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity .5s ease .1s, transform .5s ease .1s;
+      opacity: 1;
       z-index: 2;
     }
     .panel--archi .legende { right: calc(var(--W) * 0.037); text-align: right; }
     .panel--graphisme .legende { left: calc(var(--W) * 0.033); }
 
-    .panel:hover .legende,
-    .panel:focus-visible .legende,
-    .panel.active .legende {
-      opacity: 1;
-      transform: none;
-    }
 
     /* ---- Logo KYWO + signature, posé au-dessus des deux moitiés ---- */
     .logo {
