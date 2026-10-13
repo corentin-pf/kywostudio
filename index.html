@@ -99,24 +99,7 @@
     /* On cadre le bas de l'image pour garder l'ordinateur dans l'herbe */
     .panel--graphisme img { object-position: 50% 100%; }
 
-    /* Filtre coloré toujours présent, disparaît au survol */
-    .panel::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      transition: opacity .5s ease;
-    }
-    .panel--archi::after  { background: rgba(1, 13, 205, 0.72); }
-    .panel--graphisme::after { background: rgba(255, 255, 255, 0.72); }
-
-    .panel:hover::after,
-    .panel:focus-visible::after,
-    .panel.active::after {
-      opacity: 0;
-    }
-
-    /* ---- Textes qui apparaissent au survol ---- */
+    /* ---- Textes sous le filtre ---- */
     .legende {
       position: absolute;
       bottom: calc((100vh - var(--H)) / 2 + var(--H) * 0.05);
@@ -128,8 +111,22 @@
       color: var(--blanc);
       text-transform: uppercase;
       text-shadow: 0 2px 20px rgba(0,0,0,.55), 0 0 50px rgba(0,0,0,.35);
-      opacity: 1;
-      z-index: 0;
+    }
+
+    /* Filtre coloré — div placé APRÈS la légende dans le DOM → toujours au-dessus */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      transition: opacity .5s ease;
+    }
+    .panel--archi .overlay  { background: rgba(1, 13, 205, 0.72); }
+    .panel--graphisme .overlay { background: rgba(255, 255, 255, 0.72); }
+
+    .panel:hover .overlay,
+    .panel:focus-visible .overlay,
+    .panel.active .overlay {
+      opacity: 0;
     }
     .panel--archi .legende { right: calc(var(--W) * 0.037); text-align: right; }
     .panel--graphisme .legende { left: calc(var(--W) * 0.033); }
@@ -229,7 +226,7 @@
       .panel--graphisme { top: auto; bottom: 0; }
 
       /* Pas de survol au doigt : overlays désactivés, textes visibles d'emblée */
-      .panel::after { display: none; }
+      .overlay { display: none; }
       .legende {
         opacity: 1;
         transform: none;
@@ -254,11 +251,13 @@
   <a class="panel panel--archi" href="/architecture/" aria-label="Architecture d'intérieur">
     <img src="/assets/accueil/archi.jpg" alt="" loading="eager">
     <p class="legende">Architecture<br>d'interieur</p>
+    <div class="overlay" aria-hidden="true"></div>
   </a>
 
   <a class="panel panel--graphisme" href="/graphisme/" aria-label="Design digital et graphisme">
     <img src="/assets/accueil/graphisme.webp" alt="" loading="eager">
     <p class="legende">Design digital<br>Graphisme</p>
+    <div class="overlay" aria-hidden="true"></div>
   </a>
 
   <div class="drag-zone" aria-hidden="true"></div>
