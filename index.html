@@ -340,8 +340,7 @@
         }
         const opaque = estOpaque(e.clientX, e.clientY);
         kywo.style.cursor = opaque ? "grab" : "default";
-        if (opaque) updatePanelHover(e.clientX);
-        else clearPanelHover();
+        updatePanelHover(e.clientX);
       });
 
       kywo.addEventListener("pointerleave", () => {
