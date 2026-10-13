@@ -285,6 +285,7 @@
     (function () {
       const kywo = document.querySelector(".kywo");
       const kywoBloc = document.querySelector(".kywo-bloc");
+      const logo = document.querySelector(".logo");
       const archiPanel = document.querySelector(".panel--archi");
       const graphPanel = document.querySelector(".panel--graphisme");
       if (!kywo || !kywoBloc) return;
@@ -331,6 +332,16 @@
         rafId = requestAnimationFrame(boucle);
       }
 
+      // Hover via document : fonctionne même sur les pixels transparents du logo
+      document.addEventListener("pointermove", (e) => {
+        if (prise) return;
+        const r = logo.getBoundingClientRect();
+        const inLogo = e.clientX >= r.left && e.clientX <= r.right &&
+                       e.clientY >= r.top && e.clientY <= r.bottom;
+        if (inLogo) updatePanelHover(e.clientX);
+        else clearPanelHover();
+      });
+
       kywo.addEventListener("pointermove", (e) => {
         if (prise) {
           dx = e.clientX - prise.x;
@@ -340,11 +351,6 @@
         }
         const opaque = estOpaque(e.clientX, e.clientY);
         kywo.style.cursor = opaque ? "grab" : "default";
-        updatePanelHover(e.clientX);
-      });
-
-      kywo.addEventListener("pointerleave", () => {
-        if (!prise) clearPanelHover();
       });
 
       kywo.addEventListener("pointerdown", (e) => {
