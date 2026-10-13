@@ -94,19 +94,26 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0;
-      transform: scale(1.06);
-      transition: opacity .6s ease, transform 1.2s cubic-bezier(.2, .7, .2, 1);
     }
     .panel--archi img { object-position: 45% 50%; }
     /* On cadre le bas de l'image pour garder l'ordinateur dans l'herbe */
     .panel--graphisme img { object-position: 50% 100%; }
 
-    .panel:hover img,
-    .panel:focus-visible img,
-    .panel.active img {
-      opacity: 1;
-      transform: scale(1);
+    /* Filtre coloré toujours présent, disparaît au survol */
+    .panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      transition: opacity .5s ease;
+    }
+    .panel--archi::after  { background: rgba(1, 13, 205, 0.55); }
+    .panel--graphisme::after { background: rgba(255, 255, 255, 0.55); }
+
+    .panel:hover::after,
+    .panel:focus-visible::after,
+    .panel.active::after {
+      opacity: 0;
     }
 
     /* ---- Textes qui apparaissent au survol ---- */
@@ -124,7 +131,7 @@
       opacity: 0;
       transform: translateY(12px);
       transition: opacity .5s ease .1s, transform .5s ease .1s;
-      z-index: 1;
+      z-index: 2;
     }
     .panel--archi .legende { right: calc(var(--W) * 0.037); text-align: right; }
     .panel--graphisme .legende { left: calc(var(--W) * 0.033); }
@@ -229,8 +236,8 @@
       .panel--archi { top: 0; bottom: auto; }
       .panel--graphisme { top: auto; bottom: 0; }
 
-      /* Pas de survol au doigt : photos et textes visibles d'emblée */
-      .panel img { opacity: 1; transform: none; }
+      /* Pas de survol au doigt : overlays désactivés, textes visibles d'emblée */
+      .panel::after { display: none; }
       .legende {
         opacity: 1;
         transform: none;
