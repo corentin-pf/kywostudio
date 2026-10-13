@@ -103,7 +103,8 @@
     .panel--graphisme img { object-position: 50% 100%; }
 
     .panel:hover img,
-    .panel:focus-visible img {
+    .panel:focus-visible img,
+    .panel.force-hover img {
       opacity: 1;
       transform: scale(1);
     }
@@ -129,7 +130,8 @@
     .panel--graphisme .legende { left: calc(var(--W) * 0.033); }
 
     .panel:hover .legende,
-    .panel:focus-visible .legende {
+    .panel:focus-visible .legende,
+    .panel.force-hover .legende {
       opacity: 1;
       transform: none;
     }
@@ -283,8 +285,11 @@
     (function () {
       const kywo = document.querySelector(".kywo");
       const kywoBloc = document.querySelector(".kywo-bloc");
+      const archiPanel = document.querySelector(".panel--archi");
+      const graphPanel = document.querySelector(".panel--graphisme");
       if (!kywo || !kywoBloc) return;
       let prise = null, dx = 0, dy = 0, rafId = null, wobbleT = 0;
+      let hasDragged = false, clickX = 0;
 
       // Canvas caché pour tester l'opacité pixel par pixel
       let alphaCtx = null;
@@ -308,6 +313,17 @@
         catch { return true; }
       }
 
+      function updatePanelHover(clientX) {
+        const mid = window.innerWidth / 2;
+        archiPanel?.classList.toggle("force-hover", clientX < mid);
+        graphPanel?.classList.toggle("force-hover", clientX >= mid);
+      }
+
+      function clearPanelHover() {
+        archiPanel?.classList.remove("force-hover");
+        graphPanel?.classList.remove("force-hover");
+      }
+
       function boucle() {
         wobbleT += 0.12;
         const rot = Math.sin(wobbleT) * 1.8;
@@ -316,26 +332,40 @@
       }
 
       kywo.addEventListener("pointermove", (e) => {
-        if (prise) { dx = e.clientX - prise.x; dy = e.clientY - prise.y; return; }
-        // Curseur adaptatif : main sur les lettres, flèche sur le vide
-        kywo.style.cursor = estOpaque(e.clientX, e.clientY) ? "grab" : "default";
+        if (prise) {
+          dx = e.clientX - prise.x;
+          dy = e.clientY - prise.y;
+          if (Math.hypot(dx, dy) > 8) hasDragged = true;
+          return;
+        }
+        const opaque = estOpaque(e.clientX, e.clientY);
+        kywo.style.cursor = opaque ? "grab" : "default";
+        if (opaque) updatePanelHover(e.clientX);
+        else clearPanelHover();
+      });
+
+      kywo.addEventListener("pointerleave", () => {
+        if (!prise) clearPanelHover();
       });
 
       kywo.addEventListener("pointerdown", (e) => {
         if (e.button !== 0) return;
-        if (!estOpaque(e.clientX, e.clientY)) return; // pixel transparent → laisse passer
+        if (!estOpaque(e.clientX, e.clientY)) return;
         e.preventDefault();
         kywoBloc.classList.remove("retour");
         prise = { x: e.clientX - dx, y: e.clientY - dy };
+        clickX = e.clientX;
+        hasDragged = false;
         kywo.classList.add("en-main");
         kywo.setPointerCapture(e.pointerId);
         wobbleT = 0;
         if (rafId) cancelAnimationFrame(rafId);
         boucle();
+        clearPanelHover();
       });
 
-      const lacher = () => {
-        if (!prise) return;
+      function reinitialiser() {
+        if (!prise) return false;
         prise = null;
         cancelAnimationFrame(rafId);
         rafId = null;
@@ -344,11 +374,21 @@
         kywoBloc.classList.add("retour");
         kywoBloc.style.transform = "";
         kywoBloc.addEventListener("transitionend", () => kywoBloc.classList.remove("retour"), { once: true });
-      };
+        return true;
+      }
 
-      kywo.addEventListener("pointerup", lacher);
-      kywo.addEventListener("pointercancel", lacher);
-      kywo.addEventListener("lostpointercapture", lacher);
+      kywo.addEventListener("pointerup", () => {
+        const etaitEnPrise = !!prise;
+        const etaitDrag = hasDragged;
+        const savedClickX = clickX;
+        reinitialiser();
+        if (etaitEnPrise && !etaitDrag) {
+          window.location.href = savedClickX < window.innerWidth / 2 ? "/architecture/" : "/graphisme/";
+        }
+      });
+
+      kywo.addEventListener("pointercancel", reinitialiser);
+      kywo.addEventListener("lostpointercapture", reinitialiser);
 
       // Redirige les clics sur les zones transparentes vers le panneau en dessous
       kywo.addEventListener("click", (e) => {
