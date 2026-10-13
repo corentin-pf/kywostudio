@@ -155,8 +155,10 @@
     .logo .kywo {
       -webkit-user-drag: none;
       user-select: none;
-      pointer-events: none;
+      pointer-events: none; /* activé/désactivé dynamiquement par JS */
+      cursor: grab;
     }
+    .logo .kywo.en-main { cursor: grabbing; }
     /* La signature est décalée pour tomber sur le « WO », comme sur la maquette */
     .logo .signature {
       transform: translate(20.4%, 8.6%);
@@ -175,19 +177,6 @@
       transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    /* Zone de drag invisible au-dessus du logo */
-    .drag-zone {
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      width: var(--W);
-      height: var(--H);
-      transform: translate(-50%, -50%);
-      pointer-events: auto;
-      z-index: 3;
-      cursor: grab;
-    }
-    .drag-zone.en-main { cursor: grabbing; }
 
     .stage-text {
       position: absolute;
@@ -259,8 +248,6 @@
     <p class="legende">Design digital<br>Graphisme</p>
   </a>
 
-  <div class="drag-zone" aria-hidden="true"></div>
-
   <div class="logo" aria-hidden="true">
     <div class="kywo-bloc">
       <img class="kywo" src="/assets/accueil/kywo-studio.webp" alt="" draggable="false">
@@ -296,11 +283,61 @@
     // })();
 
     (function () {
+      const kywo = document.querySelector(".kywo");
       const kywoBloc = document.querySelector(".kywo-bloc");
-      const dragZone = document.querySelector(".drag-zone");
-      if (!kywoBloc || !dragZone) return;
+      const stageText = document.querySelector(".stage-text");
+      const logo = document.querySelector(".logo");
+      if (!kywo || !kywoBloc) return;
       let prise = null, dx = 0, dy = 0, rafId = null, wobbleT = 0;
       let hasDragged = false, clickX = 0;
+
+      // Canvas pour détecter les pixels opaques du logo KYWO
+      let alphaCtx = null;
+      function initCanvas() {
+        const c = document.createElement("canvas");
+        c.width = kywo.naturalWidth;
+        c.height = kywo.naturalHeight;
+        const ctx = c.getContext("2d", { willReadFrequently: true });
+        ctx.drawImage(kywo, 0, 0);
+        alphaCtx = ctx;
+      }
+      if (kywo.complete) initCanvas();
+      else kywo.addEventListener("load", initCanvas, { once: true });
+
+      function estOpaque(clientX, clientY) {
+        if (!alphaCtx) return true;
+        const r = kywo.getBoundingClientRect();
+        const ix = Math.round((clientX - r.left) / r.width * kywo.naturalWidth);
+        const iy = Math.round((clientY - r.top) / r.height * kywo.naturalHeight);
+        try { return alphaCtx.getImageData(ix, iy, 1, 1).data[3] > 10; }
+        catch { return true; }
+      }
+
+      function surContenu(clientX, clientY) {
+        if (estOpaque(clientX, clientY)) return true;
+        // Inclure aussi la zone du texte stage
+        if (stageText) {
+          const r = stageText.getBoundingClientRect();
+          if (clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom) return true;
+        }
+        return false;
+      }
+
+      // Depuis document : active/désactive pointer-events sur kywo selon la position
+      document.addEventListener("pointermove", (e) => {
+        if (prise) {
+          dx = e.clientX - prise.x;
+          dy = e.clientY - prise.y;
+          if (Math.hypot(dx, dy) > 8) hasDragged = true;
+          return;
+        }
+        const r = logo.getBoundingClientRect();
+        const inLogo = e.clientX >= r.left && e.clientX <= r.right &&
+                       e.clientY >= r.top && e.clientY <= r.bottom;
+        // Sur contenu du logo : pointer-events actif (drag + curseur grab)
+        // Sur zone transparente : pointer-events none → panel :hover fonctionne
+        kywo.style.pointerEvents = (inLogo && surContenu(e.clientX, e.clientY)) ? "auto" : "none";
+      });
 
       function boucle() {
         wobbleT += 0.12;
@@ -309,22 +346,15 @@
         rafId = requestAnimationFrame(boucle);
       }
 
-      dragZone.addEventListener("pointermove", (e) => {
-        if (!prise) return;
-        dx = e.clientX - prise.x;
-        dy = e.clientY - prise.y;
-        if (Math.hypot(dx, dy) > 8) hasDragged = true;
-      });
-
-      dragZone.addEventListener("pointerdown", (e) => {
+      kywo.addEventListener("pointerdown", (e) => {
         if (e.button !== 0) return;
         e.preventDefault();
         kywoBloc.classList.remove("retour");
         prise = { x: e.clientX - dx, y: e.clientY - dy };
         clickX = e.clientX;
         hasDragged = false;
-        dragZone.classList.add("en-main");
-        dragZone.setPointerCapture(e.pointerId);
+        kywo.classList.add("en-main");
+        kywo.setPointerCapture(e.pointerId);
         wobbleT = 0;
         if (rafId) cancelAnimationFrame(rafId);
         boucle();
@@ -336,14 +366,14 @@
         cancelAnimationFrame(rafId);
         rafId = null;
         dx = 0; dy = 0;
-        dragZone.classList.remove("en-main");
+        kywo.classList.remove("en-main");
         kywoBloc.classList.add("retour");
         kywoBloc.style.transform = "";
         kywoBloc.addEventListener("transitionend", () => kywoBloc.classList.remove("retour"), { once: true });
         return true;
       }
 
-      dragZone.addEventListener("pointerup", () => {
+      kywo.addEventListener("pointerup", () => {
         const etaitEnPrise = !!prise;
         const etaitDrag = hasDragged;
         const savedClickX = clickX;
@@ -353,8 +383,8 @@
         }
       });
 
-      dragZone.addEventListener("pointercancel", reinitialiser);
-      dragZone.addEventListener("lostpointercapture", reinitialiser);
+      kywo.addEventListener("pointercancel", reinitialiser);
+      kywo.addEventListener("lostpointercapture", reinitialiser);
     })();
   </script>
 </body>
