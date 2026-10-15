@@ -251,6 +251,36 @@
       .stage-text { font-size: 3vw; }
     }
 
+    /* ---- Footer légal ---- */
+    .footer-legal {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0.6rem 1rem;
+      pointer-events: none;
+    }
+    .footer-legal a {
+      font-family: "Anton", "Impact", sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      pointer-events: auto;
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.8); }
+
+    @media (max-width: 767px) {
+      .footer-legal { gap: 1.2rem; padding: 0.5rem 0.8rem; }
+      .footer-legal a { font-size: 0.55rem; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .panel img, .legende { transition: opacity .3s ease; transform: none !important; }
       .trait { stroke-dashoffset: 0; animation: none !important; }
@@ -273,6 +303,11 @@
   </a>
 
   <div class="drag-zone" aria-hidden="true"></div>
+
+  <footer class="footer-legal">
+    <a href="/mentions-legales/">Mentions légales</a>
+    <a href="/politique-de-confidentialite/">Politique de confidentialité</a>
+  </footer>
 
   <div class="logo" aria-hidden="true">
     <div class="kywo-bloc">
