@@ -606,6 +606,9 @@ p, h1, h2, h3 { margin: 0; font-weight: inherit; }
   .projet__colonnes .projet__images { padding-top: 0; }
   .projet__rangee { padding: 0 !important; gap: 10px !important; }
   .parcours { padding: 92px var(--marge) 40px; }
+
+  .btn-long { display: none; }
+  .btn-court { display: inline !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
