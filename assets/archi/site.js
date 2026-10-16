@@ -110,14 +110,6 @@
   }
   if (horloges.length) { mettreAJourHeure(); setInterval(mettreAJourHeure, 1000); }
 
-  // ---- 8. Compétences : clic → recherche Google ----
-  document.querySelectorAll(".competences li").forEach((li) => {
-    li.addEventListener("click", () => {
-      const terme = li.textContent.trim();
-      window.open("https://www.google.com/search?q=" + encodeURIComponent(terme + " pour les nuls"), "_blank", "noopener");
-    });
-  });
-
   // ---- 9. Jaquettes logiciels draggables ----
   (function () {
     const conteneur = document.querySelector(".apropos__jaquettes");

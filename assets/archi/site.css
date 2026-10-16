@@ -390,7 +390,6 @@ p, h1, h2, h3 { margin: 0; font-weight: inherit; }
   font-size: clamp(24px, 3.33vw, 48px);
   line-height: .85;
   text-transform: uppercase;
-  cursor: pointer;
   transition: background .3s ease, color .3s ease, box-shadow .3s ease;
 }
 .competences li:hover {
