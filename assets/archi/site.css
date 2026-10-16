@@ -508,7 +508,7 @@ p, h1, h2, h3 { margin: 0; font-weight: inherit; }
   line-height: 25px;
 }
 /* Texte aligné selon sa place : à droite dans la colonne de droite, à gauche dans celle de gauche */
-.projet__colonnes > .projet__texte:last-child { text-align: right; }
+.projet__colonnes > .projet__texte:last-child { text-align: left; }
 .projet__colonnes > .projet__texte:first-child { text-align: left; }
 .projet__texte .bouton { margin-top: 40px; }
 
