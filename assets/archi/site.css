@@ -343,6 +343,8 @@ p, h1, h2, h3 { margin: 0; font-weight: inherit; }
   display: flex;
   justify-content: space-between;
   margin-top: 40px;
+  position: relative;
+  z-index: 2;
 }
 .apropos__jaquettes {
   position: relative;
