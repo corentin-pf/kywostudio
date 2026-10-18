@@ -418,30 +418,63 @@
 
     // ---- Texte ballon : inflation linéaire au survol ----
     (function () {
-      const legendeArchi  = document.querySelector(".panel--archi .legende");
-      const legendeGraph  = document.querySelector(".panel--graphisme .legende");
+      const legendeArchi = document.querySelector(".panel--archi .legende");
+      const legendeGraph = document.querySelector(".panel--graphisme .legende");
       if (!legendeArchi || !legendeGraph) return;
 
-      legendeArchi.style.transformOrigin = "center center";
-      legendeGraph.style.transformOrigin = "center center";
-
-      const MAX   = 15;       // échelle max (remplit l'écran)
-      const GROW  = 0.03;     // vitesse de croissance par frame (linéaire, lente)
-      const SHRINK = 0.18;    // vitesse de retour (plus rapide)
+      const MAX    = 15;
+      const GROW   = 0.015;   // vitesse réduite de 50%
+      const SHRINK = 0.09;    // vitesse réduite de 50%
 
       let scaleA = 1, scaleG = 1;
       let hoverA = false, hoverG = false;
       let rafA = null, rafG = null;
+      const fixedEls = new Set();
 
-      function setScale(el, s) {
-        el.style.transform = s > 1.001 ? `scale(${s.toFixed(4)})` : "";
-        el.style.zIndex    = s > 1.001 ? "5" : "";
+      function activateFixed(el) {
+        if (fixedEls.has(el)) return;
+        const rect = el.getBoundingClientRect();
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        el.style.position      = "fixed";
+        el.style.left          = rect.left + "px";
+        el.style.top           = rect.top  + "px";
+        el.style.right         = "auto";
+        el.style.bottom        = "auto";
+        el.style.width         = rect.width + "px";
+        el.style.zIndex        = "999";
+        el.style.transformOrigin = (cx - rect.left) + "px " + (cy - rect.top) + "px";
+        fixedEls.add(el);
       }
 
-      function growA()  { if (!hoverA) return; scaleA = Math.min(scaleA + GROW, MAX); setScale(legendeArchi, scaleA); if (scaleA < MAX) rafA = requestAnimationFrame(growA); }
-      function shrinkA(){ scaleA = Math.max(scaleA - SHRINK, 1); setScale(legendeArchi, scaleA); if (scaleA > 1) rafA = requestAnimationFrame(shrinkA); }
-      function growG()  { if (!hoverG) return; scaleG = Math.min(scaleG + GROW, MAX); setScale(legendeGraph, scaleG); if (scaleG < MAX) rafG = requestAnimationFrame(growG); }
-      function shrinkG(){ scaleG = Math.max(scaleG - SHRINK, 1); setScale(legendeGraph, scaleG); if (scaleG > 1) rafG = requestAnimationFrame(shrinkG); }
+      function deactivateFixed(el) {
+        if (!fixedEls.has(el)) return;
+        el.style.position      = "";
+        el.style.left          = "";
+        el.style.top           = "";
+        el.style.right         = "";
+        el.style.bottom        = "";
+        el.style.width         = "";
+        el.style.zIndex        = "";
+        el.style.transformOrigin = "";
+        el.style.transform     = "";
+        fixedEls.delete(el);
+      }
+
+      function setScale(el, s) {
+        if (s > 1.001) {
+          activateFixed(el);
+          el.style.transform = "scale(" + s.toFixed(4) + ")";
+        } else {
+          el.style.transform = "";
+          deactivateFixed(el);
+        }
+      }
+
+      function growA()   { if (!hoverA) return; scaleA = Math.min(scaleA + GROW, MAX); setScale(legendeArchi, scaleA); if (scaleA < MAX) rafA = requestAnimationFrame(growA); }
+      function shrinkA() { scaleA = Math.max(scaleA - SHRINK, 1); setScale(legendeArchi, scaleA); if (scaleA > 1) rafA = requestAnimationFrame(shrinkA); }
+      function growG()   { if (!hoverG) return; scaleG = Math.min(scaleG + GROW, MAX); setScale(legendeGraph, scaleG); if (scaleG < MAX) rafG = requestAnimationFrame(growG); }
+      function shrinkG() { scaleG = Math.max(scaleG - SHRINK, 1); setScale(legendeGraph, scaleG); if (scaleG > 1) rafG = requestAnimationFrame(shrinkG); }
 
       let prevA = false, prevG = false;
 
