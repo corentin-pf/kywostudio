@@ -312,6 +312,7 @@
   <div class="logo" aria-hidden="true">
     <div class="kywo-bloc">
       <img class="kywo" src="/assets/accueil/kywo-studio.webp" alt="" draggable="false">
+      <p class="stage-text">Recherche un stage pour Janvier 2027</p>
     </div>
 
     <!-- SIGNATURE DÉSACTIVÉE — retirer ces commentaires pour la remettre :
@@ -413,90 +414,6 @@
 
       dragZone.addEventListener("pointercancel", reinitialiser);
       dragZone.addEventListener("lostpointercapture", reinitialiser);
-    })();
-
-    // ---- Texte ballon : inflation linéaire au survol ----
-    (function () {
-      const legendeArchi = document.querySelector(".panel--archi .legende");
-      const legendeGraph = document.querySelector(".panel--graphisme .legende");
-      if (!legendeArchi || !legendeGraph) return;
-
-      // mémorise la position dans le DOM pour remettre l'élément en place
-      const parentA = legendeArchi.parentNode, nextA = legendeArchi.nextSibling;
-      const parentG = legendeGraph.parentNode, nextG = legendeGraph.nextSibling;
-
-      const MAX    = 15;
-      const GROW   = 0.015;
-      const SHRINK = 0.09;
-
-      let scaleA = 1, scaleG = 1;
-      let hoverA = false, hoverG = false;
-      let rafA = null, rafG = null;
-      const stored = new Map();
-      const lifted = new Set(); // éléments déplacés dans <body>
-
-      function lift(el, parent, next) {
-        if (lifted.has(el)) return;
-        const rect = el.getBoundingClientRect();
-        // déplacer dans <body> pour échapper à l'overflow:hidden du panel
-        document.body.appendChild(el);
-        el.style.position      = "fixed";
-        el.style.left          = rect.left + "px";
-        el.style.top           = rect.top  + "px";
-        el.style.right         = "auto";
-        el.style.bottom        = "auto";
-        el.style.width         = rect.width + "px";
-        el.style.zIndex        = "999";
-        el.style.transformOrigin = "50% 50%";
-        stored.set(el, { cx: rect.left + rect.width / 2, cy: rect.top + rect.height / 2, parent, next });
-        lifted.add(el);
-      }
-
-      function drop(el) {
-        if (!lifted.has(el)) return;
-        const { parent, next } = stored.get(el);
-        el.style.cssText = ""; // efface tous les styles inline
-        if (next) parent.insertBefore(el, next);
-        else      parent.appendChild(el);
-        lifted.delete(el);
-        stored.delete(el);
-      }
-
-      function setScale(el, s, pa, nx) {
-        if (s > 1.001) {
-          lift(el, pa, nx);
-          const { cx, cy } = stored.get(el);
-          const t  = (s - 1) / (MAX - 1);
-          const tx = (window.innerWidth  / 2 - cx) * t;
-          const ty = (window.innerHeight / 2 - cy) * t;
-          el.style.transform = `translate(${tx.toFixed(2)}px,${ty.toFixed(2)}px) scale(${s.toFixed(4)})`;
-        } else {
-          drop(el);
-        }
-      }
-
-      function growA()   { if (!hoverA) return; scaleA = Math.min(scaleA + GROW, MAX); setScale(legendeArchi, scaleA, parentA, nextA); if (scaleA < MAX) rafA = requestAnimationFrame(growA); }
-      function shrinkA() { scaleA = Math.max(scaleA - SHRINK, 1); setScale(legendeArchi, scaleA, parentA, nextA); if (scaleA > 1) rafA = requestAnimationFrame(shrinkA); }
-      function growG()   { if (!hoverG) return; scaleG = Math.min(scaleG + GROW, MAX); setScale(legendeGraph, scaleG, parentG, nextG); if (scaleG < MAX) rafG = requestAnimationFrame(growG); }
-      function shrinkG() { scaleG = Math.max(scaleG - SHRINK, 1); setScale(legendeGraph, scaleG, parentG, nextG); if (scaleG > 1) rafG = requestAnimationFrame(shrinkG); }
-
-      let prevA = false, prevG = false;
-
-      document.addEventListener("pointermove", (e) => {
-        const onG = e.clientX >= window.innerWidth / 2;
-        const onA = !onG;
-
-        if (onG && !prevG) { prevG = true;  hoverG = true;  cancelAnimationFrame(rafG); growG(); }
-        if (!onG && prevG) { prevG = false; hoverG = false; cancelAnimationFrame(rafG); shrinkG(); }
-        if (onA && !prevA) { prevA = true;  hoverA = true;  cancelAnimationFrame(rafA); growA(); }
-        if (!onA && prevA) { prevA = false; hoverA = false; cancelAnimationFrame(rafA); shrinkA(); }
-      });
-
-      document.addEventListener("mouseleave", () => {
-        hoverA = hoverG = prevA = prevG = false;
-        cancelAnimationFrame(rafA); cancelAnimationFrame(rafG);
-        shrinkA(); shrinkG();
-      });
     })();
   </script>
 </body>
