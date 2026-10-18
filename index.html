@@ -423,19 +423,19 @@
       if (!legendeArchi || !legendeGraph) return;
 
       const MAX    = 15;
-      const GROW   = 0.015;   // vitesse réduite de 50%
-      const SHRINK = 0.09;    // vitesse réduite de 50%
+      const GROW   = 0.015;
+      const SHRINK = 0.09;
 
       let scaleA = 1, scaleG = 1;
       let hoverA = false, hoverG = false;
       let rafA = null, rafG = null;
+      // stocke la position naturelle (à scale=1) de chaque élément
+      const stored = new Map();
       const fixedEls = new Set();
 
       function activateFixed(el) {
         if (fixedEls.has(el)) return;
         const rect = el.getBoundingClientRect();
-        const cx = window.innerWidth / 2;
-        const cy = window.innerHeight / 2;
         el.style.position      = "fixed";
         el.style.left          = rect.left + "px";
         el.style.top           = rect.top  + "px";
@@ -443,30 +443,33 @@
         el.style.bottom        = "auto";
         el.style.width         = rect.width + "px";
         el.style.zIndex        = "999";
-        el.style.transformOrigin = (cx - rect.left) + "px " + (cy - rect.top) + "px";
+        el.style.transformOrigin = "50% 50%";
+        // centre naturel de l'élément en coordonnées écran
+        stored.set(el, { cx: rect.left + rect.width / 2, cy: rect.top + rect.height / 2 });
         fixedEls.add(el);
       }
 
       function deactivateFixed(el) {
         if (!fixedEls.has(el)) return;
-        el.style.position      = "";
-        el.style.left          = "";
-        el.style.top           = "";
-        el.style.right         = "";
-        el.style.bottom        = "";
-        el.style.width         = "";
-        el.style.zIndex        = "";
-        el.style.transformOrigin = "";
-        el.style.transform     = "";
+        el.style.position = el.style.left = el.style.top = "";
+        el.style.right = el.style.bottom = el.style.width = "";
+        el.style.zIndex = el.style.transformOrigin = el.style.transform = "";
         fixedEls.delete(el);
+        stored.delete(el);
       }
 
       function setScale(el, s) {
         if (s > 1.001) {
           activateFixed(el);
-          el.style.transform = "scale(" + s.toFixed(4) + ")";
+          const { cx, cy } = stored.get(el);
+          const scx = window.innerWidth / 2;
+          const scy = window.innerHeight / 2;
+          // t : 0 au début, 1 à l'échelle max → le centre se déplace progressivement vers le centre écran
+          const t  = (s - 1) / (MAX - 1);
+          const tx = (scx - cx) * t;
+          const ty = (scy - cy) * t;
+          el.style.transform = `translate(${tx.toFixed(2)}px,${ty.toFixed(2)}px) scale(${s.toFixed(4)})`;
         } else {
-          el.style.transform = "";
           deactivateFixed(el);
         }
       }
