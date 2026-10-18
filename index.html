@@ -415,6 +415,52 @@
       dragZone.addEventListener("pointercancel", reinitialiser);
       dragZone.addEventListener("lostpointercapture", reinitialiser);
     })();
+
+    // ---- Texte ballon : inflation linéaire au survol ----
+    (function () {
+      const legendeArchi  = document.querySelector(".panel--archi .legende");
+      const legendeGraph  = document.querySelector(".panel--graphisme .legende");
+      if (!legendeArchi || !legendeGraph) return;
+
+      legendeArchi.style.transformOrigin = "center center";
+      legendeGraph.style.transformOrigin = "center center";
+
+      const MAX   = 15;       // échelle max (remplit l'écran)
+      const GROW  = 0.03;     // vitesse de croissance par frame (linéaire, lente)
+      const SHRINK = 0.18;    // vitesse de retour (plus rapide)
+
+      let scaleA = 1, scaleG = 1;
+      let hoverA = false, hoverG = false;
+      let rafA = null, rafG = null;
+
+      function setScale(el, s) {
+        el.style.transform = s > 1.001 ? `scale(${s.toFixed(4)})` : "";
+        el.style.zIndex    = s > 1.001 ? "5" : "";
+      }
+
+      function growA()  { if (!hoverA) return; scaleA = Math.min(scaleA + GROW, MAX); setScale(legendeArchi, scaleA); if (scaleA < MAX) rafA = requestAnimationFrame(growA); }
+      function shrinkA(){ scaleA = Math.max(scaleA - SHRINK, 1); setScale(legendeArchi, scaleA); if (scaleA > 1) rafA = requestAnimationFrame(shrinkA); }
+      function growG()  { if (!hoverG) return; scaleG = Math.min(scaleG + GROW, MAX); setScale(legendeGraph, scaleG); if (scaleG < MAX) rafG = requestAnimationFrame(growG); }
+      function shrinkG(){ scaleG = Math.max(scaleG - SHRINK, 1); setScale(legendeGraph, scaleG); if (scaleG > 1) rafG = requestAnimationFrame(shrinkG); }
+
+      let prevA = false, prevG = false;
+
+      document.addEventListener("pointermove", (e) => {
+        const onG = e.clientX >= window.innerWidth / 2;
+        const onA = !onG;
+
+        if (onG && !prevG) { prevG = true;  hoverG = true;  cancelAnimationFrame(rafG); growG(); }
+        if (!onG && prevG) { prevG = false; hoverG = false; cancelAnimationFrame(rafG); shrinkG(); }
+        if (onA && !prevA) { prevA = true;  hoverA = true;  cancelAnimationFrame(rafA); growA(); }
+        if (!onA && prevA) { prevA = false; hoverA = false; cancelAnimationFrame(rafA); shrinkA(); }
+      });
+
+      document.addEventListener("mouseleave", () => {
+        hoverA = hoverG = prevA = prevG = false;
+        cancelAnimationFrame(rafA); cancelAnimationFrame(rafG);
+        shrinkA(); shrinkG();
+      });
+    })();
   </script>
 </body>
 </html>
