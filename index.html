@@ -421,6 +421,10 @@
       const legendeGraph = document.querySelector(".panel--graphisme .legende");
       if (!legendeArchi || !legendeGraph) return;
 
+      // mémorise la position dans le DOM pour remettre l'élément en place
+      const parentA = legendeArchi.parentNode, nextA = legendeArchi.nextSibling;
+      const parentG = legendeGraph.parentNode, nextG = legendeGraph.nextSibling;
+
       const MAX    = 15;
       const GROW   = 0.015;
       const SHRINK = 0.09;
@@ -428,13 +432,14 @@
       let scaleA = 1, scaleG = 1;
       let hoverA = false, hoverG = false;
       let rafA = null, rafG = null;
-      // stocke la position naturelle (à scale=1) de chaque élément
       const stored = new Map();
-      const fixedEls = new Set();
+      const lifted = new Set(); // éléments déplacés dans <body>
 
-      function activateFixed(el) {
-        if (fixedEls.has(el)) return;
+      function lift(el, parent, next) {
+        if (lifted.has(el)) return;
         const rect = el.getBoundingClientRect();
+        // déplacer dans <body> pour échapper à l'overflow:hidden du panel
+        document.body.appendChild(el);
         el.style.position      = "fixed";
         el.style.left          = rect.left + "px";
         el.style.top           = rect.top  + "px";
@@ -443,40 +448,37 @@
         el.style.width         = rect.width + "px";
         el.style.zIndex        = "999";
         el.style.transformOrigin = "50% 50%";
-        // centre naturel de l'élément en coordonnées écran
-        stored.set(el, { cx: rect.left + rect.width / 2, cy: rect.top + rect.height / 2 });
-        fixedEls.add(el);
+        stored.set(el, { cx: rect.left + rect.width / 2, cy: rect.top + rect.height / 2, parent, next });
+        lifted.add(el);
       }
 
-      function deactivateFixed(el) {
-        if (!fixedEls.has(el)) return;
-        el.style.position = el.style.left = el.style.top = "";
-        el.style.right = el.style.bottom = el.style.width = "";
-        el.style.zIndex = el.style.transformOrigin = el.style.transform = "";
-        fixedEls.delete(el);
+      function drop(el) {
+        if (!lifted.has(el)) return;
+        const { parent, next } = stored.get(el);
+        el.style.cssText = ""; // efface tous les styles inline
+        if (next) parent.insertBefore(el, next);
+        else      parent.appendChild(el);
+        lifted.delete(el);
         stored.delete(el);
       }
 
-      function setScale(el, s) {
+      function setScale(el, s, pa, nx) {
         if (s > 1.001) {
-          activateFixed(el);
+          lift(el, pa, nx);
           const { cx, cy } = stored.get(el);
-          const scx = window.innerWidth / 2;
-          const scy = window.innerHeight / 2;
-          // t : 0 au début, 1 à l'échelle max → le centre se déplace progressivement vers le centre écran
           const t  = (s - 1) / (MAX - 1);
-          const tx = (scx - cx) * t;
-          const ty = (scy - cy) * t;
+          const tx = (window.innerWidth  / 2 - cx) * t;
+          const ty = (window.innerHeight / 2 - cy) * t;
           el.style.transform = `translate(${tx.toFixed(2)}px,${ty.toFixed(2)}px) scale(${s.toFixed(4)})`;
         } else {
-          deactivateFixed(el);
+          drop(el);
         }
       }
 
-      function growA()   { if (!hoverA) return; scaleA = Math.min(scaleA + GROW, MAX); setScale(legendeArchi, scaleA); if (scaleA < MAX) rafA = requestAnimationFrame(growA); }
-      function shrinkA() { scaleA = Math.max(scaleA - SHRINK, 1); setScale(legendeArchi, scaleA); if (scaleA > 1) rafA = requestAnimationFrame(shrinkA); }
-      function growG()   { if (!hoverG) return; scaleG = Math.min(scaleG + GROW, MAX); setScale(legendeGraph, scaleG); if (scaleG < MAX) rafG = requestAnimationFrame(growG); }
-      function shrinkG() { scaleG = Math.max(scaleG - SHRINK, 1); setScale(legendeGraph, scaleG); if (scaleG > 1) rafG = requestAnimationFrame(shrinkG); }
+      function growA()   { if (!hoverA) return; scaleA = Math.min(scaleA + GROW, MAX); setScale(legendeArchi, scaleA, parentA, nextA); if (scaleA < MAX) rafA = requestAnimationFrame(growA); }
+      function shrinkA() { scaleA = Math.max(scaleA - SHRINK, 1); setScale(legendeArchi, scaleA, parentA, nextA); if (scaleA > 1) rafA = requestAnimationFrame(shrinkA); }
+      function growG()   { if (!hoverG) return; scaleG = Math.min(scaleG + GROW, MAX); setScale(legendeGraph, scaleG, parentG, nextG); if (scaleG < MAX) rafG = requestAnimationFrame(growG); }
+      function shrinkG() { scaleG = Math.max(scaleG - SHRINK, 1); setScale(legendeGraph, scaleG, parentG, nextG); if (scaleG > 1) rafG = requestAnimationFrame(shrinkG); }
 
       let prevA = false, prevG = false;
 
