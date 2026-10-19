@@ -925,3 +925,25 @@ li { list-style: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01s !important; animation: none !important; }
 }
+
+/* =========================================================
+   FR/EN toggle — système de langue
+   ========================================================= */
+html[data-lang="en"] .fr-only { display: none !important; }
+html[data-lang="fr"] .en-only { display: none !important; }
+
+.lang-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--texte);
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: var(--bleu);
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.lang-toggle:hover { opacity: 1; }

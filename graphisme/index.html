@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,6 +28,7 @@
   <div class="flou-haut" aria-hidden="true"></div>
   <header class="barre">
     <a class="logo-texte" href="/" aria-label="KYWO Studio — retour à l'accueil">!<span class="logo-texte__tiret">—</span>K©</a>
+    <button class="lang-toggle" aria-label="Switch language">EN</button>
     <button class="bouton-menu" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
   </header>
   <div class="voile" aria-hidden="true"></div>
@@ -35,9 +36,9 @@
     <div class="menu-lateral__courbe" aria-hidden="true"></div>
     <div class="menu-lateral__contenu">
       <div class="liens-menu">
-        <a class="lien-menu" href="/graphisme/" aria-current="page"><span class="lien-menu__texte"><img src="/assets/graphisme/commun/fleche-menu.png" alt="">Home</span><span class="lien-menu__numero"><span>01</span><span>01</span></span></a>
-        <a class="lien-menu" href="/graphisme/about/"><span class="lien-menu__texte"><img src="/assets/graphisme/commun/fleche-menu.png" alt="">About</span><span class="lien-menu__numero"><span>02</span><span>02</span></span></a>
-        <a class="lien-menu" href="/graphisme/work/"><span class="lien-menu__texte"><img src="/assets/graphisme/commun/fleche-menu.png" alt="">Work</span><span class="lien-menu__numero"><span>03</span><span>03</span></span></a>
+        <a class="lien-menu" href="/graphisme/" aria-current="page"><span class="lien-menu__texte"><img src="/assets/graphisme/commun/fleche-menu.png" alt=""><span class="fr-only">Accueil</span><span class="en-only">Home</span></span><span class="lien-menu__numero"><span>01</span><span>01</span></span></a>
+        <a class="lien-menu" href="/graphisme/about/"><span class="lien-menu__texte"><img src="/assets/graphisme/commun/fleche-menu.png" alt=""><span class="fr-only">À propos</span><span class="en-only">About</span></span><span class="lien-menu__numero"><span>02</span><span>02</span></span></a>
+        <a class="lien-menu" href="/graphisme/work/"><span class="lien-menu__texte"><img src="/assets/graphisme/commun/fleche-menu.png" alt=""><span class="fr-only">Travaux</span><span class="en-only">Work</span></span><span class="lien-menu__numero"><span>03</span><span>03</span></span></a>
       </div>
       <div class="menu-lateral__bas">
         <div class="reseaux">
@@ -48,7 +49,7 @@
         <a class="menu-tel" href="tel:+33649565083">+33 6 49 56 50 83</a>
         <div class="petits-liens">
           <a class="petit-lien" href="https://drive.google.com/file/d/1e52w0h2BPRYnOk0Bfm56C1mcyovtkw5A/view?usp=drive_link" target="_blank" rel="noopener">CV</a>
-          <a class="petit-lien" href="/architecture/">Interior design portfolio</a>
+          <a class="petit-lien" href="/architecture/"><span class="fr-only">Portfolio architecture d'intérieure</span><span class="en-only">Interior design portfolio</span></a>
         </div>
         <p class="menu-lateral__copyright">© 2026 !!! KYWO</p>
       </div>
@@ -66,17 +67,17 @@
       </div>
       <div class="hero-g__ligne">
         <div class="hero-g__infos">
-          <span class="revele"><span>Graphic and digital designer</span></span>
-          <span class="revele"><span>Building visual systems</span></span>
-          <span class="revele"><span>For clients and brands</span></span>
+          <span class="revele"><span><span class="fr-only">Designer graphique et digital</span><span class="en-only">Graphic and digital designer</span></span></span>
+          <span class="revele"><span><span class="fr-only">Créateur de systèmes visuels</span><span class="en-only">Building visual systems</span></span></span>
+          <span class="revele"><span><span class="fr-only">Pour les clients et les marques</span><span class="en-only">For clients and brands</span></span></span>
           <span class="espace"></span>
           <span class="revele"><span>Location: Lyon, FR</span></span>
-          <span class="revele"><span>Available for freelance: <a href="tel:+33649565083">(+33) 6 49 56 50 83</a></span></span>
+          <span class="revele"><span><span class="fr-only">Disponible en freelance : <a href="tel:+33649565083">(+33) 6 49 56 50 83</a></span><span class="en-only">Available for freelance: <a href="tel:+33649565083">(+33) 6 49 56 50 83</a></span></span></span>
         </div>
         <ul class="hero-g__services" aria-label="Services">
-          <li class="revele service"><span>Graphic design</span></li>
-          <li class="revele service"><span>Art direction</span></li>
-          <li class="revele service"><span>Motion design</span></li>
+          <li class="revele service"><span><span class="fr-only">Graphisme</span><span class="en-only">Graphic design</span></span></li>
+          <li class="revele service"><span><span class="fr-only">Direction artistique</span><span class="en-only">Art direction</span></span></li>
+          <li class="revele service"><span><span class="fr-only">Motion design</span><span class="en-only">Motion design</span></span></li>
         </ul>
         <a class="hero-g__tel-mobile" href="tel:+33649565083">+33 6 49 56 50 83</a>
       </div>
@@ -87,10 +88,10 @@
     <section class="intro-g">
       <div class="intro-g__grille">
         <div class="intro-g__texte">
-          <h2 class="intro-g__titre mots">Hi! KYWO at your service</h2>
+          <h2 class="intro-g__titre mots"><span class="fr-only">Salut ! KYWO à votre service</span><span class="en-only">Hi! KYWO at your service</span></h2>
           <div class="intro-g__textes">
-            <p class="mots">From Lyon, Corentin is a digital designer known for shaping ideas into innovative, modern and new experiences.</p>
-            <p class="mots">An interior designer who fell in love with clean and modern graphic design. His work blends minimal aesthetics with strong typography and structured layouts. He specializes in graphic design, branding, and interactive digital products. Always exploring new ways to combine his creativity with the world.</p>
+            <p class="mots"><span class="fr-only">De Lyon, Corentin est un designer digital reconnu pour transformer les idées en expériences innovantes, modernes et nouvelles.</span><span class="en-only">From Lyon, Corentin is a digital designer known for shaping ideas into innovative, modern and new experiences.</span></p>
+            <p class="mots"><span class="fr-only">Architecte d'intérieur tombé amoureux du graphisme épuré et moderne. Son travail mêle esthétique minimaliste, typographie forte et compositions structurées. Il se spécialise en graphisme, branding et produits digitaux interactifs. Toujours à la recherche de nouvelles façons de combiner sa créativité avec le monde.</span><span class="en-only">An interior designer who fell in love with clean and modern graphic design. His work blends minimal aesthetics with strong typography and structured layouts. He specializes in graphic design, branding, and interactive digital products. Always exploring new ways to combine his creativity with the world.</span></p>
           </div>
           <img class="intro-g__signature apparait" src="/assets/graphisme/commun/logo-signature.png" alt="Logo KYWO et signature de Corentin">
         </div>
@@ -162,7 +163,7 @@
         </div>
       </div>
 
-      <div class="centre"><a class="bouton-plein" href="/graphisme/work/">All my designs</a></div>
+      <div class="centre"><a class="bouton-plein" href="/graphisme/work/"><span class="fr-only">Tous mes créations</span><span class="en-only">All my designs</span></a></div>
     </section>
   </main>
 
@@ -170,13 +171,13 @@
   <div class="courbe courbe--creux" style="--fond: var(--bleu); --forme: var(--creme)" aria-hidden="true"></div>
   <footer class="pied-g">
     <a class="echo" href="mailto:kywostudio@gmail.com" aria-label="Let's talk — m'écrire à kywostudio@gmail.com">
-      <span class="echo__bande" aria-hidden="true"><span>Let's Talk</span></span>
-      <span class="echo__bande" aria-hidden="true"><span>Let's Talk</span></span>
-      <span class="echo__bande" aria-hidden="true"><span>Let's Talk</span></span>
+      <span class="echo__bande" aria-hidden="true"><span><span class="fr-only">Écris-moi</span><span class="en-only">Let's Talk</span></span></span>
+      <span class="echo__bande" aria-hidden="true"><span><span class="fr-only">Écris-moi</span><span class="en-only">Let's Talk</span></span></span>
+      <span class="echo__bande" aria-hidden="true"><span><span class="fr-only">Écris-moi</span><span class="en-only">Let's Talk</span></span></span>
       <span class="echo__espace"></span>
-      <span class="echo__calque"><span class="echo__plein">Let's Talk</span></span>
+      <span class="echo__calque"><span class="echo__plein"><span class="fr-only">Écris-moi</span><span class="en-only">Let's Talk</span></span></span>
     </a>
-    <p class="pied-g__rdv">(book a call) <img src="/assets/graphisme/commun/fleche-gribouillis.png" alt=""></p>
+    <p class="pied-g__rdv"><span class="fr-only">(réserver un appel)</span><span class="en-only">(book a call)</span> <img src="/assets/graphisme/commun/fleche-gribouillis.png" alt=""></p>
     <div class="pied-g__bas">
       <p>© 2026 !!! KYWO / <a href="tel:+33649565083">+33 6 49 56 50 83</a></p>
       <div class="reseaux">
@@ -190,5 +191,24 @@
 
   <script src="/assets/graphisme/lenis.min.js"></script>
   <script src="/assets/graphisme/site.js"></script>
+  <script>
+    (function () {
+      const html = document.documentElement;
+      const saved = localStorage.getItem("kywo-lang") || "fr";
+      html.setAttribute("data-lang", saved);
+      html.setAttribute("lang", saved);
+      const btn = document.querySelector(".lang-toggle");
+      if (btn) {
+        btn.textContent = saved === "fr" ? "EN" : "FR";
+        btn.addEventListener("click", () => {
+          const next = html.getAttribute("data-lang") === "fr" ? "en" : "fr";
+          html.setAttribute("data-lang", next);
+          html.setAttribute("lang", next);
+          btn.textContent = next === "fr" ? "EN" : "FR";
+          localStorage.setItem("kywo-lang", next);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
