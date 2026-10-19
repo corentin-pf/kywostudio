@@ -33,7 +33,6 @@
       <a class="souligne" href="/architecture/#contact"><span>Contact</span></a>
       <a class="souligne menu__mobile" href="/"><span><span class="fr-only">Accueil</span><span class="en-only">Home</span></span></a>
       <a class="souligne menu__mobile" href="/architecture/#projets"><span><span class="fr-only">Projets</span><span class="en-only">Projects</span></span></a>
-      <button class="lang-toggle" aria-label="Switch language">EN</button>
     </nav>
   </header>
 
@@ -90,17 +89,20 @@
   <script>
     (function () {
       const html = document.documentElement;
-      const btn  = document.querySelector(".lang-toggle");
-      if (!btn) return;
       const saved = localStorage.getItem("kywo-lang") || "fr";
-      function apply(lang) {
-        html.setAttribute("data-lang", lang);
-        html.setAttribute("lang", lang);
-        btn.textContent = lang === "fr" ? "EN" : "FR";
-        localStorage.setItem("kywo-lang", lang);
+      html.setAttribute("data-lang", saved);
+      html.setAttribute("lang", saved);
+      const btn = document.querySelector(".lang-toggle");
+      if (btn) {
+        btn.textContent = saved === "fr" ? "EN" : "FR";
+        btn.addEventListener("click", () => {
+          const next = html.getAttribute("data-lang") === "fr" ? "en" : "fr";
+          html.setAttribute("data-lang", next);
+          html.setAttribute("lang", next);
+          btn.textContent = next === "fr" ? "EN" : "FR";
+          localStorage.setItem("kywo-lang", next);
+        });
       }
-      apply(saved);
-      btn.addEventListener("click", () => apply(html.getAttribute("data-lang") === "fr" ? "en" : "fr"));
     })();
   </script>
 </body>

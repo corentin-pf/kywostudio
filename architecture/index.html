@@ -205,17 +205,20 @@
   <script>
     (function () {
       const html = document.documentElement;
-      const btn  = document.querySelector(".lang-toggle");
-      if (!btn) return;
       const saved = localStorage.getItem("kywo-lang") || "fr";
-      function apply(lang) {
-        html.setAttribute("data-lang", lang);
-        html.setAttribute("lang", lang);
-        btn.textContent = lang === "fr" ? "EN" : "FR";
-        localStorage.setItem("kywo-lang", lang);
+      html.setAttribute("data-lang", saved);
+      html.setAttribute("lang", saved);
+      const btn = document.querySelector(".lang-toggle");
+      if (btn) {
+        btn.textContent = saved === "fr" ? "EN" : "FR";
+        btn.addEventListener("click", () => {
+          const next = html.getAttribute("data-lang") === "fr" ? "en" : "fr";
+          html.setAttribute("data-lang", next);
+          html.setAttribute("lang", next);
+          btn.textContent = next === "fr" ? "EN" : "FR";
+          localStorage.setItem("kywo-lang", next);
+        });
       }
-      apply(saved);
-      btn.addEventListener("click", () => apply(html.getAttribute("data-lang") === "fr" ? "en" : "fr"));
     })();
   </script>
 </body>
