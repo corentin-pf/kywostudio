@@ -225,8 +225,9 @@
       const selector = document.getElementById("lang-selector");
       if (!selector) return;
       const flag = selector.querySelector(".lang-flag");
-      const touchesFr = selector.querySelectorAll("[data-lang='fr']");
-      const touchesEn = selector.querySelectorAll("[data-lang='en']");
+      const popup = selector.querySelector(".lang-popup");
+      const touchesFr = popup.querySelectorAll("[data-lang='fr']");
+      const touchesEn = popup.querySelectorAll("[data-lang='en']");
 
       function updateUI(lang) {
         flag.textContent = lang === "fr" ? "🇫🇷" : "🇬🇧";
@@ -244,16 +245,44 @@
 
       updateUI(saved);
 
-      selector.querySelectorAll("button[data-lang]").forEach(btn => {
-        btn.addEventListener("click", e => {
-          e.stopPropagation();
-          setLang(btn.dataset.lang);
-        });
+      // Popup hover avec délai pour couvrir le gap flag → popup
+      let hideTimer;
+      function openPopup() { clearTimeout(hideTimer); selector.classList.add("ouvert"); }
+      function startClose() { hideTimer = setTimeout(() => selector.classList.remove("ouvert"), 90); }
+
+      flag.addEventListener("mouseenter", openPopup);
+      flag.addEventListener("mouseleave", startClose);
+      popup.addEventListener("mouseenter", openPopup);
+      popup.addEventListener("mouseleave", startClose);
+
+      popup.querySelectorAll("button[data-lang]").forEach(btn => {
+        btn.addEventListener("click", e => { e.stopPropagation(); setLang(btn.dataset.lang); });
       });
 
       document.addEventListener("click", e => {
         if (!selector.contains(e.target)) selector.classList.remove("ouvert");
       });
+
+      // Positionner le flag juste après le lien Accueil
+      const accueilLink = document.querySelector(".menu nav a:first-child");
+      function positionSelector() {
+        if (!accueilLink) return;
+        const rect = accueilLink.getBoundingClientRect();
+        if (rect.right > 0) selector.style.left = (rect.right + 16) + "px";
+      }
+      // Attendre fonts + layout pour avoir getBoundingClientRect correct
+      (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => {
+        requestAnimationFrame(positionSelector);
+      });
+      window.addEventListener("resize", positionSelector);
+
+      // Synchroniser la visibilité avec le header (scroll)
+      const menu = document.querySelector(".menu");
+      if (menu) {
+        new MutationObserver(() => {
+          selector.style.transform = menu.classList.contains("menu--cache") ? "translateY(-200%)" : "";
+        }).observe(menu, { attributes: true, attributeFilter: ["class"] });
+      }
     })();
   </script>
 </body>
