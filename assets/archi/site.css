@@ -619,3 +619,35 @@ p, h1, h2, h3 { margin: 0; font-weight: inherit; }
 
 /* Page Parcours & compétences : une grande planche */
 .parcours__image { width: 1234px; max-width: 100%; margin: 0 auto; }
+
+/* ---------------------------------------------------------
+   Traduction FR / EN
+   --------------------------------------------------------- */
+html[data-lang="en"] .fr-only { display: none !important; }
+html[data-lang="fr"] .en-only { display: none !important; }
+
+/* En mode EN : le bloc anglais prend le style du bloc français */
+html[data-lang="en"] .apropos__anglais {
+  color: inherit;
+  font-size: clamp(20px, 2.22vw, 32px);
+  line-height: 1.25;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+/* Bouton toggle langue : même police que le menu, sobre */
+.lang-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--texte);
+  font-size: clamp(20px, 2.22vw, 32px);
+  line-height: 40px;
+  text-transform: uppercase;
+  color: inherit;
+  letter-spacing: 0.02em;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.lang-toggle:hover { opacity: 1; }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,6 +32,7 @@
       <a class="souligne" href="#contact"><span>Contact</span></a>
       <a class="souligne menu__mobile" href="/"><span>Home</span></a>
       <a class="souligne menu__mobile" href="#projets"><span>Projects</span></a>
+      <button class="lang-toggle" aria-label="Switch language">EN</button>
     </nav>
   </header>
 
@@ -109,9 +110,9 @@
     </section>
 
     <section class="apropos" id="apropos">
-      <h3 class="sous-titre"><span class="ligne"><span>Créateur d’intérieur et d’univers</span></span></h3>
+      <h3 class="sous-titre"><span class="ligne"><span class="fr-only">Créateur d’intérieur et d’univers</span><span class="en-only">Interior &amp; universe creator</span></span></h3>
 
-      <div class="apropos__textes">
+      <div class="apropos__textes fr-only">
         <p>Je m’appelle Corentin Pelloux Fagot, je suis étudiant en 4e année d’architecture intérieure à CREAD Lyon. Je développe un univers où l’architecture intérieure rencontre le graphisme, l’image et la création visuelle. J’aime imaginer des espaces expressifs, ludiques et singuliers, avec une approche inspirée des codes graphiques et de l’univers pop et coloré.</p>
         <p>L’architecture intérieure est mon domaine de prédilection, mais le graphisme occupe une place tout aussi importante dans ma manière de créer. J’aime travailler sur l’identité visuelle d’un projet, sa composition, ses couleurs et sa narration, autant que sur son espace. Cette double approche me permet de concevoir des univers cohérents, de l’espace jusqu’à l’image qui le représente.</p>
         <p>Je me définis également comme un véritable « jack of all trades » du design. 3D, rendu, montage vidéo, retouche, UI/UX, direction artistique ou création graphique : je maîtrise différents outils et médiums qui me permettent d’aller au-delà de mon domaine de spécialisation. Cette polyvalence me donne la liberté d’explorer une idée sous plusieurs formes et de choisir le meilleur moyen de lui donner vie.</p>
@@ -119,7 +120,7 @@
         <p>Bienvenue dans mon univers !</p>
       </div>
 
-      <div class="apropos__anglais" lang="en">
+      <div class="apropos__anglais en-only" lang="en">
         <p>My name is Corentin Pelloux Fagot, and I am a fourth-year interior architecture student at CREAD Lyon. I create expressive, playful and distinctive spaces, blending interior architecture with graphic design and a pop, colorful aesthetic.</p>
         <p>Interior architecture is my main field, while graphic design plays an equally important role in my creative approach. I enjoy working on spaces, identities, compositions and visual storytelling to create cohesive and memorable universes.</p>
         <p>I am also a true “jack of all trades” in design, with strong skills in 3D, rendering, video editing, retouching, UI/UX, art direction and graphic design. This versatility allows me to explore ideas through different mediums and bring them to life in many ways.</p>
@@ -128,7 +129,7 @@
       </div>
 
       <div class="apropos__boutons">
-        <a class="bouton" href="/architecture/parcours/"><span class="btn-long">Parcours &amp; compétences</span><span class="btn-court" hidden>Parcours</span></a>
+        <a class="bouton" href="/architecture/parcours/"><span class="btn-long"><span class="fr-only">Parcours &amp; compétences</span><span class="en-only">Career &amp; skills</span></span><span class="btn-court" hidden><span class="fr-only">Parcours</span><span class="en-only">Career</span></span></a>
         <a class="bouton" href="mailto:kywostudio@gmail.com"><span>Let's talk</span></a>
       </div>
 
@@ -201,5 +202,21 @@
 
   <div class="curseur" aria-hidden="true"></div>
   <script src="/assets/archi/site.js"></script>
+  <script>
+    (function () {
+      const html = document.documentElement;
+      const btn  = document.querySelector(".lang-toggle");
+      if (!btn) return;
+      const saved = localStorage.getItem("kywo-lang") || "fr";
+      function apply(lang) {
+        html.setAttribute("data-lang", lang);
+        html.setAttribute("lang", lang);
+        btn.textContent = lang === "fr" ? "EN" : "FR";
+        localStorage.setItem("kywo-lang", lang);
+      }
+      apply(saved);
+      btn.addEventListener("click", () => apply(html.getAttribute("data-lang") === "fr" ? "en" : "fr"));
+    })();
+  </script>
 </body>
 </html>
