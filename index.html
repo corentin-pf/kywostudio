@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -285,28 +285,52 @@
       .panel img, .legende { transition: opacity .3s ease; transform: none !important; }
       .trait { stroke-dashoffset: 0; animation: none !important; }
     }
+
+    /* FR/EN toggle */
+    html[data-lang="en"] .fr-only { display: none !important; }
+    html[data-lang="fr"] .en-only { display: none !important; }
+
+    .lang-toggle-accueil {
+      position: fixed;
+      top: 18px;
+      right: 22px;
+      z-index: 20;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: "Anton", "Impact", sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+    }
+    .lang-toggle-accueil:hover { color: rgba(255,255,255,0.95); }
   </style>
 </head>
 <body>
-  <h1 class="visually-hidden">KYWO Studio — Corentin Pelloux Fagot, architecture d'intérieur et graphisme à Lyon</h1>
+  <h1 class="visually-hidden">KYWO Studio — Corentin Pelloux Fagot, <span class="fr-only">architecture d'intérieur et graphisme à Lyon</span><span class="en-only">interior design and graphic design in Lyon</span></h1>
+
+  <button class="lang-toggle-accueil" aria-label="Switch language">EN</button>
 
   <a class="panel panel--archi" href="/architecture/" aria-label="Architecture d'intérieur">
     <img src="/assets/accueil/archi.jpg" alt="" loading="eager">
-    <p class="legende">Architecture<br>d'interieur</p>
+    <p class="legende"><span class="fr-only">Architecture<br>d'intérieur</span><span class="en-only">Interior<br>design</span></p>
     <div class="overlay" aria-hidden="true"></div>
   </a>
 
   <a class="panel panel--graphisme" href="/graphisme/" aria-label="Design digital et graphisme">
     <img src="/assets/accueil/graphisme2.jpg" alt="" loading="eager">
-    <p class="legende">Design digital<br>Graphisme</p>
+    <p class="legende"><span class="fr-only">Design digital<br>Graphisme</span><span class="en-only">Digital design<br>Graphic art</span></p>
     <div class="overlay" aria-hidden="true"></div>
   </a>
 
   <div class="drag-zone" aria-hidden="true"></div>
 
   <footer class="footer-legal">
-    <a href="/mentions-legales/">Mentions légales</a>
-    <a href="/politique-de-confidentialite/">Politique de confidentialité</a>
+    <a href="/mentions-legales/"><span class="fr-only">Mentions légales</span><span class="en-only">Legal notice</span></a>
+    <a href="/politique-de-confidentialite/"><span class="fr-only">Politique de confidentialité</span><span class="en-only">Privacy policy</span></a>
   </footer>
 
   <div class="logo" aria-hidden="true">
@@ -332,6 +356,26 @@
     </svg>
     FIN SIGNATURE -->
   </div>
+
+  <script>
+    (function () {
+      const html = document.documentElement;
+      const saved = localStorage.getItem("kywo-lang") || "fr";
+      html.setAttribute("data-lang", saved);
+      html.setAttribute("lang", saved);
+      const btn = document.querySelector(".lang-toggle-accueil");
+      if (btn) {
+        btn.textContent = saved === "fr" ? "EN" : "FR";
+        btn.addEventListener("click", () => {
+          const next = html.getAttribute("data-lang") === "fr" ? "en" : "fr";
+          html.setAttribute("data-lang", next);
+          html.setAttribute("lang", next);
+          btn.textContent = next === "fr" ? "EN" : "FR";
+          localStorage.setItem("kywo-lang", next);
+        });
+      }
+    })();
+  </script>
 
   <script>
     // SIGNATURE DÉSACTIVÉE — décommenter pour remettre :
