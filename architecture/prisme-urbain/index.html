@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,13 +26,14 @@
 
   <header class="menu">
     <nav aria-label="Menu principal">
-      <a class="souligne" href="/"><span>Home</span></a>
-      <a class="souligne" href="/architecture/#projets"><span>Projects</span></a>
-      <a class="souligne" href="/architecture/#services"><span>Me?</span></a>
-      <a class="souligne" href="/architecture/#apropos"><span>About</span></a>
+      <a class="souligne" href="/"><span><span class="fr-only">Accueil</span><span class="en-only">Home</span></span></a>
+      <a class="souligne" href="/architecture/#projets"><span><span class="fr-only">Projets</span><span class="en-only">Projects</span></span></a>
+      <a class="souligne" href="/architecture/#services"><span><span class="fr-only">Moi ?</span><span class="en-only">Me?</span></span></a>
+      <a class="souligne" href="/architecture/#apropos"><span><span class="fr-only">À propos</span><span class="en-only">About</span></span></a>
       <a class="souligne" href="/architecture/#contact"><span>Contact</span></a>
-      <a class="souligne menu__mobile" href="/"><span>Home</span></a>
-      <a class="souligne menu__mobile" href="/architecture/#projets"><span>Projects</span></a>
+      <a class="souligne menu__mobile" href="/"><span><span class="fr-only">Accueil</span><span class="en-only">Home</span></span></a>
+      <a class="souligne menu__mobile" href="/architecture/#projets"><span><span class="fr-only">Projets</span><span class="en-only">Projects</span></span></a>
+      <button class="lang-toggle" aria-label="Switch language">EN</button>
     </nav>
   </header>
   <main class="projet">
@@ -53,14 +54,14 @@
 
       <div class="projet__texte">
         <h2 class="sous-titre"><span class="ligne"><span>Prisme urbain - 2e année</span></span></h2>
-        <div class="projet__paragraphes">
+        <div class="projet__paragraphes fr-only">
           <p>Ce projet a été réalisé au premier semestre de ma deuxième année d’études. L’objectif était de transformer deux anciens studios mitoyens en un seul logement optimisé pour un étudiant.</p>
           <p>Il s’agissait de répondre à plusieurs contraintes techniques (surface restreinte, forte pente sous plafond, présence de Velux et de lucarnes jacobines) tout en développant un parti pris fort pour se démarquer de la concurrence.</p>
           <p>Avec mon groupe, nous avons choisi de nous inspirer de l’univers graphique et audacieux de Zyva Studio, notamment à travers l’usage de couleurs vives et du color zoning, pour créer un espace à la fois fonctionnel, identitaire et stimulant.</p>
           <p>Ce projet m’a permis de travailler sur des solutions créatives d’aménagement en lien avec un concept fort, tout en répondant à des enjeux techniques concrets.</p>
         </div>
-        <p class="projet__anglais" lang="en">This first-semester project of my second year focused on transforming two adjacent studios into one optimized student apartment. The design addressed several technical constraints such as limited space, sloped ceilings, and roof windows, while developing a strong creative concept. With my group, we drew inspiration from the bold and colorful universe of Zyva Studio, using vivid tones and color zoning to create a functional, distinctive, and dynamic space. This project strengthened my ability to combine technical problem-solving with a clear design identity.</p>
-        <a class="bouton" href="https://drive.google.com/file/d/1DLE1LwqdgspKGiJaiXYcdCuzJAhGwK5u/view?usp=drive_link" target="_blank" rel="noopener"><span>Projet complet</span></a>
+        <p class="projet__anglais en-only" lang="en">This first-semester project of my second year focused on transforming two adjacent studios into one optimized student apartment. The design addressed several technical constraints such as limited space, sloped ceilings, and roof windows, while developing a strong creative concept. With my group, we drew inspiration from the bold and colorful universe of Zyva Studio, using vivid tones and color zoning to create a functional, distinctive, and dynamic space. This project strengthened my ability to combine technical problem-solving with a clear design identity.</p>
+        <a class="bouton" href="https://drive.google.com/file/d/1DLE1LwqdgspKGiJaiXYcdCuzJAhGwK5u/view?usp=drive_link" target="_blank" rel="noopener"><span><span class="fr-only">Projet complet</span><span class="en-only">Full project</span></span></a>
       </div>
     </div>
 
@@ -86,5 +87,21 @@
 
   <div class="curseur" aria-hidden="true"></div>
   <script src="/assets/archi/site.js"></script>
+  <script>
+    (function () {
+      const html = document.documentElement;
+      const btn  = document.querySelector(".lang-toggle");
+      if (!btn) return;
+      const saved = localStorage.getItem("kywo-lang") || "fr";
+      function apply(lang) {
+        html.setAttribute("data-lang", lang);
+        html.setAttribute("lang", lang);
+        btn.textContent = lang === "fr" ? "EN" : "FR";
+        localStorage.setItem("kywo-lang", lang);
+      }
+      apply(saved);
+      btn.addEventListener("click", () => apply(html.getAttribute("data-lang") === "fr" ? "en" : "fr"));
+    })();
+  </script>
 </body>
 </html>

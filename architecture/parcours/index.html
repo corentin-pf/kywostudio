@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,13 +26,14 @@
 
   <header class="menu">
     <nav aria-label="Menu principal">
-      <a class="souligne" href="/"><span>Home</span></a>
-      <a class="souligne" href="/architecture/#projets"><span>Projects</span></a>
-      <a class="souligne" href="/architecture/#services"><span>Me?</span></a>
-      <a class="souligne" href="/architecture/#apropos"><span>About</span></a>
+      <a class="souligne" href="/"><span><span class="fr-only">Accueil</span><span class="en-only">Home</span></span></a>
+      <a class="souligne" href="/architecture/#projets"><span><span class="fr-only">Projets</span><span class="en-only">Projects</span></span></a>
+      <a class="souligne" href="/architecture/#services"><span><span class="fr-only">Moi ?</span><span class="en-only">Me?</span></span></a>
+      <a class="souligne" href="/architecture/#apropos"><span><span class="fr-only">À propos</span><span class="en-only">About</span></span></a>
       <a class="souligne" href="/architecture/#contact"><span>Contact</span></a>
-      <a class="souligne menu__mobile" href="/"><span>Home</span></a>
-      <a class="souligne menu__mobile" href="/architecture/#projets"><span>Projects</span></a>
+      <a class="souligne menu__mobile" href="/"><span><span class="fr-only">Accueil</span><span class="en-only">Home</span></span></a>
+      <a class="souligne menu__mobile" href="/architecture/#projets"><span><span class="fr-only">Projets</span><span class="en-only">Projects</span></span></a>
+      <button class="lang-toggle" aria-label="Switch language">EN</button>
     </nav>
   </header>
   <main class="projet">
@@ -53,5 +54,21 @@
 
   <div class="curseur" aria-hidden="true"></div>
   <script src="/assets/archi/site.js"></script>
+  <script>
+    (function () {
+      const html = document.documentElement;
+      const btn  = document.querySelector(".lang-toggle");
+      if (!btn) return;
+      const saved = localStorage.getItem("kywo-lang") || "fr";
+      function apply(lang) {
+        html.setAttribute("data-lang", lang);
+        html.setAttribute("lang", lang);
+        btn.textContent = lang === "fr" ? "EN" : "FR";
+        localStorage.setItem("kywo-lang", lang);
+      }
+      apply(saved);
+      btn.addEventListener("click", () => apply(html.getAttribute("data-lang") === "fr" ? "en" : "fr"));
+    })();
+  </script>
 </body>
 </html>

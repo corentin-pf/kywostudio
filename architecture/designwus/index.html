@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,13 +26,14 @@
 
   <header class="menu">
     <nav aria-label="Menu principal">
-      <a class="souligne" href="/"><span>Home</span></a>
-      <a class="souligne" href="/architecture/#projets"><span>Projects</span></a>
-      <a class="souligne" href="/architecture/#services"><span>Me?</span></a>
-      <a class="souligne" href="/architecture/#apropos"><span>About</span></a>
+      <a class="souligne" href="/"><span><span class="fr-only">Accueil</span><span class="en-only">Home</span></span></a>
+      <a class="souligne" href="/architecture/#projets"><span><span class="fr-only">Projets</span><span class="en-only">Projects</span></span></a>
+      <a class="souligne" href="/architecture/#services"><span><span class="fr-only">Moi ?</span><span class="en-only">Me?</span></span></a>
+      <a class="souligne" href="/architecture/#apropos"><span><span class="fr-only">À propos</span><span class="en-only">About</span></span></a>
       <a class="souligne" href="/architecture/#contact"><span>Contact</span></a>
-      <a class="souligne menu__mobile" href="/"><span>Home</span></a>
-      <a class="souligne menu__mobile" href="/architecture/#projets"><span>Projects</span></a>
+      <a class="souligne menu__mobile" href="/"><span><span class="fr-only">Accueil</span><span class="en-only">Home</span></span></a>
+      <a class="souligne menu__mobile" href="/architecture/#projets"><span><span class="fr-only">Projets</span><span class="en-only">Projects</span></span></a>
+      <button class="lang-toggle" aria-label="Switch language">EN</button>
     </nav>
   </header>
 
@@ -54,11 +55,11 @@
 
       <div class="projet__texte">
         <h2 class="sous-titre"><span class="ligne"><span>Design w/us - 3e année</span></span></h2>
-        <div class="projet__paragraphes">
+        <div class="projet__paragraphes fr-only">
           <p>Dans le cadre d’un projet d’école, j’ai imaginé Design w/us, un lieu hybride café-épicerie pensé pour accueillir une communauté de créatifs. Le projet s’articule autour d’une grande table centrale, conçue comme un véritable outil de travail collectif, favorisant les échanges, les rencontres et la collaboration entre designers, architectes ou indépendants. J’ai développé un espace ouvert structuré par une dualité d’ambiances : une zone sobre dédiée à la concentration, et une zone plus expressive encourageant les interactions. Le travail s’est également porté sur les matières, les contrastes et la modularité afin de créer un lieu adaptable aux différents usages. Un projet qui explore la manière dont l’espace peut devenir un support de collaboration.</p>
         </div>
-        <p class="projet__anglais" lang="en">As part of a school project, I conceived Design w/us, a hybrid café-grocery store designed to welcome a community of creative professionals. The project centers around a large central table, conceived as a true tool for collective work, fostering exchanges, encounters, and collaboration among designers, architects, and freelancers. I developed an open space structured by a duality of atmospheres: a minimalist zone dedicated to concentration, and a more expressive zone encouraging interaction. The design also focused on materials, contrasts, and modularity to create a space adaptable to various uses.</p>
-        <a class="bouton" href="https://drive.google.com/file/d/1kP-DNgP8sKYYna6MTFzQQXdCGK0R-LE6/view?usp=drive_link" target="_blank" rel="noopener"><span>Projet complet</span></a>
+        <p class="projet__anglais en-only" lang="en">As part of a school project, I conceived Design w/us, a hybrid café-grocery store designed to welcome a community of creative professionals. The project centers around a large central table, conceived as a true tool for collective work, fostering exchanges, encounters, and collaboration among designers, architects, and freelancers. I developed an open space structured by a duality of atmospheres: a minimalist zone dedicated to concentration, and a more expressive zone encouraging interaction. The design also focused on materials, contrasts, and modularity to create a space adaptable to various uses.</p>
+        <a class="bouton" href="https://drive.google.com/file/d/1kP-DNgP8sKYYna6MTFzQQXdCGK0R-LE6/view?usp=drive_link" target="_blank" rel="noopener"><span><span class="fr-only">Projet complet</span><span class="en-only">Full project</span></span></a>
       </div>
     </div>
 
@@ -84,5 +85,21 @@
 
   <div class="curseur" aria-hidden="true"></div>
   <script src="/assets/archi/site.js"></script>
+  <script>
+    (function () {
+      const html = document.documentElement;
+      const btn  = document.querySelector(".lang-toggle");
+      if (!btn) return;
+      const saved = localStorage.getItem("kywo-lang") || "fr";
+      function apply(lang) {
+        html.setAttribute("data-lang", lang);
+        html.setAttribute("lang", lang);
+        btn.textContent = lang === "fr" ? "EN" : "FR";
+        localStorage.setItem("kywo-lang", lang);
+      }
+      apply(saved);
+      btn.addEventListener("click", () => apply(html.getAttribute("data-lang") === "fr" ? "en" : "fr"));
+    })();
+  </script>
 </body>
 </html>

@@ -638,6 +638,12 @@ html[data-lang="en"] .apropos__anglais {
   gap: 40px;
   margin-top: 40px;
 }
+html[data-lang="en"] .projet__anglais {
+  color: inherit;
+  font-size: 17px;
+  line-height: 25px;
+  margin-top: 0;
+}
 
 /* Bouton toggle langue : même police que le menu, sobre */
 .lang-toggle {
