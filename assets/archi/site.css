@@ -201,7 +201,7 @@ p, h1, h2, h3 { margin: 0; font-weight: inherit; }
 }
 .pied__titre {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 }
 .pied__infos {
   display: grid;
