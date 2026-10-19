@@ -145,7 +145,7 @@
 
       let hideTimer;
       function openPopup() { clearTimeout(hideTimer); selector.classList.add("ouvert"); }
-      function startClose() { hideTimer = setTimeout(() => selector.classList.remove("ouvert"), 90); }
+      function startClose() { hideTimer = setTimeout(() => selector.classList.remove("ouvert"), 500); }
 
       flag.addEventListener("mouseenter", openPopup);
       flag.addEventListener("mouseleave", startClose);

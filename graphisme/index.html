@@ -231,6 +231,17 @@
 
       updateUI(saved);
 
+      const popup = selector.querySelector(".lang-popup");
+
+      let hideTimer;
+      function openPopup() { clearTimeout(hideTimer); selector.classList.add("ouvert"); }
+      function startClose() { hideTimer = setTimeout(() => selector.classList.remove("ouvert"), 500); }
+
+      flag.addEventListener("mouseenter", openPopup);
+      flag.addEventListener("mouseleave", startClose);
+      popup.addEventListener("mouseenter", openPopup);
+      popup.addEventListener("mouseleave", startClose);
+
       selector.querySelectorAll("button[data-lang]").forEach(btn => {
         btn.addEventListener("click", e => {
           e.stopPropagation();
