@@ -626,6 +626,10 @@ p, h1, h2, h3 { margin: 0; font-weight: inherit; }
 html[data-lang="en"] .fr-only { display: none !important; }
 html[data-lang="fr"] .en-only { display: none !important; }
 
+/* Les spans fr-only/en-only imbriqués dans les animations ne doivent pas hériter de display:block ou transform */
+.menu nav a span span,
+.ligne > span > span { display: inline; transform: none !important; transition: none !important; }
+
 /* En mode EN : le bloc anglais prend le style du bloc français */
 html[data-lang="en"] .apropos__anglais {
   color: inherit;
