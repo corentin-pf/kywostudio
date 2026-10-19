@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr" data-lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nouveau projet — KYWO Studio</title>
+  <meta name="description" content="[À compléter]">
+  <link rel="canonical" href="https://kywostudio.com/architecture/nouveau-projet/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="KYWO Studio">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:url" content="https://kywostudio.com/architecture/nouveau-projet/">
+  <meta property="og:title" content="[Titre du projet] | KYWO Studio">
+  <meta property="og:description" content="[À compléter]">
+  <meta property="og:image" content="https://kywostudio.com/assets/archi/nouveau-projet/couverture.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#000bc5">
+  <link rel="icon" href="/assets/accueil/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/assets/accueil/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/new-title-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/switzer-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/archi/site.css">
+  <style>
+    /* Placeholders temporaires — à supprimer quand les vraies images/vidéos sont ajoutées */
+    .placeholder {
+      background: #ffffff;
+      border: 2px dashed #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      width: 100%;
+    }
+    .placeholder--cover  { aspect-ratio: 16 / 7; }
+    .placeholder--image  { aspect-ratio: 4 / 3; }
+    .placeholder--plan   { aspect-ratio: 4 / 3; }
+    .placeholder--galerie { aspect-ratio: 3 / 2; width: 100%; }
+  </style>
+</head>
+<body>
+
+  <header class="menu">
+    <nav aria-label="Menu principal">
+      <a class="souligne" href="/"><span><span class="fr-only">Accueil</span><span class="en-only">Home</span></span></a>
+      <a class="souligne" href="/architecture/#projets"><span><span class="fr-only">Projets</span><span class="en-only">Projects</span></span></a>
+      <a class="souligne" href="/architecture/#services"><span><span class="fr-only">Moi ?</span><span class="en-only">Me?</span></span></a>
+      <a class="souligne" href="/architecture/#contact"><span>Contact</span></a>
+      <a class="souligne menu__mobile" href="/"><span><span class="fr-only">Accueil</span><span class="en-only">Home</span></span></a>
+      <a class="souligne menu__mobile" href="/architecture/#projets"><span><span class="fr-only">Projets</span><span class="en-only">Projects</span></span></a>
+    </nav>
+  </header>
+
+  <div class="lang-selector" id="lang-selector">
+    <button class="lang-flag" aria-label="Changer la langue / Switch language">🇫🇷</button>
+    <div class="lang-popup">
+      <div class="lang-popup__grille">
+        <button class="lang-popup__touche" data-lang="fr">Hi,</button>
+        <span class="lang-popup__touche lang-popup__touche--ou" aria-hidden="true"></span>
+        <button class="lang-popup__touche" data-lang="en">↙</button>
+        <button class="lang-popup__touche" data-lang="fr">FR</button>
+        <span class="lang-popup__touche lang-popup__touche--ou" aria-hidden="true">or</span>
+        <button class="lang-popup__touche" data-lang="en">ENG</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="projet">
+
+    <!-- ===== COUVERTURE ===== -->
+    <div class="projet__couverture">
+      <div class="placeholder placeholder--cover">Image / vidéo de couverture</div>
+    </div>
+
+    <!-- ===== TITRE ===== -->
+    <h1 class="grand-titre">
+      <span class="ligne"><span>[Nom du projet]</span></span>
+    </h1>
+
+    <!-- ===== BLOC 1 : images gauche + texte droite ===== -->
+    <div class="projet__colonnes">
+      <div class="projet__images">
+        <div class="placeholder placeholder--image apparait">Image 1</div>
+        <div class="placeholder placeholder--image apparait">Image 2</div>
+      </div>
+
+      <div class="projet__texte">
+        <h2 class="sous-titre"><span class="ligne"><span><span class="fr-only">[Nom du projet] — Xe année</span><span class="en-only">[Project name] — Xth year</span></span></span></h2>
+        <div class="projet__paragraphes fr-only">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        </div>
+        <div class="projet__paragraphes en-only" lang="en">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore veritatis.</p>
+        </div>
+        <a class="bouton" href="#" target="_blank" rel="noopener"><span><span class="fr-only">Projet complet</span><span class="en-only">Full project</span></span></a>
+      </div>
+    </div>
+
+    <!-- ===== BLOC 2 : texte gauche + images droite (inversé) ===== -->
+    <div class="projet__colonnes projet__colonnes--inverse">
+      <div class="projet__texte">
+        <h2 class="sous-titre"><span class="ligne"><span><span class="fr-only">[Titre section 2 FR]</span><span class="en-only">[Section 2 title EN]</span></span></span></h2>
+        <div class="projet__paragraphes fr-only">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+          <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+          <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
+        </div>
+        <div class="projet__paragraphes en-only" lang="en">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.</p>
+          <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+          <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut aliquid ex ea commodi consequatur.</p>
+        </div>
+        <a class="bouton" href="#" target="_blank" rel="noopener"><span><span class="fr-only">[Bouton FR]</span><span class="en-only">[Button EN]</span></span></a>
+      </div>
+
+      <div class="projet__images">
+        <div class="placeholder placeholder--plan apparait">Plan / image 3</div>
+        <div class="placeholder placeholder--plan apparait">Plan / image 4</div>
+        <div class="placeholder placeholder--plan apparait">Plan / image 5</div>
+      </div>
+    </div>
+
+    <!-- ===== GALERIE FINALE ===== -->
+    <div class="projet__galerie" style="gap: 29px">
+      <div class="placeholder placeholder--galerie apparait">Image galerie 1</div>
+      <div class="placeholder placeholder--galerie apparait">Image galerie 2</div>
+    </div>
+
+  </main>
+
+  <footer class="pied">
+    <a class="pied__titre" href="/" aria-label="Retour à l'accueil KYWO Studio">
+      <span class="pleine-largeur">!!! Kywo</span>
+    </a>
+    <div class="pied__infos">
+      <p>©2026</p>
+      <p>LYON FRANCE</p>
+      <p data-horloge>00:00:00</p>
+    </div>
+    <p class="pied__legales"><a href="/mentions-legales/">Mentions légales</a></p>
+  </footer>
+
+  <div class="curseur" aria-hidden="true"></div>
+  <script src="/assets/archi/site.js"></script>
+  <script>
+    (function () {
+      const html = document.documentElement;
+      const saved = localStorage.getItem("kywo-lang") || "fr";
+      html.setAttribute("data-lang", saved);
+      html.setAttribute("lang", saved);
+
+      const selector = document.getElementById("lang-selector");
+      if (!selector) return;
+      const flag = selector.querySelector(".lang-flag");
+      const popup = selector.querySelector(".lang-popup");
+      const touchesFr = popup.querySelectorAll("[data-lang='fr']");
+      const touchesEn = popup.querySelectorAll("[data-lang='en']");
+
+      const accueilLink = document.querySelector(".menu nav a:first-child");
+      function positionSelector() {
+        if (!accueilLink) return;
+        const lang = html.getAttribute("data-lang") || "fr";
+        const span = accueilLink.querySelector(lang === "fr" ? ".fr-only" : ".en-only");
+        const rect = (span || accueilLink).getBoundingClientRect();
+        if (rect.right > 0) selector.style.left = (rect.right + 16) + "px";
+      }
+
+      function updateUI(lang) {
+        flag.textContent = lang === "fr" ? "🇫🇷" : "🇬🇧";
+        touchesFr.forEach(t => t.classList.toggle("lang-popup__touche--actif", lang === "fr"));
+        touchesEn.forEach(t => t.classList.toggle("lang-popup__touche--actif", lang === "en"));
+        requestAnimationFrame(positionSelector);
+      }
+
+      function setLang(lang) {
+        html.setAttribute("data-lang", lang);
+        html.setAttribute("lang", lang);
+        localStorage.setItem("kywo-lang", lang);
+        updateUI(lang);
+      }
+
+      updateUI(saved);
+
+      let hideTimer;
+      function openPopup() { clearTimeout(hideTimer); selector.classList.add("ouvert"); }
+      function startClose() { hideTimer = setTimeout(() => selector.classList.remove("ouvert"), 500); }
+
+      flag.addEventListener("mouseenter", openPopup);
+      flag.addEventListener("mouseleave", startClose);
+      popup.addEventListener("mouseenter", openPopup);
+      popup.addEventListener("mouseleave", startClose);
+
+      popup.querySelectorAll("button[data-lang]").forEach(btn => {
+        btn.addEventListener("click", e => { e.stopPropagation(); setLang(btn.dataset.lang); });
+      });
+
+      document.addEventListener("click", e => {
+        if (!selector.contains(e.target)) selector.classList.remove("ouvert");
+      });
+
+      (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => {
+        requestAnimationFrame(positionSelector);
+      });
+      window.addEventListener("resize", positionSelector);
+
+      const menu = document.querySelector(".menu");
+      if (menu) {
+        new MutationObserver(() => {
+          selector.style.transform = menu.classList.contains("menu--cache") ? "translateY(-200%)" : "";
+        }).observe(menu, { attributes: true, attributeFilter: ["class"] });
+      }
+    })();
+  </script>
+</body>
+</html>
