@@ -190,6 +190,7 @@
     .kywo-animer {
       position: absolute;
       inset: 0;
+      pointer-events: none;
       animation: gigoter 4s ease-in-out 1.5s infinite;
     }
     .drag-zone.en-main ~ .logo .kywo-animer { animation-play-state: paused; }
@@ -565,7 +566,7 @@
         dragZone.classList.remove("en-main");
         kywoBloc.classList.add("retour");
         kywoBloc.style.transform = "";
-        kywoBloc.addEventListener("transitionend", () => kywoBloc.classList.remove("retour"), { once: true });
+        setTimeout(() => kywoBloc.classList.remove("retour"), 850);
         return true;
       }
 
