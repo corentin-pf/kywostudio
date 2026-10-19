@@ -195,11 +195,19 @@
         touchesEn.forEach(t => t.classList.toggle("lang-popup__touche--actif", lang === "en"));
       }
 
+      function applyLang(lang) {
+        document.querySelectorAll(".fr-only").forEach(el => { el.style.display = lang === "fr" ? "" : "none"; });
+        document.querySelectorAll(".en-only").forEach(el => { el.style.display = lang === "en" ? "" : "none"; });
+      }
+
+      applyLang(saved);
+
       function setLang(lang) {
         html.setAttribute("data-lang", lang);
         html.setAttribute("lang", lang);
         localStorage.setItem("kywo-lang", lang);
         updateUI(lang);
+        applyLang(lang);
       }
 
       updateUI(saved);

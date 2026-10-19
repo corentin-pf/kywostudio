@@ -172,6 +172,13 @@
       html.setAttribute("data-lang", saved);
       html.setAttribute("lang", saved);
 
+      function applyLang(lang) {
+        document.querySelectorAll(".fr-only").forEach(el => { el.style.display = lang === "fr" ? "" : "none"; });
+        document.querySelectorAll(".en-only").forEach(el => { el.style.display = lang === "en" ? "" : "none"; });
+      }
+
+      applyLang(saved);
+
       const selector = document.querySelector(".lang-selector");
       if (!selector) return;
       const flag = selector.querySelector(".lang-flag");
@@ -190,6 +197,7 @@
         html.setAttribute("lang", lang);
         localStorage.setItem("kywo-lang", lang);
         updateUI(lang);
+        applyLang(lang);
       }
 
       updateUI(saved);
