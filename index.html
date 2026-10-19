@@ -182,12 +182,17 @@
       height: 100%;
       will-change: transform;
       pointer-events: none;
-      animation: gigoter 4s ease-in-out 1.5s infinite;
     }
     .kywo-bloc.retour {
       transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .drag-zone.en-main ~ .logo .kywo-bloc { animation-play-state: paused; }
+    /* wrapper d'animation séparé : le JS ne touche que .kywo-bloc, pas .kywo-animer */
+    .kywo-animer {
+      position: absolute;
+      inset: 0;
+      animation: gigoter 4s ease-in-out 1.5s infinite;
+    }
+    .drag-zone.en-main ~ .logo .kywo-animer { animation-play-state: paused; }
     @keyframes gigoter {
       0%, 50%, 100% { transform: rotate(0deg); }
       10% { transform: rotate(-1.25deg); }
@@ -431,7 +436,9 @@
 
   <div class="logo" aria-hidden="true">
     <div class="kywo-bloc">
-      <img class="kywo" src="/assets/accueil/kywo-studio.webp" alt="" draggable="false">
+      <div class="kywo-animer">
+        <img class="kywo" src="/assets/accueil/kywo-studio.webp" alt="" draggable="false">
+      </div>
     </div>
 
     <!-- SIGNATURE DÉSACTIVÉE — retirer ces commentaires pour la remettre :
