@@ -21,26 +21,6 @@
   <link rel="preload" href="/assets/fonts/new-title-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/switzer-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/archi/site.css">
-  <style>
-    /* Placeholders temporaires — à supprimer quand les vraies images/vidéos sont ajoutées */
-    .placeholder {
-      background: #ffffff;
-      border: 2px dashed #ccc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #aaa;
-      font-family: system-ui, sans-serif;
-      font-size: 13px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      width: 100%;
-    }
-    .placeholder--cover  { aspect-ratio: 16 / 7; }
-    .placeholder--image  { aspect-ratio: 4 / 3; }
-    .placeholder--plan   { aspect-ratio: 4 / 3; }
-    .placeholder--galerie { aspect-ratio: 3 / 2; width: 100%; }
-  </style>
 </head>
 <body>
 
@@ -84,8 +64,8 @@
     <!-- ===== BLOC 1 : images gauche + texte droite ===== -->
     <div class="projet__colonnes">
       <div class="projet__images">
-        <div class="placeholder placeholder--image apparait">Image 1</div>
-        <div class="placeholder placeholder--image apparait">Image 2</div>
+        <img class="apparait" src="/assets/archi/autum/image-1.jpg" alt="Autum, planche A1 concept" loading="lazy">
+        <img class="apparait" src="/assets/archi/autum/image-2.jpg" alt="Autum, planches posters" loading="lazy">
       </div>
 
       <div class="projet__texte">
@@ -100,7 +80,7 @@
           <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore veritatis.</p>
         </div>
-        <a class="bouton" href="#" target="_blank" rel="noopener"><span><span class="fr-only">Projet complet</span><span class="en-only">Full project</span></span></a>
+        <a class="bouton" href="https://drive.google.com/file/d/10Tym7esLSN_rTSQFSYorN-x9R84XyuZw/view?usp=drive_link" target="_blank" rel="noopener"><span><span class="fr-only">Projet complet</span><span class="en-only">Full project</span></span></a>
       </div>
     </div>
 
@@ -122,16 +102,16 @@
       </div>
 
       <div class="projet__images">
-        <div class="placeholder placeholder--plan apparait">Plan / image 3</div>
-        <div class="placeholder placeholder--plan apparait">Plan / image 4</div>
-        <div class="placeholder placeholder--plan apparait">Plan / image 5</div>
+        <img class="apparait" src="/assets/archi/autum/page-48.jpg" alt="Autum, plan d'aménagement" loading="lazy">
+        <img class="apparait" src="/assets/archi/autum/page-54.jpg" alt="Autum, carnet de détails zone fleur" loading="lazy">
+        <img class="apparait" src="/assets/archi/autum/page-166.jpg" alt="Autum, rendu 3D final" loading="lazy">
       </div>
     </div>
 
     <!-- ===== GALERIE FINALE ===== -->
     <div class="projet__galerie" style="gap: 29px">
-      <div class="placeholder placeholder--galerie apparait">Image galerie 1</div>
-      <div class="placeholder placeholder--galerie apparait">Image galerie 2</div>
+      <img class="apparait" src="/assets/archi/autum/page-116.jpg" alt="Autum, plan VMC" loading="lazy">
+      <img class="apparait" src="/assets/archi/autum/page-122.jpg" alt="Autum, plan éclairagisme" loading="lazy">
     </div>
 
   </main>
