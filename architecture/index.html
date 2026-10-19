@@ -32,9 +32,22 @@
       <a class="souligne" href="#contact"><span>Contact</span></a>
       <a class="souligne menu__mobile" href="/"><span><span class="fr-only">Accueil</span><span class="en-only">Home</span></span></a>
       <a class="souligne menu__mobile" href="#projets"><span><span class="fr-only">Projets</span><span class="en-only">Projects</span></span></a>
-      <button class="lang-toggle" aria-label="Switch language">EN</button>
     </nav>
   </header>
+
+  <div class="lang-selector" id="lang-selector">
+    <button class="lang-flag" aria-label="Changer la langue / Switch language">🇫🇷</button>
+    <div class="lang-popup">
+      <div class="lang-popup__grille">
+        <button class="lang-popup__touche" data-lang="fr">Hi,</button>
+        <span class="lang-popup__touche lang-popup__touche--ou" aria-hidden="true"></span>
+        <button class="lang-popup__touche" data-lang="en">↙</button>
+        <button class="lang-popup__touche" data-lang="fr">FR</button>
+        <span class="lang-popup__touche lang-popup__touche--ou" aria-hidden="true">or</span>
+        <button class="lang-popup__touche" data-lang="en">ENG</button>
+      </div>
+    </div>
+  </div>
 
   <main>
     <!-- ================= Titre ================= -->
@@ -208,17 +221,39 @@
       const saved = localStorage.getItem("kywo-lang") || "fr";
       html.setAttribute("data-lang", saved);
       html.setAttribute("lang", saved);
-      const btn = document.querySelector(".lang-toggle");
-      if (btn) {
-        btn.textContent = saved === "fr" ? "EN" : "FR";
-        btn.addEventListener("click", () => {
-          const next = html.getAttribute("data-lang") === "fr" ? "en" : "fr";
-          html.setAttribute("data-lang", next);
-          html.setAttribute("lang", next);
-          btn.textContent = next === "fr" ? "EN" : "FR";
-          localStorage.setItem("kywo-lang", next);
-        });
+
+      const selector = document.getElementById("lang-selector");
+      if (!selector) return;
+      const flag = selector.querySelector(".lang-flag");
+      const touchesFr = selector.querySelectorAll("[data-lang='fr']");
+      const touchesEn = selector.querySelectorAll("[data-lang='en']");
+
+      function updateUI(lang) {
+        flag.textContent = lang === "fr" ? "🇫🇷" : "🇬🇧";
+        touchesFr.forEach(t => t.classList.toggle("lang-popup__touche--actif", lang === "fr"));
+        touchesEn.forEach(t => t.classList.toggle("lang-popup__touche--actif", lang === "en"));
       }
+
+      function setLang(lang) {
+        html.setAttribute("data-lang", lang);
+        html.setAttribute("lang", lang);
+        localStorage.setItem("kywo-lang", lang);
+        updateUI(lang);
+        selector.classList.remove("ouvert");
+      }
+
+      updateUI(saved);
+
+      selector.querySelectorAll("button[data-lang]").forEach(btn => {
+        btn.addEventListener("click", e => {
+          e.stopPropagation();
+          setLang(btn.dataset.lang);
+        });
+      });
+
+      document.addEventListener("click", e => {
+        if (!selector.contains(e.target)) selector.classList.remove("ouvert");
+      });
     })();
   </script>
 </body>
