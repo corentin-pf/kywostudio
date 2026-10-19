@@ -229,10 +229,21 @@
       const touchesFr = popup.querySelectorAll("[data-lang='fr']");
       const touchesEn = popup.querySelectorAll("[data-lang='en']");
 
+      // Positionner le flag juste après le texte visible du lien Accueil
+      const accueilLink = document.querySelector(".menu nav a:first-child");
+      function positionSelector() {
+        if (!accueilLink) return;
+        const lang = html.getAttribute("data-lang") || "fr";
+        const span = accueilLink.querySelector(lang === "fr" ? ".fr-only" : ".en-only");
+        const rect = (span || accueilLink).getBoundingClientRect();
+        if (rect.right > 0) selector.style.left = (rect.right + 16) + "px";
+      }
+
       function updateUI(lang) {
         flag.textContent = lang === "fr" ? "🇫🇷" : "🇬🇧";
         touchesFr.forEach(t => t.classList.toggle("lang-popup__touche--actif", lang === "fr"));
         touchesEn.forEach(t => t.classList.toggle("lang-popup__touche--actif", lang === "en"));
+        requestAnimationFrame(positionSelector);
       }
 
       function setLang(lang) {
@@ -240,7 +251,7 @@
         html.setAttribute("lang", lang);
         localStorage.setItem("kywo-lang", lang);
         updateUI(lang);
-        selector.classList.remove("ouvert");
+        // Ne pas fermer le popup : l'utilisateur reste dans la zone
       }
 
       updateUI(saved);
@@ -259,18 +270,12 @@
         btn.addEventListener("click", e => { e.stopPropagation(); setLang(btn.dataset.lang); });
       });
 
+      // Fermer si clic en dehors (mais pas si la souris est encore dans la zone)
       document.addEventListener("click", e => {
         if (!selector.contains(e.target)) selector.classList.remove("ouvert");
       });
 
-      // Positionner le flag juste après le lien Accueil
-      const accueilLink = document.querySelector(".menu nav a:first-child");
-      function positionSelector() {
-        if (!accueilLink) return;
-        const rect = accueilLink.getBoundingClientRect();
-        if (rect.right > 0) selector.style.left = (rect.right + 16) + "px";
-      }
-      // Attendre fonts + layout pour avoir getBoundingClientRect correct
+      // Attendre fonts + layout pour positionner correctement
       (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => {
         requestAnimationFrame(positionSelector);
       });
