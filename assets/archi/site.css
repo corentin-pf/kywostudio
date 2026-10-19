@@ -499,8 +499,8 @@ p, h1, h2, h3 { margin: 0; font-weight: inherit; }
   margin-top: min(150px, 10vw);
 }
 .projet__colonnes + .projet__colonnes { margin-top: min(250px, 15vw); }
-.projet__images { display: flex; flex-direction: column; gap: 10px; }
-.projet__images img { width: 100%; height: auto; }   /* image entière, jamais recadrée */
+.projet__images { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.projet__images img { width: 100%; height: auto; max-width: 100%; }   /* image entière, jamais recadrée */
 
 .projet__texte .sous-titre { margin-bottom: 40px; }
 .projet__paragraphes {
