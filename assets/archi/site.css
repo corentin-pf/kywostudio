@@ -212,6 +212,15 @@ p, h1, h2, h3 { margin: 0; font-weight: inherit; }
 }
 .pied__infos p:nth-child(2) { text-align: center; }
 .pied__infos p:nth-child(3) { text-align: right; font-variant-numeric: tabular-nums; }
+.pied__legales {
+  font-size: 0.5em;
+  opacity: 0.45;
+  margin-top: 8px;
+  text-align: right;
+  letter-spacing: 0.08em;
+}
+.pied__legales a { color: inherit; text-decoration: none; }
+.pied__legales a:hover { opacity: 1; }
 
 /* ---------------------------------------------------------
    Curseur rond qui suit la souris
