@@ -35,6 +35,20 @@
     </nav>
   </header>
 
+  <div class="lang-selector" id="lang-selector">
+    <button class="lang-flag" aria-label="Changer la langue / Switch language">🇫🇷</button>
+    <div class="lang-popup">
+      <div class="lang-popup__grille">
+        <button class="lang-popup__touche" data-lang="fr">Hi,</button>
+        <span class="lang-popup__touche lang-popup__touche--ou" aria-hidden="true"></span>
+        <button class="lang-popup__touche" data-lang="en">↙</button>
+        <button class="lang-popup__touche" data-lang="fr">FR</button>
+        <span class="lang-popup__touche lang-popup__touche--ou" aria-hidden="true">or</span>
+        <button class="lang-popup__touche" data-lang="en">ENG</button>
+      </div>
+    </div>
+  </div>
+
   <main class="projet">
     <div class="projet__couverture">
       <img src="/assets/archi/designwus/couverture.jpg" alt="Design W/US, vue d'ensemble du café-épicerie">
@@ -91,16 +105,66 @@
       const saved = localStorage.getItem("kywo-lang") || "fr";
       html.setAttribute("data-lang", saved);
       html.setAttribute("lang", saved);
-      const btn = document.querySelector(".lang-toggle");
-      if (btn) {
-        btn.textContent = saved === "fr" ? "EN" : "FR";
-        btn.addEventListener("click", () => {
-          const next = html.getAttribute("data-lang") === "fr" ? "en" : "fr";
-          html.setAttribute("data-lang", next);
-          html.setAttribute("lang", next);
-          btn.textContent = next === "fr" ? "EN" : "FR";
-          localStorage.setItem("kywo-lang", next);
-        });
+
+      const selector = document.getElementById("lang-selector");
+      if (!selector) return;
+      const flag = selector.querySelector(".lang-flag");
+      const popup = selector.querySelector(".lang-popup");
+      const touchesFr = popup.querySelectorAll("[data-lang='fr']");
+      const touchesEn = popup.querySelectorAll("[data-lang='en']");
+
+      const accueilLink = document.querySelector(".menu nav a:first-child");
+      function positionSelector() {
+        if (!accueilLink) return;
+        const lang = html.getAttribute("data-lang") || "fr";
+        const span = accueilLink.querySelector(lang === "fr" ? ".fr-only" : ".en-only");
+        const rect = (span || accueilLink).getBoundingClientRect();
+        if (rect.right > 0) selector.style.left = (rect.right + 16) + "px";
+      }
+
+      function updateUI(lang) {
+        flag.textContent = lang === "fr" ? "🇫🇷" : "🇬🇧";
+        touchesFr.forEach(t => t.classList.toggle("lang-popup__touche--actif", lang === "fr"));
+        touchesEn.forEach(t => t.classList.toggle("lang-popup__touche--actif", lang === "en"));
+        requestAnimationFrame(positionSelector);
+      }
+
+      function setLang(lang) {
+        html.setAttribute("data-lang", lang);
+        html.setAttribute("lang", lang);
+        localStorage.setItem("kywo-lang", lang);
+        updateUI(lang);
+      }
+
+      updateUI(saved);
+
+      let hideTimer;
+      function openPopup() { clearTimeout(hideTimer); selector.classList.add("ouvert"); }
+      function startClose() { hideTimer = setTimeout(() => selector.classList.remove("ouvert"), 90); }
+
+      flag.addEventListener("mouseenter", openPopup);
+      flag.addEventListener("mouseleave", startClose);
+      popup.addEventListener("mouseenter", openPopup);
+      popup.addEventListener("mouseleave", startClose);
+
+      popup.querySelectorAll("button[data-lang]").forEach(btn => {
+        btn.addEventListener("click", e => { e.stopPropagation(); setLang(btn.dataset.lang); });
+      });
+
+      document.addEventListener("click", e => {
+        if (!selector.contains(e.target)) selector.classList.remove("ouvert");
+      });
+
+      (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => {
+        requestAnimationFrame(positionSelector);
+      });
+      window.addEventListener("resize", positionSelector);
+
+      const menu = document.querySelector(".menu");
+      if (menu) {
+        new MutationObserver(() => {
+          selector.style.transform = menu.classList.contains("menu--cache") ? "translateY(-200%)" : "";
+        }).observe(menu, { attributes: true, attributeFilter: ["class"] });
       }
     })();
   </script>
