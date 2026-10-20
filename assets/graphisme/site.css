@@ -1034,7 +1034,15 @@ button.lang-popup__touche--actif:active {
 }
 
 @media (max-width: 809px) {
-  .lang-popup { padding: 8px; border-radius: 9px; }
+  .barre .lang-selector { position: absolute; left: 50%; transform: translateX(-50%); }
+  .lang-popup {
+    padding: 8px; border-radius: 9px;
+    position: fixed; top: 54px; left: 50%; right: auto;
+    transform: translateX(-50%) translateY(-6px) scale(0.97);
+    transform-origin: top center;
+  }
+  .lang-selector:hover .lang-popup,
+  .lang-selector.ouvert .lang-popup { transform: translateX(-50%); }
   .lang-popup__grille { gap: 4px; }
   .lang-popup__touche {
     min-width: 38px;

@@ -744,8 +744,14 @@ button.lang-popup__touche--actif:active {
 }
 
 @media (max-width: 809px) {
-  .lang-selector { left: 50% !important; transform: translateX(-50%) !important; }
-  .lang-popup { padding: 8px; border-radius: 9px; }
+  .lang-selector { left: 50%; transform: translateX(-50%); }
+  .lang-flag { font-size: 22px; }
+  .lang-popup {
+    padding: 8px; border-radius: 9px;
+    position: fixed; top: 54px; left: 50%;
+    transform: translateX(-50%) translateY(-6px) scale(0.97);
+  }
+  .lang-selector.ouvert .lang-popup { transform: translateX(-50%); }
   .lang-popup__grille { gap: 4px; }
   .lang-popup__touche {
     min-width: 38px;

@@ -139,6 +139,7 @@
       const accueilLink = document.querySelector(".menu nav a:first-child");
       function positionSelector() {
         if (!accueilLink) return;
+        if (window.innerWidth <= 809) return;
         const lang = html.getAttribute("data-lang") || "fr";
         const span = accueilLink.querySelector(lang === "fr" ? ".fr-only" : ".en-only");
         const rect = (span || accueilLink).getBoundingClientRect();
