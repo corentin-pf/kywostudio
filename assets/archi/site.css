@@ -744,7 +744,7 @@ button.lang-popup__touche--actif:active {
 }
 
 @media (max-width: 809px) {
-  .lang-flag { font-size: 11px; line-height: 1; }
+  .lang-selector { left: 50% !important; transform: translateX(-50%) !important; }
   .lang-popup { padding: 8px; border-radius: 9px; }
   .lang-popup__grille { gap: 4px; }
   .lang-popup__touche {
