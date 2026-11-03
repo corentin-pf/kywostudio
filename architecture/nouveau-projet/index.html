@@ -21,6 +21,21 @@
   <link rel="preload" href="/assets/fonts/new-title-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/switzer-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/archi/site.css">
+  <style>
+    .placeholder-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #e8e8e8;
+      display: block;
+    }
+    .projet__couverture .placeholder-img {
+      aspect-ratio: 16/9;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      inset: 0;
+    }
+  </style>
 </head>
 <body>
 
@@ -52,8 +67,7 @@
   <main class="projet">
 
     <!-- ===== COUVERTURE ===== -->
-    <div class="projet__couverture">
-      <img src="/assets/archi/nouveau-projet/couverture.jpg" alt="[NOM DU PROJET], [description de l'image de couverture]">
+    <div class="projet__couverture" style="background:#e8e8e8; position:relative; overflow:hidden">
     </div>
 
     <!-- ===== TITRE ===== -->
@@ -64,30 +78,30 @@
     <!-- ===== BLOC UNIQUE : images gauche + texte droite ===== -->
     <div class="projet__colonnes">
       <div class="projet__images">
-        <img class="apparait" src="/assets/archi/nouveau-projet/image-1.jpg" alt="[NOM DU PROJET], [description image 1]" loading="lazy">
-        <img class="apparait" src="/assets/archi/nouveau-projet/image-2.jpg" alt="[NOM DU PROJET], [description image 2]" loading="lazy">
-        <img class="apparait" src="/assets/archi/nouveau-projet/image-3.jpg" alt="[NOM DU PROJET], [description image 3]" loading="lazy">
+        <span class="placeholder-img apparait"></span>
+        <span class="placeholder-img apparait"></span>
+        <span class="placeholder-img apparait"></span>
       </div>
 
       <div class="projet__texte">
-        <h2 class="sous-titre"><span class="ligne"><span><span class="fr-only">[NOM DU PROJET] — [Xe année]</span><span class="en-only">[NOM DU PROJET] — [Xth year]</span></span></span></h2>
+        <h2 class="sous-titre"><span class="ligne"><span><span class="fr-only">[NOM DU PROJET] — Xe année</span><span class="en-only">[NOM DU PROJET] — Xth year</span></span></span></h2>
         <div class="projet__paragraphes fr-only">
-          <p>[Texte de présentation du projet en français. Décris le concept, le contexte, la démarche et les intentions.]</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
         <div class="projet__paragraphes en-only" lang="en">
-          <p>[Project description in English. Describe the concept, context, approach and design intent.]</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
-        <a class="bouton" href="[LIEN GOOGLE DRIVE]" target="_blank" rel="noopener"><span><span class="fr-only">Projet complet</span><span class="en-only">Full project</span></span></a>
+        <a class="bouton" href="#" target="_blank" rel="noopener"><span><span class="fr-only">Projet complet</span><span class="en-only">Full project</span></span></a>
       </div>
     </div>
 
     <!-- ===== GALERIE ===== -->
     <div class="projet__galerie">
       <div class="projet__rangee" style="gap: 29px">
-        <img class="apparait" src="/assets/archi/nouveau-projet/image-4.jpg" alt="[NOM DU PROJET], [description image 4]" style="--l: 1.778" loading="lazy">
-        <img class="apparait" src="/assets/archi/nouveau-projet/image-5.jpg" alt="[NOM DU PROJET], [description image 5]" style="--l: 1.28" loading="lazy">
+        <span class="placeholder-img apparait" style="--l: 1.778; aspect-ratio: 16/9"></span>
+        <span class="placeholder-img apparait" style="--l: 1.28; aspect-ratio: 16/9"></span>
       </div>
-      <img class="apparait" src="/assets/archi/nouveau-projet/image-6.jpg" alt="[NOM DU PROJET], [description image 6]" loading="lazy">
+      <span class="placeholder-img apparait"></span>
     </div>
 
   </main>
