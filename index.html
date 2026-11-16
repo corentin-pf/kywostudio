@@ -477,7 +477,7 @@
 
   <!-- ===== Intro vidéo ===== -->
   <div id="intro-overlay" role="dialog" aria-label="Introduction" aria-modal="true">
-    <video id="intro-video" src="/assets/archi/videos/intro-web.mp4" autoplay playsinline preload="auto"></video>
+    <video id="intro-video" autoplay playsinline preload="auto"></video>
     <div class="intro-bas">
       <button id="intro-son" class="intro-btn" aria-label="Couper le son">
         <svg id="icone-son" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -678,6 +678,11 @@
       var overlay = document.getElementById('intro-overlay');
       var video   = document.getElementById('intro-video');
       var skip    = document.getElementById('intro-skip');
+
+      // Sélectionne la bonne vidéo selon la taille d'écran
+      var srcMobile  = '/assets/archi/videos/intro-mobile.mp4';
+      var srcDesktop = '/assets/archi/videos/intro-web.mp4';
+      video.src = window.innerWidth <= 767 ? srcMobile : srcDesktop;
       var sonBtn  = document.getElementById('intro-son');
       var estSourdine = false;
 
