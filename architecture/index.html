@@ -21,70 +21,8 @@
   <link rel="preload" href="/assets/fonts/new-title-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/switzer-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/archi/site.css">
-  <style>
-    #intro-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.9s ease;
-    }
-    #intro-overlay.fondu {
-      opacity: 0;
-      pointer-events: none;
-    }
-    #intro-video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .intro-bas {
-      position: absolute;
-      bottom: clamp(28px, 6vh, 56px);
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-    }
-    #intro-skip {
-      display: block;
-      backdrop-filter: blur(24px) saturate(1.8);
-      -webkit-backdrop-filter: blur(24px) saturate(1.8);
-      background: rgba(255, 255, 255, 0.38);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      border-radius: 50px;
-      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-      color: #fff;
-      padding: 13px 40px;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.25s, box-shadow 0.25s;
-    }
-    #intro-skip:hover {
-      background: rgba(255, 255, 255, 0.52);
-      box-shadow: 0 4px 44px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    }
-  </style>
 </head>
 <body>
-
-  <!-- ===== Intro vidéo ===== -->
-  <div id="intro-overlay" role="dialog" aria-label="Introduction" aria-modal="true">
-    <video id="intro-video" src="/assets/archi/videos/intro-web.mp4" autoplay muted playsinline preload="auto"></video>
-    <div class="intro-bas">
-      <button id="intro-skip">SKIP →</button>
-    </div>
-  </div>
-  <!-- ===== Fin intro ===== -->
 
   <header class="menu">
     <nav aria-label="Menu principal">
@@ -282,24 +220,6 @@
 
   <div class="curseur" aria-hidden="true"></div>
   <script src="/assets/archi/site.js"></script>
-  <script>
-    (function () {
-      var overlay = document.getElementById('intro-overlay');
-      var video   = document.getElementById('intro-video');
-      var skip    = document.getElementById('intro-skip');
-
-      function terminer() {
-        overlay.classList.add('fondu');
-        setTimeout(function () { overlay.style.display = 'none'; }, 950);
-      }
-
-      video.addEventListener('ended', terminer);
-      skip.addEventListener('click', terminer);
-
-      // Fallback : si l'autoplay est bloqué par le navigateur, on passe directement
-      video.play().catch(function () { terminer(); });
-    })();
-  </script>
   <script>
     (function () {
       const html = document.documentElement;

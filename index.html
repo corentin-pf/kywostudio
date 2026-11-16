@@ -430,29 +430,39 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .intro-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(20px) saturate(1.6);
+      -webkit-backdrop-filter: blur(20px) saturate(1.6);
+      background: rgba(255, 255, 255, 0.70);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 50px;
+      box-shadow: 0 4px 28px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255,255,255,0.9);
+      color: #010dcd;
+      cursor: pointer;
+      font-family: "Anton", sans-serif;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .intro-btn:hover {
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 6px 36px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255,255,255,0.9);
     }
     #intro-skip {
-      display: block;
-      backdrop-filter: blur(24px) saturate(1.8);
-      -webkit-backdrop-filter: blur(24px) saturate(1.8);
-      background: rgba(255, 255, 255, 0.38);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      border-radius: 50px;
-      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-      color: #fff;
-      padding: 13px 40px;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
+      padding: 13px 36px;
+      font-size: 0.82rem;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
       white-space: nowrap;
-      transition: background 0.25s, box-shadow 0.25s;
     }
-    #intro-skip:hover {
-      background: rgba(255, 255, 255, 0.52);
-      box-shadow: 0 4px 44px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    #intro-son {
+      padding: 13px 16px;
+      line-height: 0;
     }
   </style>
 </head>
@@ -460,9 +470,16 @@
 
   <!-- ===== Intro vidéo ===== -->
   <div id="intro-overlay" role="dialog" aria-label="Introduction" aria-modal="true">
-    <video id="intro-video" src="/assets/archi/videos/intro-web.mp4" autoplay muted playsinline preload="auto"></video>
+    <video id="intro-video" src="/assets/archi/videos/intro-web.mp4" autoplay playsinline preload="auto"></video>
     <div class="intro-bas">
-      <button id="intro-skip">SKIP →</button>
+      <button id="intro-son" class="intro-btn" aria-label="Couper le son">
+        <svg id="icone-son" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+      </button>
+      <button id="intro-skip" class="intro-btn">SKIP →</button>
     </div>
   </div>
   <!-- ===== Fin intro ===== -->
@@ -654,6 +671,22 @@
       var overlay = document.getElementById('intro-overlay');
       var video   = document.getElementById('intro-video');
       var skip    = document.getElementById('intro-skip');
+      var sonBtn  = document.getElementById('intro-son');
+      var estSourdine = false;
+
+      var iconeSon = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+      var iconeSourdine = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+
+      function majIconeSon() {
+        document.getElementById('icone-son').innerHTML = estSourdine ? iconeSourdine : iconeSon;
+        sonBtn.setAttribute('aria-label', estSourdine ? 'Activer le son' : 'Couper le son');
+      }
+
+      sonBtn.addEventListener('click', function () {
+        estSourdine = !estSourdine;
+        video.muted = estSourdine;
+        majIconeSon();
+      });
 
       function terminer() {
         overlay.classList.add('fondu');
@@ -663,8 +696,14 @@
       video.addEventListener('ended', terminer);
       skip.addEventListener('click', terminer);
 
-      // Fallback : si l'autoplay est bloqué par le navigateur, on passe directement
-      video.play().catch(function () { terminer(); });
+      // Essaie avec le son, si bloqué bascule en sourdine
+      video.muted = false;
+      video.play().catch(function () {
+        video.muted = true;
+        estSourdine = true;
+        majIconeSon();
+        video.play().catch(function () { terminer(); });
+      });
     })();
   </script>
 </body>
