@@ -105,9 +105,10 @@
     /* On cadre le bas de l'image pour garder l'ordinateur dans l'herbe */
     .panel--graphisme img { object-position: 50% 100%; }
 
-    /* ---- Textes sous le filtre ---- */
+    /* ---- Textes au premier plan ---- */
     .legende {
       position: absolute;
+      z-index: 1;
       bottom: calc((100vh - var(--H)) / 2 + var(--H) * 0.05);
       margin: 0;
       font-family: "Anton", "Impact", sans-serif;
