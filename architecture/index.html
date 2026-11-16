@@ -54,10 +54,10 @@
       display: block;
       backdrop-filter: blur(24px) saturate(1.8);
       -webkit-backdrop-filter: blur(24px) saturate(1.8);
-      background: rgba(255, 255, 255, 0.16);
-      border: 1px solid rgba(255, 255, 255, 0.42);
+      background: rgba(255, 255, 255, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.6);
       border-radius: 50px;
-      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.5);
       color: #fff;
       padding: 13px 40px;
       font-size: 0.72rem;
@@ -70,8 +70,8 @@
       transition: background 0.25s, box-shadow 0.25s;
     }
     #intro-skip:hover {
-      background: rgba(255, 255, 255, 0.26);
-      box-shadow: 0 4px 44px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.52);
+      box-shadow: 0 4px 44px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.6);
     }
   </style>
 </head>
@@ -81,7 +81,7 @@
   <div id="intro-overlay" role="dialog" aria-label="Introduction" aria-modal="true">
     <video id="intro-video" src="/assets/archi/videos/intro-web.mp4" autoplay muted playsinline preload="auto"></video>
     <div class="intro-bas">
-      <button id="intro-skip">Skip</button>
+      <button id="intro-skip">SKIP →</button>
     </div>
   </div>
   <!-- ===== Fin intro ===== -->
@@ -121,12 +121,6 @@
       <div class="hero__infos">
         <p><span class="fr-only">Studio d'architecture d'intérieur</span><span class="en-only">Interior design studio</span></p>
         <p><span class="fr-only">Basé à Lyon, France</span><span class="en-only">Based in Lyon, France</span></p>
-      </div>
-    </section>
-
-    <section class="video-zoom" data-zoom="1.3" aria-label="Aperçu de mes projets">
-      <div class="video-zoom__cadre" data-zoom-cible>
-        <video class="media" src="/assets/archi/videos/intro-web.mp4" poster="/assets/archi/videos/intro-apercu.jpg" autoplay muted loop playsinline preload="auto"></video>
       </div>
     </section>
 
