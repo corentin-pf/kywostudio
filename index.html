@@ -683,6 +683,12 @@
       var video   = document.getElementById('intro-video');
       var skip    = document.getElementById('intro-skip');
 
+      // Si la vidéo a déjà été vue dans cette session, on la passe directement
+      if (sessionStorage.getItem('introVue')) {
+        overlay.style.display = 'none';
+        return;
+      }
+
       // Sélectionne la bonne vidéo selon la taille d'écran
       var srcMobile  = '/assets/archi/videos/intro-mobile.mp4';
       var srcDesktop = '/assets/archi/videos/intro-web.mp4';
@@ -705,6 +711,7 @@
       });
 
       function terminer() {
+        sessionStorage.setItem('introVue', '1');
         overlay.classList.add('fondu');
         setTimeout(function () { overlay.style.display = 'none'; }, 950);
       }
