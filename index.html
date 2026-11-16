@@ -683,8 +683,11 @@
       var video   = document.getElementById('intro-video');
       var skip    = document.getElementById('intro-skip');
 
-      // Si la vidéo a déjà été vue dans cette session, on la passe directement
-      if (sessionStorage.getItem('introVue')) {
+      // Si on revient depuis une page interne (archi/graphisme), on passe la vidéo
+      var referrer = document.referrer;
+      var venantDeSite = referrer.indexOf('kywostudio.com') !== -1 || referrer.indexOf('localhost') !== -1;
+      var venantDAccueil = referrer === '' || referrer === window.location.href || referrer.replace(/\/$/, '') === window.location.origin;
+      if (venantDeSite && !venantDAccueil) {
         overlay.style.display = 'none';
         return;
       }
@@ -711,7 +714,6 @@
       });
 
       function terminer() {
-        sessionStorage.setItem('introVue', '1');
         overlay.classList.add('fondu');
         setTimeout(function () { overlay.style.display = 'none'; }, 950);
       }
