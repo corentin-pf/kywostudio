@@ -504,6 +504,7 @@ footer{margin-top:56px;border-top:var(--bw) solid var(--fg)}
 }
 .tile-code{padding-bottom:.16em;line-height:.85}
 .tile-name{margin-top:auto;padding-top:8px}
+@media (max-width:760px){ .code{font-size:12px;padding:14px} }
 </style>
 </head>
 <body>
@@ -528,7 +529,7 @@ footer{margin-top:56px;border-top:var(--bw) solid var(--fg)}
 </nav>
 <footer><div class="wrap foot"><span>Objectif Brevet · Programme de 3<sup>e</sup>, cycle 4</span><span>Ta progression est enregistrée sur cet appareil uniquement.</span></div></footer>
 <script>
-window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {};
+window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {}; var BREVET_COURS_PLUS = {};
 BREVET.fr = [
 {
   id: "fr-phrase", tag: "Grammaire", title: "La phrase complexe",
@@ -3782,6 +3783,548 @@ BREVET_COURS["pc-signaux"] = {
   ]
 };
 
+/* Approfondissement : français */
+var P = BREVET_COURS_PLUS;
+P["fr-phrase"] = [
+  { h: "Les autres fonctions à connaître",
+    tab: { h: ["Fonction", "Définition", "Exemple"], r: [["Sujet", "fait ou subit l’action, commande l’accord du verbe", "<u>Les oiseaux</u> chantent."], ["COD", "complément du verbe sans préposition (quoi ? qui ?)", "Je lis <u>un roman</u>."], ["COI", "complément introduit par une préposition (à, de)", "Je pense <u>à toi</u>."], ["Attribut du sujet", "qualité attribuée au sujet par un verbe d’état (être, sembler, devenir, paraître, rester)", "Elle semble <u>fatiguée</u>."], ["Complément circonstanciel", "lieu, temps, cause, manière… déplaçable et supprimable", "<u>Le soir</u>, il lit <u>dans sa chambre</u>."], ["Complément du nom", "précise un nom, souvent avec une préposition", "un sac <u>de sport</u>"], ["Épithète", "adjectif placé à côté du nom", "un <u>vieux</u> livre"], ["Apposition", "séparée par une virgule, apporte une précision", "<u>Furieux</u>, il claqua la porte."]] } },
+  { h: "Les classes grammaticales (natures)",
+    p: ["La <b>nature</b> (ou classe) d’un mot est fixe : c’est ce qu’il est (nom, verbe, adjectif…). La <b>fonction</b> dépend de son rôle dans la phrase. Le même nom peut être sujet dans une phrase et COD dans une autre."],
+    tab: { h: ["Mots variables", "Mots invariables"], r: [["nom, déterminant, adjectif, pronom, verbe", "adverbe (vite, très), préposition (à, de, pour, avec), conjonction de coordination, conjonction de subordination, interjection"]] } },
+  { h: "Exercice type brevet",
+    ex: { q: "« Le vieil homme, qui marchait lentement, s’arrêta quand il aperçut la mer. » Analysez cette phrase.", s: ["Verbes conjugués : marchait, s’arrêta, aperçut → trois propositions.", "« Le vieil homme s’arrêta » : proposition principale.", "« qui marchait lentement » : subordonnée relative, complément de l’antécédent « homme ».", "« quand il aperçut la mer » : subordonnée conjonctive circonstancielle de temps, complément circonstanciel de temps de « s’arrêta »."] } },
+  { h: "Les types et formes de phrases",
+    l: ["Quatre <b>types</b> : déclaratif (.), interrogatif (?), exclamatif (!), injonctif (ordre, souvent à l’impératif).", "Formes : affirmative / négative (ne… pas, ne… jamais, ne… plus) ; active / passive (« Le chat mange la souris » → « La souris est mangée par le chat ») ; neutre / emphatique (« C’est lui qui a gagné »).", "Phrase verbale (avec un verbe) ou non verbale (« Quel spectacle ! »)."],
+    k: "À la voix passive, le COD devient sujet, le sujet devient complément d’agent introduit par « par », et le verbe se conjugue avec être au temps du verbe actif." }
+];
+P["fr-conjugaison"] = [
+  { h: "Conjugaisons difficiles à maîtriser",
+    tab: { h: ["Verbe", "Présent", "Passé simple", "Futur", "Subjonctif présent"], r: [["aller", "je vais, nous allons", "j’allai", "j’irai", "que j’aille"], ["faire", "je fais, vous faites", "je fis", "je ferai", "que je fasse"], ["pouvoir", "je peux, ils peuvent", "je pus", "je pourrai", "que je puisse"], ["voir", "je vois", "je vis", "je verrai", "que je voie"], ["venir", "je viens", "je vins", "je viendrai", "que je vienne"], ["dire", "vous dites", "je dis", "je dirai", "que je dise"], ["savoir", "je sais", "je sus", "je saurai", "que je sache"], ["courir", "je cours", "je courus", "je courrai", "que je coure"]] },
+    warn: "Courir, mourir, pouvoir, voir (futur : je verrai), envoyer (j’enverrai) : attention aux doubles « r » ou aux radicaux irréguliers au futur." },
+  { h: "Le choix de l’auxiliaire",
+    p: ["La plupart des verbes se conjuguent avec <b>avoir</b> aux temps composés. Se conjuguent avec <b>être</b> : les verbes pronominaux (se lever) et une quinzaine de verbes de mouvement ou de changement d’état : aller, venir, arriver, partir, entrer, sortir, monter, descendre, naître, mourir, rester, tomber, retourner, devenir.",
+        "Certains changent d’auxiliaire selon qu’ils ont un COD : « Elle est sortie » / « Elle a sorti la poubelle »."] },
+  { h: "Exercice type brevet : la réécriture",
+    ex: { q: "Réécrire au passé composé : « Les élèves arrivent en retard ; ils s’excusent et prennent leur place. »", s: ["« arrivent » : verbe de mouvement → être, accord avec le sujet : « sont arrivés ».", "« s’excusent » : pronominal → être, accord : « se sont excusés ».", "« prennent » : avoir, COD « leur place » placé après → « ont pris ».", "« Les élèves sont arrivés en retard ; ils se sont excusés et ont pris leur place. »"] } },
+  { h: "Les valeurs du futur et de l’imparfait",
+    l: ["Futur : action à venir ; ordre atténué (« Tu rangeras ta chambre ») ; vérité générale (« Qui vivra verra »).", "Imparfait : description, habitude, action en cours interrompue par une autre (« Je lisais quand le téléphone sonna »), hypothèse après si.", "Futur antérieur : action future antérieure à une autre (« Quand tu auras fini, tu sortiras »)."] }
+];
+P["fr-figures"] = [
+  { h: "Le vocabulaire de l’analyse",
+    tab: { h: ["Notion", "Définition"], r: [["Champ lexical", "ensemble des mots qui se rapportent à un même thème (champ lexical de la mer : vague, écume, marin, flot…)"], ["Connotation", "sens suggéré par un mot en plus de son sens propre (« rouge » connote la passion, le danger)"], ["Mélioratif / péjoratif", "vocabulaire qui valorise / dévalorise"], ["Modalisateur", "mot qui exprime le degré de certitude ou l’opinion (peut-être, sans doute, hélas)"], ["Sens propre / figuré", "« une montagne » (propre) / « une montagne de devoirs » (figuré)"], ["Polysémie", "un mot qui a plusieurs sens (une feuille d’arbre, de papier)"]] } },
+  { h: "Analyser une image",
+    p: ["Le brevet propose souvent une image (tableau, photographie, affiche, dessin de presse) liée au texte. Pour l’analyser : 1. identifier (auteur, date, nature, titre) ; 2. décrire (plans, cadrage, couleurs, lumière, composition, lignes de force) ; 3. interpréter (émotion, message, lien avec le texte).",
+        "Vocabulaire : premier plan, arrière-plan ; plongée (vu d’en haut, écrase le sujet), contre-plongée (vu d’en bas, le grandit) ; plan large, gros plan ; couleurs chaudes ou froides ; contraste."] },
+  { h: "Exercice type brevet",
+    ex: { q: "« Le soleil s’est noyé dans son sang qui se fige. » (Baudelaire, « Harmonie du soir »). Analysez l’image.", s: ["Citation : « s’est noyé dans son sang ».", "Figures : personnification du soleil (il se noie) et métaphore du coucher de soleil (le rouge du ciel devient du sang).", "Effet : le coucher de soleil, habituellement beau, devient une image de mort ; il traduit la mélancolie du poète et la tristesse du soir."] } },
+  { h: "Les erreurs à éviter",
+    l: ["Confondre comparaison et métaphore (chercher l’outil de comparaison).", "Nommer une figure sans citer le texte.", "Donner un effet trop vague (« ça rend le texte plus beau ») : préciser l’émotion ou l’idée.", "Voir des figures partout : ne cite que celles qui sont nettes et utiles à ta réponse."] }
+];
+P["fr-narration"] = [
+  { h: "Le texte de théâtre",
+    p: ["Au théâtre, il n’y a pas de narrateur : l’histoire passe par les <b>répliques</b> des personnages et les <b>didascalies</b> (indications de mise en scène en italique). Une longue réplique est une <b>tirade</b> ; un personnage seul qui parle fait un <b>monologue</b> ; une phrase dite au public sans que les autres l’entendent est un <b>aparté</b>.",
+        "La pièce est découpée en actes et en scènes. La première scène est l’<b>exposition</b> (présente les personnages et la situation) ; le <b>nœud</b> est le conflit ; le <b>dénouement</b> le résout. Genres : comédie (fin heureuse, faire rire), tragédie (fin malheureuse, destin), drame."] },
+  { h: "Les genres narratifs",
+    tab: { h: ["Genre", "Caractéristiques"], r: [["Roman", "récit long, nombreux personnages, peut être réaliste, d’aventure, policier, historique, de science-fiction"], ["Nouvelle", "récit court, peu de personnages, souvent une chute surprenante"], ["Conte", "merveilleux, formules (« Il était une fois »), morale"], ["Fable", "court récit, souvent en vers, animaux, morale explicite"], ["Récit autobiographique", "auteur = narrateur = personnage, à la 1re personne"]] } },
+  { h: "Exercice type brevet : répondre à une question de compréhension",
+    ex: { q: "« Quels sentiments éprouve le personnage dans le dernier paragraphe ? Justifiez votre réponse. »", s: ["Phrase d’introduction qui reprend la question : « Dans le dernier paragraphe, le personnage éprouve de la peur puis du soulagement. »", "Justification avec citations : « Ses mains tremblaient » (ligne 32) montre la peur ; le champ lexical de la peur (« frisson », « angoisse »).", "Évolution : « il respira enfin » (ligne 36) traduit le soulagement.", "Une réponse = une affirmation + au moins une citation + une explication."] } },
+  { h: "La reformulation et le résumé",
+    p: ["Reformuler, c’est dire la même chose avec ses propres mots, sans recopier le texte. Résumer, c’est garder l’essentiel (qui, quoi, où, quand, pourquoi) en supprimant les détails, sans ajouter son avis.",
+        "Pour réussir les questions de compréhension, lis d’abord toutes les questions, puis relis le texte en soulignant les passages utiles."] }
+];
+P["fr-orthographe"] = [
+  { h: "Les pluriels particuliers",
+    tab: { h: ["Règle", "Exemples"], r: [["-al → -aux", "un cheval, des chevaux (sauf bals, carnavals, festivals, récitals)"], ["-ail → -ails", "des rails, des détails (sauf travaux, vitraux, coraux, émaux, vantaux, soupiraux, baux)"], ["-ou → -ous", "des trous (sauf bijoux, cailloux, choux, genoux, hiboux, joujoux, poux : -x)"], ["-eu, -au, -eau → -x", "des jeux, des tuyaux, des bateaux (sauf pneus, bleus, landaus)"], ["Noms composés", "des choux-fleurs, des porte-monnaie (nom et adjectif s’accordent, verbe et adverbe restent invariables)"]] } },
+  { h: "Les accords à ne pas manquer",
+    l: ["<b>Tout</b> : adjectif (tous les jours, toutes les filles), adverbe invariable sauf devant un adjectif féminin commençant par une consonne (« elle est toute contente », « ils sont tout contents »).", "<b>Même</b> : s’accorde quand il signifie « identique » (les mêmes livres), invariable quand il signifie « aussi » (même les enfants).", "<b>Quelque</b> : « quelques amis » (plusieurs), « quelque 200 personnes » (environ, invariable).", "<b>Demi</b> : invariable devant le nom (une demi-heure), accordé en genre après (une heure et demie).", "<b>Leur</b> : invariable devant un verbe (je leur parle), s’accorde devant un nom pluriel (leurs livres)."] },
+  { h: "Exercice type brevet : la dictée commentée",
+    ex: { q: "Accorder : « Les fleurs que tu as (cueillir) se sont (faner) ; elles étaient pourtant (magnifique). »", s: ["« cueillir » avec avoir, COD « que » (les fleurs) avant → cueillies.", "« se faner » est pronominal, sans COD → accord avec le sujet « elles » → fanées.", "« magnifique » est un adjectif attribut du sujet « elles » → magnifiques.", "« Les fleurs que tu as cueillies se sont fanées ; elles étaient pourtant magnifiques. »"] } },
+  { h: "Les accents et la ponctuation",
+    p: ["Accents : « à » préposition, « où » de lieu, « là » adverbe, « déjà », « voilà », « çà et là » portent un accent ; « a », « ou », « la » sans accent ont un autre sens. Les majuscules accentuées s’écrivent avec leur accent (« État », « À »).",
+        "Ponctuation : point en fin de phrase ; virgule pour séparer des éléments d’une énumération ou des propositions ; deux-points avant une explication ou une citation ; guillemets pour les paroles ou les citations ; point-virgule entre deux propositions liées par le sens."] }
+];
+P["fr-redaction"] = [
+  { h: "Exemple d’introduction de réflexion",
+    ex: { titre: "Modèle commenté", q: "Sujet : « Selon vous, la lecture peut-elle nous aider à mieux comprendre le monde ? »", s: ["Amorce : « À l’heure des écrans et des vidéos courtes, les livres semblent parfois dépassés. »", "Reformulation : « Pourtant, lire des romans, des témoignages ou des articles peut-il nous aider à mieux comprendre le monde qui nous entoure ? »", "Annonce du plan : « Nous verrons d’abord que la lecture nous fait découvrir d’autres vies et d’autres époques, puis qu’elle développe notre esprit critique, avant de montrer qu’elle a toutefois ses limites. »"] } },
+  { h: "Exemple de paragraphe argumenté",
+    p: ["« Tout d’abord, la lecture nous permet de découvrir des réalités que nous ne connaissons pas. <i>(argument)</i> Par exemple, en lisant <i>Si c’est un homme</i>, Primo Levi nous fait vivre de l’intérieur le quotidien des déportés d’Auschwitz. <i>(exemple)</i> Grâce à ce témoignage, l’horreur des camps n’est plus seulement une leçon d’histoire : elle devient concrète et nous touche personnellement. <i>(explication)</i> Ainsi, le livre nous aide à comprendre un passé que nous n’avons pas vécu. <i>(conclusion partielle)</i> »"] },
+  { h: "Enrichir son écriture",
+    tab: { h: ["Au lieu de…", "Préfère…"], r: [["dire", "affirmer, murmurer, s’exclamer, répliquer, avouer, chuchoter"], ["faire", "réaliser, fabriquer, accomplir, effectuer"], ["il y a", "se trouve, se dresse, s’étend, règne"], ["beau", "splendide, magnifique, élégant, éblouissant"], ["voir", "apercevoir, observer, contempler, distinguer"], ["triste", "mélancolique, abattu, désespéré, morose"]] },
+    k: "Varie la longueur des phrases et la façon de les commencer (complément circonstanciel, participe, adverbe)." },
+  { h: "La grille de relecture",
+    l: ["Ai-je respecté toutes les contraintes du sujet ?", "Mon texte est-il organisé en paragraphes avec des alinéas ?", "Les temps sont-ils cohérents du début à la fin ?", "Ai-je vérifié les accords sujet-verbe, les accords dans les groupes nominaux et les participes passés ?", "La ponctuation des dialogues est-elle correcte ?", "Mon écriture est-elle lisible ?"] }
+];
+P["fr-themes"] = [
+  { h: "Relier un thème au texte du brevet",
+    p: ["Le texte du brevet est presque toujours rattaché à l’un des cinq thèmes. Le repérer aide à comprendre ses enjeux : un extrait de journal de guerre relève d’« Agir dans la cité » ; un récit d’enfance de « Se raconter » ; un poème sur un objet de « Visions poétiques » ; un récit d’anticipation de « Progrès et rêves scientifiques ».",
+        "La question de réflexion reprend souvent la problématique du thème. Avoir lu une ou deux œuvres par thème et savoir les résumer en trois phrases est donc un atout décisif."] },
+  { h: "Fiche à préparer pour chaque œuvre lue",
+    l: ["Titre, auteur, date, genre.", "Résumé en trois phrases.", "Personnage principal et ce qui lui arrive.", "Le thème du programme auquel elle se rattache.", "Une scène marquante et une courte citation.", "En quoi elle peut servir d’argument (pour ou contre une idée)."] },
+  { h: "Exercice type brevet : mobiliser une œuvre",
+    ex: { q: "Sujet de réflexion : « Le progrès scientifique rend-il forcément l’homme plus heureux ? »", s: ["Argument pour : les progrès de la médecine allongent la vie (exemple : les vaccins, les antibiotiques).", "Argument contre : la science peut servir à contrôler les individus. Dans <i>Fahrenheit 451</i>, Ray Bradbury imagine une société où la technologie et les écrans abrutissent les habitants et où les livres sont brûlés.", "Conclusion nuancée : le progrès n’apporte le bonheur que s’il est utilisé de façon responsable."] } },
+  { h: "Les registres associés aux thèmes",
+    tab: { h: ["Thème", "Registres fréquents"], r: [["Se raconter", "lyrique, pathétique, parfois humoristique"], ["Dénoncer", "satirique, ironique, polémique"], ["Visions poétiques", "lyrique"], ["Agir dans la cité", "pathétique, tragique, polémique, épique"], ["Progrès et rêves scientifiques", "fantastique, merveilleux scientifique, satirique"]] } }
+];
+
+/* Approfondissement : histoire-géographie-EMC */
+var P = BREVET_COURS_PLUS;
+P["hg-1gm"] = [
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Poilu", "surnom du soldat français de 1914-1918"], ["Union sacrée", "rassemblement de tous les partis politiques pour soutenir l’effort de guerre"], ["Front / arrière", "zone des combats / reste du pays, où vivent les civils"], ["Armistice", "accord qui met fin aux combats"], ["Génocide", "extermination volontaire et programmée d’un peuple"], ["Gueule cassée", "soldat défiguré par une blessure de guerre"], ["Mutinerie", "refus collectif d’obéir des soldats (1917)"]] } },
+  { h: "Exercice type brevet : le développement construit",
+    p: ["Sujet possible : « Montrez que la Première Guerre mondiale est une guerre totale. » On attend un texte organisé d’une quinzaine de lignes, avec une introduction, deux ou trois paragraphes et une conclusion."],
+    ex: { titre: "Plan possible", q: "Montrez que la Première Guerre mondiale est une guerre totale.", s: ["Introduction : de 1914 à 1918, la guerre oppose l’Entente aux Empires centraux ; une guerre totale mobilise toutes les ressources d’un pays.", "1. Mobilisation humaine : 8 millions de Français mobilisés, soldats des colonies, violences de masse (Verdun, 300 000 morts).", "2. Mobilisation économique : usines d’armement, femmes au travail (munitionnettes), emprunts.", "3. Mobilisation des esprits : propagande, censure, union sacrée.", "Conclusion : une guerre qui touche toute la société, combattants comme civils ; un bilan de 10 millions de soldats tués."] } },
+  { h: "Les sociétés à l’épreuve",
+    p: ["La guerre bouleverse aussi la vie des civils : rationnement, deuils dans presque toutes les familles, régions du nord et de l’est occupées par l’Allemagne, bombardements de Paris par des canons à longue portée en 1918. Après la guerre, chaque commune construit un <b>monument aux morts</b> ; le 11 novembre devient un jour de commémoration.",
+        "Pour les femmes, la guerre apporte une émancipation temporaire : elles occupent des emplois masculins. Mais elles n’obtiennent pas le droit de vote en France (contrairement au Royaume-Uni ou à l’Allemagne)."] },
+  { h: "Les erreurs à éviter",
+    l: ["Confondre armistice (11 novembre 1918) et traité de paix (Versailles, 28 juin 1919).", "Dire que les États-Unis sont en guerre dès 1914 : c’est en 1917.", "Oublier l’Empire ottoman, responsable du génocide des Arméniens.", "Réciter sans exemple : chaque idée doit être illustrée par un fait précis."] }
+];
+P["hg-totalitarismes"] = [
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Totalitarisme", "régime qui contrôle toute la société et les individus au nom d’une idéologie"], ["Communisme", "idéologie qui vise une société sans classes, avec la mise en commun des moyens de production"], ["Nazisme", "idéologie nationaliste, raciste et antisémite d’Hitler"], ["Antisémitisme", "hostilité envers les Juifs"], ["Goulag", "système de camps de travail forcé en URSS"], ["Propagande", "ensemble des moyens pour imposer des idées à la population"], ["Collectivisation", "suppression de la propriété privée des terres au profit de fermes collectives"]] } },
+  { h: "Exercice type brevet : comparer deux affiches",
+    p: ["Un sujet classique propose une affiche de propagande soviétique et une affiche nazie. On demande de présenter les documents puis de relever les points communs."],
+    ex: { q: "Quels points communs relever entre une affiche montrant Staline souriant entouré d’enfants et une affiche montrant Hitler acclamé par la jeunesse ?", s: ["Présenter : nature (affiche de propagande), auteur (le régime), date, contexte.", "Point commun 1 : le culte du chef, représenté au centre, plus grand, admiré.", "Point commun 2 : l’embrigadement de la jeunesse, qui doit être fidèle au chef.", "Point commun 3 : un message simple destiné à toute la population, qui cache la terreur.", "Conclusion : deux régimes aux idéologies opposées utilisent les mêmes méthodes de propagande."] } },
+  { h: "La marche vers la guerre",
+    l: ["1936 : remilitarisation de la Rhénanie par Hitler.", "Mars 1938 : annexion de l’Autriche (Anschluss).", "Septembre 1938 : accords de Munich ; la France et le Royaume-Uni laissent Hitler annexer les Sudètes (Tchécoslovaquie).", "Mars 1939 : Hitler envahit le reste de la Tchécoslovaquie.", "23 août 1939 : pacte germano-soviétique.", "1er septembre 1939 : invasion de la Pologne."] },
+  { h: "Les erreurs à éviter",
+    l: ["Dire qu’Hitler a pris le pouvoir par un coup d’État : il est nommé chancelier légalement en 1933, puis détruit la démocratie.", "Confondre le goulag (URSS) et les camps nazis.", "Oublier que la France reste une démocratie dans les années 1930."] }
+];
+P["hg-2gm"] = [
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Axe", "alliance de l’Allemagne, de l’Italie et du Japon"], ["Alliés", "Royaume-Uni, URSS (à partir de 1941), États-Unis (fin 1941), France libre…"], ["Blitzkrieg", "guerre éclair, offensive rapide avec chars et avions"], ["Shoah", "mot hébreu signifiant « catastrophe », désigne le génocide des Juifs"], ["Einsatzgruppen", "unités mobiles nazies chargées d’exterminer les Juifs à l’Est"], ["Crime contre l’humanité", "crime commis contre des civils pour des raisons politiques, raciales ou religieuses (défini à Nuremberg)"], ["Guerre d’anéantissement", "guerre qui vise la destruction totale de l’ennemi, y compris des civils"]] } },
+  { h: "Exercice type brevet : analyser un témoignage",
+    ex: { q: "Un extrait de Primo Levi décrit l’arrivée à Auschwitz : la sélection sur le quai, la séparation des familles. Que montre ce document ?", s: ["Présenter l’auteur : Primo Levi, juif italien, résistant, déporté à Auschwitz en 1944, survivant.", "Relever : la sélection entre les « aptes » au travail et ceux envoyés directement aux chambres à gaz (enfants, personnes âgées).", "Expliquer : Auschwitz-Birkenau est à la fois un camp de concentration et un centre de mise à mort.", "Conclure : le témoignage montre la mise en œuvre industrielle du génocide."] } },
+  { h: "La guerre du Pacifique",
+    p: ["En Asie, le Japon conquiert une grande partie du Sud-Est asiatique et du Pacifique en 1941-1942. Les États-Unis reprennent l’avantage à partir de la bataille de <b>Midway</b> (juin 1942), puis reconquièrent les îles une à une, au prix de combats très meurtriers. Face au refus du Japon de capituler, le président Truman décide d’utiliser la bombe atomique en août 1945."] },
+  { h: "Les erreurs à éviter",
+    l: ["Confondre camp de concentration et centre de mise à mort.", "Oublier les victimes tsiganes du génocide.", "Dire que la guerre se termine le 8 mai 1945 dans le monde entier : le Japon capitule le 2 septembre 1945.", "Oublier que l’URSS est d’abord alliée à l’Allemagne (pacte de 1939) avant d’être attaquée en 1941."] }
+];
+P["hg-france-occupee"] = [
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Exode", "fuite massive des populations civiles devant l’avancée allemande (mai-juin 1940)"], ["Régime de Vichy / État français", "régime autoritaire dirigé par Pétain de 1940 à 1944"], ["Révolution nationale", "programme idéologique de Vichy (Travail, Famille, Patrie)"], ["Collaboration", "coopération du régime de Vichy avec l’Allemagne nazie"], ["Résistance", "action clandestine ou armée contre l’occupant et Vichy"], ["France libre", "mouvement fondé à Londres par de Gaulle en 1940"], ["Maquis", "groupes de résistants armés cachés dans les campagnes"]] } },
+  { h: "Exercice type brevet : comparer deux discours",
+    ex: { q: "Comparer le discours de Pétain du 17 juin 1940 (« il faut cesser le combat ») et l’appel du général de Gaulle du 18 juin 1940.", s: ["Pétain : chef du gouvernement, il annonce qu’il faut demander l’armistice ; il accepte la défaite.", "De Gaulle : général réfugié à Londres, il refuse la défaite : la France a perdu une bataille, pas la guerre ; elle a un empire, des alliés (Royaume-Uni, États-Unis).", "Opposition : soumission contre résistance.", "Conséquences : Pétain fonde le régime de Vichy et collabore ; de Gaulle fonde la France libre."] } },
+  { h: "Les femmes dans la guerre",
+    p: ["Les femmes jouent un rôle important : elles font vivre les familles en l’absence de près de 2 millions de prisonniers, et beaucoup s’engagent dans la Résistance (agents de liaison, renseignement, impression de tracts). Lucie Aubrac, Berty Albrecht, Germaine Tillion en sont des figures. Ce rôle contribue à l’obtention du droit de vote en 1944."] },
+  { h: "Les erreurs à éviter",
+    l: ["Dire que la France est entièrement occupée dès 1940 : la zone sud ne l’est qu’à partir de novembre 1942.", "Oublier la responsabilité de Vichy dans la persécution des Juifs.", "Confondre la France libre (de Gaulle, extérieur) et la Résistance intérieure (unifiée par Jean Moulin)."] }
+];
+P["hg-guerre-froide"] = [
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Superpuissance", "État qui domine dans tous les domaines : militaire, économique, politique, culturel"], ["Bipolarisation", "division du monde en deux blocs autour de deux pôles"], ["Rideau de fer", "frontière qui sépare l’Europe de l’Ouest et l’Europe de l’Est"], ["Démocratie populaire", "pays d’Europe de l’Est sous domination soviétique, à parti communiste unique"], ["Dissuasion nucléaire", "posséder l’arme nucléaire pour décourager toute attaque"], ["Endiguement", "politique américaine visant à stopper l’expansion du communisme"]] } },
+  { h: "Exercice type brevet : la carte de l’Europe en 1955",
+    l: ["Colorier les pays membres de l’OTAN et ceux du pacte de Varsovie avec deux couleurs différentes.", "Tracer le rideau de fer, de la Baltique à l’Adriatique.", "Localiser Berlin, en RDA, divisée en deux.", "Repérer les pays neutres (Suisse, Autriche, Suède, Finlande) et la Yougoslavie communiste non alignée.", "Donner un titre et compléter la légende."] },
+  { h: "La guerre froide, une rivalité totale",
+    p: ["La rivalité touche tous les domaines : course aux armements nucléaires ; <b>conquête spatiale</b> (premier satellite soviétique Spoutnik en 1957, premier homme dans l’espace Youri Gagarine en 1961, premiers pas d’un Américain sur la Lune, Neil Armstrong, en 1969) ; sport (Jeux olympiques boycottés en 1980 et 1984) ; culture et propagande (cinéma, musique)."] },
+  { h: "Les erreurs à éviter",
+    l: ["Penser que les États-Unis et l’URSS se sont combattus directement.", "Confondre RFA (Ouest, démocratique) et RDA (Est, communiste).", "Dire que le mur de Berlin est construit en 1945 : c’est en 1961.", "Confondre la chute du mur (1989) et la fin de l’URSS (1991)."] }
+];
+P["hg-decolonisation"] = [
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Colonie", "territoire dominé et administré par une puissance étrangère (la métropole)"], ["Décolonisation", "processus par lequel les colonies deviennent indépendantes"], ["Nationalisme", "volonté d’un peuple de former une nation indépendante"], ["Tiers-monde", "pays pauvres, souvent anciennement colonisés, ni dans le bloc de l’Ouest ni dans celui de l’Est"], ["Non-alignement", "refus de choisir l’un des deux blocs de la guerre froide"], ["Pieds-noirs", "Français d’Algérie d’origine européenne"], ["Harkis", "Algériens ayant combattu dans l’armée française"]] } },
+  { h: "Exercice type brevet : analyser un discours d’indépendance",
+    ex: { q: "Dans un extrait du discours final de la conférence de Bandung (1955), les pays affirment que « le colonialisme dans toutes ses manifestations est un mal ». Que révèle ce document ?", s: ["Présenter : communiqué final de la conférence de Bandung, avril 1955, réunissant 29 pays d’Afrique et d’Asie.", "Idée 1 : la condamnation du colonialisme et le soutien aux peuples encore colonisés.", "Idée 2 : l’affirmation de nouveaux acteurs sur la scène internationale, refusant de dépendre des deux blocs.", "Conclusion : naissance politique du tiers-monde."] } },
+  { h: "Les mémoires de la guerre d’Algérie",
+    p: ["La guerre d’Algérie a longtemps été appelée « les événements » en France ; le terme de « guerre » n’est officiellement reconnu qu’en 1999. Ses mémoires restent douloureuses et divisées : anciens appelés du contingent, pieds-noirs rapatriés, harkis, immigrés algériens, Algériens indépendantistes."] },
+  { h: "Les erreurs à éviter",
+    l: ["Confondre l’indépendance de l’Inde (1947, Royaume-Uni) et celle de l’Algérie (1962, France).", "Dire que toutes les décolonisations ont été violentes.", "Oublier le lien entre la guerre d’Algérie et la naissance de la Ve République."] }
+];
+P["hg-ve-republique"] = [
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Constitution", "texte fondamental qui organise les pouvoirs et garantit les droits"], ["Référendum", "vote direct des citoyens pour répondre oui ou non à une question"], ["Suffrage universel direct", "tous les citoyens majeurs votent directement pour élire"], ["Alternance", "changement de majorité politique au pouvoir"], ["Cohabitation", "président et majorité parlementaire de bords opposés"], ["Séparation des pouvoirs", "législatif (Parlement), exécutif (président, gouvernement), judiciaire (tribunaux)"]] } },
+  { h: "Comment une loi est-elle votée ?",
+    dg: { type: "flow", title: "Le parcours d’une loi", steps: [ { t: "Proposition ou projet", d: "par un parlementaire ou par le gouvernement" }, { t: "Assemblée nationale", d: "examen, amendements, vote" }, { t: "Sénat", d: "examen et vote du même texte" }, { t: "Navette", d: "allers-retours jusqu’à un accord ; l’Assemblée a le dernier mot" }, { t: "Conseil constitutionnel", d: "contrôle éventuel" }, { t: "Promulgation", d: "le président signe, publication au Journal officiel" } ] } },
+  { h: "Exercice type brevet",
+    ex: { q: "Expliquez pourquoi l’élection de François Mitterrand en 1981 est un moment important de la Ve République.", s: ["Depuis 1958, la droite gouverne (de Gaulle, Pompidou, Giscard d’Estaing).", "En 1981, le socialiste François Mitterrand est élu : c’est la première alternance.", "Les institutions fonctionnent aussi avec la gauche au pouvoir : le régime se montre stable.", "Réformes : abolition de la peine de mort, retraite à 60 ans, cinquième semaine de congés payés."] } },
+  { h: "Les erreurs à éviter",
+    l: ["Dire que le président fait les lois : il les promulgue, le Parlement les vote.", "Croire que le mandat présidentiel a toujours duré 5 ans (7 ans jusqu’en 2002).", "Confondre Assemblée nationale (députés) et Sénat (sénateurs)."] }
+];
+P["hg-societe"] = [
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Trente Glorieuses", "période de forte croissance de 1945 à 1975"], ["Baby-boom", "forte hausse des naissances après 1945"], ["Société de consommation", "société où l’achat de biens occupe une place centrale"], ["Exode rural", "départ des habitants des campagnes vers les villes"], ["Grands ensembles", "immeubles collectifs construits en banlieue dans les années 1950-1970"], ["Féminisme", "mouvement qui défend l’égalité entre femmes et hommes"]] } },
+  { h: "Exercice type brevet : décrire une évolution à partir d’un graphique",
+    ex: { q: "Un graphique montre le taux d’équipement des ménages français en réfrigérateurs, télévisions et automobiles entre 1954 et 1975. Que montre-t-il ?", s: ["Décrire : en 1954, une minorité de ménages est équipée ; en 1975, une large majorité l’est (réfrigérateur dans plus de 9 foyers sur 10).", "Expliquer : la hausse des salaires, le crédit, la publicité et la production de masse.", "Conclure : c’est la naissance de la société de consommation pendant les Trente Glorieuses."] } },
+  { h: "L’immigration dans la société française",
+    p: ["Pendant les Trente Glorieuses, l’État et les entreprises font venir des travailleurs étrangers pour répondre au manque de main-d’œuvre. Ils occupent souvent les emplois les plus pénibles et vivent parfois dans des bidonvilles (Nanterre) puis dans des cités de transit ou des foyers. À partir de 1974, l’immigration de travail est suspendue, mais le regroupement familial est autorisé en 1976."] },
+  { h: "Les erreurs à éviter",
+    l: ["Confondre le droit de vote des femmes (1944) et la loi Veil (1975).", "Dire que la croissance continue après 1973.", "Oublier les combats féministes qui ont permis ces lois."] }
+];
+P["hg-territoires"] = [
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Aire d’attraction d’une ville", "pôle + couronne dont les habitants travaillent dans le pôle"], ["Métropole", "grande ville qui concentre population, activités et fonctions de commandement"], ["Périurbanisation", "extension des villes dans les espaces ruraux voisins"], ["Mobilité pendulaire", "trajet quotidien domicile-travail"], ["Espace productif", "espace où l’on produit des richesses"], ["Technopôle", "pôle qui associe entreprises de haute technologie, universités et laboratoires"], ["Espace de faible densité", "espace peu peuplé, éloigné des grandes villes"]] } },
+  { h: "Exercice type brevet : le croquis",
+    l: ["Réaliser un croquis, c’est représenter de façon simplifiée l’organisation d’un espace, avec une légende organisée en parties (I. les grandes villes ; II. les espaces productifs ; III. les axes de communication).", "Figurés ponctuels (cercles) pour les villes, de taille proportionnelle à leur importance.", "Figurés de surface (couleurs) pour les espaces : dynamiques, en reconversion, de faible densité.", "Figurés linéaires (traits, flèches) pour les axes de transport et les flux.", "Toujours un titre, une légende complète, des couleurs cohérentes."] },
+  { h: "Exemple d’étude de cas : une métropole",
+    p: ["Lyon, deuxième aire d’attraction française après Paris, illustre la métropolisation : quartier d’affaires de la Part-Dieu, pôle de recherche en santé et biotechnologies, aéroport international Saint-Exupéry, gare TGV, université. Son aire d’attraction s’étend sur des dizaines de kilomètres ; les embouteillages et la hausse des prix du logement sont des défis."] },
+  { h: "Les erreurs à éviter",
+    l: ["Confondre banlieue (partie du pôle) et couronne périurbaine.", "Oublier que les espaces de faible densité peuvent être dynamiques.", "Oublier le titre et la légende d’un croquis."] }
+];
+P["hg-ue"] = [
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Aménagement du territoire", "politique qui organise l’espace pour réduire les inégalités"], ["Collectivité territoriale", "commune, département, région, qui gèrent des affaires locales"], ["DROM", "département et région d’outre-mer"], ["ZEE", "zone économique exclusive : espace maritime de 200 milles marins où un État exploite les ressources"], ["Espace Schengen", "espace de libre circulation des personnes"], ["Zone euro", "pays de l’UE qui utilisent l’euro"]] } },
+  { h: "Exercice type brevet : un aménagement",
+    ex: { q: "Une ligne de TGV relie Paris à Bordeaux en 2 h 04 depuis 2017. En quoi est-ce un aménagement du territoire ?", s: ["Acteurs : l’État, les régions traversées, l’entreprise ferroviaire, des fonds privés.", "Objectifs : rapprocher Bordeaux et le Sud-Ouest de Paris, renforcer l’attractivité de la métropole bordelaise.", "Effets positifs : gain de temps, développement économique, tourisme.", "Limites : coût, prix des billets, villes moyennes non desservies, effets sur l’environnement."] } },
+  { h: "Les institutions de l’Union européenne",
+    tab: { h: ["Institution", "Rôle", "Siège"], r: [["Commission européenne", "propose les lois, veille à leur application", "Bruxelles"], ["Parlement européen", "vote les lois et le budget avec le Conseil ; élu tous les 5 ans", "Strasbourg (et Bruxelles)"], ["Conseil de l’UE", "réunit les ministres des États ; vote les lois", "Bruxelles"], ["Conseil européen", "réunit les chefs d’État et de gouvernement ; fixe les grandes orientations", "Bruxelles"], ["Banque centrale européenne", "gère l’euro", "Francfort"]] } },
+  { h: "Les erreurs à éviter",
+    l: ["Confondre Union européenne (27 pays), zone euro (une partie d’entre eux) et espace Schengen (qui inclut aussi des pays hors UE comme la Suisse).", "Oublier les DROM, qui font partie de l’UE.", "Dire que l’UE remplace les États : ils restent souverains dans de nombreux domaines."] }
+];
+P["hg-emc"] = [
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Citoyen", "membre d’un État qui a des droits civiques et politiques et des devoirs"], ["Laïcité", "séparation des religions et de l’État, neutralité de l’État, liberté de conscience"], ["Démocratie", "régime où le pouvoir appartient au peuple, qui l’exerce par ses représentants élus"], ["État de droit", "État où chacun, y compris les dirigeants, est soumis à la loi"], ["Discrimination", "traitement inégal fondé sur un critère interdit par la loi"], ["Engagement", "action volontaire au service d’une cause ou de la collectivité"]] } },
+  { h: "Exercice type brevet : la situation pratique",
+    ex: { q: "Un élève de ton collège est harcelé sur les réseaux sociaux. Que peux-tu faire, et sur quels principes t’appuies-tu ?", s: ["Ne pas participer, ne pas partager les messages, soutenir la victime.", "Prévenir un adulte (professeur, CPE, parents) et signaler les contenus sur la plateforme.", "Numéro national contre le harcèlement : 3018.", "Principes : respect de la dignité de chacun, fraternité, loi (le harcèlement est un délit puni par la loi)."] } },
+  { h: "La justice en France",
+    p: ["La justice est rendue « au nom du peuple français » par des juges indépendants. Principes : <b>présomption d’innocence</b> (toute personne est innocente tant que sa culpabilité n’est pas prouvée), droit à un avocat, procès équitable, possibilité de faire appel.",
+        "Les mineurs ont une justice adaptée (juge des enfants), qui privilégie l’éducation. La majorité pénale est fixée à 18 ans, mais un mineur peut être jugé et sanctionné à partir de 13 ans."] },
+  { h: "Les erreurs à éviter",
+    l: ["Confondre laïcité et interdiction des religions.", "Oublier de justifier avec un texte ou une valeur (Constitution, DDHC, loi de 1905).", "Croire que la JDC est réservée aux garçons."] }
+];
+
+/* Approfondissement : mathématiques */
+var P = BREVET_COURS_PLUS;
+P["ma-pythagore"] = [
+  { h: "Exercice type brevet : le terrain de foot",
+    ex: { q: "Un terrain rectangulaire mesure 105 m sur 68 m. Léo traverse le terrain en diagonale au lieu de longer deux côtés. Quelle distance économise-t-il, au mètre près ?", s: ["Le terrain est un rectangle : ses angles sont droits. La diagonale est l’hypoténuse d’un triangle rectangle de côtés 105 m et 68 m.", "D’après le théorème de Pythagore : d² = 105² + 68² = 11 025 + 4 624 = 15 649.", "d = √15 649 ≈ 125,1 m, soit environ 125 m.", "En longeant les côtés : 105 + 68 = 173 m.", "Il économise environ 173 − 125 = 48 m."] } },
+  { h: "Démontrer qu’un triangle est rectangle avec des décimaux",
+    p: ["Avec des nombres décimaux, les calculs se font à la calculatrice, mais on garde les valeurs <b>exactes</b> jusqu’à la comparaison. Si l’on arrondit trop tôt, deux résultats égaux peuvent sembler différents."],
+    ex: { q: "Le triangle KLM a pour côtés KL = 2,8 cm, LM = 4,5 cm et KM = 5,3 cm. Est-il rectangle ?", s: ["Plus grand côté : [KM]. D’une part KM² = 5,3² = 28,09.", "D’autre part KL² + LM² = 2,8² + 4,5² = 7,84 + 20,25 = 28,09.", "KM² = KL² + LM², donc d’après la réciproque du théorème de Pythagore, KLM est rectangle en L."] } },
+  { h: "Pythagore dans l’espace",
+    p: ["Dans un pavé droit, on peut calculer la grande diagonale en appliquant Pythagore deux fois : d’abord dans une face (diagonale de la base), puis dans le triangle rectangle formé par cette diagonale, une arête verticale et la grande diagonale.",
+        "Pour un pavé de dimensions L, l et h : diagonale de la base² = L² + l², puis grande diagonale² = L² + l² + h². Exemple : pavé 3 × 4 × 12 → base : √(9 + 16) = 5 ; grande diagonale : √(25 + 144) = √169 = 13."],
+    warn: "Dans l’espace, vérifie toujours que le triangle utilisé est bien rectangle : une arête verticale est perpendiculaire à toutes les droites de la base passant par son pied." },
+  { h: "Les erreurs à éviter",
+    l: ["Appliquer le théorème à un triangle dont on ne sait pas qu’il est rectangle.", "Oublier la racine carrée à la fin : BC² = 25 ne donne pas BC = 25.", "Écrire « BC = 3² + 4² » au lieu de « BC² = 3² + 4² ».", "Utiliser l’égalité de Pythagore pour démontrer qu’un triangle est rectangle en partant de « BC² = AB² + AC² » : il faut calculer les deux membres séparément.", "Mélanger les unités (cm et m) dans un même calcul."],
+    k: "Rédaction en 3 temps : je cite la propriété, j’écris l’égalité, je calcule et je conclus avec l’unité." }
+];
+P["ma-thales"] = [
+  { h: "Exercice type brevet : mesurer une hauteur avec l’ombre",
+    ex: { q: "À un même moment, un bâton vertical de 1,5 m projette une ombre de 2 m, et un arbre projette une ombre de 12 m. Les rayons du soleil sont parallèles. Quelle est la hauteur de l’arbre ?", s: ["Les rayons du soleil sont parallèles et les objets sont verticaux : on reconnaît une configuration de Thalès (ou deux triangles semblables).", "Le rapport hauteur / ombre est le même : h / 12 = 1,5 / 2.", "h = 12 × 1,5 ÷ 2 = 9 m.", "L’arbre mesure 9 m."] } },
+  { h: "Exercice type brevet : la configuration papillon",
+    ex: { q: "Les droites (AE) et (BD) se coupent en C. AC = 6 cm, CE = 4,5 cm, AB = 8 cm, et (AB) // (DE). Calculer DE.", s: ["Les points A, C, E et B, C, D sont alignés et (AB) // (DE). D’après le théorème de Thalès : CE/CA = CD/CB = DE/AB.", "On remplace : 4,5/6 = CD/CB = DE/8.", "DE = 8 × 4,5 ÷ 6 = 6 cm."] },
+    p: ["Dans la configuration papillon, le petit triangle CDE est l’image du grand triangle CBA par une homothétie de centre C et de rapport négatif (ici −0,75)."] },
+  { h: "Triangles semblables",
+    p: ["Deux triangles sont <b>semblables</b> s’ils ont les mêmes angles deux à deux. Leurs côtés sont alors proportionnels : l’un est un agrandissement ou une réduction de l’autre. Le théorème de Thalès est un cas particulier : les deux triangles de la configuration sont semblables.",
+        "Méthode : pour montrer que deux triangles sont semblables, il suffit de montrer que deux angles de l’un sont égaux à deux angles de l’autre (le troisième l’est forcément, puisque la somme vaut 180°). Ensuite, on écrit l’égalité des rapports des côtés <b>homologues</b> (ceux qui sont face aux angles égaux)."] },
+  { h: "Les erreurs à éviter",
+    l: ["Écrire les rapports dans le désordre : en haut toujours le même triangle.", "Utiliser Thalès sans avoir vérifié le parallélisme.", "Utiliser le rapport MN/BC dans la réciproque.", "Oublier de vérifier l’ordre des points dans la réciproque.", "Multiplier une aire par k au lieu de k²."] }
+];
+P["ma-trigo"] = [
+  { h: "Exercice type brevet : la rampe d’accès",
+    ex: { q: "Une rampe d’accès pour fauteuil roulant doit faire un angle d’au plus 5° avec le sol. Une rampe de 6 m de long permet de monter une marche de 40 cm. Est-elle réglementaire ?", s: ["La rampe est l’hypoténuse (6 m = 600 cm) ; la hauteur de 40 cm est le côté opposé à l’angle α avec le sol.", "sin α = opposé ÷ hypoténuse = 40 ÷ 600 ≈ 0,0667.", "α = sin⁻¹(0,0667) ≈ 3,8°.", "3,8° < 5° : la rampe est réglementaire."] } },
+  { h: "Relations utiles",
+    p: ["Pour tout angle aigu α : <b>(cos α)² + (sin α)² = 1</b> et <b>tan α = sin α ÷ cos α</b>. Ces relations permettent de trouver un rapport à partir d’un autre sans connaître l’angle.",
+        "Exemple : si cos α = 0,6, alors (sin α)² = 1 − 0,36 = 0,64, donc sin α = 0,8 (positif pour un angle aigu), et tan α = 0,8 ÷ 0,6 ≈ 1,33."],
+    tab: { h: ["Angle", "sin", "cos", "tan"], r: [["30°", "0,5", "≈ 0,866", "≈ 0,577"], ["45°", "≈ 0,707", "≈ 0,707", "1"], ["60°", "≈ 0,866", "0,5", "≈ 1,732"]] } },
+  { h: "Combiner Pythagore et trigonométrie",
+    p: ["Beaucoup d’exercices enchaînent les deux outils : on calcule d’abord une longueur avec la trigonométrie, puis une autre avec Pythagore, ou l’inverse. Choisis à chaque étape l’outil adapté : <b>Pythagore</b> quand on connaît deux côtés et qu’on cherche le troisième ; la <b>trigonométrie</b> dès qu’un angle intervient."],
+    ex: { q: "ABC est rectangle en A, AB = 5 cm et l’angle ABC = 40°. Calculer AC puis BC.", s: ["tan 40° = AC / AB, donc AC = 5 × tan 40° ≈ 4,2 cm.", "cos 40° = AB / BC, donc BC = 5 ÷ cos 40° ≈ 6,5 cm.", "Vérification avec Pythagore : 5² + 4,2² ≈ 42,6 et 6,5² = 42,25 : cohérent, aux arrondis près."] } },
+  { h: "Les erreurs à éviter",
+    l: ["Utiliser la trigonométrie dans un triangle non rectangle.", "Nommer les côtés par rapport au mauvais angle.", "Calculatrice en mode radians.", "Arrondir un résultat intermédiaire puis le réutiliser : garde la valeur exacte de la calculatrice.", "Confondre cos et cos⁻¹ : cos donne un nombre, cos⁻¹ donne un angle."] }
+];
+P["ma-transformations"] = [
+  { h: "Construire les images à la règle et au compas",
+    l: ["<b>Symétrique axial</b> de M : tracer la perpendiculaire à l’axe passant par M, reporter la distance de M à l’axe de l’autre côté.", "<b>Symétrique central</b> de M par rapport à O : tracer la droite (MO) et reporter OM’ = OM de l’autre côté de O.", "<b>Image par translation</b> (A → B) : construire le parallélogramme ABM’M en reportant les longueurs au compas.", "<b>Image par rotation</b> de centre O et d’angle 60° : tracer le cercle de centre O passant par M, puis placer M’ sur ce cercle avec le rapporteur, dans le sens demandé.", "<b>Image par homothétie</b> de centre O et rapport k : placer M’ sur la droite (OM) avec OM’ = |k| × OM, du même côté si k > 0, de l’autre côté si k < 0."] },
+  { h: "Exercice type brevet : la frise",
+    ex: { q: "Une frise est formée de triangles numérotés 1, 2, 3, 4… placés côte à côte. Le triangle 2 est le symétrique du triangle 1 par rapport à une droite verticale ; le triangle 3 est identique au triangle 1, décalé vers la droite. Quelle transformation transforme le triangle 1 en triangle 3 ?", s: ["Le triangle 3 a la même orientation que le triangle 1 : ce n’est ni une symétrie axiale (qui retourne) ni une rotation (qui tourne).", "Il est simplement décalé horizontalement.", "C’est une translation, qui transforme un sommet du triangle 1 en le sommet correspondant du triangle 3."] } },
+  { h: "Axes et centres de symétrie des figures usuelles",
+    tab: { h: ["Figure", "Axes de symétrie", "Centre de symétrie"], r: [["Triangle isocèle", "1 (la médiatrice de la base)", "non"], ["Triangle équilatéral", "3", "non"], ["Rectangle", "2 (les médiatrices des côtés)", "oui (intersection des diagonales)"], ["Losange", "2 (les diagonales)", "oui"], ["Carré", "4", "oui"], ["Parallélogramme quelconque", "aucun", "oui"], ["Cercle", "une infinité (tous les diamètres)", "oui (le centre)"]] } },
+  { h: "Les erreurs à éviter",
+    l: ["Oublier le sens d’une rotation.", "Confondre symétrie centrale et translation : la symétrie centrale « retourne tête en bas ».", "Pour une homothétie de rapport négatif, placer l’image du même côté que le point de départ.", "Penser qu’une homothétie conserve les aires : elles sont multipliées par k²."] }
+];
+P["ma-espace"] = [
+  { h: "Exercice type brevet : remplir un aquarium",
+    ex: { q: "Un aquarium a la forme d’un pavé droit de 80 cm × 35 cm × 40 cm. On le remplit aux trois quarts de sa hauteur. Combien de litres d’eau faut-il ? Un seau contient 10 L : combien de seaux ?", s: ["Hauteur d’eau : 40 × 3/4 = 30 cm.", "Volume d’eau : 80 × 35 × 30 = 84 000 cm³.", "84 000 cm³ = 84 dm³ = 84 L.", "84 ÷ 10 = 8,4 : il faut 9 seaux (le dernier ne sera pas plein)."] } },
+  { h: "Aire de la sphère et patrons",
+    p: ["L’aire d’une <b>sphère</b> de rayon r vaut <b>4 × π × r²</b>. L’aire latérale d’un <b>cylindre</b> (surface courbe) vaut périmètre de la base × hauteur, soit 2 × π × r × h : déroulée, elle forme un rectangle.",
+        "Un <b>patron</b> est une figure plane qui, après pliage, forme le solide. Patron d’un pavé : six rectangles ; patron d’un cylindre : deux disques et un rectangle dont la longueur est égale au périmètre des disques ; patron d’une pyramide à base carrée : un carré et quatre triangles."] },
+  { h: "Effet d’un agrandissement sur un solide",
+    p: ["Si l’on multiplie toutes les dimensions d’un solide par k, son aire est multipliée par k² et son volume par k³. Une maquette au 1/100 d’un bâtiment a un volume 1 000 000 de fois plus petit."],
+    ex: { q: "Une boule de pétanque a un rayon de 3,7 cm. Une boule géante a un rayon 10 fois plus grand. Combien de fois son volume est-il plus grand ?", s: ["Les longueurs sont multipliées par k = 10.", "Le volume est multiplié par k³ = 1 000.", "Le volume est 1 000 fois plus grand."] } },
+  { h: "Les erreurs à éviter",
+    l: ["Oublier de diviser par 3 pour une pyramide ou un cône.", "Utiliser le diamètre à la place du rayon.", "Mélanger les unités : convertir avant de calculer.", "Confondre aire (unités au carré) et volume (unités au cube).", "Écrire 1 m³ = 100 dm³ (c’est 1 000)."] }
+];
+P["ma-fonctions"] = [
+  { h: "Exercice type brevet : lecture graphique",
+    p: ["On donne la courbe d’une fonction f qui représente la température (en °C) d’un four en fonction du temps (en minutes). Les questions classiques :"],
+    l: ["« Quelle est la température au bout de 10 minutes ? » → lire l’image de 10.", "« Au bout de combien de temps la température atteint-elle 180 °C ? » → lire le ou les antécédents de 180.", "« Sur quelle période la température augmente-t-elle ? » → repérer où la courbe monte.", "« Quelle est la température maximale ? » → point le plus haut de la courbe.", "Toujours donner une valeur approchée avec l’unité, et laisser les traits de lecture en pointillés sur le graphique."] },
+  { h: "Représenter une fonction affine",
+    p: ["Pour tracer la droite d’une fonction affine, il suffit de <b>deux points</b>. Le plus simple : le point (0 ; b) sur l’axe vertical, puis un deuxième point calculé. Un troisième point sert de vérification.",
+        "Exemple : f(x) = −2x + 3. Point (0 ; 3). f(2) = −1, donc point (2 ; −1). On trace la droite qui passe par ces deux points. Elle descend car a = −2 < 0."],
+    tab: { h: ["x", "0", "2", "4"], r: [["f(x) = −2x + 3", "3", "−1", "−5"]] } },
+  { h: "Avec un tableur",
+    p: ["Au brevet, une feuille de calcul affiche souvent un tableau de valeurs. On peut demander quelle formule a été saisie. Si les valeurs de x sont en colonne A à partir de A2, la formule de f(x) = 3x² − 5 en B2 s’écrit <b>=3*A2^2-5</b> (ou =3*A2*A2-5). On l’étire ensuite vers le bas.",
+        "Rappels : une formule commence toujours par « = » ; le symbole de la multiplication est « * » ; la puissance s’écrit « ^ »."] },
+  { h: "Les erreurs à éviter",
+    l: ["Confondre image et antécédent.", "Inverser les axes en lisant un graphique.", "Penser qu’une droite qui ne passe pas par l’origine est linéaire.", "Dans f(x) = 5 − 3x, croire que a = 5 : le coefficient de x est −3, et b = 5."] }
+];
+P["ma-proportionnalite"] = [
+  { h: "Exercice type brevet : la recette",
+    ex: { q: "Une recette de crêpes pour 4 personnes demande 250 g de farine, 3 œufs et 50 cL de lait. Quelles quantités pour 10 personnes ?", s: ["Coefficient : 10 ÷ 4 = 2,5.", "Farine : 250 × 2,5 = 625 g.", "Œufs : 3 × 2,5 = 7,5, soit environ 7 ou 8 œufs.", "Lait : 50 × 2,5 = 125 cL = 1,25 L."] } },
+  { h: "Exercice type brevet : la facture et la TVA",
+    ex: { q: "Un vélo coûte 450 € hors taxes. La TVA est de 20 %. Quel est son prix TTC ? Pendant les soldes, il est vendu 432 € TTC. Quel est le pourcentage de réduction ?", s: ["Prix TTC = 450 × 1,20 = 540 €.", "Réduction : 540 − 432 = 108 €.", "Pourcentage : 108 ÷ 540 × 100 = 20 %."] } },
+  { h: "Grandeurs composées",
+    p: ["Certaines grandeurs sont des quotients de deux autres : vitesse (km/h), débit (L/min), masse volumique (g/cm³), densité de population (hab./km²), prix au kilo (€/kg), consommation (L/100 km). Elles se manipulent comme des situations de proportionnalité."],
+    ex: { q: "Un robinet a un débit de 12 L/min. Combien de temps pour remplir une baignoire de 150 L ?", s: ["Temps = volume ÷ débit = 150 ÷ 12 = 12,5 min.", "12,5 min = 12 min 30 s."] } },
+  { h: "Les erreurs à éviter",
+    l: ["Additionner deux pourcentages successifs.", "Retrouver un prix initial en ajoutant le pourcentage au lieu de diviser par le coefficient.", "Croire que deux grandeurs qui augmentent ensemble sont forcément proportionnelles.", "Mal convertir les durées (heures décimales)."] }
+];
+P["ma-calcul"] = [
+  { h: "Exercice type brevet : les deux programmes",
+    ex: { q: "Programme A : choisir un nombre, le multiplier par 4, ajouter 8. Programme B : choisir un nombre, ajouter 2, multiplier par 4. Montrer que les deux programmes donnent toujours le même résultat.", s: ["Soit x le nombre de départ.", "Programme A : 4x + 8.", "Programme B : (x + 2) × 4 = 4x + 8.", "Les deux expressions sont égales pour tout x : les programmes donnent toujours le même résultat."] } },
+  { h: "Calcul avec des fractions (rappels indispensables)",
+    tab: { h: ["Opération", "Règle", "Exemple"], r: [["Addition, soustraction", "même dénominateur, puis on additionne les numérateurs", "2/3 + 1/4 = 8/12 + 3/12 = 11/12"], ["Multiplication", "numérateurs entre eux, dénominateurs entre eux", "2/3 × 5/7 = 10/21"], ["Division", "multiplier par l’inverse", "2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = 5/6"], ["Priorités", "parenthèses, puis × et ÷, puis + et −", "1 + 2 × 3 = 7"]] } },
+  { h: "Prouver qu’une affirmation est fausse",
+    p: ["Une affirmation du type « pour tout nombre x… » est fausse s’il existe <b>un seul</b> nombre pour lequel elle ne marche pas : c’est un <b>contre-exemple</b>. Exemple : « Le carré d’un nombre est toujours supérieur à ce nombre » est faux : 0,5² = 0,25 < 0,5.",
+        "En revanche, quelques exemples qui marchent ne prouvent jamais qu’une affirmation est vraie pour tous les nombres : il faut une démonstration avec une lettre."] },
+  { h: "Les erreurs à éviter",
+    l: ["(a + b)² = a² + b² : faux.", "−(x − 3) = −x − 3 : faux, c’est −x + 3.", "3x × 2x = 6x : faux, c’est 6x².", "x + x = x² : faux, c’est 2x.", "Oublier des termes en développant une double distributivité (il y en a quatre)."] }
+];
+P["ma-equations"] = [
+  { h: "Exercice type brevet : le problème d’âge",
+    ex: { q: "Aujourd’hui, un père a 40 ans et sa fille 12 ans. Dans combien d’années l’âge du père sera-t-il le double de celui de sa fille ?", s: ["Soit x le nombre d’années.", "Dans x années : père 40 + x, fille 12 + x.", "Équation : 40 + x = 2(12 + x), soit 40 + x = 24 + 2x.", "x = 16.", "Dans 16 ans (père 56 ans, fille 28 ans : 56 = 2 × 28 ✓)."] } },
+  { h: "Équations avec des fractions",
+    ex: { q: "Résoudre x/3 + 2 = x/2.", s: ["On multiplie les deux membres par 6 (dénominateur commun) : 2x + 12 = 3x.", "12 = 3x − 2x, donc x = 12.", "Vérification : 12/3 + 2 = 6 et 12/2 = 6 ✓."] } },
+  { h: "Tester une égalité",
+    p: ["Une question fréquente : « Le nombre −2 est-il solution de l’équation x² + 3x + 2 = 0 ? » On remplace x par −2 : (−2)² + 3 × (−2) + 2 = 4 − 6 + 2 = 0. Le résultat est bien 0, donc −2 est solution.",
+        "Cette méthode permet aussi de vérifier ses propres résultats à la fin d’une résolution."] },
+  { h: "Les erreurs à éviter",
+    l: ["Changer de signe en passant un terme de l’autre côté, mais oublier de le faire pour tous les termes.", "Diviser par un nombre négatif dans une inéquation sans changer le sens.", "Pour x² = 16, oublier la solution −4.", "Oublier la phrase de conclusion dans un problème."] }
+];
+P["ma-stats"] = [
+  { h: "Exercice type brevet : comparer deux séries",
+    ex: { q: "Deux élèves ont les notes suivantes. Inès : 8, 12, 14, 15, 16. Hugo : 11, 12, 12, 13, 13. Comparer leurs résultats.", s: ["Moyennes : Inès (8 + 12 + 14 + 15 + 16) ÷ 5 = 13 ; Hugo (11 + 12 + 12 + 13 + 13) ÷ 5 = 12,2.", "Médianes : Inès 14 ; Hugo 12.", "Étendues : Inès 16 − 8 = 8 ; Hugo 13 − 11 = 2.", "Inès a de meilleurs résultats en moyenne, mais plus irréguliers ; Hugo est plus régulier."] } },
+  { h: "Les graphiques statistiques",
+    tab: { h: ["Graphique", "Usage"], r: [["Diagramme en barres (bâtons)", "comparer des effectifs de catégories ou de valeurs"], ["Diagramme circulaire", "montrer la répartition d’un tout ; angle = fréquence × 360°"], ["Histogramme", "données regroupées en classes (intervalles)"], ["Courbe", "évolution dans le temps"]] },
+    ex: { q: "Dans une classe, 40 % des élèves viennent à pied. Quel angle représente ce groupe dans un diagramme circulaire ?", s: ["Angle = 0,40 × 360° = 144°."] } },
+  { h: "Probabilités : expérience répétée et tableau",
+    p: ["Quand on lance deux dés, on peut représenter les 36 issues équiprobables dans un tableau à double entrée (dé 1 en ligne, dé 2 en colonne). Par exemple, P(somme = 7) = 6/36 = 1/6, car il y a 6 cases donnant 7 : (1;6), (2;5), (3;4), (4;3), (5;2), (6;1).",
+        "Un tirage peut se faire <b>avec remise</b> (on remet l’objet, les probabilités ne changent pas) ou <b>sans remise</b> (les probabilités du second tirage changent)."] },
+  { h: "Les erreurs à éviter",
+    l: ["Calculer la médiane sans ranger la série.", "Oublier de pondérer une moyenne par les effectifs.", "Donner une probabilité supérieure à 1 ou négative.", "Penser qu’après cinq « pile », « face » est plus probable : chaque lancer est indépendant."] }
+];
+P["ma-arithmetique"] = [
+  { h: "Exercice type brevet : le carrelage",
+    ex: { q: "On veut recouvrir une surface rectangulaire de 360 cm sur 252 cm avec des carreaux carrés identiques, sans découpe, les plus grands possible. Quelle est la taille des carreaux et combien en faut-il ?", s: ["Le côté du carreau doit diviser 360 et 252.", "360 = 2³ × 3² × 5 et 252 = 2² × 3² × 7.", "Plus grand diviseur commun : 2² × 3² = 36.", "Carreaux de 36 cm de côté : 360 ÷ 36 = 10 et 252 ÷ 36 = 7, soit 10 × 7 = 70 carreaux."] } },
+  { h: "Nombres premiers entre eux",
+    p: ["Deux nombres sont <b>premiers entre eux</b> s’ils n’ont pas d’autre diviseur commun que 1, par exemple 8 et 15. Une fraction dont le numérateur et le dénominateur sont premiers entre eux est irréductible.",
+        "Attention : deux nombres premiers entre eux ne sont pas forcément premiers (8 et 15 ne le sont pas)."] },
+  { h: "Multiples communs",
+    ex: { q: "Un bus passe toutes les 12 minutes, un tramway toutes les 18 minutes. Ils partent ensemble à 8 h. Quand repartiront-ils ensemble pour la première fois ?", s: ["On cherche le plus petit multiple commun de 12 et 18.", "Multiples de 18 : 18, 36, 54… 36 est aussi un multiple de 12.", "Ils repartiront ensemble 36 minutes plus tard, à 8 h 36."] } },
+  { h: "Les erreurs à éviter",
+    l: ["Dire que 1 est premier.", "Oublier de continuer la décomposition jusqu’au bout (15 n’est pas premier : 3 × 5).", "Confondre diviseur et multiple.", "Tester la divisibilité par 3 avec le dernier chiffre au lieu de la somme des chiffres."] }
+];
+P["ma-puissances"] = [
+  { h: "Exercice type brevet : la vitesse de la lumière",
+    ex: { q: "La lumière parcourt environ 3 × 10⁵ km par seconde. Une année compte environ 3,15 × 10⁷ secondes. Calculer une année-lumière en km, en notation scientifique.", s: ["Distance = vitesse × temps = 3 × 10⁵ × 3,15 × 10⁷.", "= (3 × 3,15) × 10⁵⁺⁷ = 9,45 × 10¹².", "Une année-lumière vaut environ 9,45 × 10¹² km."] } },
+  { h: "Comparer des nombres en notation scientifique",
+    p: ["Pour comparer deux nombres positifs en notation scientifique, on compare d’abord les <b>exposants</b> : celui qui a le plus grand exposant est le plus grand. Si les exposants sont égaux, on compare les nombres a. Exemple : 2,5 × 10⁶ > 9,8 × 10⁵ car 6 > 5."] },
+  { h: "Calculatrice et notation scientifique",
+    p: ["Sur la calculatrice, la touche ×10ˣ (ou EXP, EE) permet de saisir une puissance de 10. Un affichage « 3.2E-4 » signifie 3,2 × 10⁻⁴. Pour les puissances, on utilise la touche ^ ou xʸ."],
+    warn: "−3² se calcule −(3²) = −9 sur la calculatrice. Pour (−3)², il faut taper les parenthèses." },
+  { h: "Les erreurs à éviter",
+    l: ["10³ × 10⁴ = 10¹² : faux, on additionne les exposants (10⁷).", "2³ = 6 : faux, 2³ = 8.", "45 × 10³ n’est pas en notation scientifique (a doit être entre 1 et 10).", "10⁰ = 0 : faux, 10⁰ = 1."] }
+];
+
+/* Approfondissement : SVT, physique-chimie, technologie */
+var P = BREVET_COURS_PLUS;
+var SCI = "Rappel : l’épreuve de sciences dure 1 h ; deux disciplines sur trois (physique-chimie, SVT, technologie), 30 minutes chacune. Les sujets s’appuient sur des documents : il faut extraire des informations, les mettre en relation avec tes connaissances et rédiger une réponse argumentée.";
+
+/* ---------- SVT ---------- */
+P["svt-genetique"] = [
+  { h: "Exercice type brevet : l’arbre généalogique",
+    p: ["Un arbre généalogique représente une famille sur plusieurs générations : les carrés sont les hommes, les ronds les femmes, les symboles coloriés les personnes atteintes d’un caractère (une maladie, par exemple)."],
+    ex: { q: "Deux parents non malades ont un enfant atteint d’une maladie génétique. Que peut-on en déduire sur l’allèle responsable ?", s: ["L’enfant a reçu un allèle de chaque parent.", "Les parents ne sont pas malades, mais ils portent forcément l’allèle de la maladie, qu’ils ont transmis.", "Chez eux, cet allèle ne s’exprime pas : il est masqué par l’allèle normal.", "L’allèle de la maladie est donc récessif ; l’enfant malade le possède en deux exemplaires."] } },
+  { h: "Mutations et maladies génétiques",
+    p: ["Une <b>mutation</b> est une modification de la séquence de l’ADN. Elle peut survenir spontanément lors de la copie de l’ADN, ou être favorisée par des agents mutagènes (rayons UV, tabac, radioactivité). Si elle touche les gamètes, elle peut être transmise aux enfants ; si elle touche d’autres cellules, elle ne concerne que l’individu (certains cancers).",
+        "Exemples de maladies génétiques : la mucoviscidose (allèle récessif), la drépanocytose (anomalie de l’hémoglobine)."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["ADN", "molécule qui porte l’information génétique"], ["Chromosome", "ADN condensé, visible pendant la division cellulaire"], ["Caryotype", "photographie des chromosomes rangés par paires"], ["Gène", "portion d’ADN qui détermine un caractère"], ["Allèle", "version d’un gène"], ["Mitose", "division qui donne deux cellules identiques à la cellule mère"], ["Mutation", "modification de l’ADN, source de nouveaux allèles"]] },
+    k: SCI }
+];
+P["svt-reproduction"] = [
+  { h: "Exercice type brevet : expliquer la diversité",
+    ex: { q: "Expliquer pourquoi deux frères n’ont pas exactement les mêmes caractères.", s: ["Chaque parent produit des gamètes par méiose : chaque gamète reçoit au hasard un chromosome de chaque paire.", "Les deux frères proviennent de spermatozoïdes et d’ovules différents, donc de combinaisons de chromosomes différentes.", "La fécondation associe au hasard un ovule et un spermatozoïde.", "Leurs cellules-œufs, et donc leurs allèles, sont différentes : ils ne se ressemblent pas totalement."] } },
+  { h: "Faux jumeaux et vrais jumeaux",
+    tab: { h: ["", "Vrais jumeaux (monozygotes)", "Faux jumeaux (dizygotes)"], r: [["Origine", "une seule cellule-œuf qui se sépare en deux embryons", "deux ovules fécondés par deux spermatozoïdes"], ["Information génétique", "identique", "différente, comme deux frères et sœurs"], ["Sexe", "toujours le même", "peut être différent"]] } },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Gamète", "cellule reproductrice (spermatozoïde ou ovule) à 23 chromosomes"], ["Méiose", "division qui produit les gamètes"], ["Fécondation", "fusion d’un spermatozoïde et d’un ovule"], ["Cellule-œuf", "première cellule du futur individu, à 46 chromosomes"], ["Hormone", "substance produite par une glande, transportée par le sang, qui agit sur un organe cible"], ["Nidation", "implantation de l’embryon dans l’utérus"], ["IST", "infection sexuellement transmissible"]] } }
+];
+P["svt-evolution"] = [
+  { h: "Exercice type brevet : la phalène du bouleau",
+    ex: { q: "En Angleterre, au XIXe siècle, les papillons phalènes de couleur claire étaient majoritaires. Avec la pollution industrielle, les troncs des arbres sont devenus noirs de suie, et les phalènes foncées sont devenues majoritaires. Expliquer.", s: ["Il existait déjà des phalènes claires et foncées (allèles différents, issus de mutations).", "Sur les troncs noircis, les phalènes claires sont plus visibles et davantage mangées par les oiseaux.", "Les phalènes foncées survivent mieux et se reproduisent davantage : elles transmettent leur allèle.", "C’est la sélection naturelle : le milieu a favorisé les individus les mieux camouflés. Après la diminution de la pollution, les phalènes claires sont redevenues majoritaires."] } },
+  { h: "Les preuves de l’évolution",
+    l: ["Les <b>fossiles</b> montrent des espèces disparues et des formes intermédiaires (comme Archaeopteryx, entre dinosaures et oiseaux).", "Les <b>ressemblances anatomiques</b> : le membre antérieur du chat, de la baleine, de la chauve-souris et de l’humain a la même organisation osseuse, héritée d’un ancêtre commun.", "Les <b>ressemblances génétiques</b> : l’humain et le chimpanzé partagent environ 98 % de leur ADN.", "L’évolution observée aujourd’hui : résistance des bactéries aux antibiotiques, des insectes aux insecticides."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Biodiversité", "diversité du vivant : écosystèmes, espèces, gènes"], ["Espèce", "ensemble d’individus qui peuvent se reproduire entre eux avec une descendance fertile"], ["Ancêtre commun", "espèce dont descendent plusieurs espèces actuelles"], ["Sélection naturelle", "survie et reproduction préférentielles des individus les mieux adaptés"], ["Crise biologique", "disparition massive d’espèces en peu de temps"], ["Fossile", "reste ou trace d’un être vivant conservé dans les roches"]] } }
+];
+P["svt-immunite"] = [
+  { h: "Exercice type brevet : la courbe des anticorps",
+    ex: { q: "Un graphique montre la quantité d’anticorps dans le sang après un premier contact avec un microbe, puis après un second contact deux mois plus tard. Que montre-t-il ?", s: ["Premier contact : les anticorps apparaissent lentement (environ 1 à 2 semaines) et en quantité modérée.", "Second contact : les anticorps apparaissent très vite et en quantité beaucoup plus grande.", "Explication : lors du premier contact, l’organisme a fabriqué des lymphocytes mémoire.", "C’est le principe de la vaccination : le vaccin joue le rôle du premier contact, sans la maladie."] } },
+  { h: "Allergies et greffes",
+    p: ["Une <b>allergie</b> est une réaction excessive du système immunitaire contre une substance habituellement inoffensive (pollen, acariens, arachide) : éternuements, démangeaisons, parfois choc grave nécessitant une injection d’adrénaline.",
+        "Lors d’une <b>greffe</b>, le système immunitaire du receveur peut reconnaître l’organe comme étranger et le détruire (rejet). On cherche un donneur compatible et on donne des médicaments qui diminuent l’immunité."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Pathogène", "qui provoque une maladie"], ["Antigène", "molécule reconnue comme étrangère par le système immunitaire"], ["Anticorps", "molécule produite par les lymphocytes B, qui neutralise un antigène précis"], ["Phagocytose", "ingestion et digestion d’un microbe par un phagocyte"], ["Séropositif", "personne qui possède des anticorps contre un microbe (par exemple le VIH)"], ["Immunité collective", "protection d’une population quand une grande partie est vaccinée"]] } }
+];
+P["svt-nerveux"] = [
+  { h: "Exercice type brevet : le temps de réaction",
+    ex: { q: "Un test mesure le temps de réaction pour rattraper une règle lâchée. Après consommation d’alcool, la règle est rattrapée plus bas. Interpréter.", s: ["Plus la règle descend avant d’être rattrapée, plus le temps de réaction est long.", "L’alcool allonge le temps de réaction.", "Il ralentit la transmission des messages nerveux, notamment au niveau des synapses.", "Conséquence : danger au volant, d’où l’interdiction de conduire avec un taux d’alcool supérieur à la limite légale."] } },
+  { h: "Les organes des sens",
+    tab: { h: ["Organe", "Récepteurs", "Stimulus"], r: [["Œil", "cellules de la rétine", "lumière"], ["Oreille", "cellules ciliées de l’oreille interne", "son (vibration)"], ["Peau", "récepteurs du toucher, de la chaleur, de la douleur", "contact, température"], ["Langue", "bourgeons du goût", "substances chimiques dissoutes"], ["Nez", "cellules olfactives", "molécules odorantes"]] } },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Stimulus", "modification de l’environnement captée par un récepteur"], ["Récepteur sensoriel", "cellule ou organe qui capte un stimulus"], ["Neurone", "cellule nerveuse qui transmet le message nerveux"], ["Synapse", "zone de communication entre deux neurones"], ["Neurotransmetteur", "molécule chimique libérée dans la synapse"], ["Effecteur", "organe qui réalise la réponse (muscle)"], ["Réflexe", "réponse rapide et involontaire"]] } }
+];
+P["svt-terre"] = [
+  { h: "Exercice type brevet : la carte des séismes",
+    ex: { q: "On compare une carte mondiale des séismes et des volcans avec une carte des plaques lithosphériques. Que constate-t-on ?", s: ["Les séismes et les volcans ne sont pas répartis au hasard : ils forment des bandes étroites.", "Ces bandes correspondent aux frontières entre les plaques.", "Explication : c’est là que les plaques s’écartent, plongent ou se heurtent, ce qui provoque des ruptures de roches et des remontées de magma.", "Exemple : la « ceinture de feu » du Pacifique, une zone de subduction."] } },
+  { h: "Les tsunamis",
+    p: ["Un <b>tsunami</b> est une série de vagues géantes provoquée par un séisme sous-marin (ou une éruption, un glissement de terrain) qui soulève brutalement le fond de l’océan. Au large, la vague est peu visible mais très rapide (jusqu’à 800 km/h) ; près des côtes, elle ralentit et monte en hauteur. Exemples : Sumatra 2004, Japon 2011. Des systèmes d’alerte permettent d’évacuer les côtes."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Lithosphère", "enveloppe rigide formée de la croûte et du manteau supérieur"], ["Plaque lithosphérique", "morceau de lithosphère qui se déplace"], ["Dorsale", "chaîne de montagnes sous-marine où les plaques s’écartent"], ["Subduction", "plongée d’une plaque océanique sous une autre"], ["Foyer / épicentre", "point de rupture en profondeur / point en surface au-dessus"], ["Magma", "roche fondue qui donne la lave en surface"], ["Aléa", "phénomène naturel et sa probabilité"]] } }
+];
+P["svt-climat"] = [
+  { h: "Exercice type brevet : la courbe du CO₂",
+    ex: { q: "Un graphique montre la concentration de CO₂ dans l’atmosphère depuis 1850 et la température moyenne mondiale. Que peut-on dire ?", s: ["La concentration de CO₂ augmente fortement, surtout depuis 1950.", "La température moyenne augmente aussi sur la même période.", "Lien : le CO₂ est un gaz à effet de serre ; son augmentation, due aux activités humaines, renforce l’effet de serre.", "Les scientifiques du GIEC concluent que les activités humaines sont la cause principale du réchauffement actuel."] } },
+  { h: "Le cycle du carbone",
+    p: ["Le carbone circule entre plusieurs réservoirs : l’atmosphère (CO₂), les êtres vivants, les océans, les sols et les roches (dont les combustibles fossiles). Les végétaux absorbent du CO₂ par la <b>photosynthèse</b> ; les êtres vivants en rejettent par la respiration. Les océans en absorbent une partie, ce qui les acidifie.",
+        "En brûlant les combustibles fossiles, l’humanité libère en quelques décennies du carbone stocké pendant des millions d’années : l’équilibre est rompu."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Climat", "moyenne des conditions météorologiques sur au moins 30 ans"], ["Gaz à effet de serre", "gaz qui retient la chaleur émise par la Terre (CO₂, CH₄, vapeur d’eau)"], ["Énergie fossile", "pétrole, charbon, gaz, formés à partir d’êtres vivants il y a des millions d’années"], ["Écosystème", "milieu de vie et êtres vivants qui y interagissent"], ["Atténuation / adaptation", "réduire les causes / s’adapter aux effets du changement climatique"]] } }
+];
+P["svt-nutrition"] = [
+  { h: "Exercice type brevet : l’effort physique",
+    ex: { q: "Un tableau montre qu’au repos, la fréquence cardiaque est de 70 battements par minute et le débit d’air de 6 L/min ; pendant un effort, ils passent à 150 battements/min et 60 L/min. Expliquer.", s: ["Pendant l’effort, les muscles travaillent davantage et ont besoin de plus d’énergie.", "Ils consomment plus de dioxygène et de glucose, et rejettent plus de CO₂.", "Le cœur bat plus vite pour accélérer la circulation du sang qui les apporte.", "La respiration s’accélère pour faire entrer plus de dioxygène et rejeter plus de dioxyde de carbone."] } },
+  { h: "Le rôle des enzymes, mis en évidence par l’expérience",
+    p: ["Expérience classique : on place de l’empois d’amidon dans deux tubes à 37 °C, l’un avec de la salive, l’autre avec de l’eau. Après quelques minutes, le test à l’<b>eau iodée</b> (qui devient bleu-noir en présence d’amidon) est négatif dans le tube avec salive, et le test à la <b>liqueur de Fehling</b> (qui forme un précipité rouge brique à chaud en présence de sucres comme le glucose) est positif. Conclusion : une enzyme de la salive, l’amylase, transforme l’amidon en sucre."],
+    warn: "Le tube témoin (avec de l’eau) est indispensable : il prouve que c’est bien la salive qui agit." },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Nutriment", "petite molécule issue de la digestion, qui passe dans le sang"], ["Enzyme", "molécule qui accélère la digestion d’un aliment précis"], ["Absorption", "passage des nutriments de l’intestin vers le sang"], ["Respiration cellulaire", "production d’énergie dans les cellules à partir de glucose et de dioxygène"], ["Microbiote", "ensemble des micro-organismes qui vivent dans l’intestin"]] } }
+];
+
+/* ---------- Physique-chimie ---------- */
+P["pc-matiere"] = [
+  { h: "Exercice type brevet : la courbe de changement d’état",
+    ex: { q: "On chauffe de la glace à −10 °C. La température monte jusqu’à 0 °C, reste à 0 °C pendant 5 minutes, puis monte à nouveau. Interpréter.", s: ["De −10 °C à 0 °C : la glace se réchauffe, elle reste solide.", "Palier à 0 °C : la glace fond ; la température reste constante tant qu’il reste du solide.", "Après le palier : l’eau est entièrement liquide et se réchauffe.", "Le palier montre que l’eau est un corps pur (un mélange n’aurait pas de palier net)."] } },
+  { h: "Calculer une masse ou un volume",
+    p: ["À partir de ρ = m / V, on obtient m = ρ × V et V = m / ρ. Il faut être très attentif aux unités : si ρ est en g/cm³, V doit être en cm³ et m en g."],
+    ex: { q: "Quelle est la masse de 2 L d’huile de masse volumique 0,92 g/cm³ ?", s: ["2 L = 2 000 cm³.", "m = ρ × V = 0,92 × 2 000 = 1 840 g.", "La masse est 1,84 kg."] } },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Corps pur", "substance formée d’une seule espèce chimique"], ["Mélange homogène / hétérogène", "constituants indiscernables / visibles"], ["Masse volumique", "masse d’un volume unité de substance : ρ = m / V"], ["Atome", "particule constituée d’un noyau (protons, neutrons) et d’électrons"], ["Molécule", "assemblage d’atomes"], ["Ion", "atome ou groupe d’atomes ayant perdu ou gagné des électrons"]] },
+    k: SCI }
+];
+P["pc-univers"] = [
+  { h: "Exercice type brevet : les distances dans le système solaire",
+    ex: { q: "Mars est en moyenne à 228 millions de km du Soleil. Combien de temps met la lumière du Soleil pour l’atteindre ? (vitesse de la lumière : 300 000 km/s)", s: ["t = d / v = 228 000 000 ÷ 300 000.", "t = 760 s.", "760 s = 12 min 40 s."] } },
+  { h: "Le mouvement des astres",
+    l: ["La <b>Terre</b> tourne sur elle-même en environ 24 h (alternance jour/nuit) et autour du Soleil en environ 365,25 jours (une année). L’inclinaison de son axe explique les saisons.", "La <b>Lune</b> tourne autour de la Terre en environ 27 jours et montre toujours la même face. Ses phases (nouvelle lune, premier quartier, pleine lune, dernier quartier) dépendent de la position relative du Soleil, de la Terre et de la Lune.", "Une <b>éclipse de Soleil</b> se produit quand la Lune passe entre le Soleil et la Terre ; une <b>éclipse de Lune</b> quand la Terre passe entre le Soleil et la Lune."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Étoile", "astre qui produit sa propre lumière"], ["Planète", "astre qui tourne autour d’une étoile et ne produit pas de lumière"], ["Satellite", "astre qui tourne autour d’une planète"], ["Galaxie", "ensemble de milliards d’étoiles"], ["Année-lumière", "distance parcourue par la lumière en un an"], ["Big Bang", "état très chaud et dense à l’origine de l’Univers, il y a 13,8 milliards d’années"]] } }
+];
+P["pc-transformations"] = [
+  { h: "Exercice type brevet : la combustion du butane",
+    ex: { q: "Le butane C₄H₁₀ brûle dans le dioxygène et produit du dioxyde de carbone et de l’eau. Quels tests permettent d’identifier les produits ? Pourquoi faut-il aérer une pièce où fonctionne un chauffage au gaz ?", s: ["Le CO₂ trouble l’eau de chaux ; l’eau colore en bleu le sulfate de cuivre anhydre.", "Une combustion consomme du dioxygène et produit du CO₂.", "Si le dioxygène manque, la combustion est incomplète et produit du monoxyde de carbone (CO), un gaz toxique, incolore et inodore.", "Aérer et faire entretenir les appareils évite les intoxications."] } },
+  { h: "Les combustions",
+    p: ["Une <b>combustion</b> est une transformation chimique qui nécessite trois éléments (le <b>triangle du feu</b>) : un combustible (bois, gaz, essence), un comburant (le dioxygène de l’air) et une source de chaleur. Supprimer l’un des trois éteint le feu : c’est le principe des extincteurs (étouffer pour priver de dioxygène, refroidir avec de l’eau)."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Réactif", "espèce chimique consommée lors d’une transformation"], ["Produit", "espèce chimique formée"], ["Équation de réaction", "écriture symbolique d’une transformation, ajustée"], ["Acide / basique", "pH inférieur / supérieur à 7"], ["Dilution", "ajout d’eau qui rapproche le pH de 7"], ["Précipité", "solide qui apparaît dans une solution"]] } }
+];
+P["pc-mouvement"] = [
+  { h: "Exercice type brevet : la course",
+    ex: { q: "Un coureur parcourt un 10 km en 50 minutes. Quelle est sa vitesse moyenne en km/h ? En m/s ?", s: ["50 min = 50/60 h ≈ 0,833 h.", "v = 10 ÷ (50/60) = 10 × 60 ÷ 50 = 12 km/h.", "En m/s : 12 ÷ 3,6 ≈ 3,3 m/s.", "Autre méthode : 10 000 m ÷ 3 000 s ≈ 3,3 m/s."] } },
+  { h: "Lire un graphique distance-temps",
+    p: ["Sur un graphique représentant la distance parcourue en fonction du temps : une droite qui passe par l’origine traduit un mouvement <b>uniforme</b> (la distance est proportionnelle au temps) ; plus la droite est inclinée, plus la vitesse est grande ; un palier horizontal signifie que l’objet est à l’arrêt ; une courbe qui se redresse traduit un mouvement accéléré."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Référentiel", "objet par rapport auquel on étudie le mouvement"], ["Trajectoire", "ensemble des positions successives d’un point"], ["Vitesse moyenne", "distance parcourue ÷ durée"], ["Mouvement uniforme", "vitesse constante"], ["Chronophotographie", "positions successives enregistrées à intervalles de temps égaux"]] } }
+];
+P["pc-forces"] = [
+  { h: "Exercice type brevet : le parachutiste",
+    ex: { q: "Un parachutiste descend à vitesse constante en ligne droite. Que peut-on dire des forces qui s’exercent sur lui ?", s: ["Deux forces : son poids (vertical, vers le bas) et l’action de l’air sur le parachute (verticale, vers le haut).", "Son mouvement est rectiligne uniforme.", "D’après le principe d’inertie, les forces se compensent.", "L’action de l’air a donc la même valeur que le poids."] } },
+  { h: "Représenter une force à l’échelle",
+    p: ["Méthode : 1. placer le point d’application ; 2. tracer la direction ; 3. orienter la flèche dans le bon sens ; 4. calculer la longueur avec l’échelle. Exemple : poids de 490 N avec l’échelle 1 cm pour 100 N → flèche verticale vers le bas de 4,9 cm, partant du centre de l’objet."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Interaction", "action réciproque entre deux objets"], ["Force", "modélisation d’une action mécanique (en N)"], ["Poids", "force d’attraction exercée par un astre : P = m × g"], ["Gravitation", "attraction entre deux objets ayant une masse"], ["Dynamomètre", "instrument de mesure des forces"]] } }
+];
+P["pc-energie"] = [
+  { h: "Exercice type brevet : la facture d’électricité",
+    ex: { q: "Une famille utilise un lave-linge de 2 000 W pendant 1 h 30, 3 fois par semaine. Énergie consommée en un an (52 semaines) ? Coût avec un kWh à 0,25 € ?", s: ["Par lavage : E = 2 kW × 1,5 h = 3 kWh.", "Par semaine : 3 × 3 = 9 kWh.", "Par an : 9 × 52 = 468 kWh.", "Coût : 468 × 0,25 = 117 €."] } },
+  { h: "Les centrales électriques",
+    p: ["Presque toutes les centrales fonctionnent sur le même principe : faire tourner une <b>turbine</b> reliée à un <b>alternateur</b>, qui convertit l’énergie mécanique en énergie électrique. Ce qui change, c’est ce qui fait tourner la turbine : l’eau (centrale hydraulique), le vent (éolienne), la vapeur d’eau chauffée par la combustion de charbon ou de gaz (centrale thermique) ou par la fission de l’uranium (centrale nucléaire). Les panneaux photovoltaïques font exception : ils convertissent directement la lumière en électricité.",
+        "En France, la majorité de l’électricité est produite par les centrales nucléaires, suivies de l’hydraulique et des autres renouvelables."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Énergie", "grandeur qui se conserve et se convertit, en joules (J)"], ["Puissance", "énergie convertie par seconde, en watts (W)"], ["Convertisseur", "appareil qui transforme une forme d’énergie en une autre"], ["Rendement", "énergie utile ÷ énergie reçue"], ["Énergie renouvelable", "source qui se renouvelle rapidement à l’échelle humaine"]] } }
+];
+P["pc-electricite"] = [
+  { h: "Exercice type brevet : la caractéristique d’une résistance",
+    ex: { q: "On mesure : I = 0,02 A → U = 2 V ; I = 0,05 A → U = 5 V ; I = 0,08 A → U = 8 V. Que vaut la résistance ?", s: ["Les quotients U ÷ I sont égaux : 2 ÷ 0,02 = 5 ÷ 0,05 = 8 ÷ 0,08 = 100.", "U est proportionnelle à I : c’est la loi d’Ohm.", "R = 100 Ω."] } },
+  { h: "La multiprise : pourquoi c’est dangereux",
+    p: ["Les appareils branchés sur une multiprise sont en dérivation : les intensités s’additionnent. Si l’on branche un radiateur (2 000 W, environ 8,7 A), un four (2 500 W, environ 10,9 A) et une bouilloire (2 000 W, environ 8,7 A), l’intensité totale dépasse 28 A, alors qu’une multiprise supporte souvent 16 A au maximum. Les fils chauffent : risque d’incendie. Le disjoncteur doit couper le courant."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Intensité", "débit du courant, en ampères (A), mesurée avec un ampèremètre en série"], ["Tension", "en volts (V), mesurée avec un voltmètre en dérivation"], ["Résistance", "opposition au passage du courant, en ohms (Ω)"], ["Court-circuit", "liaison directe entre les bornes d’un générateur ou d’un dipôle"], ["Puissance électrique", "P = U × I, en watts"]] } }
+];
+P["pc-signaux"] = [
+  { h: "Exercice type brevet : l’échographie",
+    ex: { q: "Une sonde d’échographie émet des ultrasons dans le corps (vitesse environ 1 500 m/s). L’écho revient au bout de 0,0001 s. À quelle profondeur se trouve l’organe ?", s: ["Le signal fait un aller-retour : il parcourt deux fois la profondeur.", "Distance totale : d = v × t = 1 500 × 0,0001 = 0,15 m.", "Profondeur : 0,15 ÷ 2 = 0,075 m = 7,5 cm."] } },
+  { h: "Les signaux pour communiquer",
+    p: ["Un signal transporte une information : sonore (sirène, voix), lumineux (feu tricolore, fibre optique), électrique (câble), ou sous forme d’ondes électromagnétiques (radio, téléphone, Wi-Fi, GPS). Un signal peut être <b>analogique</b> (variation continue) ou <b>numérique</b> (suite de 0 et de 1). La <b>fibre optique</b> transporte la lumière par réflexions successives dans un fil de verre très fin, sur de très longues distances."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Fréquence", "nombre de vibrations par seconde, en hertz (Hz)"], ["Période", "durée d’une vibration : f = 1 / T"], ["Ultrason / infrason", "son de fréquence supérieure à 20 000 Hz / inférieure à 20 Hz"], ["Décibel", "unité du niveau d’intensité sonore"], ["Année-lumière", "distance parcourue par la lumière en un an"]] } }
+];
+
+/* ---------- Technologie ---------- */
+P["te-besoin"] = [
+  { h: "Exercice type brevet : vérifier un cahier des charges",
+    ex: { q: "Le cahier des charges d’une lampe de vélo impose une autonomie d’au moins 3 h. Un test donne 2 h 40. Que conclure et que proposer ?", s: ["2 h 40 < 3 h : le critère d’autonomie n’est pas respecté.", "La lampe n’est pas conforme au cahier des charges.", "Solutions possibles : batterie de plus grande capacité, DEL plus économe, mode d’éclairage réduit."] } },
+  { h: "Le diagramme des interacteurs (pieuvre)",
+    p: ["Ce diagramme place l’objet au centre et, autour, les éléments de son environnement (utilisateur, énergie, environnement, normes…). Les traits qui relient deux éléments en passant par l’objet sont les <b>fonctions principales</b> ; ceux qui relient l’objet à un seul élément sont les <b>fonctions contraintes</b>. Exemple pour une trottinette électrique : « permettre à l’utilisateur de se déplacer sur la route » (principale), « respecter les normes de sécurité » (contrainte)."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Besoin", "manque ou désir que l’objet doit satisfaire"], ["Fonction d’usage", "service rendu par l’objet"], ["Cahier des charges", "document qui précise les fonctions, critères et niveaux"], ["Critère / niveau", "ce qu’on mesure / la valeur à atteindre"], ["Prototype", "premier exemplaire pour tester"]] },
+    k: SCI }
+];
+P["te-chaines"] = [
+  { h: "Exercice type brevet : la serre automatique",
+    ex: { q: "Une serre ouvre sa fenêtre quand la température dépasse 28 °C et arrose quand le sol est trop sec. Identifier les éléments des deux chaînes.", s: ["Acquérir : capteur de température, capteur d’humidité du sol.", "Traiter : carte programmable qui compare les mesures aux seuils.", "Communiquer : ordres envoyés au moteur et à la pompe, affichage sur écran.", "Alimenter : batterie rechargée par un panneau solaire. Distribuer : relais. Convertir : moteur (ouverture), pompe (arrosage). Transmettre : système vis-écrou ou bras pour ouvrir la fenêtre."] } },
+  { h: "Les échanges d’information",
+    p: ["Les composants d’un système communiquent par des fils (signal électrique) ou sans fil (ondes radio, infrarouge, Bluetooth, Wi-Fi). Une information <b>numérique</b> est codée en <b>binaire</b> (0 et 1). L’unité est le <b>bit</b> ; 8 bits forment un <b>octet</b>. 1 Ko ≈ 1 000 octets, 1 Mo ≈ 1 million, 1 Go ≈ 1 milliard."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Système automatisé", "système qui fonctionne sans intervention humaine permanente"], ["Capteur", "composant qui acquiert une information"], ["Microcontrôleur", "circuit programmable qui traite l’information"], ["Actionneur", "composant qui convertit l’énergie pour agir (moteur, vérin)"], ["Préactionneur", "composant qui distribue l’énergie à l’actionneur (relais)"]] } }
+];
+P["te-programmation"] = [
+  { h: "Exercice type brevet : le jeu de quiz",
+    code: "quand le drapeau vert est cliqué\nmettre score à 0\nrépéter 3 fois\n    demander « Combien font 6 × 7 ? » et attendre\n    si réponse = 42 alors\n        ajouter 1 à score\n        dire « Bravo ! » pendant 1 seconde\n    sinon\n        dire « Raté » pendant 1 seconde\n    fin si\nfin répéter\ndire score",
+    ex: { q: "Un joueur répond 42, puis 41, puis 42. Qu’affiche le lutin à la fin ?", s: ["Le score part de 0.", "1re réponse juste : score = 1. 2e réponse fausse : score reste 1. 3e réponse juste : score = 2.", "Le lutin dit « 2 »."] } },
+  { h: "Nombres aléatoires et simulation",
+    p: ["Le bloc « nombre aléatoire entre 1 et 6 » simule un dé. En répétant l’expérience un grand nombre de fois (par exemple 1 000 lancers) et en comptant les résultats dans des variables, on observe que les fréquences se rapprochent des probabilités (1/6 pour chaque face) : c’est un lien direct avec le cours de probabilités."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Algorithme", "suite d’instructions pour résoudre un problème"], ["Programme", "algorithme écrit dans un langage informatique"], ["Boucle", "structure qui répète des instructions"], ["Condition", "test qui oriente vers une action ou une autre"], ["Variable", "espace mémoire nommé contenant une valeur modifiable"], ["Bogue (bug)", "erreur dans un programme"]] } }
+];
+P["te-materiaux"] = [
+  { h: "Exercice type brevet : choisir un matériau",
+    ex: { q: "On veut fabriquer le boîtier d’une enceinte portable qui doit être léger, résistant aux chocs, étanche et recyclable. Entre le verre, l’acier et un plastique ABS recyclé, lequel choisir ?", s: ["Verre : étanche mais fragile et lourd → non.", "Acier : résistant mais lourd et peut rouiller → peu adapté.", "ABS recyclé : léger, résistant aux chocs, facile à mouler et étanche, recyclable → c’est le meilleur compromis.", "On justifie toujours le choix avec les critères du cahier des charges."] } },
+  { h: "Les procédés de fabrication",
+    l: ["<b>Moulage / injection</b> : on injecte un plastique fondu dans un moule (pièces en grande série).", "<b>Usinage</b> : on enlève de la matière (perçage, fraisage, découpe).", "<b>Impression 3D</b> : on dépose de la matière couche par couche (prototypes, petites séries).", "<b>Découpe laser</b> : découpe précise de plaques (bois, plexiglas).", "<b>Pliage, thermoformage</b> : déformer une plaque, souvent après l’avoir chauffée."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Matière première", "ressource naturelle avant transformation"], ["Cycle de vie", "étapes d’un produit, de l’extraction à la fin de vie"], ["Recyclage", "réutiliser la matière d’un produit usagé"], ["Éco-conception", "concevoir en limitant l’impact environnemental"], ["Obsolescence", "fait qu’un produit devient inutilisable ou dépassé"]] } }
+];
+P["te-reseaux"] = [
+  { h: "Exercice type brevet : le réseau du collège",
+    ex: { q: "Dans la salle informatique, 15 ordinateurs et une imprimante sont reliés à un commutateur, lui-même relié au routeur du collège. Quel est le rôle de chaque élément ?", s: ["Commutateur : relie les ordinateurs et l’imprimante entre eux (réseau local).", "Routeur : relie le réseau local du collège aux autres réseaux et à Internet.", "Chaque appareil a sa propre adresse IP dans le réseau local.", "Le serveur du collège peut stocker les fichiers des élèves (modèle client-serveur)."] } },
+  { h: "Comment circulent les données",
+    p: ["Un message (par exemple une photo envoyée) est découpé en <b>paquets</b>. Chaque paquet contient une partie des données, l’adresse IP de l’expéditeur et celle du destinataire, et un numéro d’ordre. Les routeurs dirigent chaque paquet vers sa destination par le meilleur chemin disponible. À l’arrivée, les paquets sont remis dans l’ordre ; si l’un manque, il est redemandé."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Réseau", "ensemble d’appareils reliés pour échanger des données"], ["Adresse IP", "identifiant d’un appareil sur un réseau"], ["DNS", "service qui associe un nom de domaine à une adresse IP"], ["Protocole", "règles de communication (TCP/IP, HTTP)"], ["Serveur / client", "fournit / demande un service"]] } }
+];
+P["te-innovation"] = [
+  { h: "Exercice type brevet : comparer deux objets",
+    ex: { q: "Comparer un téléphone fixe à cadran des années 1970 et un smartphone actuel.", s: ["Même fonction d’usage : communiquer à distance.", "Énergie : réseau téléphonique pour le fixe ; batterie lithium-ion rechargeable pour le smartphone.", "Matériaux : bakélite et métal ; verre, aluminium, plastiques, métaux rares.", "Solutions techniques : cadran mécanique et fil ; écran tactile, ondes radio, processeur.", "Nouvelles fonctions : photo, Internet, GPS… mais impact environnemental plus fort à la fabrication."] } },
+  { h: "Les brevets et la propriété industrielle",
+    p: ["Un <b>brevet</b> protège une invention pendant 20 ans : personne ne peut la copier sans l’accord de l’inventeur, qui en échange rend son invention publique. En France, les brevets sont déposés à l’INPI (Institut national de la propriété industrielle). Le design d’un objet et le nom d’une marque peuvent aussi être protégés."] },
+  { h: "Vocabulaire à maîtriser",
+    tab: { h: ["Mot", "Définition"], r: [["Invention", "création d’une idée ou d’un objet nouveau"], ["Innovation", "invention mise sur le marché et adoptée"], ["Lignée", "objets qui répondent au même besoin à des époques différentes"], ["Brevet", "titre qui protège une invention pendant 20 ans"], ["Rupture technologique", "innovation qui change profondément les usages"]] } }
+];
+
 /* Cours complets : SVT */
 BREVET_COURS["svt-genetique"] = {
   cours: [
@@ -4113,6 +4656,7 @@ var SUBJECTS = [
 var EXAM = new Date(2027, 5, 24, 8, 0, 0); // jeudi 24 juin 2027, 8 h : épreuve de français (BO spécial du 25 août 2026)
 var EX = window.BREVET_EXTRA || {};
 var CO = window.BREVET_COURS || {};
+var CP = window.BREVET_COURS_PLUS || {};
 
 /* ---------- stockage local (facultatif) ---------- */
 var store = {
@@ -4130,7 +4674,8 @@ var S = {}; SUBJECTS.forEach(function (s) { S[s.id] = s; });
 var CH = [], CHI = {};
 SUBJECTS.forEach(function (s) {
   (B[s.id] || []).forEach(function (c, i) { c.sub = s.id; c.n = i + 1; if (EX[c.id]) c.quiz = c.quiz.concat(EX[c.id]);
-    var co = CO[c.id]; if (co) { if (co.cours) c.cours = co.cours; if (co.resume) c.resume = co.resume; if (co.schema) c.schema = c.schema.concat(co.schema); } CH.push(c); CHI[c.id] = c; });
+    var co = CO[c.id]; if (co) { if (co.cours) c.cours = co.cours; if (co.resume) c.resume = co.resume; if (co.schema) c.schema = c.schema.concat(co.schema); }
+    if (CP[c.id]) c.cours = c.cours.concat(CP[c.id]); CH.push(c); CHI[c.id] = c; });
 });
 function cardsOf(c) { return c.cards.map(function (x, i) { return { id: c.id + "/" + i, q: x[0], a: x[1], sub: c.sub, chap: c.title }; }); }
 function quizOf(c) { return c.quiz.map(function (x, i) { return { id: c.id + "/" + i, q: x[0], opts: x[1], ex: x[2], sub: c.sub, chap: c.title }; }); }
