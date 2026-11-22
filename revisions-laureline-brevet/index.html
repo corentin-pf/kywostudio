@@ -33,11 +33,12 @@ img{max-width:100%}
   --font:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --sub:var(--fg);
+  --link:#1558d6;
 }
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){ --bg:#000000; --fg:#f5f5f7; --mute:#9b9ba3; --soft:#1a1a1d; --hair:#2c2c31; --raise:#141416; --shadow:0 1px 2px rgba(0,0,0,.5); color-scheme:dark }
+  :root:not([data-theme="light"]){ --link:#6ea8ff; --bg:#000000; --fg:#f5f5f7; --mute:#9b9ba3; --soft:#1a1a1d; --hair:#2c2c31; --raise:#141416; --shadow:0 1px 2px rgba(0,0,0,.5); color-scheme:dark }
 }
-:root[data-theme="dark"]{ --bg:#000000; --fg:#f5f5f7; --mute:#9b9ba3; --soft:#1a1a1d; --hair:#2c2c31; --raise:#141416; --shadow:0 1px 2px rgba(0,0,0,.5); color-scheme:dark }
+:root[data-theme="dark"]{ --link:#6ea8ff; --bg:#000000; --fg:#f5f5f7; --mute:#9b9ba3; --soft:#1a1a1d; --hair:#2c2c31; --raise:#141416; --shadow:0 1px 2px rgba(0,0,0,.5); color-scheme:dark }
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -511,6 +512,37 @@ footer{margin-top:56px;border-top:var(--bw) solid var(--fg)}
 .chaps-pick .chip b{font-variant-numeric:tabular-nums;color:var(--sub)}
 .chaps-pick .chip.on b{color:var(--on)}
 @media (max-width:760px){ .page-h .lead{display:none} .page-h h1{font-size:2.4rem;margin:8px 0 4px} .chips-l{margin-top:12px} }
+
+/* ---------- Mots illustrés et pop-up ---------- */
+.wk{color:var(--link);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:pointer;border-radius:4px}
+.wk:hover{background:color-mix(in srgb, var(--link) 12%, transparent)}
+.fc-back .wk{color:var(--on);text-decoration-color:var(--on)}
+.wk-open{overflow:hidden}
+.wk-sheet{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center}
+.wk-back{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.wk-card{position:relative;width:min(460px, calc(100% - 32px));max-height:86vh;overflow:auto;background:var(--bg);color:var(--fg);border-radius:var(--r-lg);padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.wk-x{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:var(--soft);font-size:16px;font-weight:800;cursor:pointer;z-index:2}
+.wk-body{display:flex;flex-direction:column;gap:10px}
+.wk-body h3{font-size:22px;font-weight:800;padding-right:40px}
+.wk-img{border-radius:var(--r);overflow:hidden;background:var(--soft);display:flex;justify-content:center}
+.wk-img img{display:block;max-width:100%;max-height:46vh;object-fit:contain}
+.wk-ph{height:220px;animation:wkpulse 1.2s ease-in-out infinite}
+@keyframes wkpulse{50%{opacity:.5}}
+.wk-d{font-size:14px;font-weight:700;color:var(--mute)}
+.wk-e{font-size:16px;line-height:1.5}
+.wk-body .btn{align-self:flex-start;margin-top:4px}
+.wk-c{font-size:12px;color:var(--mute)}
+.ccover{position:relative;display:block;height:190px;margin:4px 0 16px;border-radius:var(--r-lg);overflow:hidden;background:var(--soft);cursor:pointer;color:inherit;text-decoration:none}
+.ccover:hover{background:var(--soft)}
+.ccover img{width:100%;height:100%;object-fit:cover;display:block}
+.ccover-c{position:absolute;left:12px;bottom:12px;max-width:calc(100% - 24px);background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:700;padding:6px 10px;border-radius:999px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wk-hint{display:block;font-size:13px;color:var(--mute);margin:0 0 14px}
+.wk-hint i{font-style:normal;color:var(--link);text-decoration:underline;text-underline-offset:3px;font-weight:700}
+@media (max-width:760px){
+  .wk-sheet{align-items:flex-end}
+  .wk-card{width:100%;max-height:88vh;border-radius:var(--r-lg) var(--r-lg) 0 0;padding:18px max(16px, env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-left,0px))}
+  .ccover{height:150px;border-radius:var(--r)}
+}
 </style>
 </head>
 <body>
@@ -535,7 +567,7 @@ footer{margin-top:56px;border-top:var(--bw) solid var(--fg)}
 </nav>
 <footer><div class="wrap foot"><span>Objectif Brevet · Programme de 3<sup>e</sup>, cycle 4</span><span>Ta progression est enregistrée sur cet appareil uniquement.</span></div></footer>
 <script>
-window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {}; var BREVET_COURS_PLUS = {}; var BREVET_MORE = {};
+window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {}; var BREVET_COURS_PLUS = {}; var BREVET_MORE = {}; var BREVET_WIKI = {}; var BREVET_COVERS = {};
 BREVET.fr = [
 {
   id: "fr-phrase", tag: "Grammaire", title: "La phrase complexe",
@@ -2734,6 +2766,80 @@ BREVET_EXTRA = {
   ["Le passage de l’ampoule à incandescence à la LED répond surtout à…", ["un besoin d’économie d’énergie", "un besoin de chaleur", "une mode", "une baisse de luminosité"], "La LED consomme beaucoup moins pour la même lumière."],
   ["Une invention devient une innovation lorsqu’elle…", ["est adoptée par les utilisateurs", "est brevetée", "est imaginée", "est dessinée"], "Elle doit être commercialisée et diffusée."]
 ]
+};
+
+/* Mots illustrés : motif (expression régulière) → titre de l’article Wikipédia en français.
+   Un motif qui commence par une minuscule accepte aussi la majuscule. */
+BREVET_WIKI = {
+  /* Auteurs */
+  "Victor Hugo": "Victor Hugo", "Voltaire": "Voltaire", "(?:Jean-Jacques )?Rousseau": "Jean-Jacques Rousseau", "(?:Jean de )?La Fontaine": "Jean de La Fontaine",
+  "(?:Charles )?Baudelaire": "Charles Baudelaire", "(?:Arthur )?Rimbaud": "Arthur Rimbaud", "(?:Guillaume )?Apollinaire": "Guillaume Apollinaire", "(?:Paul )?Éluard": "Paul Éluard",
+  "Primo Levi": "Primo Levi", "(?:Jean )?Anouilh": "Jean Anouilh", "Jules Verne": "Jules Verne", "Mary Shelley": "Mary Shelley", "(?:Ray )?Bradbury": "Ray Bradbury",
+  "(?:Aldous )?Huxley": "Aldous Huxley", "(?:Nathalie )?Sarraute": "Nathalie Sarraute", "(?:Georges )?Perec": "Georges Perec", "(?:Jean-Paul )?Sartre": "Jean-Paul Sartre",
+  "(?:Francis )?Ponge": "Francis Ponge", "(?:Jacques )?Prévert": "Jacques Prévert", "(?:Henri )?Barbusse": "Henri Barbusse", "(?:Joseph )?Kessel": "Joseph Kessel",
+  "(?:Pierre )?Corneille": "Pierre Corneille", "Racine": "Jean Racine", "(?:Paul )?Verlaine": "Paul Verlaine", "Louise Labé": "Louise Labé",
+  /* Œuvres */
+  "Candide": "Candide", "Les Misérables": "Les Misérables", "Fahrenheit 451": "Fahrenheit 451", "Le Meilleur des mondes": "Le Meilleur des mondes",
+  "Frankenstein": "Frankenstein ou le Prométhée moderne", "Les Confessions": "Les Confessions (Rousseau)", "Les Fleurs du mal": "Les Fleurs du mal",
+  "Le Dormeur du val": "Le Dormeur du val", "Si c[’']est un homme": "Si c'est un homme", "Antigone": "Antigone (Anouilh)", "Le Parti pris des choses": "Le Parti pris des choses",
+  "Calligrammes": "Calligrammes", "Vingt [Mm]ille [Ll]ieues sous les mers": "Vingt Mille Lieues sous les mers", "Le Dernier Jour d[’']un condamné": "Le Dernier Jour d'un condamné",
+  "W ou le [Ss]ouvenir d[’']enfance": "W ou le Souvenir d'enfance",
+  /* 1914-1945 */
+  "Verdun": "Bataille de Verdun", "bataille de la Marne": "Première bataille de la Marne", "bataille de la Somme": "Bataille de la Somme", "Chemin des Dames": "Bataille du Chemin des Dames",
+  "génocide des Arméniens": "Génocide arménien", "Sarajevo": "Attentat de Sarajevo", "traité de Versailles": "Traité de Versailles", "11 novembre 1918": "Armistice de 1918",
+  "poilus?": "Poilu", "tranchées": "Guerre de tranchées", "Lénine": "Lénine", "Staline": "Joseph Staline", "Hitler": "Adolf Hitler", "Mussolini": "Benito Mussolini",
+  "Léon Blum": "Léon Blum", "Front populaire": "Front populaire (France)", "Wall Street": "Krach de 1929", "Nuit de Cristal": "Nuit de Cristal", "lois de Nuremberg": "Lois de Nuremberg",
+  "goulag": "Goulag", "Shoah": "Shoah", "Auschwitz(?:-Birkenau)?": "Auschwitz", "Treblinka": "Treblinka", "Stalingrad": "Bataille de Stalingrad", "Pearl Harbor": "Attaque de Pearl Harbor",
+  "Hiroshima": "Bombardements atomiques d'Hiroshima et Nagasaki", "Oradour-sur-Glane": "Massacre d'Oradour-sur-Glane", "procès de Nuremberg": "Procès de Nuremberg",
+  "ONU": "Organisation des Nations unies", "Churchill": "Winston Churchill", "Pétain": "Philippe Pétain", "(?:général |Charles )?de Gaulle": "Charles de Gaulle",
+  "appel du 18 juin": "Appel du 18 Juin", "Jean Moulin": "Jean Moulin", "Vél[’']d[’']Hiv": "Rafle du Vélodrome d'Hiver", "régime de Vichy": "Régime de Vichy",
+  "Montoire": "Entrevue de Montoire", "Lucie Aubrac": "Lucie Aubrac", "Germaine Tillion": "Germaine Tillion", "Berty Albrecht": "Berty Albrecht",
+  /* Depuis 1945 */
+  "mur de Berlin": "Mur de Berlin", "blocus de Berlin": "Blocus de Berlin", "crise de Cuba": "Crise des missiles de Cuba", "guerre de Corée": "Guerre de Corée",
+  "guerre du Vietnam": "Guerre du Viêt Nam", "Gorbatchev": "Mikhaïl Gorbatchev", "Kennedy": "John Fitzgerald Kennedy", "Khrouchtchev": "Nikita Khrouchtchev",
+  "Spoutnik": "Spoutnik 1", "(?:Youri )?Gagarine": "Youri Gagarine", "Neil Armstrong": "Neil Armstrong", "plan Marshall": "Plan Marshall", "OTAN": "Organisation du traité de l'Atlantique nord",
+  "pacte de Varsovie": "Pacte de Varsovie", "Gandhi": "Mohandas Karamchand Gandhi", "Hô Chi Minh": "Hô Chi Minh", "Dien Bien Phu": "Bataille de Diên Biên Phu",
+  "guerre d[’']Algérie": "Guerre d'Algérie", "accords d[’']Évian": "Accords d'Évian", "Bandung": "Conférence de Bandung", "François Mitterrand": "François Mitterrand",
+  "Simone Veil": "Simone Veil", "Robert Badinter": "Robert Badinter", "[Mm]ai 68": "Mai 68", "Trente Glorieuses": "Trente Glorieuses", "choc pétrolier": "Premier choc pétrolier",
+  "Jean Fourastié": "Jean Fourastié", "Alfred Sauvy": "Alfred Sauvy", "Marianne": "Marianne", "(?:La )?Marseillaise": "La Marseillaise", "Rouget de Lisle": "Claude Joseph Rouget de Lisle",
+  "Déclaration des droits de l[’']homme et du citoyen": "Déclaration des droits de l'homme et du citoyen de 1789", "loi (?:du 9 décembre |de )1905": "Loi de séparation des Églises et de l'État",
+  "Parlement européen": "Parlement européen", "traité de Rome": "Traité instituant la Communauté économique européenne", "traité de Maastricht": "Traité de Maastricht", "espace Schengen": "Espace Schengen",
+  /* Géographie */
+  "La Défense": "La Défense", "Sophia-Antipolis": "Sophia Antipolis", "Beauce": "Beauce (France)", "Le Havre": "Le Havre", "Guyane": "Guyane", "Mayotte": "Mayotte",
+  "Montagne Pelée": "Montagne Pelée", "Piton de la Fournaise": "Piton de la Fournaise", "Himalaya": "Himalaya", "Islande": "Islande", "Andes": "Cordillère des Andes",
+  /* Savants */
+  "(?:Antoine )?Lavoisier": "Antoine Lavoisier", "Mendeleïev": "Dmitri Mendeleïev", "(?:Isaac )?Newton": "Isaac Newton", "(?:Charles )?Darwin": "Charles Darwin",
+  "(?:Alfred )?Wegener": "Alfred Wegener", "Pythagore": "Pythagore", "(?:Graham|Alexander Graham) Bell": "Alexander Graham Bell",
+  /* SVT */
+  "ADN": "Acide désoxyribonucléique", "chromosomes?": "Chromosome", "caryotype": "Caryotype", "mitose": "Mitose", "méiose": "Méiose", "trisomie 21": "Trisomie 21",
+  "spermatozoïdes?": "Spermatozoïde", "placenta": "Placenta", "phalènes?": "Phalène du bouleau", "Archaeopteryx": "Archaeopteryx", "Toumaï": "Toumaï", "Homo sapiens": "Homo sapiens",
+  "frelon asiatique": "Frelon asiatique", "bactéries?": "Bactérie", "virus": "Virus", "lymphocytes?": "Lymphocyte", "phagocytose": "Phagocytose", "anticorps": "Anticorps",
+  "vaccins?": "Vaccin", "VIH": "Virus de l'immunodéficience humaine", "neurones?": "Neurone", "synapses?": "Synapse", "tectonique des plaques": "Tectonique des plaques",
+  "dorsales?": "Dorsale océanique", "tsunamis?": "Tsunami", "effet de serre": "Effet de serre", "GIEC": "Groupe d'experts intergouvernemental sur l'évolution du climat",
+  "accord de Paris": "Accord de Paris sur le climat", "microbiote": "Microbiote intestinal humain", "intestin grêle": "Intestin grêle", "photosynthèse": "Photosynthèse",
+  "sismographes?": "Sismographe",
+  /* Physique-chimie, technologie */
+  "atomes?": "Atome", "tableau périodique": "Tableau périodique des éléments", "Voie lactée": "Voie lactée", "système solaire": "Système solaire",
+  "Jupiter": "Jupiter (planète)", "Saturne": "Saturne (planète)", "Mars(?!\\s*\\d)": "Mars (planète)", "Vénus": "Vénus (planète)", "Neptune": "Neptune (planète)", "Uranus": "Uranus (planète)",
+  "Mercure": "Mercure (planète)", "Proxima du Centaure": "Proxima Centauri", "Big Bang": "Big Bang", "prisme": "Prisme (optique)", "échographie": "Échographie",
+  "éoliennes?": "Éolienne", "centrales? nucléaires?": "Centrale nucléaire", "panneaux? photovoltaïques?": "Capteur solaire photovoltaïque", "fibre optique": "Fibre optique",
+  "Scratch": "Scratch (langage)", "impression 3D": "Impression 3D", "fibre de carbone": "Fibre de carbone", "béton armé": "Béton armé", "eau de chaux": "Eau de chaux",
+  "dynamomètre": "Dynamomètre", "chronophotographie": "Chronophotographie"
+};
+
+/* Image en tête de chapitre */
+BREVET_COVERS = {
+  "fr-figures": "Pierre Corneille", "fr-narration": "Molière", "fr-themes": "Victor Hugo", "fr-redaction": "Plume (écriture)",
+  "ma-pythagore": "Théorème de Pythagore", "ma-thales": "Théorème de Thalès", "ma-trigo": "Trigonométrie", "ma-transformations": "Pavage du plan", "ma-espace": "Pyramide",
+  "ma-fonctions": "Fonction affine", "ma-stats": "Dé", "ma-arithmetique": "Nombre premier",
+  "hg-1gm": "Bataille de Verdun", "hg-totalitarismes": "Front populaire (France)", "hg-2gm": "Débarquement de Normandie", "hg-france-occupee": "Appel du 18 Juin",
+  "hg-guerre-froide": "Mur de Berlin", "hg-decolonisation": "Conférence de Bandung", "hg-ve-republique": "Palais de l'Élysée", "hg-societe": "Trente Glorieuses",
+  "hg-territoires": "La Défense", "hg-ue": "Parlement européen", "hg-emc": "Marianne",
+  "svt-genetique": "Chromosome", "svt-reproduction": "Fécondation", "svt-evolution": "Archaeopteryx", "svt-immunite": "Lymphocyte", "svt-nerveux": "Neurone",
+  "svt-terre": "Piton de la Fournaise", "svt-climat": "Effet de serre", "svt-nutrition": "Intestin grêle",
+  "pc-matiere": "Atome", "pc-univers": "Système solaire", "pc-transformations": "Combustion", "pc-mouvement": "Chronophotographie", "pc-forces": "Isaac Newton",
+  "pc-energie": "Éolienne", "pc-electricite": "Circuit électrique", "pc-signaux": "Prisme (optique)",
+  "te-besoin": "Impression 3D", "te-chaines": "Domotique", "te-programmation": "Scratch (langage)", "te-materiaux": "Recyclage", "te-reseaux": "Fibre optique", "te-innovation": "Alexander Graham Bell"
 };
 
 /* Cours complets : français */
@@ -6366,6 +6472,8 @@ var EX = window.BREVET_EXTRA || {};
 var CO = window.BREVET_COURS || {};
 var CP = window.BREVET_COURS_PLUS || {};
 var MO = window.BREVET_MORE || {};
+var WKD = window.BREVET_WIKI || {};
+var COVERS = window.BREVET_COVERS || {};
 
 /* ---------- stockage local (facultatif) ---------- */
 var store = {
@@ -6490,6 +6598,7 @@ function mountDeck(root, list, opt) {
       '<div class="deck-actions"><button class="btn" data-act="no">✕ À revoir</button><button class="btn btn-fill" data-act="yes">✓ Je sais</button></div>' +
       '<div class="deck-foot"><button class="link" data-act="prev"' + (i ? "" : ' style="visibility:hidden"') + '>← Précédente</button><button class="link" data-act="shuffle">Mélanger le paquet</button></div>';
     bindSwipe(root.querySelector(".fc"));
+    linkify(root.querySelector(".fc-back"));
   }
   function rate(a) { known[order[i].id] = a === "yes" ? 1 : 0; store.set("known", known); i++; draw(); if (opt.onChange) opt.onChange(); }
   function bindSwipe(fc) {
@@ -6572,6 +6681,7 @@ function mountQuiz(root, list, opt) {
     var fb = root.querySelector(".qz-fb");
     fb.hidden = false; fb.className = "qz-fb " + (ok ? "ok" : "ko");
     fb.innerHTML = '<b>' + (ok ? "Bonne réponse." : "Pas tout à fait.") + '</b><p>' + q.ex + '</p><button class="btn btn-fill" data-act="next">' + (i + 1 < items.length ? "Question suivante →" : "Voir mon score") + '</button>';
+    linkify(fb);
     fb.querySelector("button").focus({ preventScroll: true });
   }
   function end() {
@@ -6583,6 +6693,7 @@ function mountQuiz(root, list, opt) {
       (subs.length > 1 ? '<div class="qz-subs">' + subs.map(function (s) { var r = bySub[s]; return '<div class="qz-sub" style="--sub:' + col(s) + '"><span>' + S[s].name + '</span><b>' + r.ok + '/' + r.n + '</b><i><em style="width:' + Math.round(r.ok / r.n * 100) + '%"></em></i></div>'; }).join("") + '</div>' : "") +
       (wrong.length ? '<div class="qz-rev"><h4>À revoir</h4>' + wrong.map(function (q) { return '<div class="qz-rev-i"><p>' + q.q + '</p><p><b>Réponse :</b> ' + q.opts[0] + '</p><p class="mute">' + q.ex + '</p></div>'; }).join("") + '</div>' : "") +
       '<div class="row"><button class="btn btn-sub" data-act="restart">' + (opt.restartLabel || "Recommencer") + '</button>' + (opt.more || "") + '</div></div>';
+    var rv = root.querySelector(".qz-rev"); if (rv) linkify(rv);
     if (opt.onEnd) opt.onEnd(pct);
   }
   root.onclick = function (e) {
@@ -6596,6 +6707,92 @@ function mountQuiz(root, list, opt) {
     if (m != null && !done && i < items.length) pick(m);
   };
   draw();
+}
+
+/* ---------- illustrations Wikipédia ---------- */
+var wkRe = null, wkTitles = [], wkCache = {};
+var WK_SKIP = "svg,pre,h1,h2,h3,figcaption,.wk,.tab,.chip,.opt,.qz-q,.fc-front,.tl-d,.dg-h,.pill,.key > span,.cex > span,.cwarn > span";
+function esc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+function buildWk() {
+  var keys = Object.keys(WKD).sort(function (a, b) { return b.length - a.length; });
+  wkTitles = keys.map(function (k) { return WKD[k]; });
+  var parts = keys.map(function (k) { var c = k.charAt(0); return "(" + (c !== c.toUpperCase() ? "[" + c + c.toUpperCase() + "]" + k.slice(1) : k) + ")"; });
+  try { wkRe = new RegExp("(?<![\\p{L}\\d])(?:" + parts.join("|") + ")(?![\\p{L}])", "gu"); } catch (e) { wkRe = false; }
+}
+function linkify(root) {
+  if (!root || wkRe === false) return;
+  if (!wkRe) buildWk();
+  if (!wkRe) return;
+  var used = {}, nodes = [], w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
+  while ((n = w.nextNode())) { if (n.nodeValue.trim() && !(n.parentNode.closest && n.parentNode.closest(WK_SKIP))) nodes.push(n); }
+  nodes.forEach(function (node) {
+    var t = node.nodeValue, m, last = 0, frag = null;
+    wkRe.lastIndex = 0;
+    while ((m = wkRe.exec(t))) {
+      var gi = 1; while (m[gi] === undefined && gi < m.length) gi++;
+      var title = wkTitles[gi - 1];
+      if (!title || used[title]) continue;
+      used[title] = 1;
+      frag = frag || document.createDocumentFragment();
+      frag.appendChild(document.createTextNode(t.slice(last, m.index)));
+      var sp = document.createElement("span");
+      sp.className = "wk"; sp.setAttribute("role", "button"); sp.tabIndex = 0; sp.dataset.wk = title; sp.textContent = m[0];
+      frag.appendChild(sp);
+      last = m.index + m[0].length;
+    }
+    if (frag) { frag.appendChild(document.createTextNode(t.slice(last))); node.parentNode.replaceChild(frag, node); }
+  });
+}
+function wkFetch(title) {
+  if (!wkCache[title]) wkCache[title] = fetch("https://fr.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(title.replace(/ /g, "_")))
+    .then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { return d && d.type === "standard" ? d : null; }).catch(function () { return null; });
+  return wkCache[title];
+}
+function wkImg(d) {
+  if (!d || !d.thumbnail) return null;
+  var o = d.originalimage, s = d.thumbnail.source;
+  if (o && o.width <= 900) return o.source;
+  return /\/\d+px-/.test(s) ? s.replace(/\/\d+px-/, "/500px-") : s;
+}
+var sheet = document.createElement("div");
+sheet.className = "wk-sheet"; sheet.hidden = true;
+sheet.innerHTML = '<div class="wk-back" data-close></div><div class="wk-card" role="dialog" aria-modal="true" aria-label="Illustration"><button class="wk-x" data-close aria-label="Fermer">✕</button><div class="wk-body"></div></div>';
+document.body.appendChild(sheet);
+function closeWk() { sheet.hidden = true; document.body.classList.remove("wk-open"); }
+function openWk(title) {
+  sheet.hidden = false; document.body.classList.add("wk-open");
+  var body = sheet.querySelector(".wk-body"), name = esc(title.replace(/ \(.*\)$/, ""));
+  body.innerHTML = '<div class="wk-img wk-ph"></div><h3>' + name + '</h3><p class="wk-d">Chargement…</p>';
+  wkFetch(title).then(function (d) {
+    if (sheet.hidden) return;
+    if (!d) { body.innerHTML = '<h3>' + name + '</h3><p class="wk-e">Impossible de charger l’illustration. Vérifie ta connexion Internet et réessaie.</p>'; return; }
+    var img = wkImg(d), sentences = (d.extract || "").match(/[^.!?]+[.!?]+/g) || [d.extract || ""];
+    body.innerHTML = (img ? '<div class="wk-img"><img src="' + esc(img) + '" alt="' + esc(d.title) + '"></div>' : "") +
+      '<h3>' + esc(d.title) + '</h3>' + (d.description ? '<p class="wk-d">' + esc(d.description) + '</p>' : "") +
+      '<p class="wk-e">' + esc(sentences.slice(0, 3).join(" ").trim()) + '</p>' +
+      '<a class="btn" href="' + esc(d.content_urls.mobile.page) + '" target="_blank" rel="noopener">Lire l’article sur Wikipédia</a>' +
+      '<p class="wk-c">Texte et image : Wikipédia, sous licences libres.</p>';
+  });
+}
+document.addEventListener("click", function (e) {
+  var t = e.target.closest ? e.target : e.target.parentNode;
+  var w = t.closest(".wk");
+  if (w) { e.preventDefault(); e.stopPropagation(); openWk(w.dataset.wk); return; }
+  if (t.closest("[data-close]")) { e.preventDefault(); closeWk(); }
+}, true);
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && !sheet.hidden) closeWk();
+  else if (e.key === "Enter" && e.target.classList && e.target.classList.contains("wk")) { e.preventDefault(); openWk(e.target.dataset.wk); }
+}, true);
+function loadCover(c) {
+  var t = COVERS[c.id], el = document.getElementById("ccover");
+  if (!t || !el) return;
+  wkFetch(t).then(function (d) {
+    var img = wkImg(d);
+    if (!img || !document.body.contains(el)) return;
+    el.innerHTML = '<img src="' + esc(img) + '" alt="' + esc(d.title) + '"><span class="ccover-c">' + esc(d.title) + ' · touche pour en savoir plus</span>';
+    el.dataset.wk = t; el.hidden = false;
+  });
 }
 
 /* ---------- cours ---------- */
@@ -6678,6 +6875,7 @@ function viewChapter(c) {
   '<section class="chead"><div class="wrap">' +
     '<nav class="crumb"><a href="#">Matières</a><span>/</span><a href="#' + s.id + '">' + s.name + '</a></nav>' +
     '<div class="chead-row"><div class="chead-n">' + pad(c.n) + '</div><div class="chead-t"><span class="tag">' + c.tag + '</span><h1>' + c.title + '</h1></div></div>' +
+    '<div class="ccover wk" id="ccover" role="button" tabindex="0" hidden></div>' +
     '<div class="chead-meta"><span>≈ <b>' + readMin(c) + ' min</b> de lecture</span><span><b>' + c.cours.length + '</b> parties de cours</span><span><b>' + c.schema.length + '</b> ' + (c.schema.length > 1 ? "schémas" : "schéma") + '</span><span><b>' + c.cards.length + '</b> flashcards</span><span><b>' + c.quiz.length + '</b> questions</span><span>Meilleur score : <b id="best">' + (scores[c.id] != null ? scores[c.id] + " %" : "pas encore") + '</b></span></div>' +
   '</div></section>' +
   '<div class="tabs-wrap"><div class="wrap"><div class="tabs" role="tablist">' + TABS.map(function (t) { return '<button role="tab" class="tab" data-tab="' + t[0] + '">' + t[1] + '<small>' + counts[t[0]] + '</small></button>'; }).join("") + '</div></div></div>' +
@@ -6692,7 +6890,7 @@ function drawPanel(c, tab) {
     p.innerHTML = '<div class="resume"><h2 class="ph">L’essentiel en ' + c.resume.length + ' points</h2><ol>' + c.resume.map(function (r, k) { return '<li><span class="rn">' + (k + 1) + '</span><p>' + r + '</p></li>'; }).join("") + '</ol>' +
       '<div class="row next-steps"><button class="btn btn-sub" data-goto="cours">Lire le cours complet</button><button class="btn" data-goto="flashcards">Passer aux flashcards</button><button class="btn" data-goto="quiz">Faire le quiz</button></div></div>';
   } else if (tab === "cours") {
-    p.innerHTML = '<div class="cours"><nav class="toc">' + c.cours.map(function (x, k) { return '<a href="#' + c.id + '" data-scroll="cs' + k + '">' + x.h + '</a>'; }).join("") + '</nav><div class="cbody">' +
+    p.innerHTML = '<div class="cours"><nav class="toc">' + c.cours.map(function (x, k) { return '<a href="#' + c.id + '" data-scroll="cs' + k + '">' + x.h + '</a>'; }).join("") + '</nav><div class="cbody"><p class="wk-hint">Touche les mots <i>en bleu</i> pour voir une photo ou une illustration.</p>' +
       c.cours.map(function (x, k) {
         return section(x, k);
       }).join("") + '<div class="row"><button class="btn btn-sub" data-goto="schemas">Voir les schémas</button><button class="btn" data-goto="quiz">Tester mes connaissances</button></div></div></div>';
@@ -6710,6 +6908,7 @@ function drawPanel(c, tab) {
       onEnd: function () { var b = document.getElementById("best"); if (b) b.textContent = scores[c.id] + " %"; }
     });
   }
+  if (tab === "resume" || tab === "cours" || tab === "schemas") linkify(p);
 }
 
 function chips(base, f, ch, count) {
@@ -6790,6 +6989,7 @@ function route() {
       var sc = e.target.closest("[data-scroll]"); if (sc) { e.preventDefault(); var el = document.getElementById(sc.dataset.scroll); if (el) el.scrollIntoView({ behavior: "smooth" }); }
     });
     drawPanel(c, cur);
+    loadCover(c);
   } else if (parts[0] === "flashcards") {
     var fch = CHI[parts.slice(1).join("-")] || null;
     var f = fch ? fch.sub : S[parts[1]] ? parts[1] : "all";
