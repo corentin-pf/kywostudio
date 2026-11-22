@@ -505,6 +505,12 @@ footer{margin-top:56px;border-top:var(--bw) solid var(--fg)}
 .tile-code{padding-bottom:.16em;line-height:.85}
 .tile-name{margin-top:auto;padding-top:8px}
 @media (max-width:760px){ .code{font-size:12px;padding:14px} }
+.chips-l{margin:18px 0 0;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.chips-l + .chips{margin-top:8px}
+.chip small{font-weight:600;opacity:.6;font-variant-numeric:tabular-nums}
+.chaps-pick .chip b{font-variant-numeric:tabular-nums;color:var(--sub)}
+.chaps-pick .chip.on b{color:var(--on)}
+@media (max-width:760px){ .page-h .lead{display:none} .page-h h1{font-size:2.4rem;margin:8px 0 4px} .chips-l{margin-top:12px} }
 </style>
 </head>
 <body>
@@ -529,7 +535,7 @@ footer{margin-top:56px;border-top:var(--bw) solid var(--fg)}
 </nav>
 <footer><div class="wrap foot"><span>Objectif Brevet · Programme de 3<sup>e</sup>, cycle 4</span><span>Ta progression est enregistrée sur cet appareil uniquement.</span></div></footer>
 <script>
-window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {}; var BREVET_COURS_PLUS = {};
+window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {}; var BREVET_COURS_PLUS = {}; var BREVET_MORE = {};
 BREVET.fr = [
 {
   id: "fr-phrase", tag: "Grammaire", title: "La phrase complexe",
@@ -4641,6 +4647,1708 @@ BREVET_COURS["te-innovation"] = {
   ]
 };
 
+/* Flashcards et questions supplémentaires : français */
+var M = BREVET_MORE;
+M["fr-phrase"] = {
+  c: [
+    ["Proposition indépendante : définition ?", "Proposition qui ne dépend d’aucune autre et dont aucune ne dépend."],
+    ["Proposition principale ?", "Celle dont dépend une subordonnée."],
+    ["Juxtaposition : outils ?", "Virgule, point-virgule, deux-points."],
+    ["Adverbes de liaison pour coordonner ?", "Puis, ensuite, pourtant, cependant, en effet…"],
+    ["Comment repérer une relative ?", "Elle commence par un pronom relatif et complète un antécédent."],
+    ["Fonction de la relative ?", "Complément de l’antécédent."],
+    ["Test pour reconnaître une complétive ?", "On peut la remplacer par « cela »."],
+    ["Fonction de la circonstancielle ?", "Complément circonstanciel (temps, cause, but…)."],
+    ["Conjonctions de cause ?", "Parce que, puisque, comme."], ["Conjonctions de but ?", "Pour que, afin que."], ["Conjonctions de conséquence ?", "Si bien que, de sorte que, si… que."], ["Conjonctions de concession ?", "Bien que, quoique, même si."], ["Conjonction de condition ?", "Si, à condition que."],
+    ["Mode après « pour que » ?", "Subjonctif."], ["Mode après « parce que » ?", "Indicatif."],
+    ["« Que » pronom relatif ou conjonction ?", "Relatif s’il a un antécédent (nom juste avant) ; conjonction après un verbe."],
+    ["« Dont » remplace un complément introduit par…", "« de »."],
+    ["Différence nature / fonction ?", "Nature = ce qu’est le mot ; fonction = son rôle dans la phrase."],
+    ["Qu’est-ce qu’un attribut du sujet ?", "Un mot relié au sujet par un verbe d’état (être, sembler, devenir…)."],
+    ["COD ou COI ?", "COD : sans préposition ; COI : introduit par une préposition (à, de)."],
+    ["Les 4 types de phrases ?", "Déclarative, interrogative, exclamative, injonctive."],
+    ["Voix passive : comment se forme-t-elle ?", "Être + participe passé ; le sujet actif devient complément d’agent (par)."],
+    ["Phrase non verbale : exemple ?", "« Quel beau temps ! »"]
+  ],
+  q: [
+    ["« L’homme dont je t’ai parlé arrive. » Nature de la proposition ?", ["subordonnée relative", "subordonnée complétive", "principale", "circonstancielle"], "« dont » est un pronom relatif, antécédent « l’homme »."],
+    ["« Elle souhaite <u>que tu viennes</u>. » Fonction ?", ["COD de « souhaite »", "complément de l’antécédent", "sujet", "complément circonstanciel"], "Elle souhaite quoi ? que tu viennes."],
+    ["« Comme il pleuvait, nous sommes rentrés. » La subordonnée exprime…", ["la cause", "la comparaison", "le temps", "la conséquence"], "« Comme » en tête de phrase exprime la cause."],
+    ["« Il a tant couru qu’il est épuisé. » Rapport logique ?", ["conséquence", "cause", "but", "opposition"], "« tant… que » introduit une conséquence."],
+    ["Combien de propositions : « Je pense qu’il viendra si tu l’invites. » ?", ["3", "2", "4", "1"], "pense, viendra, invites."],
+    ["« La maison où j’ai grandi » : « où » est…", ["un pronom relatif", "une conjonction", "un adverbe interrogatif", "une préposition"], "Il a un antécédent : la maison."],
+    ["Quelle phrase contient une proposition coordonnée ?", ["Il est fatigué, mais il continue.", "Il est fatigué ; il continue.", "Bien qu’il soit fatigué, il continue.", "Il continue quoiqu’il soit fatigué."], "« mais » est une conjonction de coordination."],
+    ["« Elle semble heureuse. » Fonction de « heureuse » ?", ["attribut du sujet", "COD", "épithète", "complément circonstanciel"], "Verbe d’état « sembler »."],
+    ["« Je parle à ma sœur. » « à ma sœur » est…", ["COI", "COD", "attribut", "complément circonstanciel"], "Introduit par la préposition « à »."],
+    ["Mettre à la voix passive : « Le vent arrache les feuilles. »", ["Les feuilles sont arrachées par le vent.", "Les feuilles arrachent le vent.", "Le vent est arraché par les feuilles.", "Les feuilles ont arraché le vent."], "Le COD devient sujet."],
+    ["« Bien qu’il soit tard, il travaille. » Mode du verbe de la subordonnée ?", ["subjonctif", "indicatif", "conditionnel", "impératif"], "« bien que » + subjonctif."],
+    ["Une subordonnée circonstancielle peut souvent être déplacée.", ["Vrai", "Faux"], "Comme tout complément circonstanciel."],
+    ["« Range ta chambre ! » Type de phrase ?", ["injonctive", "déclarative", "interrogative", "exclamative"], "Elle exprime un ordre."],
+    ["« Je crois que c’est vrai. » « que » est…", ["une conjonction de subordination", "un pronom relatif", "un adverbe", "un déterminant"], "Pas d’antécédent : il suit un verbe."],
+    ["« Afin que tout soit prêt » exprime…", ["le but", "la cause", "le temps", "la condition"], "« afin que » = but."]
+  ]
+};
+M["fr-conjugaison"] = {
+  c: [
+    ["Passé simple de « être », 3e pers. pluriel ?", "Ils furent."], ["Passé simple d’« avoir », 1re pers. sing. ?", "J’eus."], ["Passé simple de « faire », 3e pers. sing. ?", "Il fit."], ["Passé simple de « venir », 3e pers. pluriel ?", "Ils vinrent."], ["Passé simple de « prendre », 3e pers. sing. ?", "Il prit."],
+    ["Futur de « voir », 1re pers. ?", "Je verrai."], ["Futur d’« aller » ?", "J’irai."], ["Futur de « courir » ?", "Je courrai."],
+    ["Subjonctif présent de « faire » ?", "Que je fasse."], ["Subjonctif présent d’« être » ?", "Que je sois, que nous soyons."], ["Subjonctif présent d’« avoir » ?", "Que j’aie, qu’il ait."], ["Subjonctif présent d’« aller » ?", "Que j’aille."],
+    ["Formation du plus-que-parfait ?", "Auxiliaire à l’imparfait + participe passé."],
+    ["Formation du futur antérieur ?", "Auxiliaire au futur + participe passé."],
+    ["Formation du conditionnel présent ?", "Radical du futur + terminaisons de l’imparfait."],
+    ["Verbes conjugués avec être ?", "Pronominaux et verbes de mouvement/état : aller, venir, partir, arriver, naître, mourir, rester, tomber…"],
+    ["Valeur du conditionnel dans « Le suspect serait en fuite » ?", "Information non vérifiée."],
+    ["Si + imparfait → principale au…", "Conditionnel présent."],
+    ["Si + plus-que-parfait → principale au…", "Conditionnel passé."],
+    ["Valeur de l’imparfait dans « Je lisais quand il entra » ?", "Action en cours interrompue."],
+    ["Impératif de « aller », 2e pers. sing. ?", "Va (vas-y)."],
+    ["Impératif de « avoir », 2e pers. sing. ?", "Aie."],
+    ["Participe présent de « savoir » ?", "Sachant."],
+    ["Gérondif de « marcher » ?", "En marchant."]
+  ],
+  q: [
+    ["« Ils (venir) hier » au passé simple ?", ["vinrent", "venirent", "vinent", "venèrent"], "Venir : je vins, ils vinrent."],
+    ["« Nous (pouvoir) » au futur ?", ["pourrons", "pouvrons", "pourons", "pouvons"], "Double r."],
+    ["« Il faut qu’il (être) là » ?", ["soit", "est", "sera", "serait"], "Subjonctif présent."],
+    ["« Si tu (travailler), tu réussirais » ?", ["travaillais", "travailles", "travaillerais", "travailleras"], "Si + imparfait."],
+    ["« Quand tu (finir), tu sortiras » ?", ["auras fini", "finis", "finiras", "aurais fini"], "Futur antérieur : action antérieure à un futur."],
+    ["« Je (chanter) » au passé simple ?", ["chantai", "chantais", "chanterai", "chante"], "Passé simple 1er groupe : -ai."],
+    ["« Elle est partie » : temps ?", ["passé composé", "plus-que-parfait", "passé simple", "présent passif"], "Auxiliaire au présent + participe."],
+    ["« Nous avions mangé » : temps ?", ["plus-que-parfait", "passé composé", "imparfait", "passé antérieur"], "Auxiliaire à l’imparfait."],
+    ["« Je voudrais vous parler » : valeur ?", ["politesse", "hypothèse", "futur dans le passé", "ordre"], "Atténuation."],
+    ["« Il disait qu’il viendrait » : valeur du conditionnel ?", ["futur dans le passé", "politesse", "hypothèse", "information incertaine"], "Le futur vu depuis le passé."],
+    ["Impératif de « finir », 1re pers. pluriel ?", ["finissons", "finirons", "finissions", "finissez"], "Impératif présent."],
+    ["« En courant » est un…", ["gérondif", "participe présent seul", "infinitif", "adjectif"], "En + participe présent."],
+    ["« Que je (savoir) » au subjonctif ?", ["sache", "sais", "saurai", "savais"], "Forme irrégulière."],
+    ["Quel verbe se conjugue avec être au passé composé ?", ["tomber", "manger", "finir", "prendre"], "Verbe de changement d’état."],
+    ["« Elle a sorti le chien » : pourquoi « avoir » ?", ["le verbe a un COD", "c’est une erreur", "sortir se conjugue toujours avec avoir", "c’est un verbe pronominal"], "Avec un COD, sortir prend avoir."]
+  ]
+};
+M["fr-figures"] = {
+  c: [
+    ["Outils de comparaison ?", "Comme, tel, pareil à, ainsi que, semblable à, ressembler."],
+    ["Métaphore filée ?", "Métaphore prolongée sur plusieurs lignes."],
+    ["Personnification ?", "Donner des traits humains à une chose ou un animal."],
+    ["Allégorie ?", "Représenter une idée abstraite par une figure concrète (la Mort avec sa faux)."],
+    ["Hyperbole ?", "Exagération."], ["Gradation ?", "Termes d’intensité croissante."], ["Accumulation ?", "Succession de termes de même nature."],
+    ["Antithèse ?", "Opposition de deux idées dans une phrase."], ["Oxymore ?", "Deux mots contraires accolés."], ["Litote ?", "Dire moins pour faire entendre plus."], ["Euphémisme ?", "Adoucir une réalité pénible."], ["Antiphrase ?", "Dire le contraire de ce qu’on pense (ironie)."],
+    ["Allitération ?", "Répétition d’un son consonne."], ["Assonance ?", "Répétition d’un son voyelle."],
+    ["Alexandrin ?", "Vers de 12 syllabes."], ["Octosyllabe ?", "Vers de 8 syllabes."], ["Sonnet ?", "14 vers : deux quatrains et deux tercets."],
+    ["Rimes plates ?", "AABB."], ["Rimes croisées ?", "ABAB."], ["Rimes embrassées ?", "ABBA."],
+    ["Enjambement ?", "La phrase continue sur le vers suivant."],
+    ["Champ lexical ?", "Ensemble de mots liés à un même thème."],
+    ["Connotation ?", "Sens suggéré par un mot en plus de son sens propre."],
+    ["Plongée / contre-plongée ?", "Vu d’en haut (écrase) / vu d’en bas (grandit)."]
+  ],
+  q: [
+    ["« J’ai mille choses à faire » est…", ["une hyperbole", "une litote", "un oxymore", "une antithèse"], "On exagère la quantité."],
+    ["« Paris, Paris outragé, Paris brisé » : figure ?", ["anaphore", "litote", "euphémisme", "oxymore"], "Répétition en tête de groupe."],
+    ["« Cette obscure clarté » est…", ["un oxymore", "une antithèse", "une métaphore", "une comparaison"], "Deux termes contraires accolés."],
+    ["« Les sanglots longs des violons » : le son [on] répété est…", ["une assonance", "une allitération", "une rime", "une anaphore"], "Répétition d’un son voyelle."],
+    ["« Pour qui sont ces serpents qui sifflent » : le son [s] répété est…", ["une allitération", "une assonance", "une gradation", "une litote"], "Répétition d’un son consonne."],
+    ["« Bravo, quelle belle réussite ! » devant un échec : c’est…", ["une antiphrase", "une litote", "une hyperbole", "un euphémisme"], "On dit le contraire."],
+    ["« Il est parti pour un monde meilleur » : c’est…", ["un euphémisme", "une litote", "une antithèse", "une comparaison"], "On adoucit l’idée de la mort."],
+    ["« La Justice tient une balance » : c’est…", ["une allégorie", "une comparaison", "une hyperbole", "un oxymore"], "Une idée abstraite représentée concrètement."],
+    ["« Je vis, je meurs » : figure ?", ["antithèse", "oxymore", "gradation", "anaphore"], "Opposition de deux idées."],
+    ["Un sonnet comporte…", ["14 vers", "12 vers", "4 strophes de 4 vers", "8 vers"], "2 quatrains + 2 tercets."],
+    ["Rimes ABAB : elles sont…", ["croisées", "plates", "embrassées", "suivies"], "Elles alternent."],
+    ["Combien de syllabes dans un alexandrin ?", ["12", "10", "8", "14"], "Vers classique français."],
+    ["Une image vue en contre-plongée…", ["grandit le sujet", "écrase le sujet", "est floue", "est en couleur"], "Vue d’en bas."],
+    ["« Ses cheveux, flots d’or » : figure ?", ["métaphore", "comparaison", "personnification", "litote"], "Pas d’outil de comparaison."],
+    ["« Va, cours, vole » : figure ?", ["gradation", "antithèse", "oxymore", "euphémisme"], "Intensité croissante."]
+  ]
+};
+M["fr-narration"] = {
+  c: [
+    ["Narrateur interne : marque ?", "Il raconte à la 1re personne et participe à l’histoire."],
+    ["Narrateur externe : marque ?", "Il raconte à la 3e personne sans être personnage."],
+    ["Point de vue interne : effet ?", "Identification au personnage, vision limitée."],
+    ["Point de vue externe : effet ?", "Objectivité, mystère."],
+    ["Point de vue omniscient : effet ?", "Le lecteur sait tout, vue d’ensemble."],
+    ["Ellipse ?", "Le récit saute une période de temps."],
+    ["Retour en arrière (analepse) ?", "Le récit revient sur des événements passés."],
+    ["Anticipation (prolepse) ?", "Le récit annonce des événements futurs."],
+    ["Sommaire ?", "Résumé d’une longue période en quelques lignes."],
+    ["Discours direct : marques ?", "Guillemets, tirets, verbe de parole."],
+    ["Discours indirect : transformations ?", "Subordonnée, changement de pronoms et de temps."],
+    ["Discours indirect libre ?", "Paroles fondues dans le récit, sans verbe introducteur ni guillemets."],
+    ["Direct → indirect : « demain » devient…", "« le lendemain »."],
+    ["Registre lyrique ?", "Expression des sentiments personnels."], ["Registre épique ?", "Exploits héroïques, exagération."], ["Registre tragique ?", "Destin inévitable, fatalité."], ["Registre pathétique ?", "Susciter la pitié."], ["Registre fantastique ?", "Hésitation entre réel et surnaturel."],
+    ["Didascalie ?", "Indication de mise en scène au théâtre."], ["Tirade ?", "Longue réplique au théâtre."], ["Monologue ?", "Personnage seul qui parle."], ["Aparté ?", "Réplique entendue par le public seulement."],
+    ["Nouvelle : caractéristiques ?", "Récit court, peu de personnages, souvent une chute."],
+    ["Scène d’exposition ?", "Première scène qui présente les personnages et la situation."]
+  ],
+  q: [
+    ["« Je sentais mon cœur battre » : point de vue ?", ["interne", "externe", "omniscient", "neutre"], "Accès aux sensations d’un personnage."],
+    ["« Dix ans passèrent. » Procédé ?", ["ellipse", "retour en arrière", "pause", "scène"], "Le récit saute dix ans."],
+    ["Il dit : « Je pars demain. » Au discours indirect ?", ["Il dit qu’il part le lendemain.", "Il dit : je pars demain.", "Il dit qu’il partira demain.", "Il dit que je pars demain."], "Pronom et repère temporel changent."],
+    ["Elle cria qu’elle avait peur : discours…", ["indirect", "direct", "indirect libre", "narrativisé"], "Subordonnée après un verbe de parole."],
+    ["Un récit où le lecteur doute : est-ce un fantôme ou une illusion ?", ["fantastique", "merveilleux", "réaliste", "épique"], "L’hésitation définit le fantastique."],
+    ["Un texte qui chante les exploits d’un héros est…", ["épique", "lyrique", "satirique", "tragique"], "Exploits, combats, exagération."],
+    ["Au théâtre, « (Il sort en claquant la porte.) » est…", ["une didascalie", "une réplique", "un aparté", "une tirade"], "Indication de mise en scène."],
+    ["Une comédie se termine en général…", ["bien", "par la mort du héros", "sans dénouement", "par une guerre"], "Fin heureuse."],
+    ["Dans un roman à la première personne, le narrateur est forcément l’auteur.", ["Faux", "Vrai"], "Seulement dans l’autobiographie."],
+    ["« Il était une fois » ouvre souvent…", ["un conte", "une nouvelle réaliste", "une autobiographie", "une tragédie"], "Formule du conte."],
+    ["Le registre qui fait rire est…", ["comique", "pathétique", "tragique", "lyrique"], "Effet recherché : le rire."],
+    ["Une nouvelle se termine souvent par…", ["une chute", "une morale", "un épilogue de 100 pages", "un monologue"], "Fin surprenante."],
+    ["« Elle ne viendrait pas, c’était sûr. » est du discours…", ["indirect libre", "direct", "indirect", "théâtral"], "Pensée fondue dans le récit."],
+    ["La focalisation externe ressemble à…", ["une caméra", "un journal intime", "un narrateur qui sait tout", "une lettre"], "On ne voit que l’extérieur."],
+    ["Pour justifier une réponse de compréhension, il faut…", ["citer le texte entre guillemets", "donner son avis", "résumer tout le texte", "recopier la question"], "Une citation courte prouve l’affirmation."]
+  ]
+};
+M["fr-orthographe"] = {
+  c: [
+    ["Comment trouver le sujet ?", "Poser « Qui est-ce qui ? » devant le verbe."],
+    ["Accord avec plusieurs sujets ?", "Pluriel."],
+    ["« C’est moi qui … » : accord ?", "Avec « moi » : c’est moi qui suis."],
+    ["Pluriel de « cheval » ?", "Chevaux."], ["Pluriel de « festival » ?", "Festivals."], ["Pluriel de « travail » ?", "Travaux."], ["Pluriel de « genou » ?", "Genoux."], ["Pluriel de « pneu » ?", "Pneus."],
+    ["Adjectif de couleur venant d’un nom ?", "Invariable : des yeux marron."],
+    ["Adjectif de couleur composé ?", "Invariable : des robes bleu clair."],
+    ["« Tout » devant un adjectif féminin à consonne ?", "S’accorde : elle est toute contente."],
+    ["« Demi » devant le nom ?", "Invariable : une demi-heure."],
+    ["« Leur » devant un verbe ?", "Invariable : je leur parle."],
+    ["Participe passé avec avoir, COD avant ?", "Accord avec le COD."],
+    ["« Ils se sont parlé » : pourquoi pas d’accord ?", "« se » est COI (on parle à quelqu’un)."],
+    ["« on » ou « ont » ?", "« ont » si on peut dire « avaient »."],
+    ["« la », « l’a » ou « là » ?", "l’a = l’avait ; là = ici ; la = article ou pronom."],
+    ["« peu » ou « peut » ?", "« peut » = pouvait."],
+    ["« ce » ou « se » ?", "« se » devant un verbe pronominal ; « ce » = cela ou devant un nom."],
+    ["« quel » ou « qu’elle » ?", "« qu’elle » = « qu’il »."],
+    ["« ou » ou « où » ?", "« ou » = ou bien ; « où » = lieu ou temps."],
+    ["Mots invariables à connaître ?", "Beaucoup, toujours, parmi, malgré, longtemps, néanmoins, quelquefois."],
+    ["-é ou -er après « pour » ?", "-er (infinitif) : pour manger."]
+  ],
+  q: [
+    ["« Les enfants que j’ai (voir) » ?", ["vus", "vu", "vues", "voir"], "COD « que » (les enfants) avant : masculin pluriel."],
+    ["« Elles se sont (téléphoner) » ?", ["téléphoné", "téléphonées", "téléphonés", "téléphoner"], "On téléphone à quelqu’un : COI, pas d’accord."],
+    ["« Des chaussures (orange) » ?", ["orange", "oranges", "orangées", "orangés"], "Couleur venant d’un nom."],
+    ["« Ils sont (tout) surpris » ?", ["tout", "tous", "toutes", "toute"], "Adverbe devant un adjectif masculin : invariable."],
+    ["« Elles sont (tout) étonnées » ?", ["tout", "toutes", "tous", "toute"], "Devant une voyelle : invariable."],
+    ["« Trois heures et (demi) » ?", ["demie", "demi", "demis", "demies"], "Après le nom, accord en genre."],
+    ["« Je … ai donné … livres » ?", ["leur / leurs", "leurs / leur", "leur / leur", "leurs / leurs"], "Devant le verbe invariable, devant le nom pluriel accord."],
+    ["« … ne sait jamais » ?", ["On", "Ont", "Ont-ils", "Hon"], "Pronom sujet = il."],
+    ["« Il … ouvert la porte et l’a laissée … » ?", ["a / là", "à / la", "a / la", "à / là"], "« avait » ouvert ; « ici »."],
+    ["Pluriel de « bijou » ?", ["bijoux", "bijous", "bijoues", "bijou"], "Un des 7 mots en -ou avec x."],
+    ["« La plupart des élèves (être) venus » ?", ["sont", "est", "étais", "sera"], "Accord au pluriel avec « la plupart des ».", ],
+    ["« Les fleurs qu’elle a (cueillir) » ?", ["cueillies", "cueilli", "cueillis", "cueillir"], "COD avant, féminin pluriel."],
+    ["« Elle … est lavé les cheveux » ?", ["s’", "c’", "ses", "ces"], "Verbe pronominal « se laver »."],
+    ["« Je vais (manger) » : terminaison ?", ["manger", "mangé", "mangez", "mangeais"], "Après « aller », infinitif."],
+    ["Pluriel de « vitrail » ?", ["vitraux", "vitrails", "vitrauxs", "vitrailes"], "Exception en -aux."]
+  ]
+};
+M["fr-redaction"] = {
+  c: [
+    ["Deux types de sujets de rédaction ?", "Imagination et réflexion."],
+    ["Que surligner en premier dans le sujet ?", "Les contraintes : type de texte, personne, temps, point de vue, destinataire."],
+    ["Longueur attendue ?", "Souvent une à deux pages (environ 300 à 400 mots)."],
+    ["Temps conseillé pour la rédaction ?", "Environ 1 h 30 (20 min brouillon, 1 h écriture, 10 min relecture)."],
+    ["Ce qu’on note au brouillon ?", "Le plan et les mots-clés, pas tout le texte."],
+    ["Introduction de réflexion : 3 étapes ?", "Amorce, reformulation de la question, annonce du plan."],
+    ["Conclusion : 2 étapes ?", "Bilan qui répond à la question, ouverture."],
+    ["Plan dialectique ?", "Pour / contre / avis nuancé."],
+    ["Plan thématique ?", "Plusieurs arguments dans le même sens."],
+    ["Paragraphe argumenté : structure ?", "Argument, exemple, explication."],
+    ["Qu’est-ce qu’un bon exemple ?", "Un fait précis : œuvre lue, film, actualité, expérience."],
+    ["Connecteurs pour ajouter ?", "De plus, en outre, par ailleurs."],
+    ["Connecteurs pour opposer ?", "Cependant, pourtant, en revanche, néanmoins."],
+    ["Connecteurs pour conclure ?", "Donc, ainsi, en conclusion, finalement."],
+    ["Récit : que faut-il intégrer ?", "Description, dialogue, sentiments, schéma narratif."],
+    ["Ponctuation d’un dialogue ?", "Guillemets à l’ouverture et à la fermeture, tiret à chaque changement d’interlocuteur."],
+    ["Verbes de parole variés ?", "Murmurer, s’exclamer, répliquer, chuchoter, avouer."],
+    ["Mise en page d’un paragraphe ?", "Aller à la ligne avec un alinéa."],
+    ["Hors-sujet : conséquence ?", "Note très basse, même si le texte est bien écrit."],
+    ["Les cinq sens dans une description ?", "Vue, ouïe, odorat, toucher, goût."]
+  ],
+  q: [
+    ["Dans une introduction, l’amorce sert à…", ["introduire le thème de façon générale", "donner sa conclusion", "citer un exemple détaillé", "annoncer le plan"], "Elle amène le sujet."],
+    ["« En revanche » exprime…", ["l’opposition", "l’addition", "la cause", "la conclusion"], "Connecteur d’opposition."],
+    ["« En effet » sert à…", ["justifier", "opposer", "conclure", "énumérer"], "Il introduit une explication."],
+    ["Un plan dialectique comporte…", ["une thèse, une antithèse, une synthèse", "un seul argument", "uniquement des exemples", "un résumé du texte"], "Pour, contre, avis nuancé."],
+    ["Dans un récit au passé, on utilise surtout…", ["l’imparfait et le passé simple", "le présent et le futur", "le conditionnel", "le subjonctif"], "Arrière-plan et premier plan."],
+    ["Un exemple doit être…", ["précis", "vague", "très long", "inventé sans rapport"], "Il illustre l’argument."],
+    ["Que faire dans les 10 dernières minutes ?", ["relire orthographe et contraintes", "commencer un nouveau paragraphe", "recopier le sujet", "faire un plan"], "La relecture fait gagner des points."],
+    ["Dans un dialogue, un tiret indique…", ["un changement d’interlocuteur", "la fin du dialogue", "une pensée", "un titre"], "Chaque nouvelle réplique."],
+    ["« Ainsi » introduit souvent…", ["une conséquence ou une conclusion", "une opposition", "une concession", "une question"], "Connecteur de conclusion."],
+    ["Écrire tout son texte au brouillon puis le recopier est la meilleure méthode.", ["Faux", "Vrai"], "On manque de temps : brouillon = plan et idées."],
+    ["La conclusion doit…", ["répondre clairement à la question", "poser une nouvelle question sans répondre", "répéter l’introduction", "ajouter un argument"], "Bilan puis ouverture."],
+    ["Le registre d’un récit d’aventure plein d’exploits est…", ["épique", "lyrique", "tragique", "satirique"], "Exploits héroïques."],
+    ["Pour enrichir « il y a une maison », on peut écrire…", ["« une maison se dresse »", "« il y a une maison qui est »", "« y a une maison »", "« une maison il y a »"], "Verbe plus précis."],
+    ["Un sujet impose « à la première personne » : on écrit avec…", ["je", "il", "on", "vous"], "Contrainte de personne."],
+    ["Le brouillon est noté.", ["Faux", "Vrai"], "Seule la copie au propre compte."]
+  ]
+};
+M["fr-themes"] = {
+  c: [
+    ["Pacte autobiographique (Lejeune) ?", "L’auteur s’engage à dire la vérité ; auteur = narrateur = personnage."],
+    ["Mémoires : définition ?", "Récit de sa vie centré sur les événements historiques vécus."],
+    ["Journal intime ?", "Écrit au jour le jour, pour soi."],
+    ["Pourquoi écrire sur soi ?", "Se comprendre, témoigner, garder une trace, se justifier."],
+    ["Auteur des « Confessions » ?", "Jean-Jacques Rousseau."], ["Auteur d’« Enfance » ?", "Nathalie Sarraute."], ["Auteur de « W ou le souvenir d’enfance » ?", "Georges Perec."],
+    ["Fable : définition ?", "Court récit, souvent en vers, avec des animaux et une morale."],
+    ["Conte philosophique ?", "Récit plaisant qui critique la société (Voltaire, « Candide »)."],
+    ["Satire ?", "Texte qui se moque pour critiquer."],
+    ["Ironie ?", "Dire le contraire de ce que l’on pense pour faire réagir."],
+    ["Auteur du « Dernier Jour d’un condamné » ?", "Victor Hugo, contre la peine de mort."],
+    ["Poème en prose ?", "Poème sans vers, écrit en paragraphes."],
+    ["Vers libre ?", "Vers sans rime ni nombre fixe de syllabes."],
+    ["Calligramme ?", "Poème dont la disposition forme un dessin (Apollinaire)."],
+    ["Auteur du « Parti pris des choses » ?", "Francis Ponge."], ["Auteur des « Fleurs du mal » ?", "Charles Baudelaire."], ["Poème « Le Dormeur du val » ?", "Arthur Rimbaud, contre la guerre."],
+    ["Auteur de « Si c’est un homme » ?", "Primo Levi, témoignage sur Auschwitz."],
+    ["Auteur d’« Antigone » (1944) ?", "Jean Anouilh."], ["Auteur du « Feu » ?", "Henri Barbusse (tranchées)."],
+    ["Utopie / dystopie ?", "Société idéale / société cauchemardesque."],
+    ["Auteur de « Frankenstein » ?", "Mary Shelley."], ["Auteur de « Fahrenheit 451 » ?", "Ray Bradbury."], ["Auteur du « Meilleur des mondes » ?", "Aldous Huxley."]
+  ],
+  q: [
+    ["« W ou le souvenir d’enfance » relève du thème…", ["se raconter", "progrès et rêves scientifiques", "dénoncer", "visions poétiques"], "Perec raconte son enfance."],
+    ["La Fontaine écrit…", ["des fables", "des romans de science-fiction", "des autobiographies", "des tragédies"], "Fables publiées de 1668 à 1694."],
+    ["« Le Dormeur du val » dénonce…", ["la guerre", "la peine de mort", "l’esclavage", "la science"], "Un soldat mort dans un paysage paisible."],
+    ["Un calligramme est associé à…", ["Apollinaire", "Rousseau", "Voltaire", "Huxley"], "Calligrammes (1918)."],
+    ["« Le Meilleur des mondes » est…", ["une dystopie", "une utopie heureuse", "une fable", "un recueil de poèmes"], "Société conditionnée."],
+    ["Henri Barbusse témoigne de…", ["la vie dans les tranchées", "la Résistance", "la conquête spatiale", "Mai 68"], "« Le Feu », 1916."],
+    ["Dans « Antigone », l’héroïne…", ["dit non au pouvoir de Créon", "raconte son enfance", "invente une machine", "écrit des fables"], "Individu face au pouvoir."],
+    ["Le pacte autobiographique a été défini par…", ["Philippe Lejeune", "Victor Hugo", "Jules Verne", "Paul Éluard"], "Critique littéraire."],
+    ["« Liberté » de Paul Éluard est un poème…", ["de la Résistance", "romantique du XIXe siècle", "de science-fiction", "comique"], "1942."],
+    ["Jules Verne est associé à…", ["l’émerveillement devant la science", "la satire de la cour", "l’autobiographie", "le théâtre tragique"], "Vingt mille lieues sous les mers."],
+    ["Francis Ponge décrit…", ["des objets du quotidien", "des batailles", "des voyages spatiaux", "des procès"], "Le cageot, l’huître, le pain."],
+    ["Voltaire utilise surtout…", ["l’ironie", "le lyrisme", "le fantastique", "le registre épique"], "Il critique en se moquant."],
+    ["Mary Shelley montre…", ["un savant dépassé par sa création", "une société idéale", "l’enfance heureuse", "la vie à la cour"], "Frankenstein."],
+    ["Un journal intime s’écrit…", ["au jour le jour", "des années après", "pour un éditeur", "en vers"], "Écriture quotidienne."],
+    ["Les Misérables dénoncent la misère sociale.", ["Vrai", "Faux"], "Roman de Victor Hugo (1862)."]
+  ]
+};
+
+/* Flashcards et questions supplémentaires : histoire-géographie-EMC */
+var M = BREVET_MORE;
+M["hg-1gm"] = {
+  c: [
+    ["Membres de la Triple-Entente ?", "France, Royaume-Uni, Russie."], ["Empires centraux ?", "Allemagne, Autriche-Hongrie (puis Empire ottoman)."],
+    ["Événement déclencheur de la guerre ?", "L’assassinat de l’archiduc François-Ferdinand à Sarajevo, le 28 juin 1914."],
+    ["Date de l’entrée en guerre de la France ?", "3 août 1914 (déclaration de guerre allemande)."],
+    ["Bataille qui arrête l’avancée allemande en 1914 ?", "La Marne (septembre 1914)."],
+    ["Guerre de position ?", "Guerre où le front se fige ; les soldats vivent dans les tranchées."],
+    ["Conditions de vie dans les tranchées ?", "Boue, froid, rats, poux, bombardements, peur."],
+    ["Nouvelles armes de la guerre ?", "Gaz, chars, avions, mitrailleuses, artillerie lourde."],
+    ["Objectif allemand à Verdun ?", "« Saigner à blanc » l’armée française."], ["La « voie sacrée » ?", "Route qui ravitaillait Verdun et permettait la rotation des troupes."],
+    ["Bataille de la Somme : bilan ?", "Plus d’un million de soldats tués, blessés ou disparus."],
+    ["Munitionnettes ?", "Ouvrières des usines d’armement."], ["Bourrage de crâne ?", "Propagande qui cache la réalité de la guerre."],
+    ["Nombre de victimes du génocide arménien ?", "1,2 à 1,5 million."], ["Qui commet le génocide arménien ?", "Le gouvernement de l’Empire ottoman."],
+    ["Mutineries de 1917 : cause ?", "L’échec meurtrier de l’offensive du Chemin des Dames."],
+    ["Révolution russe d’octobre 1917 : qui prend le pouvoir ?", "Les bolcheviks de Lénine."],
+    ["Lieu de signature de l’armistice ?", "Rethondes, en forêt de Compiègne."],
+    ["Bilan humain de la guerre ?", "Environ 10 millions de soldats tués, dont 1,4 million de Français."],
+    ["Conséquences du traité de Versailles pour l’Allemagne ?", "Responsable de la guerre, perte de l’Alsace-Moselle et des colonies, réparations, armée limitée."],
+    ["Pourquoi les Allemands parlent-ils de « diktat » ?", "Le traité leur est imposé sans négociation."],
+    ["Nouveaux États en 1919 ?", "Pologne, Tchécoslovaquie, Yougoslavie…"],
+    ["Monuments aux morts ?", "Construits dans chaque commune après 1918 pour honorer les soldats tués."]
+  ],
+  q: [
+    ["Où l’archiduc François-Ferdinand est-il assassiné ?", ["Sarajevo", "Vienne", "Berlin", "Belgrade"], "28 juin 1914."],
+    ["La bataille de la Marne a lieu en…", ["septembre 1914", "février 1916", "juillet 1916", "novembre 1918"], "Elle arrête l’offensive allemande."],
+    ["Les mutineries de 1917 font suite à l’échec…", ["du Chemin des Dames", "de Verdun", "de la Marne", "de Stalingrad"], "Offensive Nivelle d’avril 1917."],
+    ["Combien de Français sont mobilisés pendant la guerre ?", ["environ 8 millions", "environ 800 000", "environ 40 millions", "environ 2 millions"], "Sur une population d’environ 40 millions."],
+    ["Quel empire rejoint les Empires centraux ?", ["l’Empire ottoman", "l’Empire russe", "l’Empire britannique", "l’Empire japonais"], "Il entre en guerre fin 1914."],
+    ["Quelle arme apparaît en 1915 sur le front ?", ["les gaz de combat", "la bombe atomique", "les missiles", "les drones"], "À Ypres, en Belgique."],
+    ["Le traité de Versailles est signé en…", ["1919", "1918", "1914", "1920"], "Le 28 juin 1919."],
+    ["Quel pays sort de la guerre en 1918 après sa révolution ?", ["la Russie", "l’Italie", "les États-Unis", "le Royaume-Uni"], "Paix de Brest-Litovsk."],
+    ["L’Alsace-Moselle redevient française en…", ["1918-1919", "1871", "1945", "1914"], "Par le traité de Versailles."],
+    ["La SDN a pour but de…", ["préserver la paix", "organiser les Jeux olympiques", "gérer l’euro", "coloniser l’Afrique"], "Société des Nations."],
+    ["Le génocide des Arméniens commence en…", ["1915", "1939", "1918", "1912"], "24 avril 1915."],
+    ["Les « gueules cassées » sont…", ["des soldats défigurés", "des mutins fusillés", "des généraux", "des déserteurs"], "Blessés au visage."],
+    ["L’union sacrée désigne…", ["l’alliance des partis politiques pour la guerre", "une alliance militaire avec la Russie", "un traité de paix", "un mouvement pacifiste"], "Tous les partis soutiennent l’effort de guerre."],
+    ["La Première Guerre mondiale a touché uniquement les soldats.", ["Faux", "Vrai"], "Civils : occupation, bombardements, deuils, génocide."],
+    ["Verdun est une bataille…", ["d’usure", "éclair", "navale", "aérienne uniquement"], "Dix mois pour presque aucun gain de terrain."]
+  ]
+};
+M["hg-totalitarismes"] = {
+  c: [
+    ["Qui instaure le fascisme en Italie ?", "Mussolini, en 1922."], ["Krach de Wall Street : date ?", "Octobre 1929."], ["Conséquence de la crise de 1929 ?", "Faillites, chômage de masse, montée des extrémismes."],
+    ["Chômeurs en Allemagne en 1932 ?", "Environ 6 millions."], ["Fondation de l’URSS ?", "1922."], ["Successeur de Lénine ?", "Staline."],
+    ["Kolkhoze ?", "Ferme collective soviétique."], ["Koulaks ?", "Paysans accusés d’être riches, persécutés et déportés."], ["Famine en Ukraine ?", "1932-1933, due à la collectivisation, plusieurs millions de morts."],
+    ["Plans quinquennaux ?", "Plans de 5 ans qui fixent les objectifs de l’économie soviétique."], ["Police politique soviétique ?", "Le NKVD."], ["Police politique nazie ?", "La Gestapo."],
+    ["Parti d’Hitler ?", "Le NSDAP (parti nazi)."], ["Titre que prend Hitler ?", "Führer (guide)."], ["Nom du régime nazi ?", "Le IIIe Reich."],
+    ["Premier camp de concentration nazi ?", "Dachau (1933)."], ["Ministre de la propagande nazie ?", "Joseph Goebbels."],
+    ["Espace vital ?", "Territoires à l’Est qu’Hitler veut conquérir."], ["Anschluss ?", "Annexion de l’Autriche par l’Allemagne (1938)."],
+    ["6 février 1934 ?", "Émeutes des ligues d’extrême droite à Paris."], ["Accords de Matignon ?", "Juin 1936 : hausse des salaires, conventions collectives."],
+    ["Mesures du Front populaire ?", "Deux semaines de congés payés, semaine de 40 heures."], ["Chef du Front populaire ?", "Léon Blum."],
+    ["Homme nouveau ?", "Idéal des régimes totalitaires : un individu entièrement façonné par l’idéologie."]
+  ],
+  q: [
+    ["Qui est au pouvoir en Italie dès 1922 ?", ["Mussolini", "Hitler", "Franco", "Staline"], "Le fascisme italien."],
+    ["Les plans quinquennaux concernent…", ["l’URSS", "l’Allemagne nazie", "la France", "les États-Unis"], "Économie planifiée."],
+    ["Dachau est…", ["un camp de concentration nazi", "un camp du goulag", "une ville soviétique", "un ghetto"], "Ouvert en 1933."],
+    ["La Gestapo est…", ["la police politique nazie", "l’armée soviétique", "un parti communiste", "un journal"], "Elle traque les opposants."],
+    ["Hitler devient chancelier…", ["légalement", "par un coup d’État", "après une révolution", "par une guerre civile"], "Nommé par Hindenburg."],
+    ["La Nuit de Cristal vise…", ["les Juifs", "les communistes uniquement", "les Tsiganes uniquement", "les soldats"], "Novembre 1938."],
+    ["Les congés payés sont obtenus en…", ["1936", "1945", "1919", "1968"], "Front populaire."],
+    ["Quel pays reste une démocratie dans les années 1930 ?", ["la France", "l’URSS", "l’Allemagne", "l’Italie"], "Malgré les crises."],
+    ["La collectivisation des terres a lieu…", ["en URSS", "en Allemagne", "en France", "aux États-Unis"], "Kolkhozes."],
+    ["Le krach boursier de 1929 a lieu à…", ["New York", "Londres", "Berlin", "Paris"], "Wall Street."],
+    ["Les Jeunesses hitlériennes illustrent…", ["l’embrigadement", "la liberté d’association", "la démocratie", "le pluralisme"], "Encadrement de la jeunesse."],
+    ["Le culte de la personnalité consiste à…", ["glorifier le chef", "élire librement le président", "critiquer le gouvernement", "respecter l’opposition"], "Propagande autour du chef."],
+    ["L’Anschluss est l’annexion…", ["de l’Autriche", "de la Pologne", "de la Tchécoslovaquie", "de l’Alsace"], "Mars 1938."],
+    ["Staline et Hitler ont la même idéologie.", ["Faux", "Vrai"], "Communisme contre nazisme, mais méthodes proches."],
+    ["Léon Blum est…", ["socialiste", "communiste", "d’extrême droite", "monarchiste"], "Chef de la SFIO."]
+  ]
+};
+M["hg-2gm"] = {
+  c: [
+    ["Pacte germano-soviétique ?", "Pacte de non-agression Hitler-Staline, 23 août 1939."], ["« Drôle de guerre » ?", "Période sans combats de septembre 1939 à mai 1940."],
+    ["Blitzkrieg ?", "Guerre éclair."], ["Qui résiste seul en 1940 ?", "Le Royaume-Uni de Churchill."], ["Opération Barbarossa ?", "Invasion de l’URSS par l’Allemagne, juin 1941."],
+    ["Pearl Harbor : date ?", "7 décembre 1941."], ["Pays de l’Axe ?", "Allemagne, Italie, Japon."],
+    ["Bataille de Midway ?", "Juin 1942, victoire américaine dans le Pacifique."], ["El-Alamein ?", "Novembre 1942, victoire britannique en Égypte."], ["Stalingrad : fin ?", "Février 1943, capitulation allemande."],
+    ["Débarquement de Provence ?", "15 août 1944."], ["Capitulation allemande ?", "8 mai 1945."], ["Capitulation japonaise ?", "2 septembre 1945."],
+    ["Hiroshima / Nagasaki ?", "6 et 9 août 1945."], ["Bilan de la guerre ?", "Environ 60 millions de morts, majorité de civils."],
+    ["Ghetto ?", "Quartier où les Juifs sont enfermés (Varsovie)."], ["Shoah par balles ?", "Fusillades de Juifs par les Einsatzgruppen à l’Est."], ["Conférence de Wannsee ?", "Janvier 1942, organisation de la « solution finale »."],
+    ["Centres de mise à mort ?", "Auschwitz-Birkenau, Treblinka, Sobibor, Belzec…"], ["Victimes juives de la Shoah ?", "Environ 6 millions."], ["Victimes tsiganes ?", "Environ 200 000."],
+    ["Oradour-sur-Glane ?", "Village massacré par les SS le 10 juin 1944 (642 morts)."], ["Procès de Nuremberg ?", "1945-1946, jugement des dirigeants nazis."], ["Création de l’ONU ?", "Juin 1945, à San Francisco."]
+  ],
+  q: [
+    ["La guerre commence le…", ["1er septembre 1939", "3 août 1914", "7 décembre 1941", "22 juin 1941"], "Invasion de la Pologne."],
+    ["Qui est Premier ministre britannique en 1940 ?", ["Churchill", "Chamberlain", "Roosevelt", "de Gaulle"], "Il refuse de capituler."],
+    ["L’opération Barbarossa vise…", ["l’URSS", "le Royaume-Uni", "la France", "les États-Unis"], "Juin 1941."],
+    ["La victoire de Midway est…", ["américaine", "japonaise", "soviétique", "britannique"], "Tournant dans le Pacifique."],
+    ["La conférence de Wannsee organise…", ["l’extermination des Juifs", "la paix", "le débarquement", "la création de l’ONU"], "Janvier 1942."],
+    ["Auschwitz est situé en…", ["Pologne", "Allemagne", "France", "Autriche"], "Pologne occupée."],
+    ["Le débarquement de Normandie a lieu le…", ["6 juin 1944", "8 mai 1945", "15 août 1944", "25 août 1944"], "Jour J."],
+    ["La première bombe atomique est lancée sur…", ["Hiroshima", "Nagasaki", "Tokyo", "Pearl Harbor"], "6 août 1945."],
+    ["L’ONU est créée en…", ["1945", "1919", "1939", "1949"], "Charte de San Francisco."],
+    ["Les Einsatzgruppen sont…", ["des unités mobiles de tuerie nazies", "des résistants", "des soldats soviétiques", "des diplomates"], "Shoah par balles."],
+    ["Les civils représentent … des morts de la guerre", ["plus de la moitié", "environ 5 %", "aucun", "un dixième"], "Guerre d’anéantissement."],
+    ["Quel pays perd le plus de vies ?", ["l’URSS", "la France", "les États-Unis", "le Royaume-Uni"], "20 à 25 millions de morts."],
+    ["Le crime contre l’humanité est défini…", ["au procès de Nuremberg", "au traité de Versailles", "à la conférence de Bandung", "à Yalta"], "1945-1946."],
+    ["Le Japon capitule avant l’Allemagne.", ["Faux", "Vrai"], "Allemagne le 8 mai, Japon le 2 septembre 1945."],
+    ["Oradour-sur-Glane est…", ["un village français massacré par les SS", "un camp de concentration", "une bataille navale", "un ghetto"], "10 juin 1944."]
+  ]
+};
+M["hg-france-occupee"] = {
+  c: [
+    ["Durée de la campagne de France ?", "Environ six semaines (mai-juin 1940)."], ["Date de l’armistice de 1940 ?", "22 juin 1940."],
+    ["Lignes de partage de la France ?", "Zone occupée au nord et à l’ouest, zone libre au sud (jusqu’en novembre 1942)."],
+    ["Prisonniers français en Allemagne ?", "Environ 1,8 million."], ["Vote des pleins pouvoirs à Pétain ?", "10 juillet 1940."],
+    ["Nom officiel du régime de Vichy ?", "L’État français."], ["Entrevue de Montoire ?", "24 octobre 1940, début officiel de la collaboration."],
+    ["Statut des Juifs ?", "Lois de Vichy (octobre 1940, juin 1941) excluant les Juifs de nombreux métiers."],
+    ["STO ?", "Service du travail obligatoire en Allemagne (1943)."], ["Milice ?", "Force de police de Vichy qui traque résistants et Juifs (1943)."],
+    ["Nombre de Juifs déportés depuis la France ?", "Environ 75 000."], ["Qui reconnaît la responsabilité de l’État dans la rafle du Vél’d’Hiv ?", "Jacques Chirac, en 1995."],
+    ["FFL ?", "Forces françaises libres, armée de la France libre."], ["Date de création du CNR ?", "27 mai 1943."],
+    ["Arrestation de Jean Moulin ?", "Juin 1943 à Caluire, près de Lyon."], ["Figures féminines de la Résistance ?", "Lucie Aubrac, Berty Albrecht, Germaine Tillion."],
+    ["Actions de la Résistance ?", "Renseignement, journaux clandestins, sabotages, maquis, aide aux persécutés."],
+    ["GPRF ?", "Gouvernement provisoire de la République française (1944-1946)."], ["Ordonnance sur le vote des femmes ?", "21 avril 1944."],
+    ["Création de la Sécurité sociale ?", "Octobre 1945."], ["Nationalisations de 1945 ?", "Renault, banques, électricité, charbon."]
+  ],
+  q: [
+    ["Qui signe l’armistice de juin 1940 ?", ["Pétain", "de Gaulle", "Jean Moulin", "Blum"], "22 juin 1940."],
+    ["La zone sud est occupée par les Allemands à partir de…", ["novembre 1942", "juin 1940", "juin 1944", "septembre 1939"], "Après le débarquement allié en Afrique du Nord."],
+    ["Le STO oblige les jeunes à…", ["travailler en Allemagne", "rejoindre la Résistance", "voter", "s’engager dans l’armée française"], "1943."],
+    ["La Milice est…", ["une force de répression de Vichy", "un réseau de résistance", "l’armée de la France libre", "un parti démocratique"], "Créée en 1943."],
+    ["Le CNR réunit…", ["les mouvements de Résistance", "les collaborateurs", "les ministres de Vichy", "les armées alliées"], "Unifié par Jean Moulin."],
+    ["L’appel du 18 juin est lancé depuis…", ["Londres", "Vichy", "Alger", "Paris"], "À la radio de la BBC."],
+    ["Paris est libéré le…", ["25 août 1944", "6 juin 1944", "8 mai 1945", "11 novembre 1944"], "Insurrection et arrivée de la 2e DB."],
+    ["Quel était le régime politique avant Vichy ?", ["la IIIe République", "la IVe République", "l’Empire", "la monarchie"], "Fin le 10 juillet 1940."],
+    ["Les maquis se développent notamment à cause…", ["du STO", "du Front populaire", "de la crise de 1929", "de la guerre froide"], "Les réfractaires prennent le maquis."],
+    ["Montoire symbolise…", ["la collaboration", "la Résistance", "la Libération", "le débarquement"], "Rencontre Pétain-Hitler."],
+    ["Le programme du CNR prévoit notamment…", ["la Sécurité sociale", "les congés payés", "la peine de mort", "la monarchie"], "Mise en place en 1945."],
+    ["Germaine Tillion est…", ["une résistante déportée", "une ministre de Vichy", "une collaboratrice", "une aviatrice américaine"], "Déportée à Ravensbrück."],
+    ["Vichy a participé à la déportation des Juifs.", ["Vrai", "Faux"], "Rafles menées par la police française."],
+    ["La France libre est dirigée par…", ["de Gaulle", "Pétain", "Laval", "Jean Moulin"], "Depuis Londres."],
+    ["L’exode de 1940 désigne…", ["la fuite des civils devant l’invasion", "le départ des soldats au front", "le retour des prisonniers", "l’émigration en Amérique"], "Mai-juin 1940."]
+  ]
+};
+M["hg-guerre-froide"] = {
+  c: [
+    ["Durée de la guerre froide ?", "1947-1991."], ["Doctrine Truman ?", "1947 : endiguer le communisme."], ["Plan Marshall ?", "Aide économique américaine à l’Europe (1947)."],
+    ["Rideau de fer : origine de l’expression ?", "Churchill, 1946."], ["Bombe atomique soviétique ?", "1949."], ["Création de l’OTAN ?", "1949."], ["Pacte de Varsovie ?", "1955."],
+    ["Blocus de Berlin : dates ?", "1948-1949."], ["Réponse américaine au blocus ?", "Un pont aérien."], ["RFA / RDA ?", "Allemagne de l’Ouest démocratique / Allemagne de l’Est communiste (1949)."],
+    ["Construction du mur ?", "Août 1961."], ["Réunification allemande ?", "3 octobre 1990."], ["Guerre de Corée ?", "1950-1953."],
+    ["Crise de Cuba : acteurs ?", "Kennedy (États-Unis) et Khrouchtchev (URSS), octobre 1962."], ["Téléphone rouge ?", "Ligne directe Washington-Moscou installée après la crise de Cuba."],
+    ["Guerre du Vietnam ?", "1955-1975, intervention américaine contre le Nord communiste."], ["Invasion de l’Afghanistan ?", "URSS, 1979-1989."],
+    ["Gorbatchev ?", "Dirigeant soviétique à partir de 1985, réformateur."], ["Perestroïka ?", "Réformes économiques de Gorbatchev."], ["Glasnost ?", "Transparence, liberté d’expression accrue."],
+    ["Spoutnik ?", "Premier satellite artificiel (URSS, 1957)."], ["Premier homme dans l’espace ?", "Youri Gagarine (1961)."], ["Premier homme sur la Lune ?", "Neil Armstrong (1969)."],
+    ["Fin de l’URSS ?", "Décembre 1991."]
+  ],
+  q: [
+    ["Le plan Marshall est proposé par…", ["les États-Unis", "l’URSS", "la France", "l’ONU"], "Aide à la reconstruction."],
+    ["L’OTAN est créée en…", ["1949", "1955", "1945", "1961"], "Alliance de l’Ouest."],
+    ["Le pacte de Varsovie regroupe…", ["l’URSS et ses alliés de l’Est", "les États-Unis et l’Europe de l’Ouest", "les pays non alignés", "les pays de l’UE"], "1955."],
+    ["Lors du blocus de Berlin, les Américains…", ["organisent un pont aérien", "envahissent Berlin-Est", "construisent un mur", "quittent l’Allemagne"], "Ravitaillement par avion."],
+    ["Qui fait construire le mur de Berlin ?", ["la RDA", "la RFA", "les États-Unis", "la France"], "Pour stopper les départs vers l’Ouest."],
+    ["La crise de Cuba éclate en…", ["1962", "1948", "1956", "1989"], "Missiles soviétiques."],
+    ["Le premier satellite artificiel est…", ["Spoutnik", "Apollo", "Gemini", "Hubble"], "Soviétique, 1957."],
+    ["Neil Armstrong marche sur la Lune en…", ["1969", "1961", "1957", "1975"], "Mission Apollo 11."],
+    ["La guerre de Corée oppose…", ["le Nord communiste et le Sud soutenu par les États-Unis", "la Chine et le Japon", "la France et l’Indochine", "l’URSS et les États-Unis directement"], "Guerre indirecte."],
+    ["Le dernier dirigeant de l’URSS est…", ["Gorbatchev", "Staline", "Khrouchtchev", "Lénine"], "Au pouvoir de 1985 à 1991."],
+    ["L’Allemagne est réunifiée en…", ["1990", "1989", "1991", "1961"], "Le 3 octobre 1990."],
+    ["L’expression « rideau de fer » est de…", ["Churchill", "Truman", "Staline", "Kennedy"], "Discours de Fulton, 1946."],
+    ["Pendant la guerre froide, les États-Unis et l’URSS se sont affrontés directement.", ["Faux", "Vrai"], "Jamais d’affrontement direct."],
+    ["L’URSS envahit l’Afghanistan en…", ["1979", "1968", "1989", "1956"], "Elle se retire en 1989."],
+    ["Glasnost signifie…", ["transparence", "reconstruction", "révolution", "guerre"], "Liberté d’expression accrue."]
+  ]
+};
+M["hg-decolonisation"] = {
+  c: [
+    ["Pourquoi les métropoles sont-elles affaiblies en 1945 ?", "La guerre les a ruinées (la France a été vaincue)."],
+    ["Position de l’ONU sur la colonisation ?", "Elle défend le droit des peuples à disposer d’eux-mêmes."],
+    ["Méthode de Gandhi ?", "La non-violence (boycott, marche du sel, désobéissance civile)."],
+    ["Partition de l’Inde ?", "Inde (majorité hindoue) et Pakistan (majorité musulmane), 1947."],
+    ["Chef du Viet Minh ?", "Hô Chi Minh."], ["Dien Bien Phu ?", "Défaite française en Indochine, mai 1954."], ["Accords de Genève ?", "1954 : fin de la guerre d’Indochine."],
+    ["« Toussaint rouge » ?", "1er novembre 1954, début de la guerre d’Algérie."], ["FLN ?", "Front de libération nationale (Algérie)."], ["Pieds-noirs ?", "Européens d’Algérie."], ["Harkis ?", "Algériens ayant combattu aux côtés de l’armée française."],
+    ["Accords d’Évian ?", "18 mars 1962."], ["Indépendance de l’Algérie ?", "Juillet 1962."], ["Sétif 1945 ?", "Manifestations nationalistes et répression sanglante en Algérie."],
+    ["Indépendance du Maroc et de la Tunisie ?", "1956."], ["Année de l’Afrique ?", "1960, 17 États africains indépendants."],
+    ["Conférence de Bandung ?", "Avril 1955, 29 pays d’Asie et d’Afrique condamnent le colonialisme."], ["Mouvement des non-alignés ?", "Créé en 1961, refuse de choisir entre les deux blocs."],
+    ["Qui invente l’expression « tiers-monde » ?", "Alfred Sauvy, en 1952."], ["Difficultés des nouveaux États ?", "Pauvreté, frontières héritées, conflits, dépendance économique."]
+  ],
+  q: [
+    ["La guerre d’Indochine se termine en…", ["1954", "1962", "1946", "1975"], "Accords de Genève."],
+    ["Hô Chi Minh dirige…", ["le Viet Minh", "le FLN", "le Congrès indien", "la France libre"], "Indochine."],
+    ["L’Inde est colonie…", ["britannique", "française", "portugaise", "néerlandaise"], "Indépendante en 1947."],
+    ["Les accords d’Évian concernent…", ["l’Algérie", "l’Indochine", "l’Inde", "le Maroc"], "18 mars 1962."],
+    ["Le Maroc devient indépendant en…", ["1956", "1962", "1947", "1960"], "Comme la Tunisie."],
+    ["La guerre d’Algérie commence en…", ["1954", "1945", "1958", "1962"], "Toussaint rouge."],
+    ["Bandung se trouve en…", ["Indonésie", "Inde", "Égypte", "Algérie"], "Conférence de 1955."],
+    ["Le mouvement des non-alignés refuse…", ["de choisir entre les deux blocs", "toute indépendance", "l’ONU", "le commerce international"], "Neutralité dans la guerre froide."],
+    ["En 1960, la décolonisation concerne surtout…", ["l’Afrique subsaharienne", "l’Asie du Sud-Est", "l’Amérique latine", "l’Océanie"], "Année de l’Afrique."],
+    ["La torture a été pratiquée pendant la guerre d’Algérie.", ["Vrai", "Faux"], "Par l’armée française notamment."],
+    ["Le retour de de Gaulle en 1958 est lié à…", ["la crise algérienne", "la guerre d’Indochine", "Mai 68", "la guerre froide"], "Fin de la IVe République."],
+    ["Les harkis sont…", ["des Algériens ayant combattu pour la France", "des indépendantistes du FLN", "des Européens d’Algérie", "des soldats vietnamiens"], "Beaucoup ont fui en France en 1962."],
+    ["Gandhi prône…", ["la non-violence", "la lutte armée", "la collaboration avec le colonisateur", "le communisme"], "Désobéissance civile."],
+    ["La partition de l’Inde crée…", ["le Pakistan", "le Bangladesh directement", "le Sri Lanka", "le Népal"], "1947 (le Bangladesh se détache du Pakistan en 1971)."],
+    ["Le tiers-monde désigne les pays riches.", ["Faux", "Vrai"], "Pays pauvres, souvent nouvellement indépendants."]
+  ]
+};
+M["hg-ve-republique"] = {
+  c: [
+    ["Pourquoi la IVe République est-elle instable ?", "Les gouvernements changent sans cesse."], ["Référendum sur la Constitution de 1958 ?", "28 septembre 1958, près de 80 % de oui."],
+    ["Premier président de la Ve République ?", "Charles de Gaulle (1959-1969)."], ["Réforme de 1962 ?", "Élection du président au suffrage universel direct."], ["Première élection présidentielle au suffrage direct ?", "1965."],
+    ["Pouvoirs du président ?", "Nomme le Premier ministre, chef des armées, dissout l’Assemblée, référendum, promulgue les lois."],
+    ["Rôle du gouvernement ?", "Détermine et conduit la politique de la nation."], ["Rôle du Parlement ?", "Vote les lois et contrôle le gouvernement."],
+    ["Nombre de députés ?", "577."], ["Nombre de sénateurs ?", "348."], ["Durée du mandat des sénateurs ?", "6 ans."], ["Mode d’élection des sénateurs ?", "Suffrage universel indirect."],
+    ["Rôle du Conseil constitutionnel ?", "Vérifier que les lois respectent la Constitution."], ["Septennat / quinquennat ?", "Mandat de 7 ans / 5 ans."],
+    ["Pourquoi de Gaulle démissionne-t-il en 1969 ?", "Il perd un référendum."], ["Trois cohabitations ?", "1986-1988, 1993-1995, 1997-2002."],
+    ["Abolition de la peine de mort ?", "1981, Robert Badinter."], ["Majorité à 18 ans ?", "1974."], ["Loi Veil ?", "1975, légalisation de l’IVG."], ["Loi sur la parité ?", "2000."],
+    ["Navette parlementaire ?", "Allers-retours d’un texte entre l’Assemblée et le Sénat."], ["Promulgation d’une loi ?", "Signature par le président, puis publication au Journal officiel."]
+  ],
+  q: [
+    ["Combien y a-t-il de députés ?", ["577", "348", "100", "925"], "Élus pour 5 ans."],
+    ["Le Premier ministre est nommé par…", ["le président", "l’Assemblée nationale", "le Sénat", "les citoyens"], "Article 8 de la Constitution."],
+    ["Qui peut dissoudre l’Assemblée nationale ?", ["le président", "le Premier ministre", "le Sénat", "le Conseil constitutionnel"], "Pouvoir propre du président."],
+    ["La Constitution de la Ve République date de…", ["1958", "1946", "1962", "1875"], "Adoptée par référendum."],
+    ["Le quinquennat a été adopté en…", ["2000", "1962", "1981", "1958"], "Appliqué depuis 2002."],
+    ["Première cohabitation : Premier ministre ?", ["Jacques Chirac", "Lionel Jospin", "Édouard Balladur", "Michel Rocard"], "1986-1988 sous Mitterrand."],
+    ["Robert Badinter fait voter…", ["l’abolition de la peine de mort", "la loi Veil", "le quinquennat", "la parité"], "1981."],
+    ["Le Sénat est élu…", ["au suffrage indirect", "au suffrage direct", "par le président", "par tirage au sort"], "Grands électeurs."],
+    ["Le Conseil constitutionnel compte … membres", ["9", "577", "12", "27"], "Nommés pour 9 ans."],
+    ["Qui promulgue les lois ?", ["le président", "le Sénat", "le Premier ministre", "le Conseil d’État"], "Signature du président."],
+    ["En cas de désaccord entre les deux chambres, qui a le dernier mot ?", ["l’Assemblée nationale", "le Sénat", "le président", "le Conseil constitutionnel"], "Sur demande du gouvernement."],
+    ["Le président est élu pour…", ["5 ans", "7 ans", "4 ans", "6 ans"], "Depuis 2002."],
+    ["La Ve République naît pendant…", ["la guerre d’Algérie", "la Seconde Guerre mondiale", "la guerre froide uniquement", "Mai 68"], "Crise de mai 1958."],
+    ["François Mitterrand est le premier président de gauche de la Ve République.", ["Vrai", "Faux"], "Élu en 1981."],
+    ["Le gouvernement est responsable devant…", ["l’Assemblée nationale", "le Sénat seulement", "le Conseil constitutionnel", "les maires"], "Motion de censure possible."]
+  ]
+};
+M["hg-societe"] = {
+  c: [
+    ["Qui a inventé l’expression « Trente Glorieuses » ?", "L’économiste Jean Fourastié."], ["Croissance annuelle pendant les Trente Glorieuses ?", "Environ 5 % par an."],
+    ["Population française en 1946 et 1975 ?", "Environ 40 millions puis plus de 52 millions."], ["Premier hypermarché en France ?", "1963."],
+    ["Biens de consommation emblématiques ?", "Réfrigérateur, machine à laver, télévision, automobile."], ["Grands ensembles ?", "Immeubles collectifs construits en banlieue."],
+    ["Tertiarisation ?", "Hausse des emplois de services (employés, cadres)."], ["Pays d’origine des immigrés des Trente Glorieuses ?", "Italie, Espagne, Portugal, Algérie, Maroc…"],
+    ["Bidonvilles ?", "Quartiers d’habitat précaire (Nanterre)."], ["Mai 68 : point de départ ?", "Université de Nanterre puis la Sorbonne."],
+    ["Grévistes en Mai 68 ?", "Environ 7 millions."], ["Accords de Grenelle ?", "Mai 1968 : hausse des salaires."],
+    ["MLF ?", "Mouvement de libération des femmes (à partir de 1970)."], ["Manifeste des 343 ?", "1971 : 343 femmes déclarent avoir avorté, pour défendre le droit à l’IVG."],
+    ["Égalité hommes-femmes dans la Constitution ?", "Préambule de 1946."], ["Autorité parentale ?", "1970, remplace l’autorité paternelle."], ["Égalité salariale (principe) ?", "1972."],
+    ["Mixité scolaire obligatoire ?", "1975 (loi Haby)."], ["Premier choc pétrolier ?", "1973."], ["Conséquence du choc pétrolier ?", "Ralentissement de la croissance, chômage de masse."],
+    ["Régions industrielles touchées par la crise ?", "Le Nord, la Lorraine (mines, sidérurgie)."], ["Regroupement familial ?", "Autorisé en 1976."]
+  ],
+  q: [
+    ["Les Trente Glorieuses durent de…", ["1945 à 1975", "1918 à 1948", "1958 à 1988", "1975 à 2005"], "Forte croissance."],
+    ["Le baby-boom est…", ["une forte hausse des naissances", "une crise économique", "une vague d’immigration", "une guerre"], "Après 1945."],
+    ["Mai 68 commence dans…", ["les universités", "les usines automobiles", "les campagnes", "l’armée"], "Révolte étudiante."],
+    ["La loi Neuwirth (1967) autorise…", ["la contraception", "l’IVG", "le divorce", "le vote des femmes"], "Lucien Neuwirth."],
+    ["La loi Haby (1975) impose…", ["la mixité scolaire", "le vote à 18 ans", "l’IVG", "la Sécurité sociale"], "Collège unique et mixte."],
+    ["Le premier choc pétrolier multiplie le prix du pétrole par…", ["environ 4", "2", "10", "100"], "1973."],
+    ["Les grands ensembles sont construits…", ["en banlieue", "dans les centres historiques", "à la campagne", "en montagne"], "Pour loger rapidement les familles."],
+    ["Le Manifeste des 343 défend…", ["le droit à l’avortement", "le droit de vote", "la mixité", "le travail des enfants"], "1971."],
+    ["La société de consommation se développe grâce…", ["à la hausse des salaires et au crédit", "à la guerre", "au rationnement", "à la crise de 1929"], "Pouvoir d’achat en hausse."],
+    ["En 1965, les femmes mariées obtiennent le droit de…", ["travailler sans l’accord du mari", "voter", "avorter", "être députées"], "Réforme des régimes matrimoniaux."],
+    ["L’exode rural est…", ["le départ des campagnes vers les villes", "le départ des villes vers les campagnes", "l’émigration à l’étranger", "un exode en temps de guerre"], "Trente Glorieuses."],
+    ["La part des agriculteurs dans les actifs en 1975 est d’environ…", ["moins de 10 %", "50 %", "30 %", "75 %"], "Contre un tiers en 1946."],
+    ["Après 1974, l’immigration de travail est…", ["suspendue", "encouragée", "obligatoire", "inchangée"], "Crise économique."],
+    ["Mai 68 se termine par la démission immédiate de de Gaulle.", ["Faux", "Vrai"], "Il démissionne en 1969 après un référendum."],
+    ["Jean Fourastié est…", ["un économiste", "un président", "un syndicaliste", "un écrivain de science-fiction"], "Auteur de « Les Trente Glorieuses » (1979)."]
+  ]
+};
+M["hg-territoires"] = {
+  c: [
+    ["Part des Français vivant sous influence urbaine ?", "Environ 80 %."], ["Pôle d’une aire d’attraction ?", "Ville-centre et banlieue."], ["Couronne ?", "Communes dont beaucoup d’habitants travaillent dans le pôle."],
+    ["Fonctions de commandement ?", "Sièges sociaux, universités, recherche, pouvoirs politiques."], ["Ville mondiale française ?", "Paris."],
+    ["Grandes métropoles régionales ?", "Lyon, Marseille, Toulouse, Lille, Bordeaux, Nantes…"], ["Étalement urbain : conséquences ?", "Consommation de terres agricoles, dépendance à la voiture."],
+    ["Solutions contre l’étalement ?", "Transports en commun, densification, limitation des constructions."],
+    ["Zone industrialo-portuaire ?", "Industries lourdes installées dans un grand port (Marseille-Fos, Le Havre, Dunkerque)."],
+    ["Ville de l’aéronautique ?", "Toulouse."], ["Technopôle près de Nice ?", "Sophia-Antipolis."], ["Grand quartier d’affaires ?", "La Défense."],
+    ["Région céréalière ?", "La Beauce."], ["Région d’élevage ?", "La Bretagne."], ["Vignobles célèbres ?", "Bordelais, Champagne, Bourgogne."],
+    ["AOP / AOC ?", "Labels de qualité liés à un territoire."], ["Diagonale du vide ?", "Bande de faible densité des Ardennes aux Landes."],
+    ["Déserts médicaux ?", "Territoires où l’accès aux médecins est difficile."], ["Néoruraux ?", "Citadins installés à la campagne."],
+    ["Attraits des espaces de faible densité ?", "Tourisme vert, résidences secondaires, télétravail, qualité de vie."], ["Reconversion industrielle ?", "Transformation d’anciens bassins industriels (Nord, Lorraine)."]
+  ],
+  q: [
+    ["La périurbanisation entraîne…", ["des mobilités pendulaires plus longues", "une baisse de l’usage de la voiture", "la disparition des banlieues", "le retour des paysans"], "Domicile-travail plus éloignés."],
+    ["Toulouse est spécialisée dans…", ["l’aéronautique", "la sidérurgie", "le textile", "la pêche"], "Airbus."],
+    ["La Défense est…", ["un quartier d’affaires", "un port", "un parc naturel", "un technopôle agricole"], "Près de Paris."],
+    ["Dunkerque est…", ["une zone industrialo-portuaire", "une station de ski", "un technopôle", "une ville nouvelle"], "Sidérurgie, port."],
+    ["La diagonale du vide est un espace…", ["de faible densité", "très urbanisé", "industriel", "littoral"], "Des Ardennes aux Landes."],
+    ["Le tourisme vert concerne surtout…", ["les espaces ruraux", "les quartiers d’affaires", "les zones portuaires", "les aéroports"], "Nature, randonnée."],
+    ["Une ville mondiale concentre…", ["des fonctions de commandement internationales", "uniquement des usines", "des espaces agricoles", "peu d’habitants"], "Sièges, finance, culture."],
+    ["Les espaces productifs sont de plus en plus liés…", ["à la mondialisation", "à la guerre froide", "à la colonisation", "au Moyen Âge"], "Exportations, multinationales."],
+    ["Un technopôle associe…", ["entreprises, universités et laboratoires", "fermes et marchés", "ports et chantiers", "hôtels et plages"], "Innovation."],
+    ["La métropolisation est…", ["la concentration dans les grandes villes", "l’exode urbain", "la fermeture des villes", "la disparition des banlieues"], "Population, activités, pouvoirs."],
+    ["Les déserts médicaux touchent surtout…", ["les espaces ruraux isolés", "les centres des métropoles", "les quartiers d’affaires", "les zones portuaires"], "Manque de médecins."],
+    ["L’Insee définit les…", ["aires d’attraction des villes", "zones économiques exclusives", "régions ultrapériphériques", "pôles de guerre"], "Pôle + couronne."],
+    ["Tous les espaces ruraux sont en déclin.", ["Faux", "Vrai"], "Certains attirent néoruraux et touristes."],
+    ["Les grands ports industriels sont situés…", ["sur les littoraux", "en montagne", "au centre du pays uniquement", "dans les vignobles"], "Importation de matières premières."],
+    ["Une mobilité pendulaire est un trajet…", ["quotidien domicile-travail", "annuel de vacances", "définitif de déménagement", "international"], "Aller-retour chaque jour."]
+  ]
+};
+M["hg-ue"] = {
+  c: [
+    ["Nombre de régions métropolitaines depuis 2016 ?", "13."], ["Les 5 DROM ?", "Guadeloupe, Martinique, Guyane, La Réunion, Mayotte."], ["DROM non insulaire ?", "La Guyane."],
+    ["Difficultés des DROM ?", "Éloignement, chômage élevé, prix élevés, risques naturels."], ["Régions ultrapériphériques ?", "Statut des DROM dans l’UE, avec des aides spécifiques."],
+    ["Rang de l’espace maritime français ?", "Deuxième du monde."], ["Fonds européen pour les régions ?", "Le FEDER."], ["Zones blanches ?", "Territoires sans couverture téléphonique ou Internet."],
+    ["Compétences de la région ?", "Lycées, TER, développement économique."], ["Compétences du département ?", "Collèges, routes, action sociale."], ["Compétences de la commune ?", "Écoles primaires, urbanisme, état civil."],
+    ["Pays fondateurs de la CECA ?", "France, RFA, Italie, Belgique, Pays-Bas, Luxembourg."], ["Traité de Rome ?", "1957, création de la CEE."], ["Traité de Maastricht ?", "1992, création de l’UE et de la citoyenneté européenne."],
+    ["Première élection du Parlement européen ?", "1979."], ["Euro en pièces et billets ?", "2002."], ["Élargissements à l’Est ?", "2004 et 2007."], ["Brexit ?", "Sortie du Royaume-Uni, 2020."],
+    ["Siège du Parlement européen ?", "Strasbourg."], ["Rôle de la Commission européenne ?", "Proposer les lois et veiller à leur application."], ["Banque centrale européenne ?", "Francfort, gère l’euro."],
+    ["Travailleurs frontaliers ?", "Personnes qui vivent dans un pays et travaillent dans un pays voisin."], ["Atouts de la puissance française ?", "Siège permanent au Conseil de sécurité, arme nucléaire, Francophonie, présence dans tous les océans."]
+  ],
+  q: [
+    ["Combien de pays fondent la CEE en 1957 ?", ["6", "9", "12", "27"], "Les mêmes que la CECA."],
+    ["Le traité de Maastricht crée…", ["l’Union européenne", "la CECA", "l’euro en billets", "l’OTAN"], "1992."],
+    ["Où siège le Parlement européen ?", ["Strasbourg", "Paris", "Berlin", "Rome"], "Avec des sessions à Bruxelles."],
+    ["Le Parlement européen est élu…", ["au suffrage universel direct", "par les présidents", "par la Commission", "par tirage au sort"], "Depuis 1979."],
+    ["La Commission européenne siège à…", ["Bruxelles", "Strasbourg", "Luxembourg", "Francfort"], "Capitale de l’UE."],
+    ["Mayotte est…", ["un DROM", "un pays indépendant", "une région métropolitaine", "un territoire allemand"], "Depuis 2011."],
+    ["Les collèges sont gérés par…", ["le département", "la région", "la commune", "l’UE"], "Compétence départementale."],
+    ["Les lycées sont gérés par…", ["la région", "le département", "la commune", "l’État uniquement"], "Compétence régionale."],
+    ["Quel pays est sorti de l’UE ?", ["le Royaume-Uni", "la Suisse", "la Norvège", "l’Irlande"], "Brexit, 2020."],
+    ["La Suisse fait partie de l’espace Schengen.", ["Vrai", "Faux"], "Sans être membre de l’UE."],
+    ["La France est membre permanent du…", ["Conseil de sécurité de l’ONU", "pacte de Varsovie", "G2", "Conseil de l’Europe uniquement"], "Avec un droit de veto."],
+    ["Les DROM font partie de l’UE.", ["Vrai", "Faux"], "Régions ultrapériphériques."],
+    ["Le FEDER finance…", ["des projets pour réduire les inégalités régionales", "les armées", "les retraites", "les Jeux olympiques"], "Fonds européen de développement régional."],
+    ["L’aménagement du territoire vise à…", ["réduire les inégalités entre territoires", "augmenter les inégalités", "supprimer les régions", "fermer les frontières"], "Objectif principal."],
+    ["L’euro est géré par…", ["la Banque centrale européenne", "la Banque de France seule", "le FMI", "le Parlement européen"], "Siège à Francfort."]
+  ]
+};
+M["hg-emc"] = {
+  c: [
+    ["Article 1er de la Constitution : caractéristiques de la République ?", "Indivisible, laïque, démocratique et sociale."], ["Auteur de la Marseillaise ?", "Rouget de Lisle (1792)."],
+    ["Hymne national depuis ?", "1879."], ["Fête nationale depuis ?", "1880."], ["Origine des couleurs du drapeau ?", "Blanc de la royauté, bleu et rouge de Paris."],
+    ["Date de la loi de séparation des Églises et de l’État ?", "9 décembre 1905."], ["Liberté de conscience ?", "Liberté de croire, de ne pas croire ou de changer de religion."],
+    ["Loi de 2004 à l’école ?", "Interdit aux élèves les signes religieux ostensibles."], ["Devoir de neutralité ?", "Les agents publics ne manifestent pas leurs convictions dans leur travail."],
+    ["Article 1er de la DDHC ?", "Les hommes naissent et demeurent libres et égaux en droits."], ["Déclaration universelle des droits de l’homme ?", "ONU, 1948."],
+    ["Préambule de 1946 ?", "Ajoute des droits sociaux (travail, santé, éducation)."], ["Devoirs du citoyen ?", "Respecter la loi, payer l’impôt, participer à la défense, être juré si tiré au sort."],
+    ["Élections en France ?", "Municipales, départementales, régionales, législatives, présidentielle, européennes."], ["Service civique : âge ?", "Dès 16 ans."],
+    ["Dissuasion nucléaire ?", "Posséder l’arme nucléaire pour décourager toute attaque."], ["Opération Sentinelle ?", "Déploiement de militaires contre le terrorisme en France."],
+    ["Recensement : où et quand ?", "À la mairie, à 16 ans."], ["JDC ?", "Journée défense et citoyenneté."], ["Défenseur des droits ?", "Autorité qui peut être saisie gratuitement par les victimes de discrimination."],
+    ["Numéro contre le harcèlement ?", "3018."], ["Présomption d’innocence ?", "Toute personne est innocente tant que sa culpabilité n’est pas prouvée."], ["État de droit ?", "État où tous sont soumis à la loi."]
+  ],
+  q: [
+    ["La France est une République…", ["indivisible, laïque, démocratique et sociale", "fédérale et religieuse", "monarchique et laïque", "impériale et sociale"], "Article 1er."],
+    ["La Marseillaise a été écrite par…", ["Rouget de Lisle", "Victor Hugo", "Napoléon", "Marianne"], "En 1792."],
+    ["La loi de 1905 garantit…", ["la liberté de conscience", "une religion d’État", "l’interdiction des cultes", "le vote des femmes"], "Séparation des Églises et de l’État."],
+    ["La DDHC date de…", ["1789", "1848", "1905", "1958"], "Révolution française."],
+    ["La Déclaration universelle des droits de l’homme est adoptée par…", ["l’ONU en 1948", "la France en 1789", "l’UE en 1992", "la SDN en 1919"], "À Paris."],
+    ["Payer l’impôt est…", ["un devoir du citoyen", "un droit facultatif", "réservé aux entreprises", "interdit aux mineurs"], "Contribuer aux dépenses publiques."],
+    ["Le service civique est possible dès…", ["16 ans", "18 ans", "21 ans", "14 ans"], "Engagement volontaire."],
+    ["La présomption d’innocence signifie que…", ["l’accusé est innocent tant que sa culpabilité n’est pas prouvée", "l’accusé doit prouver son innocence", "tout accusé est coupable", "les juges ne peuvent pas condamner"], "Principe fondamental."],
+    ["Un juré d’assises est…", ["un citoyen tiré au sort", "un avocat", "un policier", "un député"], "Il participe au jugement."],
+    ["La loi de 2004 concerne…", ["les signes religieux à l’école", "le vote à 16 ans", "la JDC", "la parité"], "Signes ostensibles interdits aux élèves."],
+    ["Le Défenseur des droits peut être saisi…", ["gratuitement", "seulement par un avocat", "seulement par les majeurs", "contre paiement"], "Par toute personne."],
+    ["Le 3018 est le numéro…", ["contre le harcèlement", "des pompiers", "de la police", "du SAMU"], "Harcèlement et cyberharcèlement."],
+    ["Les citoyens européens peuvent voter en France aux élections…", ["municipales et européennes", "présidentielles", "législatives", "toutes"], "Droit lié à la citoyenneté européenne."],
+    ["La laïcité interdit de croire en Dieu.", ["Faux", "Vrai"], "Elle garantit la liberté de croire ou non."],
+    ["L’opération Sentinelle vise à…", ["protéger le territoire contre le terrorisme", "aider les DROM", "surveiller les frontières de l’UE", "organiser la JDC"], "Militaires déployés depuis 2015."]
+  ]
+};
+
+/* Flashcards et questions supplémentaires : maths (géométrie) */
+var M = BREVET_MORE;
+M["ma-pythagore"] = {
+  c: [
+    ["Que vaut 7² ?", "49"], ["Que vaut 11² ?", "121"], ["Que vaut 12² ?", "144"], ["Que vaut 13² ?", "169"], ["Que vaut 15² ?", "225"],
+    ["√64 = ?", "8"], ["√81 = ?", "9"], ["√196 = ?", "14"],
+    ["Comment savoir quel côté est l’hypoténuse ?", "C’est le côté en face de l’angle droit (et le plus long)."],
+    ["Formule pour calculer un côté de l’angle droit ?", "AC² = BC² − AB² (on soustrait)."],
+    ["Que signifie le symbole ≈ ?", "« environ » : le résultat est une valeur arrondie."],
+    ["Valeur exacte de BC si BC² = 20 ?", "BC = √20 cm."],
+    ["Étapes pour utiliser la réciproque ?", "Repérer le plus grand côté, calculer son carré, calculer la somme des carrés des deux autres, comparer."],
+    ["Que conclure si le carré du plus grand côté ≠ somme des carrés des deux autres ?", "Le triangle n’est pas rectangle (contraposée)."],
+    ["Le triangle 6-8-10 est-il rectangle ?", "Oui : 10² = 100 = 36 + 64."],
+    ["Le triangle 8-15-17 est-il rectangle ?", "Oui : 17² = 289 = 64 + 225."],
+    ["Dans quel cas utilise-t-on le théorème direct ?", "Pour calculer une longueur dans un triangle qu’on sait rectangle."],
+    ["Diagonale d’un rectangle de 3 cm sur 4 cm ?", "5 cm."],
+    ["Diagonale d’un carré de côté a ?", "a × √2."],
+    ["Grande diagonale d’un pavé L × l × h ?", "√(L² + l² + h²)."],
+    ["Phrase de conclusion de la réciproque ?", "« D’après la réciproque du théorème de Pythagore, le triangle est rectangle en … »."],
+    ["Pourquoi un mur et le sol forment un angle droit ?", "Le mur est vertical, le sol horizontal : ils sont perpendiculaires."],
+    ["Erreur classique : BC² = 25, donc BC = … ?", "BC = 5 (et non 25 : ne pas oublier la racine)."],
+    ["Pythagore s’applique-t-il dans un triangle quelconque ?", "Non, seulement dans un triangle rectangle."],
+    ["Que faut-il vérifier sur les unités ?", "Que toutes les longueurs sont dans la même unité."],
+    ["Qui était Pythagore ?", "Un mathématicien grec du VIe siècle av. J.-C."]
+  ],
+  q: [
+    ["Rectangle en A, AB = 5, AC = 12. BC = ?", ["13", "17", "7", "√17"], "BC² = 25 + 144 = 169, donc BC = 13."],
+    ["Rectangle en A, BC = 17, AC = 15. AB = ?", ["8", "2", "√514", "32"], "AB² = 289 − 225 = 64."],
+    ["Rectangle en A, AB = AC = 3. BC ≈ ?", ["4,2", "6", "9", "3"], "BC² = 18, BC = √18 ≈ 4,24."],
+    ["Triangle de côtés 9, 12, 15 ?", ["rectangle", "non rectangle", "équilatéral", "impossible"], "15² = 225 = 81 + 144."],
+    ["Triangle de côtés 4, 6, 7 ?", ["non rectangle", "rectangle", "isocèle", "équilatéral"], "49 ≠ 16 + 36 = 52."],
+    ["Diagonale d’un écran de 60 cm × 34 cm (au cm près) ?", ["69 cm", "94 cm", "47 cm", "65 cm"], "√(3 600 + 1 156) = √4 756 ≈ 69."],
+    ["Pour prouver qu’un triangle est rectangle, on utilise…", ["la réciproque de Pythagore", "le théorème direct", "Thalès", "la trigonométrie"], "La réciproque conclut à un angle droit."],
+    ["Le carré de l’hypoténuse est égal à…", ["la somme des carrés des deux autres côtés", "la différence des carrés", "le double du plus petit côté", "la somme des deux autres côtés"], "C’est l’énoncé du théorème."],
+    ["Un rectangle mesure 8 cm sur 6 cm. Sa diagonale mesure…", ["10 cm", "14 cm", "48 cm", "7 cm"], "√(64 + 36) = 10."],
+    ["Dans un triangle rectangle, l’hypoténuse peut être plus courte qu’un autre côté.", ["Faux", "Vrai"], "C’est toujours le plus long côté."],
+    ["Une rampe de 5 m monte de 1,4 m. Sa longueur au sol ≈ ?", ["4,8 m", "3,6 m", "6,4 m", "5,2 m"], "√(25 − 1,96) = √23,04 = 4,8."],
+    ["√50 en valeur arrondie au dixième ?", ["7,1", "25", "7,0", "5,0"], "√50 ≈ 7,07."],
+    ["Pavé 2 × 3 × 6 : grande diagonale ?", ["7", "11", "√13", "36"], "√(4 + 9 + 36) = √49 = 7."],
+    ["Le triangle 7-24-25 est rectangle.", ["Vrai", "Faux"], "625 = 49 + 576."],
+    ["Quel est l’angle droit dans un triangle RST où RT est le plus grand côté et RT² = RS² + ST² ?", ["en S", "en R", "en T", "aucun"], "L’angle droit est opposé au plus grand côté [RT]."]
+  ]
+};
+M["ma-thales"] = {
+  c: [
+    ["Conditions pour appliquer Thalès ?", "Deux droites sécantes et deux droites parallèles qui les coupent."],
+    ["Où place-t-on les côtés du petit triangle dans les rapports ?", "Au numérateur (en haut)."],
+    ["Qu’est-ce qu’un produit en croix ?", "Si a/b = c/d, alors a × d = b × c."],
+    ["Configuration emboîtée : définition ?", "Le petit triangle est à l’intérieur du grand, M sur [AB], N sur [AC]."],
+    ["Configuration papillon : définition ?", "Les deux triangles sont opposés par le sommet commun."],
+    ["Côtés correspondants à MN dans Thalès ?", "BC (côté parallèle)."],
+    ["Réciproque : quels rapports compare-t-on ?", "AM/AB et AN/AC."],
+    ["Réciproque : condition sur l’ordre des points ?", "Les points doivent être alignés dans le même ordre."],
+    ["Si AM/AB ≠ AN/AC ?", "Les droites (MN) et (BC) ne sont pas parallèles."],
+    ["Deux droites perpendiculaires à une même troisième sont…", "Parallèles entre elles."],
+    ["Effet d’un rapport k sur les longueurs ?", "Multipliées par k."],
+    ["Effet d’un rapport k sur les aires ?", "Multipliées par k²."],
+    ["Effet d’un rapport k sur les volumes ?", "Multipliés par k³."],
+    ["Effet d’un agrandissement sur les angles ?", "Aucun : ils sont conservés."],
+    ["Rapport de réduction si AM = 2 et AB = 8 ?", "k = 2/8 = 0,25."],
+    ["k > 1 signifie…", "un agrandissement."],
+    ["0 < k < 1 signifie…", "une réduction."],
+    ["Deux triangles semblables : définition ?", "Ils ont les mêmes angles ; leurs côtés sont proportionnels."],
+    ["Lien entre Thalès et homothétie ?", "AMN est l’image de ABC par l’homothétie de centre A et de rapport AM/AB."],
+    ["Aire d’une réduction de rapport 1/2 d’un triangle de 40 cm² ?", "10 cm²."],
+    ["Volume d’un agrandissement de rapport 2 d’un cube de 5 cm³ ?", "40 cm³."],
+    ["Mesurer une hauteur avec les ombres utilise…", "Thalès (rayons du soleil parallèles)."]
+  ],
+  q: [
+    ["(MN) // (BC), AM = 4, AB = 10, BC = 15. MN = ?", ["6", "37,5", "9", "2,7"], "4/10 = MN/15 donc MN = 6."],
+    ["(MN) // (BC), AN = 3, AC = 9, AM = 2. AB = ?", ["6", "4,5", "1", "13,5"], "3/9 = 2/AB donc AB = 6."],
+    ["Configuration papillon, CE/CA = 0,5 et AB = 12. DE = ?", ["6", "24", "12", "0,5"], "DE = 12 × 0,5."],
+    ["Pour Thalès, il faut absolument…", ["des droites parallèles", "un angle droit", "un triangle isocèle", "un cercle"], "Le parallélisme est indispensable."],
+    ["AM/AB = 3/5 et AN/AC = 6/10, points dans le même ordre. (MN) et (BC) sont…", ["parallèles", "sécantes", "perpendiculaires", "on ne peut pas savoir"], "6/10 = 3/5 : réciproque."],
+    ["AM/AB = 0,3 et AN/AC = 0,35. Les droites sont…", ["non parallèles", "parallèles", "confondues", "perpendiculaires"], "Rapports différents : contraposée."],
+    ["Une maquette au 1/50 : 1 cm sur la maquette = … en réalité", ["50 cm", "5 m", "50 m", "0,5 cm"], "1 × 50 = 50 cm."],
+    ["Un carré de 3 cm de côté agrandi avec k = 4 a une aire de…", ["144 cm²", "36 cm²", "48 cm²", "12 cm²"], "Côté 12 cm, aire 144 cm² (ou 9 × 16)."],
+    ["Cône réduit de rapport 1/2. Volume initial 160 cm³. Nouveau volume ?", ["20 cm³", "80 cm³", "40 cm³", "10 cm³"], "160 × 1/8."],
+    ["Un bâton de 1 m a une ombre de 1,6 m ; un poteau a une ombre de 8 m. Hauteur du poteau ?", ["5 m", "12,8 m", "6,4 m", "4 m"], "h/8 = 1/1,6, h = 5."],
+    ["Les angles d’un triangle agrandi sont…", ["inchangés", "multipliés par k", "multipliés par k²", "divisés par k"], "Les angles sont conservés."],
+    ["Dans Thalès, le côté MN correspond à…", ["BC", "AB", "AC", "AM"], "Les côtés parallèles se correspondent."],
+    ["k = 3 : un volume de 2 cm³ devient…", ["54 cm³", "6 cm³", "18 cm³", "8 cm³"], "2 × 27."],
+    ["Pour la réciproque de Thalès, on peut utiliser MN/BC.", ["Faux", "Vrai"], "On ne sait pas encore si les droites sont parallèles."],
+    ["Deux triangles qui ont les mêmes angles sont…", ["semblables", "égaux", "rectangles", "isocèles"], "Leurs côtés sont proportionnels."]
+  ]
+};
+M["ma-trigo"] = {
+  c: [
+    ["Dans quel triangle utilise-t-on la trigonométrie ?", "Uniquement dans un triangle rectangle."],
+    ["Côté opposé à un angle : définition ?", "Le côté qui ne touche pas l’angle."],
+    ["Côté adjacent à un angle : définition ?", "Le côté de l’angle droit qui touche l’angle."],
+    ["Formule du sinus ?", "sin = opposé ÷ hypoténuse."],
+    ["Formule du cosinus ?", "cos = adjacent ÷ hypoténuse."],
+    ["Formule de la tangente ?", "tan = opposé ÷ adjacent."],
+    ["Entre quelles valeurs sont sin et cos d’un angle aigu ?", "Entre 0 et 1."],
+    ["La tangente peut-elle dépasser 1 ?", "Oui (tan 60° ≈ 1,73)."],
+    ["cos 60° = ?", "0,5."], ["sin 30° = ?", "0,5."], ["tan 45° = ?", "1."],
+    ["Touche pour retrouver un angle à partir de son cosinus ?", "cos⁻¹ (Arccos)."],
+    ["Mode de la calculatrice ?", "Degrés."],
+    ["Somme des deux angles aigus d’un triangle rectangle ?", "90° (ils sont complémentaires)."],
+    ["Si cos B = AB/BC, comment calculer BC ?", "BC = AB ÷ cos B."],
+    ["Si cos B = AB/BC, comment calculer AB ?", "AB = BC × cos B."],
+    ["Relation entre sin et cos ?", "(cos α)² + (sin α)² = 1."],
+    ["Relation entre tan, sin et cos ?", "tan α = sin α ÷ cos α."],
+    ["Je connais l’opposé et l’hypoténuse, je cherche l’angle : j’utilise…", "le sinus puis sin⁻¹."],
+    ["Je connais l’opposé et l’adjacent : j’utilise…", "la tangente."],
+    ["L’hypoténuse change-t-elle selon l’angle choisi ?", "Non, c’est toujours le côté opposé à l’angle droit."],
+    ["Moyen mnémotechnique ?", "SOH CAH TOA."]
+  ],
+  q: [
+    ["Rectangle en A, B = 30°, BC = 12. AC (opposé à B) = ?", ["6", "10,4", "24", "6,9"], "AC = 12 × sin 30° = 6."],
+    ["Rectangle en A, B = 60°, AB = 4 (adjacent). BC = ?", ["8", "2", "6,9", "4,6"], "BC = 4 ÷ cos 60° = 8."],
+    ["Rectangle en A, AB = 5, AC = 5. Angle B = ?", ["45°", "30°", "60°", "90°"], "tan B = 1."],
+    ["Rectangle en A, AB = 3, BC = 6. Angle B = ?", ["60°", "30°", "45°", "50°"], "cos B = 0,5."],
+    ["Rectangle en A, B = 40°, AB = 10. AC ≈ ?", ["8,4", "6,4", "11,9", "7,7"], "AC = 10 × tan 40° ≈ 8,39."],
+    ["Un angle de 25° et une hypoténuse de 20 cm : adjacent ≈ ?", ["18,1 cm", "8,5 cm", "9,3 cm", "22,1 cm"], "20 × cos 25° ≈ 18,1."],
+    ["Si cos α = 0,8, alors sin α = ?", ["0,6", "0,2", "1,8", "0,64"], "sin² = 1 − 0,64 = 0,36."],
+    ["Quel rapport utilise les deux côtés de l’angle droit ?", ["la tangente", "le sinus", "le cosinus", "aucun"], "tan = opposé ÷ adjacent."],
+    ["Un angle aigu d’un triangle rectangle mesure 35°. L’autre mesure…", ["55°", "65°", "145°", "35°"], "90 − 35 = 55."],
+    ["Une échelle de 4 m fait un angle de 70° avec le sol. Hauteur atteinte ≈ ?", ["3,8 m", "1,4 m", "11 m", "4,3 m"], "4 × sin 70° ≈ 3,76."],
+    ["Pente : on monte de 10 m pour 100 m à l’horizontale. Angle ≈ ?", ["5,7°", "10°", "84°", "0,1°"], "tan⁻¹(0,1) ≈ 5,7°."],
+    ["cos 0,5 donne -0,88 sur ma calculatrice : pourquoi ?", ["elle est en radians", "c’est normal", "il faut cos⁻¹", "la calculatrice est cassée"], "En degrés, on obtiendrait une valeur proche de 1."],
+    ["sin 90° = ?", ["1", "0", "0,5", "90"], "Valeur limite."],
+    ["Le cosinus d’un angle aigu est toujours inférieur à 1.", ["Vrai", "Faux"], "adjacent < hypoténuse."],
+    ["Pour calculer un angle avec sa tangente, on utilise…", ["tan⁻¹", "tan", "cos⁻¹", "1/tan"], "La fonction réciproque donne l’angle."]
+  ]
+};
+M["ma-transformations"] = {
+  c: [
+    ["Symétrie axiale : image de M ?", "M’ tel que l’axe soit la médiatrice de [MM’]."],
+    ["Symétrie centrale de centre O : image de M ?", "M’ tel que O soit le milieu de [MM’]."],
+    ["Translation : à quoi ressemble le mouvement ?", "Un glissement, sans rotation ni retournement."],
+    ["Translation qui transforme A en B : propriété de ABM’M ?", "C’est un parallélogramme."],
+    ["Trois éléments d’une rotation ?", "Un centre, un angle, un sens."],
+    ["Sens anti-horaire, autre nom ?", "Sens direct (inverse des aiguilles d’une montre)."],
+    ["Rotation : propriété de OM et OM’ ?", "OM’ = OM."],
+    ["Homothétie de centre O, rapport k : OM’ = ?", "|k| × OM."],
+    ["Homothétie k < 0 : position de M’ ?", "De l’autre côté de O."],
+    ["Homothétie de rapport −1 = ?", "Symétrie centrale."],
+    ["Quelle transformation « retourne » la figure ?", "La symétrie axiale."],
+    ["Qu’est-ce qui est conservé par symétrie, translation, rotation ?", "Longueurs, angles, aires, alignement, parallélisme."],
+    ["Homothétie de rapport 3 : effet sur les aires ?", "Multipliées par 9."],
+    ["Nombre d’axes de symétrie d’un carré ?", "4."], ["Nombre d’axes d’un rectangle ?", "2."], ["Nombre d’axes d’un triangle équilatéral ?", "3."],
+    ["Le parallélogramme a-t-il un centre de symétrie ?", "Oui, le point d’intersection de ses diagonales."],
+    ["Frise : quelle transformation répète le motif ?", "La translation."],
+    ["Rosace : quelle transformation ?", "Des rotations successives autour d’un même centre."],
+    ["Rotation de 360° ?", "Le point revient à sa place."],
+    ["Symétrie centrale = rotation de…", "180°."]
+  ],
+  q: [
+    ["Combien d’axes de symétrie a un losange (non carré) ?", ["2", "4", "1", "0"], "Ses deux diagonales."],
+    ["Homothétie de rapport 2 : un segment de 3 cm devient…", ["6 cm", "1,5 cm", "9 cm", "12 cm"], "3 × 2."],
+    ["Homothétie de rapport −0,5 : un segment de 10 cm devient…", ["5 cm", "−5 cm", "20 cm", "10 cm"], "Longueur × |−0,5|."],
+    ["Quelle transformation conserve l’orientation et ne tourne pas ?", ["la translation", "la rotation", "la symétrie axiale", "l’homothétie de rapport −2"], "Simple glissement."],
+    ["Une rotation de 90° autour de O transforme A en A’. OA = 4. OA’ = ?", ["4", "8", "90", "2"], "La rotation conserve les distances au centre."],
+    ["Le cercle a combien d’axes de symétrie ?", ["une infinité", "1", "2", "4"], "Tous ses diamètres."],
+    ["Un triangle d’aire 5 cm² par homothétie de rapport 3 a une aire de…", ["45 cm²", "15 cm²", "135 cm²", "8 cm²"], "5 × 9."],
+    ["La symétrie centrale « retourne » la figure comme un miroir.", ["Faux", "Vrai"], "Elle la fait tourner d’un demi-tour, sans la retourner."],
+    ["Une rosace à 8 motifs identiques : angle de chaque rotation ?", ["45°", "8°", "90°", "36°"], "360 ÷ 8."],
+    ["L’homothétie conserve…", ["les angles", "les longueurs", "les aires", "les distances au centre"], "Les angles sont conservés."],
+    ["Un rectangle a-t-il un centre de symétrie ?", ["oui", "non", "seulement s’il est carré", "on ne peut pas savoir"], "Intersection des diagonales."],
+    ["Translation de A vers B : l’image de B est…", ["un point C tel que B soit le milieu de [AC]", "A", "B", "le milieu de [AB]"], "On glisse de AB à partir de B."],
+    ["Pour décrire une rotation, il manque : centre O, angle 60°…", ["le sens", "le rapport", "l’axe", "la longueur"], "Il faut le sens."],
+    ["Un triangle équilatéral a un centre de symétrie.", ["Faux", "Vrai"], "Il a 3 axes mais pas de centre de symétrie."],
+    ["Image d’une droite par une rotation ?", ["une droite", "un cercle", "un point", "un segment de longueur différente"], "L’alignement est conservé."]
+  ]
+};
+M["ma-espace"] = {
+  c: [
+    ["Aire d’un triangle ?", "base × hauteur ÷ 2."], ["Aire d’un parallélogramme ?", "base × hauteur."], ["Aire d’un disque ?", "π × r²."], ["Périmètre d’un cercle ?", "2 × π × r (ou π × d)."],
+    ["Volume d’un pavé droit ?", "L × l × h."], ["Volume d’un cube de côté c ?", "c³."], ["Volume d’un prisme droit ?", "aire de la base × hauteur."], ["Volume d’une pyramide ?", "aire de la base × hauteur ÷ 3."], ["Volume d’une boule ?", "4/3 × π × r³."], ["Aire d’une sphère ?", "4 × π × r²."],
+    ["1 L = … dm³", "1 dm³."], ["1 mL = … cm³", "1 cm³."], ["1 m³ = … L", "1 000 L."], ["1 m² = … cm²", "10 000 cm²."], ["1 m³ = … cm³", "1 000 000 cm³."],
+    ["Nombre de faces, arêtes, sommets d’un cube ?", "6 faces, 12 arêtes, 8 sommets."],
+    ["Section d’un cylindre parallèle à la base ?", "Un disque identique à la base."],
+    ["Section d’une boule par un plan ?", "Un cercle (disque)."],
+    ["Section d’une pyramide parallèle à la base ?", "Une réduction de la base."],
+    ["Patron d’un cylindre ?", "Deux disques et un rectangle."],
+    ["Latitude : définition ?", "Angle Nord ou Sud par rapport à l’équateur (0° à 90°)."],
+    ["Longitude : définition ?", "Angle Est ou Ouest par rapport au méridien de Greenwich (0° à 180°)."],
+    ["Différence sphère / boule ?", "La sphère est la surface, la boule le solide plein."],
+    ["Rayon d’une section de boule (rayon R) à distance d du centre ?", "r = √(R² − d²)."]
+  ],
+  q: [
+    ["Volume d’un cube de 4 cm d’arête ?", ["64 cm³", "16 cm³", "48 cm³", "12 cm³"], "4³ = 64."],
+    ["Volume d’un cylindre de rayon 3 cm et hauteur 10 cm (arrondi) ?", ["283 cm³", "94 cm³", "188 cm³", "90 cm³"], "π × 9 × 10 ≈ 282,7."],
+    ["Volume d’un cône de rayon 3 cm, hauteur 10 cm (arrondi) ?", ["94 cm³", "283 cm³", "30 cm³", "188 cm³"], "Un tiers du cylindre."],
+    ["Aire d’un triangle de base 8 cm et hauteur 5 cm ?", ["20 cm²", "40 cm²", "13 cm²", "26 cm²"], "8 × 5 ÷ 2."],
+    ["Périmètre d’un cercle de rayon 5 cm (arrondi) ?", ["31,4 cm", "78,5 cm", "15,7 cm", "10 cm"], "2 × π × 5."],
+    ["3,5 m² = … cm²", ["35 000", "350", "3 500", "350 000"], "× 10 000."],
+    ["750 mL = … L", ["0,75", "7,5", "75", "0,075"], "÷ 1 000."],
+    ["2 m³ = … L", ["2 000", "200", "20", "20 000"], "1 m³ = 1 000 L."],
+    ["Un pavé contient 12 L. Base 20 cm × 30 cm. Hauteur ?", ["20 cm", "2 cm", "12 cm", "40 cm"], "12 000 cm³ ÷ 600 cm² = 20 cm."],
+    ["Section d’un cube par un plan parallèle à une face ?", ["un carré", "un triangle", "un rectangle quelconque", "un disque"], "Identique à la face."],
+    ["Aire d’une sphère de rayon 2 cm (arrondi) ?", ["50 cm²", "12,6 cm²", "33,5 cm²", "16 cm²"], "4π × 4 ≈ 50,3."],
+    ["Une pyramide a combien de sommets si sa base est carrée ?", ["5", "4", "8", "6"], "4 sommets de la base + l’apex."],
+    ["Paris est à environ 49° …", ["Nord", "Sud", "Est", "Ouest"], "Latitude Nord."],
+    ["Le volume d’une pyramide est … celui du prisme de même base et même hauteur.", ["le tiers de", "la moitié de", "le double de", "égal à"], "Division par 3."],
+    ["Un aquarium de 50 × 30 × 40 cm contient au maximum…", ["60 L", "600 L", "6 L", "120 L"], "60 000 cm³ = 60 L."]
+  ]
+};
+
+/* Flashcards et questions supplémentaires : maths (nombres, calcul, fonctions, données) */
+var M = BREVET_MORE;
+M["ma-fonctions"] = {
+  c: [
+    ["Notation f : x ⟼ f(x) se lit…", "f est la fonction qui à x associe f(x)."],
+    ["Combien d’images a un nombre ?", "Une seule."],
+    ["Combien d’antécédents peut avoir un nombre ?", "Zéro, un ou plusieurs."],
+    ["Comment calculer l’image de 3 par f ?", "On remplace x par 3 dans l’expression de f."],
+    ["Comment trouver un antécédent de 5 par f ?", "On résout l’équation f(x) = 5."],
+    ["Sur un graphique, où lit-on les images ?", "Sur l’axe vertical (ordonnées)."],
+    ["Sur un graphique, où lit-on les antécédents ?", "Sur l’axe horizontal (abscisses)."],
+    ["Représentation graphique d’une fonction linéaire ?", "Une droite passant par l’origine."],
+    ["Représentation d’une fonction affine ?", "Une droite (non verticale)."],
+    ["Fonction linéaire et proportionnalité ?", "Une fonction linéaire modélise une situation de proportionnalité."],
+    ["Dans f(x) = ax + b, comment s’appelle a ?", "Le coefficient directeur."],
+    ["Dans f(x) = ax + b, comment s’appelle b ?", "L’ordonnée à l’origine."],
+    ["Si a > 0, la fonction affine est…", "croissante (la droite monte)."],
+    ["Si a < 0, la fonction affine est…", "décroissante (la droite descend)."],
+    ["Si a = 0 ?", "La fonction est constante (droite horizontale)."],
+    ["Formule pour calculer a avec deux points ?", "a = (f(x₂) − f(x₁)) ÷ (x₂ − x₁)."],
+    ["Combien de points pour tracer une droite ?", "Deux (un troisième pour vérifier)."],
+    ["Formule de tableur pour f(x) = 2x + 1 si x est en A2 ?", "=2*A2+1"],
+    ["Symbole de la puissance dans un tableur ?", "^ (exemple : =A2^2)."],
+    ["Fonction linéaire telle que f(4) = 10 ?", "f(x) = 2,5x."],
+    ["Abonnement 20 € + 3 € par séance : quelle fonction ?", "f(x) = 3x + 20 (affine)."],
+    ["Point d’intersection de deux droites de tarifs ?", "Le nombre pour lequel les deux tarifs coûtent pareil."]
+  ],
+  q: [
+    ["f(x) = x² − 4. f(−3) = ?", ["5", "−13", "−10", "13"], "(−3)² − 4 = 9 − 4."],
+    ["f(x) = 2x + 7. Antécédent de 1 ?", ["−3", "9", "4", "3"], "2x + 7 = 1, x = −3."],
+    ["f(x) = −4x. Image de −2 ?", ["8", "−8", "2", "−6"], "−4 × (−2)."],
+    ["Fonction affine telle que f(0) = 3 et f(2) = 7 ?", ["f(x) = 2x + 3", "f(x) = 3x + 2", "f(x) = 7x", "f(x) = 4x + 3"], "a = 4/2 = 2 et b = 3."],
+    ["La droite d’équation y = 3x − 1 passe par…", ["(1 ; 2)", "(0 ; 1)", "(2 ; 3)", "(1 ; 3)"], "3 × 1 − 1 = 2."],
+    ["Quelle fonction est décroissante ?", ["f(x) = −2x + 5", "f(x) = 3x − 1", "f(x) = x", "f(x) = 0,5x + 2"], "a = −2 < 0."],
+    ["f(x) = 0,8x modélise…", ["une baisse de 20 %", "une hausse de 80 %", "une baisse de 80 %", "une hausse de 8 %"], "× 0,8 = −20 %."],
+    ["Un taxi : 4 € de prise en charge + 1,50 € par km. Prix pour 10 km ?", ["19 €", "15 €", "40 €", "14 €"], "4 + 1,5 × 10."],
+    ["Tarif A : 6 € par film. Tarif B : 18 € + 3 € par film. Même prix pour…", ["6 films", "3 films", "9 films", "4 films"], "6x = 18 + 3x → x = 6."],
+    ["Sur un graphique, l’image de 2 est 5. Le point de la courbe est…", ["(2 ; 5)", "(5 ; 2)", "(0 ; 5)", "(2 ; 0)"], "(abscisse ; ordonnée)."],
+    ["La fonction f(x) = 5 est…", ["constante", "linéaire", "croissante", "décroissante"], "a = 0."],
+    ["f(x) = x². Antécédents de 16 ?", ["4 et −4", "4", "256", "8"], "4² = (−4)² = 16."],
+    ["Coefficient directeur de la droite passant par (2 ; 1) et (6 ; 9) ?", ["2", "4", "0,5", "8"], "(9 − 1) ÷ (6 − 2) = 2."],
+    ["Une fonction linéaire peut avoir une ordonnée à l’origine de 3.", ["Faux", "Vrai"], "Une droite linéaire passe par (0 ; 0)."],
+    ["Dans un tableur, A2 = 4. Que donne =3*A2^2 ?", ["48", "144", "24", "36"], "3 × 16 = 48."]
+  ]
+};
+M["ma-proportionnalite"] = {
+  c: [
+    ["Comment reconnaître la proportionnalité dans un tableau ?", "Tous les quotients sont égaux."],
+    ["Et sur un graphique ?", "Les points sont alignés avec l’origine."],
+    ["Méthode du passage à l’unité ?", "On calcule la valeur pour 1, puis on multiplie."],
+    ["Calculer 15 % de 60 ?", "0,15 × 60 = 9."],
+    ["Calculer un pourcentage ?", "partie ÷ total × 100."],
+    ["Coefficient pour une hausse de 30 % ?", "1,30."], ["Coefficient pour une baisse de 15 % ?", "0,85."], ["Coefficient pour +5 % ?", "1,05."],
+    ["Retrouver un prix avant une hausse de 25 % (prix final P) ?", "P ÷ 1,25."],
+    ["Deux hausses de 10 % successives = ?", "× 1,1 × 1,1 = × 1,21, soit +21 %."],
+    ["Échelle 1/10 000 : 1 cm = ?", "100 m."],
+    ["Distance réelle à partir d’une carte ?", "distance sur la carte × dénominateur de l’échelle."],
+    ["Ratio 3 : 2 sur 40 € ?", "24 € et 16 €."],
+    ["Formule de la vitesse ?", "v = d ÷ t."],
+    ["1 h 45 min en heures décimales ?", "1,75 h."],
+    ["0,4 h en minutes ?", "24 min."],
+    ["TVA de 20 % : prix TTC à partir du HT ?", "HT × 1,20."],
+    ["Qu’est-ce qu’une grandeur composée ?", "Un quotient de deux grandeurs (km/h, €/kg, hab./km²)."],
+    ["Débit : formule ?", "volume ÷ durée."],
+    ["La taille d’un enfant est-elle proportionnelle à son âge ?", "Non."]
+  ],
+  q: [
+    ["Un article à 120 € subit une hausse de 15 %. Nouveau prix ?", ["138 €", "135 €", "18 €", "102 €"], "120 × 1,15."],
+    ["Après une baisse de 30 %, un objet coûte 56 €. Prix initial ?", ["80 €", "72,80 €", "86 €", "73 €"], "56 ÷ 0,7."],
+    ["5 cahiers coûtent 7,50 €. Prix de 8 cahiers ?", ["12 €", "10,50 €", "15 €", "13 €"], "1,50 € l’unité."],
+    ["Sur 250 élèves, 80 mangent à la cantine. Pourcentage ?", ["32 %", "80 %", "25 %", "31 %"], "80 ÷ 250 × 100."],
+    ["Une voiture roule à 80 km/h pendant 2 h 15. Distance ?", ["180 km", "172 km", "160 km", "200 km"], "80 × 2,25."],
+    ["Échelle 1/200 000 : 5 cm représentent…", ["10 km", "1 km", "100 km", "40 km"], "1 000 000 cm = 10 km."],
+    ["Partager 63 € selon le ratio 4 : 3 ?", ["36 € et 27 €", "40 € et 23 €", "35 € et 28 €", "42 € et 21 €"], "63 ÷ 7 = 9 par part."],
+    ["Un prix baisse de 20 % puis augmente de 20 %. Au total…", ["il baisse de 4 %", "il ne change pas", "il augmente de 4 %", "il baisse de 40 %"], "0,8 × 1,2 = 0,96."],
+    ["Lequel de ces tableaux est proportionnel ? (2→6, 5→15, 8→24)", ["oui, coefficient 3", "non", "oui, coefficient 4", "on ne peut pas savoir"], "6/2 = 15/5 = 24/8 = 3."],
+    ["Un robinet débite 15 L/min. Temps pour 240 L ?", ["16 min", "3 600 min", "225 min", "18 min"], "240 ÷ 15."],
+    ["Une commune de 12 000 hab. sur 40 km². Densité ?", ["300 hab./km²", "480 000 hab./km²", "30 hab./km²", "3 000 hab./km²"], "12 000 ÷ 40."],
+    ["Prix HT 250 €, TVA 20 %. Prix TTC ?", ["300 €", "270 €", "50 €", "312,50 €"], "250 × 1,2."],
+    ["1,2 h = ?", ["1 h 12 min", "1 h 20 min", "1 h 2 min", "1 h 10 min"], "0,2 × 60 = 12."],
+    ["Un cycliste fait 45 km en 1 h 30. Vitesse ?", ["30 km/h", "45 km/h", "34,6 km/h", "67,5 km/h"], "45 ÷ 1,5."],
+    ["Les points d’une situation de proportionnalité sont alignés avec l’origine.", ["Vrai", "Faux"], "Représentation d’une fonction linéaire."]
+  ]
+};
+M["ma-calcul"] = {
+  c: [
+    ["Développer k(a − b) ?", "ka − kb."],
+    ["Développer (a + b)(c + d) ?", "ac + ad + bc + bd."],
+    ["Développer (x + 5)² ?", "x² + 10x + 25."],
+    ["Développer (x − 3)² ?", "x² − 6x + 9."],
+    ["Développer (x + 4)(x − 4) ?", "x² − 16."],
+    ["Factoriser 5x + 15 ?", "5(x + 3)."],
+    ["Factoriser x² − 9 ?", "(x − 3)(x + 3)."],
+    ["Factoriser x² + 6x + 9 ?", "(x + 3)²."],
+    ["Réduire 4x + 3 − 2x + 5 ?", "2x + 8."],
+    ["Simplifier 3x × 4x ?", "12x²."],
+    ["Supprimer les parenthèses : −(2x − 7) ?", "−2x + 7."],
+    ["Valeur de 2x² pour x = −3 ?", "18."],
+    ["Écrire un nombre pair avec une lettre ?", "2n."], ["Écrire un nombre impair ?", "2n + 1."], ["Deux entiers consécutifs ?", "n et n + 1."], ["Un multiple de 5 ?", "5n."],
+    ["Comment prouver qu’une affirmation est fausse ?", "Trouver un contre-exemple."],
+    ["Quelques exemples suffisent-ils pour prouver qu’une propriété est vraie ?", "Non, il faut une démonstration avec une lettre."],
+    ["Calcul mental 99² avec une identité ?", "(100 − 1)² = 10 000 − 200 + 1 = 9 801."],
+    ["Calcul mental 31 × 29 ?", "(30 + 1)(30 − 1) = 900 − 1 = 899."],
+    ["Addition de fractions : première étape ?", "Mettre au même dénominateur."],
+    ["Diviser par une fraction revient à…", "multiplier par son inverse."]
+  ],
+  q: [
+    ["Développer 4(3x − 2)", ["12x − 8", "12x − 2", "7x − 8", "12x + 8"], "4 × 3x − 4 × 2."],
+    ["Développer (x + 3)(x + 2)", ["x² + 5x + 6", "x² + 6", "2x + 5", "x² + 6x + 5"], "x² + 2x + 3x + 6."],
+    ["Développer (2x + 1)²", ["4x² + 4x + 1", "4x² + 1", "2x² + 4x + 1", "4x² + 2x + 1"], "(2x)² + 2 × 2x × 1 + 1."],
+    ["Factoriser 9x² − 25", ["(3x − 5)(3x + 5)", "(9x − 5)(x + 5)", "(3x − 5)²", "9(x² − 25)"], "a² − b² avec a = 3x, b = 5."],
+    ["Factoriser 6x² + 3x", ["3x(2x + 1)", "3(2x² + x)", "x(6x + 3)", "6x(x + 3)"], "Facteur commun 3x (le plus complet)."],
+    ["Réduire 5x − (2x − 4)", ["3x + 4", "3x − 4", "7x − 4", "3x"], "5x − 2x + 4."],
+    ["Pour x = −2, 3x² − x vaut…", ["14", "10", "−14", "−10"], "12 + 2."],
+    ["(x − 1)² − x² = ?", ["−2x + 1", "1", "−1", "2x + 1"], "x² − 2x + 1 − x²."],
+    ["La somme de deux entiers consécutifs est toujours…", ["impaire", "paire", "un multiple de 3", "un carré"], "n + n + 1 = 2n + 1."],
+    ["« Pour tout x, x² > x ». Contre-exemple ?", ["x = 0,5", "x = 2", "x = 3", "x = 10"], "0,25 < 0,5."],
+    ["3/4 + 1/6 = ?", ["11/12", "4/10", "4/24", "1/2"], "9/12 + 2/12."],
+    ["2/5 ÷ 4/3 = ?", ["3/10", "8/15", "1/2", "5/6"], "2/5 × 3/4 = 6/20 = 3/10."],
+    ["101 × 99 = ?", ["9 999", "10 001", "9 899", "10 099"], "100² − 1²."],
+    ["(a + b)² = a² + 2ab + b² est vraie pour tous les nombres.", ["Vrai", "Faux"], "C’est une identité remarquable."],
+    ["Programme : x → ×2 → +6 → ÷2 → −x. Résultat ?", ["toujours 3", "x", "2x", "toujours 6"], "(2x + 6) ÷ 2 − x = 3."]
+  ]
+};
+M["ma-equations"] = {
+  c: [
+    ["Qu’est-ce qu’une solution d’une équation ?", "Un nombre qui rend l’égalité vraie."],
+    ["Comment tester si 3 est solution ?", "On remplace x par 3 dans chaque membre et on compare."],
+    ["Règle : que peut-on faire aux deux membres ?", "Ajouter, soustraire, multiplier ou diviser par un même nombre (non nul pour × et ÷)."],
+    ["Résoudre 2x = 14 ?", "x = 7."], ["Résoudre x − 8 = 3 ?", "x = 11."], ["Résoudre x/4 = 5 ?", "x = 20."],
+    ["Propriété du produit nul ?", "A × B = 0 ⇔ A = 0 ou B = 0."],
+    ["Solutions de (x − 1)(x + 7) = 0 ?", "1 et −7."],
+    ["Solutions de x(x − 5) = 0 ?", "0 et 5."],
+    ["Solutions de x² = 36 ?", "6 et −6."],
+    ["Solutions de x² = −9 ?", "Aucune."],
+    ["Solution de x² = 0 ?", "0."],
+    ["Inéquation : quand change le sens ?", "Quand on multiplie ou divise par un nombre négatif."],
+    ["Résoudre −x > 4 ?", "x < −4."],
+    ["Sur une droite graduée, x ≤ 2 : crochet ?", "Tourné vers les solutions (2 est inclus)."],
+    ["Les 5 étapes d’un problème ?", "Inconnue, mise en équation, résolution, vérification, conclusion."],
+    ["Résoudre une équation avec fractions : astuce ?", "Multiplier les deux membres par un dénominateur commun."],
+    ["Pourquoi ne pas diviser par x ?", "On risque de perdre la solution x = 0."],
+    ["Factoriser avant de résoudre x² − 4x = 0 ?", "x(x − 4) = 0, donc x = 0 ou x = 4."],
+    ["Résoudre 3x + 2 = x + 10 ?", "x = 4."]
+  ],
+  q: [
+    ["Résoudre 7x − 4 = 3x + 8", ["x = 3", "x = 1", "x = 12", "x = −3"], "4x = 12."],
+    ["Résoudre 5(x − 2) = 15", ["x = 5", "x = 1", "x = 3,4", "x = 17"], "5x − 10 = 15."],
+    ["Résoudre (3x − 6)(x + 1) = 0", ["2 et −1", "6 et −1", "3 et 1", "−2 et 1"], "3x = 6 ou x = −1."],
+    ["Résoudre x² = 49", ["7 et −7", "7", "24,5", "aucune"], "Deux solutions."],
+    ["Résoudre x² − 3x = 0", ["0 et 3", "3", "−3 et 3", "0"], "x(x − 3) = 0."],
+    ["Résoudre 2x + 5 < 11", ["x < 3", "x > 3", "x < 8", "x < 6"], "2x < 6."],
+    ["Résoudre −4x ≥ 12", ["x ≤ −3", "x ≥ −3", "x ≥ 3", "x ≤ 3"], "Division par −4 : le sens change."],
+    ["Trois nombres consécutifs ont une somme de 57. Le plus petit ?", ["18", "19", "17", "20"], "3n + 3 = 57, n = 18."],
+    ["Un rectangle de périmètre 30 a une longueur double de sa largeur. Largeur ?", ["5", "10", "7,5", "15"], "6x = 30."],
+    ["−1 est-il solution de x² + 2x + 1 = 0 ?", ["oui", "non", "seulement si x > 0", "on ne peut pas savoir"], "1 − 2 + 1 = 0."],
+    ["Résoudre x/2 + 3 = 7", ["x = 8", "x = 2", "x = 20", "x = 5"], "x/2 = 4."],
+    ["Combien de solutions a x² = −4 ?", ["0", "1", "2", "une infinité"], "Un carré n’est jamais négatif."],
+    ["Résoudre 4 − x = 10", ["x = −6", "x = 6", "x = 14", "x = −14"], "−x = 6."],
+    ["Une inéquation peut avoir une infinité de solutions.", ["Vrai", "Faux"], "Tous les nombres d’un intervalle."],
+    ["Léa a 3 fois l’âge de son frère ; ensemble ils ont 24 ans. Âge du frère ?", ["6 ans", "8 ans", "18 ans", "12 ans"], "4x = 24."]
+  ]
+};
+M["ma-stats"] = {
+  c: [
+    ["Effectif d’une valeur ?", "Nombre de fois où elle apparaît."],
+    ["Fréquence d’une valeur ?", "effectif ÷ effectif total."],
+    ["Fréquence en pourcentage ?", "fréquence × 100."],
+    ["Moyenne pondérée : méthode ?", "Somme des (valeur × effectif) ÷ effectif total."],
+    ["Médiane, effectif impair N ?", "Valeur de rang (N + 1) ÷ 2 dans la série rangée."],
+    ["Médiane, effectif pair N ?", "Moyenne des valeurs de rang N/2 et N/2 + 1."],
+    ["Que mesure l’étendue ?", "La dispersion des valeurs."],
+    ["Indicateur peu sensible aux valeurs extrêmes ?", "La médiane."],
+    ["Angle d’un secteur dans un diagramme circulaire ?", "fréquence × 360°."],
+    ["Issue : définition ?", "Un résultat possible d’une expérience aléatoire."],
+    ["Événement : définition ?", "Un ensemble d’issues."],
+    ["Probabilité d’un événement certain ?", "1."], ["Probabilité d’un événement impossible ?", "0."],
+    ["Événements incompatibles ?", "Qui ne peuvent pas se produire en même temps."],
+    ["Probabilité d’un chemin dans un arbre ?", "Produit des probabilités sur les branches."],
+    ["Somme des probabilités sur les branches d’un même nœud ?", "1."],
+    ["Nombre d’issues quand on lance deux dés ?", "36."],
+    ["P(somme = 7) avec deux dés ?", "6/36 = 1/6."],
+    ["Tirage avec remise / sans remise ?", "On remet l’objet (probabilités inchangées) / on ne le remet pas (elles changent)."],
+    ["Loi des grands nombres (idée) ?", "Sur un grand nombre d’essais, la fréquence se rapproche de la probabilité."]
+  ],
+  q: [
+    ["Notes : 10, 12, 12, 14, 17. Moyenne ?", ["13", "12", "14", "12,5"], "65 ÷ 5."],
+    ["Médiane de 3 ; 9 ; 4 ; 7 ; 12 ; 6 ?", ["6,5", "7", "6", "5,5"], "Rangée : 3, 4, 6, 7, 9, 12 → (6 + 7)/2."],
+    ["Étendue de 15, 8, 22, 11 ?", ["14", "22", "8", "7"], "22 − 8."],
+    ["Fréquence d’une valeur d’effectif 6 sur 24 ?", ["25 %", "6 %", "4 %", "24 %"], "6 ÷ 24 = 0,25."],
+    ["Angle pour une fréquence de 25 % ?", ["90°", "25°", "45°", "100°"], "0,25 × 360."],
+    ["On tire une carte dans un jeu de 32 cartes. P(as) ?", ["1/8", "1/32", "1/4", "4/52"], "4 as sur 32."],
+    ["P(A) = 0,35. P(non A) ?", ["0,65", "0,35", "1,35", "0,5"], "1 − 0,35."],
+    ["On lance un dé. P(nombre supérieur à 4) ?", ["1/3", "1/2", "2/3", "1/6"], "5 et 6 : 2/6."],
+    ["Deux lancers de pièce. P(deux faces) ?", ["1/4", "1/2", "1/3", "1"], "1/2 × 1/2."],
+    ["Urne : 2 rouges, 3 noires. On tire 2 boules avec remise. P(2 rouges) ?", ["4/25", "2/5", "1/10", "4/10"], "2/5 × 2/5."],
+    ["Moyenne de 12 (coef 2) et 15 (coef 1) ?", ["13", "13,5", "14", "12,5"], "(24 + 15) ÷ 3."],
+    ["Un salaire très élevé ajouté à une série fait surtout varier…", ["la moyenne", "la médiane", "l’effectif d’une valeur", "rien"], "La moyenne est sensible aux valeurs extrêmes."],
+    ["Une probabilité peut valoir 1,2.", ["Faux", "Vrai"], "Toujours entre 0 et 1."],
+    ["Deux dés : P(double six) ?", ["1/36", "1/6", "1/12", "2/36"], "Une seule case sur 36."],
+    ["Après 1 000 lancers d’un dé équilibré, la fréquence du 6 est proche de…", ["0,17", "0,5", "0,06", "1"], "1/6 ≈ 0,167."]
+  ]
+};
+M["ma-arithmetique"] = {
+  c: [
+    ["Division euclidienne de 47 par 6 ?", "47 = 6 × 7 + 5."],
+    ["a est un diviseur de b si…", "le reste de la division de b par a est nul."],
+    ["Critère de divisibilité par 4 ?", "Le nombre formé par les deux derniers chiffres est divisible par 4."],
+    ["Critère de divisibilité par 9 ?", "La somme des chiffres est divisible par 9."],
+    ["Nombres premiers inférieurs à 20 ?", "2, 3, 5, 7, 11, 13, 17, 19."],
+    ["Seul nombre premier pair ?", "2."],
+    ["Décomposition de 12 ?", "2² × 3."], ["Décomposition de 100 ?", "2² × 5²."], ["Décomposition de 72 ?", "2³ × 3²."], ["Décomposition de 210 ?", "2 × 3 × 5 × 7."],
+    ["Fraction irréductible : définition ?", "Numérateur et dénominateur n’ont pas d’autre diviseur commun que 1."],
+    ["Deux nombres premiers entre eux ?", "Leur seul diviseur commun est 1."],
+    ["Comment tester si 97 est premier ?", "Diviser par 2, 3, 5, 7 (car 11² > 97) : aucun ne divise, il est premier."],
+    ["Faire le plus grand nombre de paquets identiques : on cherche…", "le plus grand diviseur commun."],
+    ["Deux événements cycliques coïncident à nouveau : on cherche…", "le plus petit multiple commun."],
+    ["Diviseurs de 18 ?", "1, 2, 3, 6, 9, 18."],
+    ["91 est-il premier ?", "Non : 91 = 7 × 13."],
+    ["Un nombre divisible par 2 et 3 est divisible par…", "6."],
+    ["Simplifier 45/60 ?", "3/4."],
+    ["La décomposition en facteurs premiers est-elle unique ?", "Oui."]
+  ],
+  q: [
+    ["Lequel n’est pas premier ?", ["51", "53", "47", "59"], "51 = 3 × 17."],
+    ["Décomposition de 84 ?", ["2² × 3 × 7", "2 × 42", "4 × 21", "2³ × 7"], "84 = 4 × 21."],
+    ["Plus grand diviseur commun à 48 et 80 ?", ["16", "8", "4", "240"], "48 = 2⁴ × 3 et 80 = 2⁴ × 5."],
+    ["Simplifier 126/162", ["7/9", "63/81", "14/18", "3/4"], "Divisé par 18."],
+    ["Reste de la division de 100 par 7 ?", ["2", "14", "3", "5"], "100 = 7 × 14 + 2."],
+    ["1 245 est divisible par…", ["3 et 5", "2 et 5", "9", "4"], "Somme 12 et finit par 5."],
+    ["Nombre de diviseurs de 12 ?", ["6", "4", "12", "3"], "1, 2, 3, 4, 6, 12."],
+    ["120 dragées et 90 chocolats en sachets identiques, maximum de sachets ?", ["30", "10", "15", "60"], "PGCD(120, 90) = 30."],
+    ["Deux bus partent ensemble, l’un toutes les 15 min, l’autre toutes les 20 min. Ils repartent ensemble après…", ["60 min", "35 min", "300 min", "5 min"], "PPCM(15, 20)."],
+    ["15 et 28 sont…", ["premiers entre eux", "premiers", "pairs", "multiples l’un de l’autre"], "Aucun diviseur commun sauf 1."],
+    ["Combien de nombres premiers entre 1 et 30 ?", ["10", "8", "15", "12"], "2, 3, 5, 7, 11, 13, 17, 19, 23, 29."],
+    ["2³ × 3 × 5 = ?", ["120", "60", "30", "240"], "8 × 15."],
+    ["La fraction 21/35 est irréductible.", ["Faux", "Vrai"], "On peut simplifier par 7 : 3/5."],
+    ["7 532 est divisible par 4.", ["Vrai", "Faux"], "32 est divisible par 4."],
+    ["Le produit de deux nombres premiers est premier.", ["Faux", "Vrai"], "3 × 5 = 15 n’est pas premier."]
+  ]
+};
+M["ma-puissances"] = {
+  c: [
+    ["a⁰ = ?", "1 (pour a ≠ 0)."], ["a¹ = ?", "a."], ["a⁻ⁿ = ?", "1 ÷ aⁿ."], ["10⁵ = ?", "100 000."], ["10⁻⁴ = ?", "0,0001."],
+    ["10ⁿ × 10ᵐ = ?", "10ⁿ⁺ᵐ."], ["10ⁿ ÷ 10ᵐ = ?", "10ⁿ⁻ᵐ."], ["(10ⁿ)ᵐ = ?", "10ⁿˣᵐ."],
+    ["Condition sur a dans a × 10ⁿ (notation scientifique) ?", "1 ≤ a < 10."],
+    ["Écrire 52 000 en notation scientifique ?", "5,2 × 10⁴."], ["Écrire 0,0071 en notation scientifique ?", "7,1 × 10⁻³."],
+    ["(−2)⁴ = ?", "16."], ["(−2)³ = ?", "−8."], ["−2⁴ = ?", "−16."],
+    ["Préfixe giga ?", "10⁹."], ["Préfixe micro ?", "10⁻⁶."], ["Préfixe nano ?", "10⁻⁹."],
+    ["Comment comparer deux nombres en notation scientifique ?", "D’abord les exposants, puis les nombres a."],
+    ["Taille d’un atome (ordre de grandeur) ?", "10⁻¹⁰ m."],
+    ["Affichage « 4.5E8 » sur la calculatrice ?", "4,5 × 10⁸."]
+  ],
+  q: [
+    ["10⁶ × 10⁻² = ?", ["10⁴", "10⁻¹²", "10⁸", "10³"], "6 + (−2)."],
+    ["(10³)⁴ = ?", ["10¹²", "10⁷", "10⁸¹", "10⁻¹"], "3 × 4."],
+    ["5⁻² = ?", ["1/25", "−25", "−10", "0,5"], "1 ÷ 5²."],
+    ["3,4 × 10⁻³ = ?", ["0,0034", "3 400", "0,034", "0,00034"], "Décaler de 3 rangs vers la gauche."],
+    ["Écrire 0,000 08 en notation scientifique", ["8 × 10⁻⁵", "8 × 10⁻⁴", "0,8 × 10⁻⁴", "8 × 10⁵"], "Le 8 est au 5e rang."],
+    ["(4 × 10⁵) × (3 × 10²) = ?", ["1,2 × 10⁸", "12 × 10⁷", "7 × 10⁷", "1,2 × 10⁷"], "12 × 10⁷ = 1,2 × 10⁸."],
+    ["Lequel est le plus grand ?", ["2 × 10⁵", "9 × 10⁴", "9,9 × 10⁴", "1 × 10⁵"], "Exposant le plus grand puis a."],
+    ["1 Go ≈ … octets", ["10⁹", "10⁶", "10³", "10¹²"], "Giga = milliard."],
+    ["2⁴ × 2³ = ?", ["2⁷", "2¹²", "4⁷", "2¹"], "On additionne les exposants."],
+    ["(−1)¹⁰¹ = ?", ["−1", "1", "101", "0"], "Puissance impaire d’un négatif."],
+    ["0,5 µm = … m", ["5 × 10⁻⁷", "5 × 10⁻⁶", "0,5 × 10⁶", "5 × 10⁻⁵"], "0,5 × 10⁻⁶."],
+    ["10⁰ = 0", ["Faux", "Vrai"], "10⁰ = 1."],
+    ["La distance Terre-Soleil ≈ 1,5 × 10⁸ km. En m ?", ["1,5 × 10¹¹", "1,5 × 10⁵", "1,5 × 10⁹", "15 × 10⁸"], "× 10³."],
+    ["Combien de zéros dans 10⁷ écrit en entier ?", ["7", "6", "8", "10"], "10 000 000."],
+    ["12,5 × 10³ en notation scientifique ?", ["1,25 × 10⁴", "1,25 × 10³", "125 × 10²", "12,5 × 10³"], "12,5 n’est pas compris entre 1 et 10 : on écrit 1,25 × 10⁴."]
+  ]
+};
+
+/* Flashcards et questions supplémentaires : physique-chimie et technologie */
+var M = BREVET_MORE;
+M["pc-matiere"] = {
+  c: [
+    ["Particules d’un solide ?", "Rapprochées, ordonnées, presque immobiles."], ["Particules d’un liquide ?", "Rapprochées, désordonnées, mobiles."], ["Particules d’un gaz ?", "Éloignées, désordonnées, très agitées."],
+    ["Un gaz est-il compressible ?", "Oui."], ["Solide → liquide ?", "Fusion."], ["Liquide → solide ?", "Solidification."], ["Liquide → gaz ?", "Vaporisation."], ["Gaz → liquide ?", "Liquéfaction."], ["Solide → gaz ?", "Sublimation."], ["Gaz → solide ?", "Condensation."],
+    ["Température de fusion de l’eau pure ?", "0 °C."], ["Température d’ébullition de l’eau pure ?", "100 °C (pression normale)."],
+    ["Palier de température ?", "Température constante pendant le changement d’état d’un corps pur."], ["Pourquoi la glace flotte ?", "Elle est moins dense que l’eau liquide."],
+    ["Masse volumique de l’eau ?", "1 g/cm³ = 1 kg/L."], ["Condition pour flotter ?", "Masse volumique de l’objet inférieure à celle du liquide."],
+    ["Charge du noyau ?", "Positive."], ["Charge de l’électron ?", "Négative."], ["Taille d’un atome ?", "Environ 10⁻¹⁰ m."], ["Structure lacunaire ?", "L’atome est essentiellement fait de vide."],
+    ["Symbole du sodium ?", "Na."], ["Symbole du fer ?", "Fe."], ["Symbole du cuivre ?", "Cu."], ["Formule du dioxyde de carbone ?", "CO₂."], ["Formule du méthane ?", "CH₄."],
+    ["Solution saturée ?", "Le soluté ne peut plus se dissoudre."], ["Masse lors d’une dissolution ?", "Elle se conserve."]
+  ],
+  q: [
+    ["Le passage de la vapeur d’eau à l’eau liquide s’appelle…", ["la liquéfaction", "la vaporisation", "la fusion", "la sublimation"], "Buée sur une vitre froide."],
+    ["Un mélange d’eau et d’huile est…", ["hétérogène", "homogène", "un corps pur", "une solution"], "On distingue les deux liquides."],
+    ["La masse volumique du fer (7,9 g/cm³) explique qu’il…", ["coule dans l’eau", "flotte sur l’eau", "s’évapore", "fond à 0 °C"], "7,9 > 1."],
+    ["Masse de 3 L d’eau ?", ["3 kg", "300 g", "30 kg", "3 g"], "1 L d’eau = 1 kg."],
+    ["Un atome de fer qui perd 3 électrons devient…", ["Fe³⁺", "Fe³⁻", "Fe", "Fe²⁺"], "Ion positif."],
+    ["Combien d’atomes dans CO₂ ?", ["3", "2", "1", "4"], "1 C + 2 O."],
+    ["Le noyau est environ … fois plus petit que l’atome", ["100 000", "10", "2", "1 000 000 000"], "Structure lacunaire."],
+    ["Pendant l’ébullition de l’eau pure, sa température…", ["reste à 100 °C", "augmente sans cesse", "diminue", "descend à 0 °C"], "Palier."],
+    ["L’eau salée est…", ["un mélange homogène", "un corps pur", "un mélange hétérogène", "un gaz"], "Le sel est dissous."],
+    ["Le volume d’un gaz…", ["dépend du récipient", "est fixe", "est nul", "est toujours de 1 L"], "Pas de volume propre."],
+    ["ρ = 0,8 g/cm³ et V = 50 cm³. m = ?", ["40 g", "62,5 g", "50,8 g", "400 g"], "m = ρ × V."],
+    ["Le tableau périodique a été créé par…", ["Mendeleïev", "Lavoisier", "Newton", "Darwin"], "XIXe siècle."],
+    ["Un ion négatif a…", ["gagné des électrons", "perdu des électrons", "gagné des protons", "perdu des neutrons"], "Plus d’électrons que de protons."],
+    ["Une bouteille d’eau pleine éclate au congélateur car…", ["la glace occupe plus de volume", "la masse augmente", "l’eau s’évapore", "le plastique fond"], "Exception de l’eau."],
+    ["La masse change lors d’un changement d’état.", ["Faux", "Vrai"], "Le nombre de particules ne change pas."]
+  ]
+};
+M["pc-univers"] = {
+  c: [
+    ["Âge de l’Univers ?", "13,8 milliards d’années."], ["Origine de l’Univers ?", "Le Big Bang."], ["L’Univers est en…", "expansion."], ["Galaxie ?", "Ensemble de milliards d’étoiles, de gaz et de poussières."],
+    ["Nombre d’étoiles dans la Voie lactée ?", "100 à 400 milliards."], ["Diamètre de la Voie lactée ?", "Environ 100 000 années-lumière."],
+    ["Âge du système solaire ?", "4,6 milliards d’années."], ["Part de la masse du système solaire dans le Soleil ?", "99,8 %."], ["Pluton ?", "Planète naine depuis 2006."],
+    ["Planète la plus proche du Soleil ?", "Mercure."], ["Planète la plus chaude ?", "Vénus."], ["Planète la plus grosse ?", "Jupiter."], ["Planète aux anneaux spectaculaires ?", "Saturne."], ["Planète la plus lointaine ?", "Neptune."],
+    ["Unité astronomique ?", "Distance Terre-Soleil, environ 150 millions de km."], ["Distance Terre-Lune ?", "Environ 384 000 km."], ["Temps de trajet de la lumière du Soleil ?", "Environ 8 minutes."],
+    ["Étoile la plus proche après le Soleil ?", "Proxima du Centaure, 4,2 années-lumière."], ["Rotation de la Terre sur elle-même ?", "Environ 24 h."], ["Révolution de la Terre autour du Soleil ?", "Environ 365,25 jours."],
+    ["Origine des saisons ?", "L’inclinaison de l’axe de la Terre."], ["Éclipse de Soleil ?", "La Lune passe entre le Soleil et la Terre."], ["Éclipse de Lune ?", "La Terre passe entre le Soleil et la Lune."],
+    ["Où sont fabriqués les éléments lourds ?", "Au cœur des étoiles."]
+  ],
+  q: [
+    ["La Voie lactée est…", ["une galaxie", "une étoile", "une planète", "une constellation du système solaire"], "Notre galaxie."],
+    ["La planète la plus proche du Soleil est…", ["Mercure", "Vénus", "Mars", "la Terre"], "Ordre : Mercure, Vénus, Terre, Mars…"],
+    ["Combien de planètes géantes ?", ["4", "2", "5", "8"], "Jupiter, Saturne, Uranus, Neptune."],
+    ["Une unité astronomique vaut environ…", ["150 millions de km", "384 000 km", "1 année-lumière", "300 000 km"], "Distance Terre-Soleil."],
+    ["La lumière met environ … pour aller de la Lune à la Terre", ["1,3 seconde", "8 minutes", "1 heure", "4 ans"], "384 000 ÷ 300 000."],
+    ["Les saisons s’expliquent par…", ["l’inclinaison de l’axe terrestre", "la distance Terre-Soleil", "la Lune", "les nuages"], "Axe incliné de 23°."],
+    ["Une éclipse de Lune se produit quand…", ["la Terre est entre le Soleil et la Lune", "la Lune est entre le Soleil et la Terre", "le Soleil est entre la Terre et la Lune", "la Lune est cachée par un nuage"], "La Terre fait de l’ombre à la Lune."],
+    ["Pluton est…", ["une planète naine", "la 9e planète", "un satellite de Neptune", "une étoile"], "Depuis 2006."],
+    ["La Lune montre toujours la même face car…", ["elle tourne sur elle-même aussi vite qu’autour de la Terre", "elle ne tourne pas", "la Terre la cache", "elle est plate"], "Rotation synchrone."],
+    ["Le Big Bang a eu lieu il y a…", ["13,8 milliards d’années", "4,6 milliards d’années", "66 millions d’années", "1 million d’années"], "Âge de l’Univers."],
+    ["Mars est appelée la planète rouge à cause…", ["de l’oxyde de fer de son sol", "de sa chaleur", "de sa lumière propre", "de ses volcans actifs"], "Rouille."],
+    ["Une planète produit sa propre lumière.", ["Faux", "Vrai"], "Elle réfléchit celle de son étoile."],
+    ["La Terre fait le tour du Soleil en…", ["environ 365 jours", "24 heures", "27 jours", "12 ans"], "Une année."],
+    ["Les atomes de notre corps ont été formés…", ["dans des étoiles", "sur Terre récemment", "dans les océans", "par les humains"], "Poussières d’étoiles."],
+    ["Quel astre a la plus grande masse dans le système solaire ?", ["le Soleil", "Jupiter", "la Terre", "Saturne"], "99,8 % de la masse."]
+  ]
+};
+M["pc-transformations"] = {
+  c: [
+    ["Transformation physique : exemple ?", "Fusion de la glace, dissolution du sucre."], ["Indices d’une transformation chimique ?", "Changement de couleur, gaz, solide qui apparaît, chaleur, lumière."],
+    ["Loi de Lavoisier ?", "Rien ne se perd, rien ne se crée, tout se transforme."], ["Qu’est-ce qui se conserve dans une réaction ?", "Les atomes et la masse totale."],
+    ["Équation de la combustion du carbone ?", "C + O₂ → CO₂."], ["Équation de formation de l’eau ?", "2 H₂ + O₂ → 2 H₂O."],
+    ["Test du dioxygène ?", "Bûchette incandescente qui se rallume."], ["Test du dihydrogène ?", "Petite détonation."], ["Test de l’eau ?", "Sulfate de cuivre anhydre qui bleuit."], ["Test du CO₂ ?", "Eau de chaux qui se trouble."],
+    ["Précipité avec Cu²⁺ et la soude ?", "Bleu."], ["Précipité avec Fe²⁺ ?", "Vert."], ["Précipité avec Fe³⁺ ?", "Rouille."], ["Test de l’ion chlorure ?", "Nitrate d’argent : précipité blanc qui noircit."],
+    ["Ions majoritaires dans une solution acide ?", "H⁺."], ["Ions majoritaires dans une solution basique ?", "HO⁻."], ["pH du vinaigre ?", "Environ 3 (acide)."], ["pH de l’eau savonneuse ?", "Environ 9-10 (basique)."],
+    ["Règle de sécurité acide/eau ?", "Verser l’acide dans l’eau, jamais l’inverse."], ["Pictogramme d’un acide concentré ?", "Corrosif."],
+    ["Triangle du feu ?", "Combustible, comburant (dioxygène), source de chaleur."], ["Gaz toxique d’une combustion incomplète ?", "Le monoxyde de carbone (CO)."],
+    ["Effet de l’acide sur le pH quand il réagit avec le fer ?", "Le pH augmente (les ions H⁺ sont consommés)."]
+  ],
+  q: [
+    ["Lors d’une transformation chimique, la masse totale…", ["se conserve", "augmente", "diminue", "devient nulle"], "Lavoisier."],
+    ["Le précipité vert avec la soude révèle…", ["les ions fer II", "les ions cuivre", "les ions fer III", "les ions chlorure"], "Fe²⁺."],
+    ["Une solution de pH 11 est…", ["basique", "acide", "neutre", "pure"], "pH > 7."],
+    ["On ajoute beaucoup d’eau à une solution de pH 12. Son pH…", ["diminue vers 7", "augmente", "reste à 12", "devient 0"], "Dilution."],
+    ["La combustion du méthane produit…", ["CO₂ et H₂O", "O₂ et H₂", "CH₄ et O₂", "uniquement de l’eau"], "CH₄ + 2 O₂ → CO₂ + 2 H₂O."],
+    ["Fondre de la glace est une transformation…", ["physique", "chimique", "nucléaire", "biologique"], "L’espèce reste de l’eau."],
+    ["Quel gaz entretient les combustions ?", ["le dioxygène", "le dioxyde de carbone", "l’azote", "l’hélium"], "Comburant."],
+    ["Pour éteindre un feu d’huile, on…", ["étouffe avec un couvercle", "verse de l’eau", "souffle dessus", "ajoute de l’huile"], "On prive le feu de dioxygène."],
+    ["Le monoxyde de carbone est…", ["toxique, incolore et inodore", "sans danger", "coloré et odorant", "un gaz rare"], "Intoxications domestiques."],
+    ["2 H₂ + O₂ → 2 H₂O : nombre d’atomes d’hydrogène de chaque côté ?", ["4", "2", "6", "8"], "2 × 2 = 4."],
+    ["Les ions H⁺ caractérisent…", ["les solutions acides", "les solutions basiques", "l’eau pure seulement", "les métaux"], "Acidité."],
+    ["L’eau de Javel est…", ["basique", "acide", "neutre", "un corps pur"], "pH ≈ 12."],
+    ["La rouille est le résultat d’une transformation chimique.", ["Vrai", "Faux"], "Le fer réagit avec le dioxygène et l’eau."],
+    ["Le précipité blanc qui noircit à la lumière révèle…", ["les ions chlorure", "les ions sodium", "les ions cuivre", "l’eau"], "Avec le nitrate d’argent."],
+    ["Un acide attaque…", ["certains métaux comme le fer", "le verre", "l’or facilement", "le plastique toujours"], "Dégagement de dihydrogène."]
+  ]
+};
+M["pc-mouvement"] = {
+  c: [
+    ["Mouvement relatif ?", "Il dépend du référentiel choisi."], ["Référentiel terrestre ?", "Le sol."], ["Référentiel géocentrique ?", "Le centre de la Terre (étude de la Lune, des satellites)."], ["Référentiel héliocentrique ?", "Le centre du Soleil (étude des planètes)."],
+    ["Trajectoire rectiligne ?", "Une droite."], ["Trajectoire circulaire ?", "Un cercle."], ["Trajectoire curviligne ?", "Une courbe quelconque."],
+    ["Chronophotographie ?", "Positions enregistrées à intervalles de temps égaux."], ["Écarts réguliers ?", "Mouvement uniforme."], ["Écarts qui augmentent ?", "Mouvement accéléré."], ["Écarts qui diminuent ?", "Mouvement ralenti."],
+    ["d = ?", "v × t."], ["t = ?", "d ÷ v."], ["Unité SI de la vitesse ?", "m/s."], ["m/s → km/h ?", "× 3,6."], ["km/h → m/s ?", "÷ 3,6."],
+    ["1 h 15 min en heures ?", "1,25 h."], ["20 min en heures ?", "1/3 h ≈ 0,33 h."], ["Distance d’arrêt ?", "Distance de réaction + distance de freinage."],
+    ["Temps de réaction moyen ?", "Environ 1 s."], ["Facteurs qui allongent le temps de réaction ?", "Fatigue, alcool, téléphone, drogues."], ["Vitesse × 2 : distance de freinage ?", "Environ × 4."],
+    ["Graphique distance-temps : droite passant par l’origine ?", "Mouvement uniforme."]
+  ],
+  q: [
+    ["Une voiture à 108 km/h roule à…", ["30 m/s", "389 m/s", "10,8 m/s", "300 m/s"], "108 ÷ 3,6."],
+    ["Un piéton à 1,5 m/s marche à…", ["5,4 km/h", "0,4 km/h", "15 km/h", "1,5 km/h"], "1,5 × 3,6."],
+    ["Temps pour parcourir 240 km à 80 km/h ?", ["3 h", "2 h", "320 min", "4 h"], "240 ÷ 80."],
+    ["Distance parcourue en 45 min à 60 km/h ?", ["45 km", "60 km", "27 km", "80 km"], "60 × 0,75."],
+    ["La Lune est étudiée dans le référentiel…", ["géocentrique", "héliocentrique", "terrestre local", "galactique"], "Centre de la Terre."],
+    ["La trajectoire d’un point d’une roue de vélo par rapport à l’axe est…", ["circulaire", "rectiligne", "parabolique", "immobile"], "Autour de l’axe."],
+    ["Pendant le temps de réaction, la voiture…", ["continue à rouler à la même vitesse", "s’arrête", "freine fort", "recule"], "Le conducteur n’a pas encore freiné."],
+    ["Sur une chronophotographie, les points se rapprochent : le mouvement est…", ["ralenti", "accéléré", "uniforme", "circulaire"], "Distance plus faible pour la même durée."],
+    ["Un mouvement uniforme a une vitesse…", ["constante", "qui augmente", "qui diminue", "nulle"], "Définition."],
+    ["Un passager assis dans un bus est en mouvement par rapport…", ["au trottoir", "à son siège", "au chauffeur", "au plafond du bus"], "Référentiel terrestre."],
+    ["Une route mouillée…", ["allonge la distance de freinage", "raccourcit la distance d’arrêt", "n’a aucun effet", "supprime le temps de réaction"], "Moins d’adhérence."],
+    ["À 50 km/h, en 1 s de réaction, la voiture parcourt environ…", ["14 m", "50 m", "5 m", "100 m"], "50 ÷ 3,6 ≈ 13,9 m."],
+    ["Sur un graphique distance-temps, un palier horizontal signifie…", ["l’arrêt", "une accélération", "une vitesse maximale", "un recul"], "La distance ne change plus."],
+    ["La vitesse moyenne tient compte des arrêts.", ["Vrai", "Faux"], "Distance totale ÷ durée totale."],
+    ["Mouvement d’une balle lâchée : écarts entre positions…", ["de plus en plus grands", "constants", "de plus en plus petits", "nuls"], "Chute accélérée."]
+  ]
+};
+M["pc-forces"] = {
+  c: [
+    ["Effets d’une action mécanique ?", "Mettre en mouvement, modifier la trajectoire ou la vitesse, déformer."], ["Interaction de contact : exemples ?", "Pousser, tirer, frotter, réaction d’un support."],
+    ["Interaction à distance : exemples ?", "Gravitation, magnétisme, électrique."], ["Principe des actions réciproques ?", "Si A agit sur B, B agit sur A avec la même valeur, en sens opposé."],
+    ["Diagramme objet-interactions : trait plein / pointillé ?", "Contact / distance."], ["4 caractéristiques d’une force ?", "Point d’application, direction, sens, valeur."],
+    ["Unité d’une force ?", "Le newton (N)."], ["Instrument de mesure d’une force ?", "Le dynamomètre."], ["Direction du poids ?", "Verticale, vers le centre de l’astre."],
+    ["g sur Terre ?", "9,8 N/kg (souvent arrondi à 10)."], ["g sur la Lune ?", "1,6 N/kg."], ["g sur Mars ?", "3,7 N/kg."], ["g sur Jupiter ?", "24,8 N/kg."],
+    ["De quoi dépend la gravitation ?", "Des masses et de la distance."], ["Qui a formulé la gravitation universelle ?", "Isaac Newton (XVIIe siècle)."],
+    ["Phénomènes expliqués par la gravitation ?", "Chute des objets, marées, orbites de la Lune et des planètes."], ["Principe d’inertie ?", "Si les forces se compensent, l’objet est immobile ou en mouvement rectiligne uniforme."],
+    ["Réaction du support ?", "Force exercée par une table sur un objet posé, verticale vers le haut."], ["Masse d’un objet sur la Lune ?", "La même que sur Terre."],
+    ["Échelle 1 cm pour 50 N : longueur pour 200 N ?", "4 cm."]
+  ],
+  q: [
+    ["Poids d’un objet de 2 kg sur Terre ?", ["19,6 N", "2 N", "9,8 N", "0,2 N"], "2 × 9,8."],
+    ["Poids d’une personne de 60 kg sur la Lune ?", ["96 N", "588 N", "60 N", "37,5 N"], "60 × 1,6."],
+    ["Un objet pèse 49 N sur Terre. Sa masse ?", ["5 kg", "49 kg", "480 kg", "0,2 kg"], "49 ÷ 9,8."],
+    ["L’attraction d’un aimant sur un clou est une action…", ["à distance", "de contact", "chimique", "thermique"], "Magnétisme."],
+    ["Un livre posé sur une table est immobile : les forces…", ["se compensent", "sont nulles", "sont toutes vers le bas", "s’additionnent"], "Principe d’inertie."],
+    ["La force de la Terre sur la Lune et celle de la Lune sur la Terre ont…", ["la même valeur", "des valeurs très différentes", "le même sens", "une valeur nulle"], "Actions réciproques."],
+    ["Les marées sont dues…", ["à l’attraction de la Lune et du Soleil", "au vent", "aux volcans", "à la rotation des bateaux"], "Gravitation."],
+    ["Sur Jupiter, un objet pèse…", ["plus que sur Terre", "moins que sur Terre", "autant que sur Terre", "zéro"], "g plus grand."],
+    ["Le point d’application du poids est…", ["le centre de l’objet", "le point de contact avec le sol", "le sommet de l’objet", "n’importe où"], "Centre de gravité."],
+    ["Un frottement est une action…", ["de contact", "à distance", "nucléaire", "électrique"], "Contact entre deux surfaces."],
+    ["Une balance mesure…", ["une masse", "un poids", "une force", "une vitesse"], "En kg ou g."],
+    ["Un satellite reste en orbite grâce…", ["à la gravitation", "au vent solaire", "à son moteur en permanence", "au magnétisme"], "Attraction de la Terre."],
+    ["Le poids est une force verticale vers le haut.", ["Faux", "Vrai"], "Vers le bas (vers le centre de l’astre)."],
+    ["Avec l’échelle 1 cm pour 100 N, une force de 350 N mesure…", ["3,5 cm", "35 cm", "0,35 cm", "350 cm"], "350 ÷ 100."],
+    ["Newton a formulé…", ["la gravitation universelle", "la théorie de l’évolution", "la loi d’Ohm", "le tableau périodique"], "XVIIe siècle."]
+  ]
+};
+M["pc-energie"] = {
+  c: [
+    ["Unité de l’énergie ?", "Le joule (J)."], ["1 kWh = ? J", "3 600 000 J."], ["Unité de la puissance ?", "Le watt (W)."], ["E = ?", "P × t."], ["Ec = ?", "½ × m × v²."],
+    ["Énergie liée à la hauteur ?", "Énergie potentielle de position."], ["Énergie d’un carburant ?", "Énergie chimique."], ["Énergie du noyau atomique ?", "Énergie nucléaire."],
+    ["Conservation de l’énergie ?", "Elle ne se crée pas et ne disparaît pas, elle se convertit."], ["Pertes dans un convertisseur ?", "Le plus souvent de l’énergie thermique."],
+    ["Rendement ?", "Énergie utile ÷ énergie reçue (< 1)."], ["Conversion d’une lampe ?", "Électrique → lumineuse + thermique."], ["Conversion d’un moteur électrique ?", "Électrique → mécanique + thermique."],
+    ["Conversion d’un panneau photovoltaïque ?", "Lumineuse → électrique."], ["Conversion d’une pile ?", "Chimique → électrique."], ["Conversion d’une éolienne ?", "Cinétique (vent) → électrique."],
+    ["Chaîne d’un barrage ?", "Potentielle → cinétique → mécanique (turbine) → électrique (alternateur)."], ["Rôle d’un alternateur ?", "Convertir l’énergie mécanique en électrique."],
+    ["Énergie mécanique ?", "Somme de l’énergie cinétique et de l’énergie potentielle."], ["Chute d’un objet : conversion ?", "Potentielle → cinétique."],
+    ["Énergies renouvelables ?", "Solaire, éolien, hydraulique, biomasse, géothermie, marées."], ["Énergies fossiles ?", "Pétrole, charbon, gaz."], ["Avantage du nucléaire pour le climat ?", "Peu de CO₂ émis."], ["Inconvénient du nucléaire ?", "Déchets radioactifs."]
+  ],
+  q: [
+    ["Énergie consommée par une lampe de 60 W pendant 5 h ?", ["300 Wh", "12 Wh", "65 Wh", "3 000 Wh"], "60 × 5."],
+    ["Ec d’un objet de 2 kg à 3 m/s ?", ["9 J", "6 J", "18 J", "3 J"], "0,5 × 2 × 9."],
+    ["Si la masse double, Ec…", ["double", "quadruple", "ne change pas", "est divisée par 2"], "Proportionnelle à m."],
+    ["Un ballon qui monte : son énergie cinétique…", ["diminue", "augmente", "reste constante", "devient chimique"], "Elle se convertit en énergie potentielle."],
+    ["Le rendement d’un moteur est de 0,8. Pour 1 000 J reçus, énergie utile ?", ["800 J", "1 000 J", "200 J", "1 250 J"], "1 000 × 0,8."],
+    ["Dans une centrale nucléaire, la chaleur sert à…", ["produire de la vapeur qui fait tourner une turbine", "éclairer directement", "charger des piles", "chauffer les maisons uniquement"], "Principe commun aux centrales thermiques."],
+    ["2 kWh = ? J", ["7 200 000 J", "2 000 J", "720 J", "3 600 J"], "2 × 3 600 000."],
+    ["Quelle source est intermittente ?", ["le solaire", "le nucléaire", "le charbon", "le gaz"], "Pas de soleil la nuit."],
+    ["La biomasse est…", ["renouvelable", "fossile", "nucléaire", "inépuisable sans limite"], "Bois, déchets végétaux."],
+    ["Une ampoule LED est plus efficace car…", ["elle perd moins d’énergie en chaleur", "elle consomme plus", "elle chauffe plus", "elle est plus grosse"], "Meilleur rendement."],
+    ["Puissance d’un appareil qui consomme 3 kWh en 2 h ?", ["1,5 kW", "6 kW", "3 kW", "0,67 kW"], "P = E ÷ t."],
+    ["L’énergie peut être créée.", ["Faux", "Vrai"], "Elle se conserve et se convertit."],
+    ["La principale source d’électricité en France est…", ["le nucléaire", "le charbon", "le pétrole", "le solaire"], "Majorité de la production."],
+    ["L’énergie stockée dans les aliments est…", ["chimique", "nucléaire", "électrique", "lumineuse"], "Convertie par le corps."],
+    ["Un convertisseur a toujours un rendement inférieur à 100 %.", ["Vrai", "Faux"], "Il y a toujours des pertes."]
+  ]
+};
+M["pc-electricite"] = {
+  c: [
+    ["Éléments d’un circuit ?", "Générateur, récepteurs, fils, interrupteur."], ["Sens conventionnel du courant ?", "Du + vers le − à l’extérieur du générateur."],
+    ["Conducteurs : exemples ?", "Métaux, eau salée, corps humain."], ["Isolants : exemples ?", "Plastique, verre, bois sec, air."], ["Particularité d’une DEL ?", "Le courant ne passe que dans un sens."],
+    ["Série : intensité ?", "La même partout."], ["Série : tension ?", "Loi d’additivité U = U₁ + U₂."], ["Dérivation : tension ?", "La même aux bornes de chaque branche."], ["Dérivation : intensité ?", "Loi des nœuds I = I₁ + I₂."],
+    ["Unité de l’intensité ?", "L’ampère (A)."], ["Unité de la tension ?", "Le volt (V)."], ["Branchement de l’ampèremètre ?", "En série."], ["Branchement du voltmètre ?", "En dérivation."],
+    ["Loi d’Ohm ?", "U = R × I."], ["R = ?", "U ÷ I."], ["I = ?", "U ÷ R."], ["Caractéristique d’une résistance ?", "Droite passant par l’origine."],
+    ["P électrique = ?", "U × I."], ["Tension du secteur en France ?", "230 V."], ["Court-circuit ?", "Le courant passe sans traverser de récepteur ; intensité très élevée."],
+    ["Rôle du fusible et du disjoncteur ?", "Couper le courant en cas de surintensité."], ["Rôle de la prise de terre et du différentiel ?", "Protéger les personnes contre l’électrocution."],
+    ["Tension dangereuse en milieu humide ?", "Au-delà de 25 V."], ["1 mA = ? A", "0,001 A."]
+  ],
+  q: [
+    ["Dans un circuit série, I₁ = 0,3 A. L’intensité ailleurs dans la boucle vaut…", ["0,3 A", "0,6 A", "0,15 A", "0 A"], "Même intensité partout."],
+    ["Deux lampes en série : U₁ = 4 V, U₂ = 2 V. Tension du générateur ?", ["6 V", "2 V", "4 V", "8 V"], "Additivité."],
+    ["Deux branches en dérivation : I₁ = 0,2 A, I₂ = 0,5 A. Intensité principale ?", ["0,7 A", "0,3 A", "0,1 A", "0,5 A"], "Loi des nœuds."],
+    ["U = 12 V et I = 0,04 A. R = ?", ["300 Ω", "0,48 Ω", "48 Ω", "3 Ω"], "12 ÷ 0,04."],
+    ["R = 50 Ω et U = 10 V. I = ?", ["0,2 A", "500 A", "5 A", "60 A"], "10 ÷ 50."],
+    ["Un appareil de 460 W sous 230 V : I = ?", ["2 A", "0,5 A", "105 800 A", "690 A"], "460 ÷ 230."],
+    ["Le voltmètre se branche…", ["en dérivation", "en série", "à la place du générateur", "jamais"], "Aux bornes du dipôle."],
+    ["Le plastique des gaines électriques est…", ["isolant", "conducteur", "magnétique", "radioactif"], "Protection."],
+    ["Un court-circuit provoque…", ["une forte intensité et un échauffement", "une baisse d’intensité", "rien", "une baisse de tension sans danger"], "Risque d’incendie."],
+    ["Le disjoncteur différentiel protège…", ["les personnes", "uniquement les appareils", "rien", "les fils seulement"], "Contre l’électrocution."],
+    ["Les appareils de la maison sont branchés…", ["en dérivation", "en série", "en boucle unique", "sans circuit"], "230 V chacun, indépendants."],
+    ["Une DEL branchée à l’envers…", ["ne s’allume pas", "brille plus fort", "explose toujours", "change de couleur"], "Sens passant unique."],
+    ["L’eau salée conduit le courant.", ["Vrai", "Faux"], "Elle contient des ions."],
+    ["250 mA = … A", ["0,25", "2,5", "25", "0,025"], "÷ 1 000."],
+    ["La tension du secteur en France est de…", ["230 V", "12 V", "110 V", "1 000 V"], "Courant alternatif."]
+  ]
+};
+M["pc-signaux"] = {
+  c: [
+    ["Origine d’un son ?", "La vibration d’un objet."], ["Le son se propage-t-il dans le vide ?", "Non."], ["Vitesse du son dans l’eau ?", "Environ 1 500 m/s."], ["Vitesse du son dans l’acier ?", "Environ 5 000 m/s."],
+    ["Unité de la fréquence ?", "Le hertz (Hz)."], ["Lien fréquence-période ?", "f = 1 ÷ T."], ["Son aigu ?", "Fréquence élevée."], ["Son grave ?", "Fréquence faible."],
+    ["Domaine audible ?", "20 Hz à 20 000 Hz."], ["Animaux utilisant les ultrasons ?", "Chauves-souris, dauphins."], ["Animaux utilisant les infrasons ?", "Éléphants."],
+    ["Unité du niveau sonore ?", "Le décibel (dB)."], ["+3 dB correspond à…", "une intensité sonore doublée."], ["Seuil de douleur ?", "Environ 120 dB."],
+    ["Propagation de la lumière ?", "En ligne droite, même dans le vide."], ["Vitesse de la lumière ?", "Environ 300 000 km/s."], ["Décomposition de la lumière blanche ?", "Par un prisme, en spectre coloré."],
+    ["Formule de l’écho ?", "d = v × t ÷ 2."], ["Principe du sonar ?", "Mesurer la durée aller-retour d’ultrasons."], ["Calcul de la distance d’un orage ?", "Secondes entre éclair et tonnerre × 340 m."],
+    ["Signal analogique / numérique ?", "Variation continue / suite de 0 et de 1."], ["Fibre optique ?", "Transporte la lumière par réflexions dans un fil de verre."]
+  ],
+  q: [
+    ["Un son de 50 Hz est…", ["grave", "aigu", "un ultrason", "un infrason"], "Basse fréquence audible."],
+    ["Un son de 15 Hz est…", ["un infrason", "un ultrason", "aigu", "grave audible"], "Moins de 20 Hz."],
+    ["Période d’un son de 100 Hz ?", ["0,01 s", "100 s", "0,1 s", "1 s"], "T = 1 ÷ 100."],
+    ["Le son va plus vite dans…", ["l’acier", "l’air", "le vide", "l’air chaud"], "Milieu plus rigide."],
+    ["Un sonar reçoit l’écho après 2 s dans l’eau. Profondeur ?", ["1 500 m", "3 000 m", "750 m", "340 m"], "1 500 × 2 ÷ 2."],
+    ["On compte 3 s entre l’éclair et le tonnerre. Distance ?", ["environ 1 km", "3 km", "340 m", "100 m"], "340 × 3 ≈ 1 020 m."],
+    ["La lumière blanche est…", ["un mélange de couleurs", "une seule couleur", "invisible", "un son"], "Décomposée par un prisme."],
+    ["Un concert à 100 dB est…", ["dangereux après quelques minutes", "sans risque", "inaudible", "silencieux"], "Au-delà de 85 dB."],
+    ["L’échographie utilise…", ["des ultrasons", "des rayons X", "des infrasons", "la lumière visible"], "Sans danger."],
+    ["Les ondes radio se propagent à la vitesse…", ["de la lumière", "du son", "d’une voiture", "nulle"], "Ondes électromagnétiques."],
+    ["La lumière met environ … pour venir du Soleil", ["8 minutes", "8 secondes", "8 heures", "8 ans"], "150 millions de km."],
+    ["Un signal numérique est formé de…", ["0 et de 1", "sons continus", "couleurs", "vagues"], "Codage binaire."],
+    ["Le son peut se propager sur la Lune sans air.", ["Faux", "Vrai"], "Pas de milieu matériel."],
+    ["+3 dB, c’est une intensité sonore…", ["doublée", "triplée", "divisée par 2", "identique"], "Échelle logarithmique."],
+    ["Les dauphins communiquent avec…", ["des ultrasons", "des infrasons uniquement", "la lumière", "des ondes radio"], "Écholocation."]
+  ]
+};
+M["te-besoin"] = {
+  c: [
+    ["Objet technique ?", "Objet fabriqué par l’homme pour répondre à un besoin."], ["Types de besoins ?", "Vitaux, pratiques, de confort ou de plaisir."], ["Étapes de conception ?", "Besoin, cahier des charges, solutions, prototype, tests, fabrication."],
+    ["Fonction d’estime ?", "Ce qui donne envie d’acheter (esthétique, marque)."], ["Fonction de service ?", "Relation de l’objet avec son environnement ou l’utilisateur."], ["Fonction technique ?", "Ce que doit faire une partie de l’objet pour assurer une fonction de service."],
+    ["Solution technique ?", "Moyen concret choisi (matériau, composant)."], ["Critère ?", "Ce qu’on mesure pour vérifier une fonction."], ["Niveau ?", "Valeur attendue du critère, avec tolérance."],
+    ["Diagramme des interacteurs ?", "Schéma « pieuvre » des relations entre l’objet et son environnement."], ["Fonction principale (pieuvre) ?", "Relie deux éléments en passant par l’objet."], ["Fonction contrainte ?", "Relie l’objet à un seul élément."],
+    ["CAO ?", "Conception assistée par ordinateur."], ["Prototype ?", "Premier exemplaire pour tester."], ["Croquis ?", "Dessin à main levée."],
+    ["Outils de prototypage ?", "Impression 3D, découpe laser."], ["Que vérifie un test ?", "Le respect du cahier des charges."]
+  ],
+  q: [
+    ["La CAO permet de…", ["modéliser un objet en 3D sur ordinateur", "vendre un objet", "recycler un objet", "programmer un robot uniquement"], "Conception assistée par ordinateur."],
+    ["« Être de couleur rouge vif » relève de…", ["la fonction d’estime", "la fonction d’usage", "la fonction technique", "l’analyse du cycle de vie"], "Ce qui plaît."],
+    ["Dans la bête à cornes, « dans quel but ? » donne…", ["la fonction d’usage", "le prix", "le matériau", "le niveau"], "Fonction principale."],
+    ["Un niveau « ≤ 400 g » correspond au critère…", ["masse", "volume", "température", "couleur"], "Unité de masse."],
+    ["Le prototype sert à…", ["tester la solution avant la fabrication en série", "vendre au public", "remplacer le cahier des charges", "décorer"], "Vérification."],
+    ["Une fonction contrainte peut être…", ["respecter les normes de sécurité", "déplacer l’utilisateur", "vendre l’objet", "plaire à tout le monde"], "Exigence imposée."],
+    ["Une double paroi sous vide est…", ["une solution technique", "une fonction d’estime", "un besoin", "un critère"], "Moyen concret."],
+    ["La première étape de conception est…", ["l’analyse du besoin", "la fabrication", "le recyclage", "la vente"], "Tout part du besoin."],
+    ["Un critère doit être mesurable.", ["Vrai", "Faux"], "Pour vérifier la conformité."],
+    ["L’impression 3D dépose la matière…", ["couche par couche", "en un seul bloc", "par découpe", "par pliage"], "Fabrication additive."]
+  ]
+};
+M["te-chaines"] = {
+  c: [
+    ["Exemples de systèmes automatisés ?", "Portail, porte de supermarché, robot aspirateur, feu tricolore."], ["Information logique ?", "Tout ou rien (0 ou 1)."], ["Information analogique ?", "Valeur qui varie de façon continue."],
+    ["Capteur de distance ?", "Capteur à ultrasons."], ["Capteur de présence ?", "Détecteur infrarouge (PIR)."], ["Capteur de luminosité ?", "Photorésistance (LDR)."], ["Capteur de température ?", "Thermistance ou sonde."],
+    ["Composant qui distribue l’énergie ?", "Relais, variateur, transistor."], ["Actionneur de translation ?", "Vérin."], ["Actionneur sonore ?", "Haut-parleur, buzzer."],
+    ["Éléments de transmission ?", "Engrenages, poulies, courroie, pignon-crémaillère."], ["Bit ?", "Unité d’information binaire (0 ou 1)."], ["Octet ?", "8 bits."],
+    ["Rôle de la cellule photoélectrique d’un portail ?", "Détecter un obstacle (sécurité)."], ["Objet connecté ?", "Objet qui communique par un réseau (Wi-Fi, Bluetooth)."],
+    ["Limites des objets connectés ?", "Consommation électrique, données personnelles, piratage."], ["Microcontrôleur ?", "Circuit programmable qui traite l’information."]
+  ],
+  q: [
+    ["Une photorésistance détecte…", ["la luminosité", "la température", "la distance", "le son"], "LDR."],
+    ["Un vérin produit un mouvement de…", ["translation", "rotation", "vibration sonore", "lumière"], "Mouvement rectiligne."],
+    ["Un relais réalise la fonction…", ["distribuer", "acquérir", "convertir", "transmettre"], "Il commande le passage de l’énergie."],
+    ["Un buzzer est…", ["un actionneur", "un capteur", "un microcontrôleur", "une batterie"], "Il produit un son."],
+    ["Une information « appuyé / pas appuyé » est…", ["logique", "analogique", "chimique", "mécanique"], "Tout ou rien."],
+    ["Un octet contient…", ["8 bits", "2 bits", "10 bits", "1 000 bits"], "Définition."],
+    ["Une courroie réalise la fonction…", ["transmettre", "acquérir", "alimenter", "communiquer"], "Transmission du mouvement."],
+    ["Un capteur d’humidité dans une serre réalise…", ["acquérir", "traiter", "distribuer", "convertir"], "Il mesure une grandeur."],
+    ["La carte programmable appartient à la chaîne…", ["d’information", "d’énergie", "de montage", "de recyclage"], "Elle traite."],
+    ["Une pompe à eau convertit l’énergie…", ["électrique en mécanique", "lumineuse en chimique", "mécanique en électrique", "thermique en lumineuse"], "C’est un actionneur."]
+  ]
+};
+M["te-programmation"] = {
+  c: [
+    ["Logigramme ?", "Représentation graphique d’un algorithme."], ["Séquence ?", "Instructions exécutées l’une après l’autre."], ["Boucle bornée ?", "Répéter un nombre de fois connu."], ["Boucle conditionnelle ?", "Répéter jusqu’à ce qu’une condition soit vraie."],
+    ["Événement en Scratch ?", "Bloc qui déclenche un script (drapeau vert, touche pressée)."], ["Initialiser une variable ?", "Lui donner une valeur de départ."], ["Incrémenter ?", "Ajouter 1 à une variable."],
+    ["Angle pour un carré ?", "90°."], ["Angle pour un triangle équilatéral ?", "120°."], ["Angle pour un pentagone régulier ?", "72°."], ["Angle pour un hexagone régulier ?", "60°."], ["Formule de l’angle d’un polygone à n côtés ?", "360 ÷ n."],
+    ["Nombre aléatoire en Scratch ?", "« nombre aléatoire entre 1 et 6 »."], ["Bogue ?", "Erreur dans un programme."], ["Langage du lycée ?", "Python."],
+    ["Comment lire un script ?", "L’exécuter pas à pas en notant les variables."], ["Condition stricte « > 10 » avec 10 ?", "Faux (10 n’est pas strictement supérieur à 10)."]
+  ],
+  q: [
+    ["« répéter 5 fois : avancer de 20 » : distance totale ?", ["100", "25", "20", "5"], "5 × 20."],
+    ["Pour dessiner un carré, le lutin tourne de…", ["90°", "60°", "45°", "120°"], "360 ÷ 4."],
+    ["« mettre a à 10 ; ajouter −3 à a » : a = ?", ["7", "13", "−3", "30"], "10 − 3."],
+    ["Une boucle infinie…", ["ne s’arrête jamais d’elle-même", "s’exécute une fois", "n’existe pas en Scratch", "s’arrête après 10 tours"], "Répéter indéfiniment."],
+    ["« si n > 5 alors dire Grand sinon dire Petit » avec n = 5 ?", ["Petit", "Grand", "rien", "5"], "5 n’est pas > 5."],
+    ["Pour simuler un dé, on utilise…", ["un nombre aléatoire entre 1 et 6", "une boucle infinie", "une condition", "un capteur"], "Hasard."],
+    ["« mettre x à 1 ; répéter 3 fois : mettre x à x × 3 » : x = ?", ["27", "9", "3", "10"], "1 → 3 → 9 → 27."],
+    ["Un hexagone régulier : nombre de répétitions ?", ["6", "5", "8", "60"], "6 côtés."],
+    ["Un bogue est…", ["une erreur de programme", "un capteur", "une variable", "une boucle"], "Bug."],
+    ["Initialiser une variable évite…", ["de garder une ancienne valeur", "les boucles", "les conditions", "l’affichage"], "Valeur de départ maîtrisée."]
+  ]
+};
+M["te-materiaux"] = {
+  c: [
+    ["Matériaux métalliques ?", "Acier, aluminium, cuivre, fonte."], ["Matériaux organiques ?", "Bois, papier, carton, cuir, textiles, plastiques."], ["Céramiques et minéraux ?", "Verre, porcelaine, béton, brique."], ["Composites ?", "Fibre de carbone, béton armé, contreplaqué."],
+    ["Origine de la plupart des plastiques ?", "Le pétrole."], ["Propriété du verre ?", "Dur mais fragile."], ["Matériau le plus léger parmi acier, aluminium, cuivre ?", "L’aluminium."],
+    ["Corrosion ?", "Dégradation d’un métal (rouille)."], ["ACV ?", "Analyse du cycle de vie."], ["Étape la plus polluante d’un smartphone ?", "La fabrication."], ["Étape la plus polluante d’une voiture thermique ?", "L’utilisation."],
+    ["Règle des 3R ?", "Réduire, réutiliser, recycler."], ["Matériaux recyclables presque à l’infini ?", "Verre et aluminium."], ["Compost ?", "Valorisation des déchets organiques."],
+    ["Injection plastique ?", "Plastique fondu injecté dans un moule."], ["Usinage ?", "Enlever de la matière (perçage, fraisage)."], ["Indice de réparabilité ?", "Note sur 10 affichée sur certains appareils."],
+    ["Obsolescence programmée ?", "Réduction volontaire de la durée de vie d’un produit, interdite en France."]
+  ],
+  q: [
+    ["Le béton armé est…", ["un composite", "un métal pur", "un plastique", "un bois"], "Béton + acier."],
+    ["Le bois est un matériau…", ["organique et renouvelable", "métallique", "céramique", "fossile"], "Issu des arbres."],
+    ["Quel matériau conduit bien la chaleur ?", ["l’aluminium", "le polystyrène", "le bois", "le liège"], "Les métaux sont conducteurs."],
+    ["Le verre se recycle…", ["presque à l’infini", "une seule fois", "jamais", "deux fois maximum"], "Sans perte de qualité."],
+    ["Réparer un objet relève de…", ["réutiliser", "recycler", "incinérer", "extraire"], "Prolonger la durée de vie."],
+    ["L’ACV mesure…", ["l’impact environnemental sur toute la vie d’un produit", "le prix d’un produit", "la vitesse de fabrication", "la beauté d’un objet"], "Analyse du cycle de vie."],
+    ["Le moulage par injection convient…", ["aux grandes séries de pièces plastiques", "aux pièces uniques en bois", "au verre uniquement", "aux métaux précieux"], "Production de masse."],
+    ["L’éco-conception intervient…", ["dès la conception", "après la vente", "uniquement au recyclage", "jamais"], "Tout le cycle de vie."],
+    ["Le plastique est un bon isolant électrique.", ["Vrai", "Faux"], "Gaines de câbles."],
+    ["Prolonger la durée de vie d’un objet est souvent plus efficace que le recycler.", ["Vrai", "Faux"], "Le recyclage consomme aussi de l’énergie."]
+  ]
+};
+M["te-reseaux"] = {
+  c: [
+    ["LAN ?", "Réseau local."], ["Liaisons filaires ?", "Câble Ethernet, fibre optique."], ["Liaisons sans fil ?", "Wi-Fi, Bluetooth, 4G/5G."], ["Carte réseau ?", "Permet à un appareil de se connecter."],
+    ["Commutateur (switch) ?", "Relie les appareils d’un réseau local."], ["Routeur ?", "Relie des réseaux différents et choisit le chemin."], ["Box ?", "Modem-routeur qui relie la maison à Internet."],
+    ["Exemple d’adresse IP locale ?", "192.168.1.15."], ["DNS ?", "Traduit un nom de domaine en adresse IP."], ["TCP/IP ?", "Protocoles qui découpent et acheminent les données en paquets."],
+    ["HTTP / HTTPS ?", "Protocole du web / version chiffrée."], ["Contenu d’un paquet ?", "Données, adresses IP de départ et d’arrivée, numéro d’ordre."],
+    ["Hameçonnage ?", "Faux message qui cherche à voler des identifiants."], ["RGPD ?", "Règlement européen de protection des données personnelles."], ["Double authentification ?", "Deux preuves d’identité pour se connecter."],
+    ["Impact environnemental du numérique ?", "Fabrication des appareils, centres de données."]
+  ],
+  q: [
+    ["Le DNS sert à…", ["traduire un nom de domaine en adresse IP", "chiffrer les données", "relier les ordinateurs par câble", "stocker des vidéos"], "Annuaire d’Internet."],
+    ["Le commutateur relie…", ["les appareils d’un même réseau local", "des réseaux différents", "un ordinateur à une imprimante uniquement", "des satellites"], "Réseau local."],
+    ["Le cadenas dans la barre d’adresse indique…", ["une connexion HTTPS chiffrée", "un site gratuit", "un virus", "une connexion lente"], "Sécurisé."],
+    ["Les paquets d’un même message…", ["peuvent prendre des chemins différents", "suivent toujours le même câble", "arrivent toujours dans l’ordre", "ne contiennent pas d’adresse"], "Routage."],
+    ["Le hameçonnage consiste à…", ["voler des identifiants par de faux messages", "pêcher en ligne", "accélérer Internet", "réparer un réseau"], "Phishing."],
+    ["La fibre optique transporte…", ["de la lumière", "de l’électricité", "du son", "de l’eau"], "Très haut débit."],
+    ["Le RGPD protège…", ["les données personnelles", "les routeurs", "les mots de passe Wi-Fi uniquement", "les jeux vidéo"], "Règlement européen."],
+    ["Un serveur…", ["fournit un service", "demande un service", "est toujours un téléphone", "n’est jamais connecté"], "Modèle client-serveur."],
+    ["Un mot de passe identique pour tous ses comptes est une bonne pratique.", ["Faux", "Vrai"], "Un piratage les compromet tous."],
+    ["La box relie le réseau domestique…", ["à Internet", "à la télévision uniquement", "au réseau électrique", "à l’imprimante uniquement"], "Fournisseur d’accès."]
+  ]
+};
+M["te-innovation"] = {
+  c: [
+    ["Facteurs d’évolution d’un objet ?", "Progrès techniques, matériaux, énergie, besoins, contraintes."], ["Innovation incrémentale ?", "Amélioration progressive d’un objet existant."], ["Innovation de rupture ?", "Innovation qui change profondément les usages."],
+    ["Durée de protection d’un brevet ?", "20 ans."], ["Organisme français des brevets ?", "L’INPI."], ["Année du premier téléphone ?", "1876 (brevet de Graham Bell)."],
+    ["Premier appel depuis un portable ?", "1973."], ["Premier portable commercialisé ?", "1983."], ["Premier SMS ?", "1992."], ["Smartphones tactiles ?", "Depuis 2007."],
+    ["Lampe à incandescence ?", "1879, 90 % de l’énergie perdue en chaleur."], ["Avantage de la LED ?", "Très économe et longue durée de vie."],
+    ["Critères pour comparer deux objets ?", "Fonction, énergie, matériaux, solutions techniques, usage, impact environnemental."], ["Enjeux de l’innovation ?", "Vie privée, déchets électroniques, métaux rares, inégalités d’accès."]
+  ],
+  q: [
+    ["Un brevet protège une invention pendant…", ["20 ans", "5 ans", "100 ans", "toute la vie de l’inventeur"], "Puis elle devient libre."],
+    ["Le passage du téléphone à fil au smartphone est…", ["une innovation de rupture", "une simple invention", "un recul technique", "une lignée sans rapport"], "Changement profond des usages."],
+    ["La lampe fluocompacte contient…", ["du mercure", "de l’or", "de l’uranium", "du plomb uniquement"], "Recyclage spécifique."],
+    ["Un smartphone plus rapide chaque année est une innovation…", ["incrémentale", "de rupture", "impossible", "abandonnée"], "Amélioration progressive."],
+    ["L’INPI est…", ["l’office français des brevets", "un fabricant de téléphones", "un réseau social", "une banque"], "Propriété industrielle."],
+    ["Le premier SMS a été envoyé en…", ["1992", "1973", "2007", "1876"], "Royaume-Uni."],
+    ["Les métaux rares sont surtout utilisés dans…", ["l’électronique", "le bois", "le verre", "le papier"], "Smartphones, batteries."],
+    ["Une invention non commercialisée est une innovation.", ["Faux", "Vrai"], "Elle doit être adoptée."],
+    ["Lampe à huile, ampoule, LED forment…", ["une lignée", "un cahier des charges", "une chaîne d’énergie", "un réseau"], "Même besoin : éclairer."],
+    ["Le premier portable commercialisé pesait près de…", ["1 kg", "100 g", "10 kg", "10 g"], "1983."]
+  ]
+};
+
+/* Flashcards et questions supplémentaires : SVT */
+var M = BREVET_MORE;
+M["svt-genetique"] = {
+  c: [
+    ["Que contient le noyau d’une cellule ?", "Les chromosomes, porteurs de l’information génétique."], ["Forme de la molécule d’ADN ?", "Une double hélice."],
+    ["Quand les chromosomes sont-ils visibles ?", "Pendant la division cellulaire, quand l’ADN est condensé."], ["Origine des chromosomes d’une paire ?", "Un vient du père, l’autre de la mère."],
+    ["Chromosomes de la 23e paire chez la femme ?", "XX."], ["Nombre de chromosomes chez le chimpanzé ?", "48."], ["Trisomie 21 : nombre total de chromosomes ?", "47."],
+    ["Où se trouve le gène du groupe sanguin ?", "Sur le chromosome 9."], ["Allèles du groupe sanguin ?", "A, B et O."], ["Combien d’allèles de chaque gène possède-t-on ?", "Deux."],
+    ["Allèle dominant ?", "Il s’exprime même en un seul exemplaire."], ["Allèle récessif ?", "Il ne s’exprime que s’il est présent en deux exemplaires."],
+    ["Groupe d’une personne A et O ?", "Groupe A."], ["Groupe d’une personne A et B ?", "Groupe AB."], ["Groupe O : allèles ?", "O et O."],
+    ["Rôle de la mitose ?", "Croissance et renouvellement des cellules."], ["Que se passe-t-il avant la mitose ?", "Chaque chromosome est copié (deux chromatides)."],
+    ["Agents mutagènes ?", "UV, tabac, radioactivité."], ["Mutation dans un gamète ?", "Peut être transmise aux enfants."], ["Mucoviscidose ?", "Maladie génétique due à un allèle récessif."],
+    ["Arbre généalogique : carré / rond ?", "Homme / femme."], ["Influence de l’environnement : exemple ?", "Le bronzage, la taille selon l’alimentation."],
+    ["Les vrais jumeaux ont-ils le même ADN ?", "Oui."]
+  ],
+  q: [
+    ["Combien de paires de chromosomes chez l’humain ?", ["23", "46", "22", "24"], "46 chromosomes."],
+    ["Une personne XY est…", ["un homme", "une femme", "porteuse de trisomie", "impossible"], "Chromosomes sexuels masculins."],
+    ["Un allèle récessif s’exprime…", ["s’il est présent en deux exemplaires", "toujours", "jamais", "s’il est seul"], "Sinon il est masqué."],
+    ["Parents A/O et B/O : leur enfant peut être du groupe…", ["A, B, AB ou O", "seulement AB", "seulement O", "A ou B seulement"], "Toutes les combinaisons sont possibles."],
+    ["Les cellules filles d’une mitose sont…", ["identiques à la cellule mère", "toutes différentes", "à 23 chromosomes", "sans noyau"], "Copie conforme."],
+    ["Le caryotype permet de…", ["repérer une anomalie du nombre de chromosomes", "connaître le groupe sanguin", "voir les gènes un par un", "mesurer la taille"], "Photographie des chromosomes."],
+    ["L’ADN se trouve principalement…", ["dans le noyau", "dans le sang uniquement", "dans les os", "à l’extérieur des cellules"], "Information génétique."],
+    ["Deux parents non malades ont un enfant malade. L’allèle de la maladie est…", ["récessif", "dominant", "absent", "codominant"], "Masqué chez les parents."],
+    ["Les UV peuvent provoquer…", ["des mutations", "la mitose", "la fécondation", "la photosynthèse"], "Agent mutagène."],
+    ["Un gène est…", ["une portion d’ADN", "un chromosome entier", "une cellule", "une protéine"], "Il gouverne un caractère."],
+    ["Le groupe AB montre que A et B sont…", ["codominants", "récessifs", "absents", "mutés"], "Les deux s’expriment."],
+    ["La taille d’une personne dépend…", ["des gènes et de l’environnement", "uniquement des gènes", "uniquement de l’alimentation", "du hasard seul"], "Caractère complexe."],
+    ["Le nombre de chromosomes indique la complexité d’une espèce.", ["Faux", "Vrai"], "Aucun lien."],
+    ["Pendant la mitose, le nombre de chromosomes…", ["est conservé", "est divisé par deux", "double définitivement", "devient 23"], "46 → 46."],
+    ["Une cellule de peau contient-elle tous les gènes ?", ["oui", "non, seulement ceux de la peau", "non, aucun", "seulement les gènes sexuels"], "Toutes les cellules ont le même ADN."]
+  ]
+};
+M["svt-reproduction"] = {
+  c: [
+    ["Organes producteurs de spermatozoïdes ?", "Les testicules."], ["Organes producteurs d’ovules ?", "Les ovaires."], ["Fréquence de la libération d’un ovule ?", "Environ une fois par mois."],
+    ["Chromosome sexuel d’un ovule ?", "Toujours X."], ["Chromosome sexuel d’un spermatozoïde ?", "X ou Y."], ["Qui détermine le sexe de l’enfant ?", "Le spermatozoïde."],
+    ["Nombre de combinaisons possibles de gamètes ?", "Plus de 8 millions (2²³)."], ["Lieu de la fécondation ?", "Une trompe."], ["Lieu de la nidation ?", "L’utérus."],
+    ["Durée d’une grossesse ?", "Environ 9 mois."], ["Rôle du placenta ?", "Échanges entre la mère et le fœtus (nutriments, dioxygène, déchets)."],
+    ["Âge de la puberté ?", "Environ 10-14 ans."], ["Qui déclenche la puberté ?", "Le cerveau (hypothalamus et hypophyse)."],
+    ["Hormones féminines ?", "Œstrogènes et progestérone."], ["Hormone masculine ?", "Testostérone."],
+    ["Caractères sexuels secondaires chez le garçon ?", "Mue de la voix, pilosité, musculature."], ["Chez la fille ?", "Seins, pilosité, règles."],
+    ["Durée moyenne d’un cycle menstruel ?", "28 jours."], ["Jour de l’ovulation ?", "Environ le 14e jour."], ["Que sont les règles ?", "L’élimination de la muqueuse utérine."],
+    ["Action de la pilule ?", "Bloquer l’ovulation."], ["Méthode qui protège des IST ?", "Le préservatif."], ["Exemples d’IST ?", "VIH, chlamydia, papillomavirus."], ["PMA ?", "Procréation médicalement assistée."]
+  ],
+  q: [
+    ["Le sexe de l’enfant est déterminé par…", ["le spermatozoïde", "l’ovule", "la mère", "le placenta"], "X ou Y."],
+    ["La nidation a lieu dans…", ["l’utérus", "la trompe", "l’ovaire", "le vagin"], "Environ une semaine après la fécondation."],
+    ["L’hormone masculine principale est…", ["la testostérone", "la progestérone", "l’insuline", "l’œstrogène"], "Produite par les testicules."],
+    ["La méiose produit des cellules à…", ["23 chromosomes", "46 chromosomes", "92 chromosomes", "12 chromosomes"], "Gamètes."],
+    ["Le placenta permet…", ["les échanges entre mère et fœtus", "la fécondation", "la production d’ovules", "la digestion"], "Nutriments et dioxygène."],
+    ["Les vrais jumeaux sont toujours de même sexe.", ["Vrai", "Faux"], "Même cellule-œuf."],
+    ["Les faux jumeaux proviennent…", ["de deux cellules-œufs", "d’une seule cellule-œuf", "d’un seul spermatozoïde", "d’une mitose"], "Deux ovules fécondés."],
+    ["Les règles correspondent…", ["à l’élimination de la muqueuse utérine", "à l’ovulation", "à la fécondation", "à la nidation"], "Début du cycle."],
+    ["Qui commande le fonctionnement des ovaires ?", ["le cerveau", "l’estomac", "le cœur", "les reins"], "Hypophyse."],
+    ["Le préservatif protège…", ["des IST et des grossesses", "seulement des grossesses", "seulement des IST", "de rien"], "Double protection."],
+    ["La fécondation rétablit…", ["46 chromosomes", "23 chromosomes", "92 chromosomes", "les chromosomes X uniquement"], "23 + 23."],
+    ["Les spermatozoïdes sont produits…", ["en continu dès la puberté", "une fois par mois", "dès la naissance", "seulement à 18 ans"], "Production continue."],
+    ["La contraception d’urgence se prend…", ["le plus tôt possible après un rapport à risque", "un mois après", "avant la puberté", "uniquement pendant les règles"], "Efficacité décroissante avec le temps."],
+    ["Le vaccin contre le papillomavirus est proposé…", ["au collège", "uniquement aux adultes", "à la naissance", "jamais"], "Prévention des IST et de cancers."],
+    ["La méiose et la fécondation expliquent la diversité génétique.", ["Vrai", "Faux"], "Double hasard."]
+  ]
+};
+M["svt-evolution"] = {
+  c: [
+    ["Nombre d’espèces décrites sur Terre ?", "Environ 2 millions."], ["Définition d’une espèce ?", "Individus qui se reproduisent entre eux avec une descendance fertile."],
+    ["Biodiversité génétique ?", "Variété des allèles au sein d’une espèce."], ["Critère de classification ?", "Les attributs partagés."],
+    ["Attribut des vertébrés ?", "Squelette interne (colonne vertébrale)."], ["Attribut des tétrapodes ?", "Quatre membres."], ["Attributs des mammifères ?", "Poils et mamelles."],
+    ["Ancêtre commun humain-chimpanzé ?", "Il y a environ 7 millions d’années."], ["ADN partagé humain-chimpanzé ?", "Environ 98 %."],
+    ["Qui a proposé la sélection naturelle ?", "Charles Darwin, 1859."], ["Dérive génétique ?", "Variation au hasard de la fréquence des allèles, surtout dans les petites populations."],
+    ["Archaeopteryx ?", "Fossile intermédiaire entre dinosaures et oiseaux."], ["Âge de la Terre ?", "4,6 milliards d’années."], ["Premières traces de vie ?", "Il y a 3,8 milliards d’années."],
+    ["Sortie des eaux ?", "Il y a environ 400 millions d’années."], ["Extinction des dinosaures non aviens ?", "Il y a 66 millions d’années."], ["Toumaï ?", "Un des plus anciens représentants de la lignée humaine (7 Ma)."],
+    ["Homo sapiens apparaît…", "il y a environ 300 000 ans, en Afrique."], ["Nombre de crises biologiques majeures ?", "Cinq."],
+    ["Causes du déclin de la biodiversité ?", "Destruction des habitats, pollutions, surexploitation, espèces invasives, réchauffement."],
+    ["Trame verte et bleue ?", "Corridors écologiques qui relient les milieux naturels."], ["Exemple d’espèce invasive en France ?", "Le frelon asiatique."]
+  ],
+  q: [
+    ["La baleine est classée avec…", ["les mammifères", "les poissons", "les oiseaux", "les reptiles"], "Poils (à la naissance), mamelles."],
+    ["L’humain descend…", ["d’un ancêtre commun avec le chimpanzé", "du chimpanzé", "du gorille", "du singe actuel"], "Ancêtre commun il y a environ 7 Ma."],
+    ["La sélection naturelle agit sur…", ["des variations déjà présentes", "des besoins des individus", "les volontés des espèces", "rien"], "Les mutations apparaissent au hasard."],
+    ["Les membres de la chauve-souris et de l’humain ont la même organisation osseuse car…", ["ils ont un ancêtre commun", "ils volent tous les deux", "c’est un hasard", "ils mangent la même chose"], "Homologie."],
+    ["Darwin publie « L’Origine des espèces » en…", ["1859", "1789", "1905", "1950"], "Théorie de la sélection naturelle."],
+    ["Une crise biologique est…", ["une disparition massive d’espèces", "une mutation", "une maladie", "une migration"], "Cinq majeures."],
+    ["La Terre s’est formée il y a…", ["4,6 milliards d’années", "4,6 millions d’années", "13,8 milliards d’années", "66 millions d’années"], "Âge de la Terre."],
+    ["La phalène foncée devient majoritaire avec la pollution car…", ["elle est mieux camouflée sur les troncs noircis", "elle mange la suie", "elle mute volontairement", "elle vole plus vite"], "Sélection naturelle."],
+    ["Les fossiles sont…", ["des restes d’êtres vivants conservés dans les roches", "des roches volcaniques", "des minéraux précieux", "des cellules actuelles"], "Témoins du passé."],
+    ["Une mutation est toujours défavorable.", ["Faux", "Vrai"], "Elle peut être favorable, défavorable ou neutre."],
+    ["La biodiversité comprend…", ["écosystèmes, espèces, gènes", "seulement les animaux", "seulement les plantes", "seulement les espèces rares"], "Trois niveaux."],
+    ["Le frelon asiatique est…", ["une espèce invasive", "une espèce endémique protégée", "un mammifère", "une plante"], "Arrivé en France en 2004."],
+    ["Homo sapiens est apparu en…", ["Afrique", "Europe", "Asie", "Amérique"], "Il y a environ 300 000 ans."],
+    ["Pour classer les êtres vivants, on se base sur…", ["les attributs partagés", "leur taille", "leur milieu de vie", "leur alimentation"], "Groupes emboîtés."],
+    ["Les dinosaures non aviens disparaissent il y a 66 millions d’années.", ["Vrai", "Faux"], "Crise Crétacé-Paléogène."]
+  ]
+};
+M["svt-immunite"] = {
+  c: [
+    ["Taille d’une bactérie ?", "Environ 1 µm."], ["Un virus peut-il se multiplier seul ?", "Non, seulement dans une cellule."], ["Maladies bactériennes ?", "Angine bactérienne, tuberculose, tétanos."], ["Maladies virales ?", "Grippe, rhume, rougeole, Covid-19, VIH."],
+    ["Voies de contamination ?", "Plaie, voies respiratoires, aliments et eau, rapports sexuels, sang."], ["Barrières naturelles ?", "Peau, muqueuses, larmes, mucus, acidité de l’estomac, microbiote."],
+    ["4 signes de l’inflammation ?", "Rougeur, chaleur, gonflement, douleur."], ["Étapes de la phagocytose ?", "Adhésion, ingestion, digestion, rejet."],
+    ["Réaction rapide : caractéristiques ?", "Quelques heures, non spécifique."], ["Réaction lente : caractéristiques ?", "Plusieurs jours, spécifique."],
+    ["Antigène ?", "Molécule reconnue comme étrangère."], ["Rôle des lymphocytes T ?", "Détruire les cellules infectées."], ["Rôle des anticorps ?", "Neutraliser les microbes et faciliter leur phagocytose."],
+    ["Lymphocytes mémoire ?", "Ils permettent une réponse plus rapide lors d’un second contact."], ["Être immunisé ?", "Être protégé contre un microbe grâce à la mémoire immunitaire."],
+    ["Cible du VIH ?", "Certains lymphocytes T."], ["Maladies opportunistes ?", "Maladies qui profitent d’un système immunitaire affaibli."],
+    ["Immunité collective ?", "Quand beaucoup sont vaccinés, le microbe circule moins et protège les fragiles."], ["Asepsie ?", "Empêcher la contamination."], ["Antisepsie ?", "Détruire les microbes sur une plaie."],
+    ["Allergie ?", "Réaction excessive contre une substance inoffensive."], ["Rejet de greffe ?", "Le système immunitaire attaque l’organe greffé."], ["Séropositif ?", "Personne qui possède des anticorps contre un microbe."]
+  ],
+  q: [
+    ["Le VIH détruit…", ["certains lymphocytes T", "les globules rouges", "les neurones", "les os"], "Affaiblit l’immunité."],
+    ["Après un second contact avec un microbe, la production d’anticorps est…", ["plus rapide et plus forte", "plus lente", "identique", "nulle"], "Mémoire immunitaire."],
+    ["La réaction inflammatoire est…", ["rapide et non spécifique", "lente et spécifique", "inexistante chez l’humain", "provoquée par les antibiotiques"], "Première ligne."],
+    ["Un virus se multiplie…", ["dans les cellules", "seul dans l’eau", "dans l’air", "dans les antibiotiques"], "Parasite obligatoire."],
+    ["La tuberculose est due à…", ["une bactérie", "un virus", "un champignon", "un parasite animal"], "Bacille de Koch."],
+    ["Les anticorps sont…", ["spécifiques d’un antigène", "efficaces contre tous les microbes", "des globules blancs", "des antibiotiques"], "Reconnaissance précise."],
+    ["Se laver les mains relève de…", ["l’asepsie", "l’antisepsie", "la vaccination", "la phagocytose"], "Prévention de la contamination."],
+    ["Un vaccin contient…", ["un microbe atténué, tué ou un fragment", "des antibiotiques", "des anticorps de la mère", "des lymphocytes"], "Il entraîne la mémoire."],
+    ["L’allergie est…", ["une réaction excessive du système immunitaire", "une infection bactérienne", "une maladie génétique uniquement", "une absence d’immunité"], "Contre une substance inoffensive."],
+    ["Les phagocytes sont…", ["des globules blancs", "des globules rouges", "des plaquettes", "des neurones"], "Ils ingèrent les microbes."],
+    ["La peau est une barrière naturelle.", ["Vrai", "Faux"], "Elle empêche l’entrée des microbes."],
+    ["Pour une angine virale, le médecin prescrit…", ["pas d’antibiotiques", "des antibiotiques", "un vaccin immédiat", "une greffe"], "Inefficaces contre les virus."],
+    ["L’immunité collective protège…", ["aussi les personnes non vaccinées", "seulement les vaccinés", "personne", "seulement les animaux"], "Moins de circulation du microbe."],
+    ["La mémoire immunitaire est assurée par…", ["les lymphocytes mémoire", "les globules rouges", "les phagocytes uniquement", "les antibiotiques"], "Ils persistent après la guérison."],
+    ["La contamination est…", ["l’entrée d’un microbe dans l’organisme", "sa multiplication", "la guérison", "la vaccination"], "L’infection vient ensuite."]
+  ]
+};
+M["svt-nerveux"] = {
+  c: [
+    ["Centres nerveux ?", "Encéphale (dont le cerveau) et moelle épinière."], ["Protection de la moelle épinière ?", "La colonne vertébrale."],
+    ["Nerf sensitif ?", "Transmet le message du récepteur vers le centre nerveux."], ["Nerf moteur ?", "Transmet le message du centre nerveux vers le muscle."],
+    ["Nombre de neurones dans le cerveau ?", "Environ 86 milliards."], ["Axone ?", "Long prolongement du neurone."], ["Un nerf est fait de…", "faisceaux d’axones."],
+    ["Nature du message dans le neurone ?", "Électrique."], ["Nature du message dans la synapse ?", "Chimique."], ["Neurotransmetteur ?", "Molécule libérée dans la synapse pour activer le neurone suivant."],
+    ["Réflexe : centre nerveux ?", "La moelle épinière."], ["Récepteurs de l’œil ?", "Cellules de la rétine."], ["Récepteurs de l’oreille ?", "Cellules ciliées de l’oreille interne."],
+    ["Effet de l’alcool ?", "Ralentit la transmission nerveuse et les réflexes."], ["Effet du cannabis ?", "Agit sur les synapses, troubles de la mémoire, dépendance."], ["Effet de la nicotine ?", "Forte dépendance."],
+    ["Sommeil nécessaire à un adolescent ?", "8 à 10 heures."], ["Effet des écrans le soir ?", "La lumière bleue retarde l’endormissement."],
+    ["Plasticité cérébrale ?", "Le cerveau se modifie selon les apprentissages."], ["Lors d’un effort, qui augmente le rythme cardiaque ?", "Le système nerveux."],
+    ["Activité physique conseillée pour un ado ?", "Au moins 1 heure par jour."], ["Les cellules ciliées détruites repoussent-elles ?", "Non."]
+  ],
+  q: [
+    ["La moelle épinière est un…", ["centre nerveux", "nerf moteur", "récepteur", "muscle"], "Elle commande les réflexes."],
+    ["Le message nerveux va du récepteur au centre nerveux par…", ["un nerf sensitif", "un nerf moteur", "le sang", "la moelle osseuse"], "Sens afférent."],
+    ["La synapse est…", ["la zone de contact entre deux neurones", "le centre du cerveau", "un muscle", "un os"], "Transmission chimique."],
+    ["Retirer sa main d’une plaque chaude est…", ["un réflexe", "un mouvement volontaire", "une hormone", "une émotion"], "Commandé par la moelle épinière."],
+    ["Le nerf optique relie…", ["l’œil au cerveau", "l’oreille au cerveau", "le cerveau aux muscles", "le cœur au cerveau"], "Nerf sensitif."],
+    ["Les drogues agissent souvent…", ["au niveau des synapses", "sur les os", "sur l’estomac uniquement", "sur les cheveux"], "Imitent ou bloquent des neurotransmetteurs."],
+    ["Le manque de sommeil provoque…", ["une baisse d’attention et de mémoire", "une meilleure concentration", "une croissance plus rapide", "aucun effet"], "Le sommeil consolide la mémoire."],
+    ["Un muscle est…", ["un effecteur", "un récepteur", "un centre nerveux", "un nerf"], "Il réalise la réponse."],
+    ["Le message dans un axone est…", ["électrique", "chimique", "sonore", "lumineux"], "Influx nerveux."],
+    ["Les neurotransmetteurs sont libérés…", ["dans la synapse", "dans le sang", "dans l’estomac", "dans l’air"], "Entre deux neurones."],
+    ["Au-delà de quel niveau sonore l’audition est-elle en danger sur la durée ?", ["85 dB", "20 dB", "40 dB", "60 dB"], "Seuil de danger."],
+    ["L’alcool augmente le temps de réaction.", ["Vrai", "Faux"], "Danger au volant."],
+    ["Le cerveau peut se modifier toute la vie.", ["Vrai", "Faux"], "Plasticité cérébrale."],
+    ["Les bourgeons du goût se trouvent…", ["sur la langue", "dans le nez", "dans l’oreille", "sur la peau"], "Récepteurs gustatifs."],
+    ["Pendant un effort, la fréquence respiratoire…", ["augmente", "diminue", "s’arrête", "ne change pas"], "Plus de dioxygène pour les muscles."]
+  ]
+};
+M["svt-terre"] = {
+  c: [
+    ["Enveloppes de la Terre ?", "Croûte, manteau, noyau."], ["Épaisseur de la croûte océanique ?", "Environ 7 km."], ["Épaisseur de la croûte continentale ?", "Environ 30 km."],
+    ["Épaisseur de la lithosphère ?", "Environ 100 km."], ["Asthénosphère ?", "Partie du manteau plus chaude et ductile sous la lithosphère."],
+    ["Nombre de grandes plaques ?", "Une douzaine."], ["Qui a proposé la dérive des continents ?", "Alfred Wegener, 1912."], ["Arguments de Wegener ?", "Côtes complémentaires, fossiles identiques sur plusieurs continents."],
+    ["Moteur du mouvement des plaques ?", "La convection du manteau."], ["Ce qui se forme à une dorsale ?", "De la croûte océanique."],
+    ["Fosse océanique ?", "Zone profonde où une plaque plonge (subduction)."], ["Ceinture de feu ?", "Zones de subduction autour du Pacifique."],
+    ["Magnitude ?", "Énergie libérée par un séisme (échelle de Richter)."], ["Intensité ?", "Dégâts observés en un lieu."], ["Sismographe ?", "Appareil qui enregistre les ondes sismiques."],
+    ["Lave d’un volcan explosif ?", "Visqueuse, riche en gaz."], ["Nuée ardente ?", "Nuage de gaz et de cendres brûlants qui dévale les pentes."], ["Volcan effusif français ?", "Le Piton de la Fournaise (La Réunion)."],
+    ["Tsunami ?", "Vagues géantes provoquées par un séisme sous-marin."], ["Construction parasismique ?", "Bâtiment conçu pour résister aux séismes."],
+    ["Peut-on prévoir la date d’un séisme ?", "Non."], ["Signes avant une éruption ?", "Gonflement du volcan, petits séismes, émissions de gaz."]
+  ],
+  q: [
+    ["Les Andes se sont formées par…", ["subduction", "divergence", "collision continentale", "érosion"], "Plaque océanique sous l’Amérique du Sud."],
+    ["L’Islande est située sur…", ["une dorsale", "une zone de collision", "une fosse", "un plateau continental stable"], "Dorsale médio-atlantique."],
+    ["Les Alpes se sont formées par…", ["collision", "divergence", "subduction océanique uniquement", "volcanisme"], "Plaques africaine et eurasiatique."],
+    ["La lithosphère est…", ["rigide", "liquide", "gazeuse", "ductile"], "Elle forme les plaques."],
+    ["Un sismographe enregistre…", ["les ondes sismiques", "la température", "le vent", "la pluie"], "Vibrations du sol."],
+    ["La magnitude mesure…", ["l’énergie libérée", "les dégâts", "le nombre de morts", "la durée"], "Échelle de Richter."],
+    ["Les nuées ardentes sont caractéristiques d’un volcanisme…", ["explosif", "effusif", "éteint", "sous-marin calme"], "Très dangereux."],
+    ["Le Piton de la Fournaise est un volcan…", ["effusif", "explosif", "éteint", "de boue"], "Coulées de lave fluide."],
+    ["Un tsunami est provoqué principalement par…", ["un séisme sous-marin", "une tempête", "la marée", "un orage"], "Soulèvement du fond océanique."],
+    ["La dérive des continents a été proposée par…", ["Wegener", "Darwin", "Newton", "Pasteur"], "1912."],
+    ["Les plaques se déplacent grâce à…", ["la convection du manteau", "le vent", "la rotation de la Lune", "les marées"], "Mouvements lents du manteau."],
+    ["On peut prévoir précisément la date d’un séisme.", ["Faux", "Vrai"], "On connaît les zones à risque, pas les dates."],
+    ["Réduire la vulnérabilité, c’est par exemple…", ["construire des bâtiments parasismiques", "supprimer l’aléa", "arrêter les plaques", "boucher les volcans"], "On agit sur les enjeux."],
+    ["La croûte océanique est plus épaisse que la croûte continentale.", ["Faux", "Vrai"], "7 km contre 30 km environ."],
+    ["La ceinture de feu entoure…", ["le Pacifique", "l’Atlantique", "la Méditerranée", "l’océan Indien"], "Zones de subduction."]
+  ]
+};
+M["svt-climat"] = {
+  c: [
+    ["Paramètres de la météo ?", "Température, précipitations, vent, pression."], ["Grands climats ?", "Équatorial, tropical, désertique, tempéré, polaire."],
+    ["Qui redistribue l’énergie solaire sur le globe ?", "Les vents et les courants marins."], ["Température moyenne sans effet de serre ?", "Environ −18 °C."], ["Température moyenne actuelle ?", "Environ +15 °C."],
+    ["Gaz à effet de serre principaux ?", "Vapeur d’eau, CO₂, méthane."], ["Concentration de CO₂ en 1850 et aujourd’hui ?", "Environ 280 ppm, plus de 420 ppm aujourd’hui."],
+    ["Réchauffement depuis l’ère préindustrielle ?", "Environ +1,2 °C."], ["Causes de la montée des océans ?", "Fonte des glaces et dilatation de l’eau."],
+    ["Acidification des océans : conséquence ?", "Menace pour les coraux et les coquillages."], ["Accord de Paris ?", "2015 : limiter le réchauffement nettement en dessous de 2 °C."],
+    ["Photosynthèse ?", "Les végétaux absorbent du CO₂ et produisent de la matière organique grâce à la lumière."], ["Réservoirs de carbone ?", "Atmosphère, êtres vivants, océans, sols, roches et combustibles fossiles."],
+    ["Atténuation : exemples ?", "Énergies renouvelables, isolation, transports en commun."], ["Adaptation : exemples ?", "Digues, végétalisation des villes, cultures résistantes à la sécheresse."],
+    ["Services écosystémiques ?", "Pollinisation, eau potable, sols fertiles, stockage du carbone."], ["Ressource renouvelable ?", "Qui se reconstitue rapidement à l’échelle humaine (eau, bois, soleil)."],
+    ["Développement durable ?", "Répondre aux besoins du présent sans compromettre ceux des générations futures."], ["Rôle des forêts pour le climat ?", "Elles stockent du carbone."]
+  ],
+  q: [
+    ["Le climat se calcule sur au moins…", ["30 ans", "1 an", "10 jours", "100 ans"], "Moyenne sur 30 ans."],
+    ["Le principal gaz à effet de serre émis par les humains est…", ["le CO₂", "l’oxygène", "l’azote", "l’hélium"], "Combustion des énergies fossiles."],
+    ["L’effet de serre naturel est…", ["indispensable à la vie", "dangereux", "inexistant", "dû uniquement aux humains"], "Sans lui, −18 °C."],
+    ["La montée du niveau des océans est due à…", ["la fonte des glaces et la dilatation de l’eau", "la pluie", "les marées", "les volcans"], "Réchauffement."],
+    ["Végétaliser une ville contre les canicules est…", ["de l’adaptation", "de l’atténuation", "de la météo", "de la pollution"], "On vit avec les effets."],
+    ["Les forêts…", ["stockent du carbone", "émettent surtout du méthane", "réchauffent le climat", "n’ont aucun rôle"], "Photosynthèse."],
+    ["L’accord de Paris date de…", ["2015", "1997", "2021", "1992"], "COP21."],
+    ["Le méthane est émis notamment par…", ["l’élevage de ruminants", "les éoliennes", "les panneaux solaires", "les forêts"], "Digestion des bovins."],
+    ["L’acidification des océans menace…", ["les coraux", "les volcans", "les nuages", "les déserts"], "Le CO₂ dissous acidifie l’eau."],
+    ["La température moyenne mondiale a augmenté d’environ … depuis 1850", ["1,2 °C", "12 °C", "0,01 °C", "5 °C"], "Selon le GIEC."],
+    ["Le charbon est une ressource…", ["non renouvelable", "renouvelable", "inépuisable", "biologique récente"], "Formé en millions d’années."],
+    ["Le GIEC rassemble…", ["des scientifiques experts du climat", "des chefs d’État", "des militaires", "des entreprises pétrolières"], "Synthèse des connaissances."],
+    ["Une canicule isolée prouve le réchauffement climatique.", ["Faux", "Vrai"], "Le climat s’étudie sur le long terme, même si les canicules deviennent plus fréquentes."],
+    ["Prendre le vélo plutôt que la voiture relève de…", ["l’atténuation", "l’adaptation", "la météorologie", "la tectonique"], "Moins d’émissions."],
+    ["La pollinisation est…", ["un service rendu par les écosystèmes", "une pollution", "une maladie", "un phénomène volcanique"], "Abeilles et insectes."]
+  ]
+};
+M["svt-nutrition"] = {
+  c: [
+    ["Besoins permanents des organes ?", "Nutriments (glucose) et dioxygène."], ["Déchets de la respiration cellulaire ?", "Dioxyde de carbone et eau."],
+    ["Trajet du tube digestif ?", "Bouche, œsophage, estomac, intestin grêle, gros intestin, anus."], ["Longueur de l’intestin grêle ?", "6 à 7 m."],
+    ["Glandes annexes de la digestion ?", "Foie et pancréas."], ["Digestion mécanique ?", "Mastication, brassage de l’estomac."], ["Digestion chimique ?", "Action des enzymes des sucs digestifs."],
+    ["Amidon → ?", "Glucose."], ["Protéines → ?", "Acides aminés."], ["Lipides → ?", "Acides gras et glycérol."], ["Que deviennent les fibres ?", "Non digérées, éliminées."],
+    ["Amylase ?", "Enzyme de la salive qui digère l’amidon."], ["Test de l’amidon ?", "Eau iodée : bleu-noir."], ["Test du glucose ?", "Liqueur de Fehling : précipité rouge brique à chaud."],
+    ["Pourquoi l’intestin absorbe-t-il bien ?", "Grande surface repliée, paroi fine, très irriguée."], ["Rôle du cœur ?", "Pompe qui met le sang en mouvement."],
+    ["Lieu des échanges gazeux ?", "Les alvéoles pulmonaires."], ["Rôle des reins ?", "Filtrer le sang, éliminer l’urée dans l’urine."],
+    ["Rôles du microbiote ?", "Digestion des fibres, vitamines, protection, immunité."], ["Fruits et légumes conseillés par jour ?", "Au moins 5."], ["Seule boisson indispensable ?", "L’eau."]
+  ],
+  q: [
+    ["Les protéines sont digérées en…", ["acides aminés", "glucose", "acides gras", "fibres"], "Petites molécules absorbables."],
+    ["L’eau iodée devient bleu-noir en présence…", ["d’amidon", "de glucose", "de protéines", "d’eau"], "Test de l’amidon."],
+    ["La liqueur de Fehling met en évidence…", ["le glucose", "l’amidon", "les lipides", "le dioxygène"], "Précipité rouge brique."],
+    ["L’absorption des nutriments a lieu dans…", ["l’intestin grêle", "l’estomac", "le gros intestin", "l’œsophage"], "Villosités."],
+    ["Le foie et le pancréas sont…", ["des glandes annexes", "des parties du tube digestif", "des organes respiratoires", "des muscles"], "Ils déversent des sucs."],
+    ["Les reins éliminent…", ["l’urée", "le glucose", "le dioxygène", "les enzymes"], "Dans l’urine."],
+    ["Le sang se charge en dioxygène dans…", ["les poumons", "l’estomac", "le foie", "les reins"], "Alvéoles."],
+    ["Dans l’expérience avec la salive, le tube témoin contient…", ["de l’eau à la place de la salive", "de la salive bouillie uniquement", "rien", "du glucose"], "Pour comparer."],
+    ["Les enzymes digestives agissent mieux à…", ["37 °C", "0 °C", "100 °C", "−10 °C"], "Température du corps."],
+    ["Le microbiote intestinal est formé…", ["de bactéries", "de neurones", "de globules rouges", "d’os"], "Milliards de micro-organismes."],
+    ["La respiration cellulaire produit…", ["de l’énergie", "du glucose", "du dioxygène", "des enzymes"], "À partir de glucose et de dioxygène."],
+    ["Les fibres alimentaires favorisent…", ["un bon transit intestinal", "la prise de poids", "la carie", "rien"], "Elles nourrissent aussi le microbiote."],
+    ["Le cœur est un muscle.", ["Vrai", "Faux"], "Muscle creux."],
+    ["L’amidon se trouve surtout dans…", ["le pain et les pâtes", "la viande", "l’huile", "l’eau"], "Féculents."],
+    ["Les lipides sont digérés en…", ["acides gras et glycérol", "glucose", "acides aminés", "vitamines"], "Grâce à des enzymes (lipases)."]
+  ]
+};
+
 (function () {
 "use strict";
 var B = window.BREVET;
@@ -4657,6 +6365,7 @@ var EXAM = new Date(2027, 5, 24, 8, 0, 0); // jeudi 24 juin 2027, 8 h : épreuve
 var EX = window.BREVET_EXTRA || {};
 var CO = window.BREVET_COURS || {};
 var CP = window.BREVET_COURS_PLUS || {};
+var MO = window.BREVET_MORE || {};
 
 /* ---------- stockage local (facultatif) ---------- */
 var store = {
@@ -4675,7 +6384,8 @@ var CH = [], CHI = {};
 SUBJECTS.forEach(function (s) {
   (B[s.id] || []).forEach(function (c, i) { c.sub = s.id; c.n = i + 1; if (EX[c.id]) c.quiz = c.quiz.concat(EX[c.id]);
     var co = CO[c.id]; if (co) { if (co.cours) c.cours = co.cours; if (co.resume) c.resume = co.resume; if (co.schema) c.schema = c.schema.concat(co.schema); }
-    if (CP[c.id]) c.cours = c.cours.concat(CP[c.id]); CH.push(c); CHI[c.id] = c; });
+    if (CP[c.id]) c.cours = c.cours.concat(CP[c.id]);
+    if (MO[c.id]) { if (MO[c.id].c) c.cards = c.cards.concat(MO[c.id].c); if (MO[c.id].q) c.quiz = c.quiz.concat(MO[c.id].q); } CH.push(c); CHI[c.id] = c; });
 });
 function cardsOf(c) { return c.cards.map(function (x, i) { return { id: c.id + "/" + i, q: x[0], a: x[1], sub: c.sub, chap: c.title }; }); }
 function quizOf(c) { return c.quiz.map(function (x, i) { return { id: c.id + "/" + i, q: x[0], opts: x[1], ex: x[2], sub: c.sub, chap: c.title }; }); }
@@ -4994,29 +6704,44 @@ function drawPanel(c, tab) {
   } else if (tab === "quiz") {
     p.innerHTML = '<div class="quiz" id="quiz"></div>';
     var nx = B[c.sub][c.n];
-    mountQuiz(document.getElementById("quiz"), shuffle(quizOf(c)), {
-      save: c.id,
+    mountQuiz(document.getElementById("quiz"), pickFresh(quizOf(c), 15), {
+      save: c.id, restart: function () { drawPanel(c, "quiz"); }, restartLabel: "Nouvelle série",
       more: nx ? '<a class="btn" href="#' + nx.id + '">Chapitre suivant →</a>' : "",
       onEnd: function () { var b = document.getElementById("best"); if (b) b.textContent = scores[c.id] + " %"; }
     });
   }
 }
 
-function chips(base, f) {
-  return '<div class="chips"><a class="chip all' + (f === "all" ? " on" : "") + '" href="#' + base + '">Toutes les matières</a>' +
+function chips(base, f, ch, count) {
+  var out = '<p class="chips-l">Matière</p><div class="chips"><a class="chip all' + (f === "all" ? " on" : "") + '" href="#' + base + '">Toutes les matières</a>' +
     SUBJECTS.map(function (s) { return '<a class="chip' + (f === s.id ? " on" : "") + '" style="--sub:' + col(s.id) + '" href="#' + base + '-' + s.id + '"><i></i>' + s.name + '</a>'; }).join("") + '</div>';
+  if (f !== "all") {
+    var list = B[f];
+    out += '<p class="chips-l">Chapitre</p><div class="chips chaps-pick" style="--sub:' + col(f) + '"><a class="chip' + (!ch ? " on" : "") + '" href="#' + base + '-' + f + '">Tous les chapitres <small>' + list.reduce(function (a, c) { return a + count(c); }, 0) + '</small></a>' +
+      list.map(function (c) { return '<a class="chip' + (ch === c.id ? " on" : "") + '" href="#' + base + '-' + c.id + '"><b>' + pad(c.n) + '</b> ' + c.title + ' <small>' + count(c) + '</small></a>'; }).join("") + '</div>';
+  }
+  return out;
 }
-function viewDeck(f) {
-  return '<section class="wrap page-h"><p class="eyebrow">Mode révision</p><h1>Flashcards</h1><p class="lead">Lis la question, réponds dans ta tête, puis retourne la carte. Classe-la ensuite : « Je sais » ou « À revoir ».</p>' + chips("flashcards", f) +
+function pickFresh(pool, n) {
+  var seen = store.get("seenQ", {});
+  var t = pool.map(function (q) { return { q: q, k: (seen[q.id] || 0) + Math.random() * 1e5 }; });
+  t.sort(function (a, b) { return a.k - b.k; });
+  var res = t.slice(0, n).map(function (x) { return x.q; }), now = Date.now();
+  res.forEach(function (q) { seen[q.id] = now; });
+  store.set("seenQ", seen);
+  return shuffle(res);
+}
+function viewDeck(f, ch) {
+  return '<section class="wrap page-h"><p class="eyebrow">Mode révision</p><h1>Flashcards</h1><p class="lead">Choisis une matière, puis un chapitre ou tous à la fois. Lis la question, réponds dans ta tête, retourne la carte et classe-la : « Je sais » ou « À revoir ».</p>' + chips("flashcards", f, ch, function (c) { return c.cards.length; }) +
     '<label class="toggle" for="only-review"><input type="checkbox" id="only-review"> Seulement les cartes à revoir ou jamais vues</label></section>' +
     '<section class="wrap"><div class="deck" id="deck"></div>' + DECK_HINT + '</section>';
 }
 var DECK_HINT = '<p class="kbd">Glisse la carte vers la droite si tu sais, vers la gauche pour la revoir.<span class="kbd-desk"> Clavier : espace, → et ←.</span></p>';
 var QMODES = [["10", "10 questions"], ["20", "20 questions"], ["vf", "Vrai ou faux"], ["err", "Mes erreurs"]];
-function viewQuiz(f) {
-  return '<section class="wrap page-h"><p class="eyebrow">Entraînement</p><h1>Quiz</h1><p class="lead">Questions tirées au hasard, corrigées et expliquées tout de suite. Tes erreurs sont gardées pour être retravaillées.</p>' +
+function viewQuiz(f, ch) {
+  return '<section class="wrap page-h"><p class="eyebrow">Entraînement</p><h1>Quiz</h1><p class="lead">Choisis une matière, puis un chapitre ou tous à la fois. Les questions que tu n’as pas encore vues passent en priorité ; tes erreurs sont gardées pour être retravaillées.</p>' +
     '<div class="seg" id="qmodes" role="tablist">' + QMODES.map(function (m) { return '<button role="tab" data-mode="' + m[0] + '">' + m[1] + (m[0] === "err" ? ' <small id="nerr"></small>' : "") + '</button>'; }).join("") + '</div>' +
-    chips("quiz", f) + '</section>' +
+    chips("quiz", f, ch, function (c) { return c.quiz.length; }) + '</section>' +
     '<section class="wrap"><div class="quiz" id="quiz"></div></section>';
 }
 function viewExam() {
@@ -5066,19 +6791,21 @@ function route() {
     });
     drawPanel(c, cur);
   } else if (parts[0] === "flashcards") {
-    var f = S[parts[1]] ? parts[1] : "all";
+    var fch = CHI[parts.slice(1).join("-")] || null;
+    var f = fch ? fch.sub : S[parts[1]] ? parts[1] : "all";
     if (f !== "all") app.style.setProperty("--sub", col(f));
-    app.innerHTML = viewDeck(f); setNav("flashcards"); document.title = "Flashcards · Objectif Brevet";
-    var pool = flat(f === "all" ? CH : B[f], cardsOf);
+    app.innerHTML = viewDeck(f, fch && fch.id); setNav("flashcards"); document.title = "Flashcards · Objectif Brevet";
+    var pool = fch ? cardsOf(fch) : flat(f === "all" ? CH : B[f], cardsOf);
     var box = document.getElementById("only-review");
     var start = function () { var l = box.checked ? pool.filter(function (x) { return known[x.id] !== 1; }) : pool; mountDeck(document.getElementById("deck"), shuffle(l), { empty: "Bravo, toutes les cartes de cette sélection sont sues." }); };
     box.onchange = start; start();
   } else if (parts[0] === "quiz") {
     if (parts[1] === "erreurs") { qmode = "err"; store.set("qmode", qmode); }
-    var fq = S[parts[1]] ? parts[1] : "all";
+    var qch = CHI[parts.slice(1).join("-")] || null;
+    var fq = qch ? qch.sub : S[parts[1]] ? parts[1] : "all";
     if (fq !== "all") app.style.setProperty("--sub", col(fq));
-    app.innerHTML = viewQuiz(fq); setNav("quiz"); document.title = "Quiz · Objectif Brevet";
-    var qpool = flat(fq === "all" ? CH : B[fq], quizOf);
+    app.innerHTML = viewQuiz(fq, qch && qch.id); setNav("quiz"); document.title = "Quiz · Objectif Brevet";
+    var qpool = qch ? quizOf(qch) : flat(fq === "all" ? CH : B[fq], quizOf);
     var seg = document.getElementById("qmodes");
     var run = function () {
       Array.prototype.forEach.call(seg.children, function (b) { var on = b.dataset.mode === qmode; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
@@ -5086,7 +6813,7 @@ function route() {
       document.getElementById("nerr").textContent = errs.length ? errs.length : "";
       var p = qmode === "vf" ? qpool.filter(function (q) { return isTF(q.opts); }) : qmode === "err" ? errs : qpool;
       var n = qmode === "20" ? 20 : qmode === "err" ? p.length : 10;
-      mountQuiz(document.getElementById("quiz"), shuffle(p).slice(0, n), {
+      mountQuiz(document.getElementById("quiz"), pickFresh(p, n), {
         mixed: true, restart: run,
         restartLabel: qmode === "err" ? "Revoir mes erreurs" : "Nouvelle série",
         emptyTitle: qmode === "err" ? "Aucune erreur en attente." : "Aucune question ici.",
@@ -5101,6 +6828,10 @@ function route() {
     app.innerHTML = viewHome(); setNav("home"); document.title = "Objectif Brevet";
   }
   window.scrollTo(0, 0);
+  Array.prototype.forEach.call(document.querySelectorAll(".chips"), function (row) {
+    var on = row.querySelector(".chip.on");
+    if (on) row.scrollLeft = on.offsetLeft - row.offsetLeft - (row.clientWidth - on.offsetWidth) / 2;
+  });
 }
 
 document.getElementById("strip").innerHTML = SUBJECTS.map(function (s) { return '<a href="#' + s.id + '" style="background:' + col(s.id) + '" aria-label="' + s.name + '"></a>'; }).join("");
