@@ -543,6 +543,13 @@ footer{margin-top:56px;border-top:var(--bw) solid var(--fg)}
   .wk-card{width:100%;max-height:88vh;border-radius:var(--r-lg) var(--r-lg) 0 0;padding:18px max(16px, env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-left,0px))}
   .ccover{height:150px;border-radius:var(--r)}
 }
+/* ---------- Schémas illustrés ---------- */
+.dimg{position:relative;display:block;width:100%;padding:0;border:0;background:var(--soft);border-radius:var(--r);overflow:hidden;cursor:zoom-in}
+.dimg img{display:block;width:100%;max-height:520px;object-fit:contain;background:#fff}
+.dimg-z{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px}
+.dg-img .dg-cap a{color:var(--link);font-weight:700;white-space:nowrap}
+.wk-big img{max-height:70vh;background:#fff}
+@media (max-width:760px){ .dimg img{max-height:360px} }
 </style>
 </head>
 <body>
@@ -567,7 +574,7 @@ footer{margin-top:56px;border-top:var(--bw) solid var(--fg)}
 </nav>
 <footer><div class="wrap foot"><span>Objectif Brevet · Programme de 3<sup>e</sup>, cycle 4</span><span>Ta progression est enregistrée sur cet appareil uniquement.</span></div></footer>
 <script>
-window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {}; var BREVET_COURS_PLUS = {}; var BREVET_MORE = {}; var BREVET_WIKI = {}; var BREVET_COVERS = {};
+window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {}; var BREVET_COURS_PLUS = {}; var BREVET_MORE = {}; var BREVET_WIKI = {}; var BREVET_COVERS = {}; var BREVET_IMGS = {};
 BREVET.fr = [
 {
   id: "fr-phrase", tag: "Grammaire", title: "La phrase complexe",
@@ -2781,11 +2788,9 @@ BREVET_WIKI = {
   /* Œuvres */
   "Candide": "Candide", "Les Misérables": "Les Misérables", "Fahrenheit 451": "Fahrenheit 451", "Le Meilleur des mondes": "Le Meilleur des mondes",
   "Frankenstein": "Frankenstein ou le Prométhée moderne", "Les Confessions": "Les Confessions (Rousseau)", "Les Fleurs du mal": "Les Fleurs du mal",
-  "Le Dormeur du val": "Le Dormeur du val", "Si c[’']est un homme": "Si c'est un homme", "Antigone": "Antigone (Anouilh)", "Le Parti pris des choses": "Le Parti pris des choses",
-  "Calligrammes": "Calligrammes", "Vingt [Mm]ille [Ll]ieues sous les mers": "Vingt Mille Lieues sous les mers", "Le Dernier Jour d[’']un condamné": "Le Dernier Jour d'un condamné",
-  "W ou le [Ss]ouvenir d[’']enfance": "W ou le Souvenir d'enfance",
+  "Le Dormeur du val": "Le Dormeur du val", "Si c[’']est un homme": "Si c'est un homme", "Calligrammes": "Calligrammes", "Vingt [Mm]ille [Ll]ieues sous les mers": "Vingt Mille Lieues sous les mers", "Le Dernier Jour d[’']un condamné": "Le Dernier Jour d'un condamné",
   /* 1914-1945 */
-  "Verdun": "Bataille de Verdun", "bataille de la Marne": "Première bataille de la Marne", "bataille de la Somme": "Bataille de la Somme", "Chemin des Dames": "Bataille du Chemin des Dames",
+  "Verdun": "Bataille de Verdun", "bataille de la Somme": "Bataille de la Somme", "Chemin des Dames": "Bataille du Chemin des Dames",
   "génocide des Arméniens": "Génocide arménien", "Sarajevo": "Attentat de Sarajevo", "traité de Versailles": "Traité de Versailles", "11 novembre 1918": "Armistice de 1918",
   "poilus?": "Poilu", "tranchées": "Guerre de tranchées", "Lénine": "Lénine", "Staline": "Joseph Staline", "Hitler": "Adolf Hitler", "Mussolini": "Benito Mussolini",
   "Léon Blum": "Léon Blum", "Front populaire": "Front populaire (France)", "Wall Street": "Krach de 1929", "Nuit de Cristal": "Nuit de Cristal", "lois de Nuremberg": "Lois de Nuremberg",
@@ -2811,7 +2816,7 @@ BREVET_WIKI = {
   "(?:Antoine )?Lavoisier": "Antoine Lavoisier", "Mendeleïev": "Dmitri Mendeleïev", "(?:Isaac )?Newton": "Isaac Newton", "(?:Charles )?Darwin": "Charles Darwin",
   "(?:Alfred )?Wegener": "Alfred Wegener", "Pythagore": "Pythagore", "(?:Graham|Alexander Graham) Bell": "Alexander Graham Bell",
   /* SVT */
-  "ADN": "Acide désoxyribonucléique", "chromosomes?": "Chromosome", "caryotype": "Caryotype", "mitose": "Mitose", "méiose": "Méiose", "trisomie 21": "Trisomie 21",
+  "ADN": "Acide désoxyribonucléique", "chromosomes?": "Chromosome", "caryotype": "Caryotype", "mitose": "Mitose", "trisomie 21": "Trisomie 21",
   "spermatozoïdes?": "Spermatozoïde", "placenta": "Placenta", "phalènes?": "Phalène du bouleau", "Archaeopteryx": "Archaeopteryx", "Toumaï": "Toumaï", "Homo sapiens": "Homo sapiens",
   "frelon asiatique": "Frelon asiatique", "bactéries?": "Bactérie", "virus": "Virus", "lymphocytes?": "Lymphocyte", "phagocytose": "Phagocytose", "anticorps": "Anticorps",
   "vaccins?": "Vaccin", "VIH": "Virus de l'immunodéficience humaine", "neurones?": "Neurone", "synapses?": "Synapse", "tectonique des plaques": "Tectonique des plaques",
@@ -2840,6 +2845,203 @@ BREVET_COVERS = {
   "pc-matiere": "Atome", "pc-univers": "Système solaire", "pc-transformations": "Combustion", "pc-mouvement": "Chronophotographie", "pc-forces": "Isaac Newton",
   "pc-energie": "Éolienne", "pc-electricite": "Circuit électrique", "pc-signaux": "Prisme (optique)",
   "te-besoin": "Impression 3D", "te-chaines": "Domotique", "te-programmation": "Scratch (langage)", "te-materiaux": "Recyclage", "te-reseaux": "Fibre optique", "te-innovation": "Alexander Graham Bell"
+};
+
+/* Mots illustrés supplémentaires */
+Object.assign(BREVET_WIKI, {
+  /* Pays et villes */
+  "Allemagne": "Allemagne", "Royaume-Uni": "Royaume-Uni", "États-Unis": "États-Unis", "URSS": "Union des républiques socialistes soviétiques", "Russie": "Russie",
+  "Italie": "Italie", "Japon": "Japon", "Pologne": "Pologne", "Chine": "Chine", "Inde": "Inde", "Pakistan": "Pakistan", "Algérie": "Algérie", "Maroc": "Maroc",
+  "Tunisie": "Tunisie", "Cuba": "Cuba", "Afghanistan": "Afghanistan", "Autriche": "Autriche", "Tchécoslovaquie": "Tchécoslovaquie", "Ukraine": "Ukraine",
+  "Belgique": "Belgique", "Suisse": "Suisse", "Indonésie": "Indonésie", "Sénégal": "Sénégal", "Madagascar": "Madagascar", "Égypte": "Égypte",
+  "Empire ottoman": "Empire ottoman", "Autriche-Hongrie": "Autriche-Hongrie", "Alsace-Moselle": "Alsace-Moselle",
+  "Paris": "Paris", "Lyon": "Lyon", "Marseille": "Marseille", "Toulouse": "Toulouse", "Lille": "Lille", "Bordeaux": "Bordeaux", "Nantes": "Nantes", "Strasbourg": "Strasbourg",
+  "Dunkerque": "Dunkerque", "Londres": "Londres", "Berlin": "Berlin", "Moscou": "Moscou", "New York": "New York", "Tokyo": "Tokyo", "Vichy": "Régime de Vichy",
+  "Bruxelles": "Bruxelles", "Francfort": "Francfort-sur-le-Main", "Nagasaki": "Bombardements atomiques d'Hiroshima et Nagasaki", "Rethondes": "Clairière de l'Armistice",
+  "Martinique": "Martinique", "Guadeloupe": "Guadeloupe", "La Réunion": "La Réunion", "Nouvelle-Calédonie": "Nouvelle-Calédonie", "Polynésie française": "Polynésie française",
+  "Bretagne": "Bretagne", "Champagne": "Champagne (province)", "Massif central": "Massif central", "Alpes": "Alpes", "diagonale du vide": "Diagonale du vide",
+  "Marseille-Fos": "Grand port maritime de Marseille", "Paris-Saclay": "Paris-Saclay", "Airbus": "Airbus", "TGV": "TGV", "RER": "Réseau express régional d'Île-de-France", "tramways?": "Tramway",
+  "zone économique exclusive": "Zone économique exclusive", "ZEE": "Zone économique exclusive",
+  /* Histoire */
+  "Triple-Entente": "Triple-Entente", "gaz de combat": "Arme chimique", "mitrailleuses?": "Mitrailleuse",
+  "gueules cassées": "Gueule cassée", "monuments? aux morts": "Monument aux morts", "Société des Nations": "Société des Nations", "SDN": "Société des Nations",
+  "bolcheviks?": "Bolchevik", "kolkhozes?": "Kolkhoze", "NKVD": "NKVD", "Gestapo": "Gestapo", "Goebbels": "Joseph Goebbels", "Jeunesses hitlériennes": "Jeunesses hitlériennes",
+  "Dachau": "Camp de concentration de Dachau", "Anschluss": "Anschluss", "accords de Munich": "Accords de Munich", "pacte germano-soviétique": "Pacte germano-soviétique",
+  "Blitzkrieg": "Blitzkrieg", "bataille d[’']Angleterre": "Bataille d'Angleterre", "Barbarossa": "Opération Barbarossa", "Midway": "Bataille de Midway", "El-Alamein": "Seconde bataille d'El Alamein",
+  "ghettos?": "Ghetto de Varsovie", "Einsatzgruppen": "Einsatzgruppen", "Wannsee": "Conférence de Wannsee", "Sobibor": "Sobibór", "Truman": "Harry S. Truman",
+  "exode(?! rural)": "Exode de 1940", "zone libre": "Zone libre", "STO": "Service du travail obligatoire (France)", "Milice": "Milice française", "étoile jaune": "Étoile jaune",
+  "France libre": "France libre", "FFL": "Forces françaises libres", "maquis": "Maquis (Résistance)", "GPRF": "Gouvernement provisoire de la République française",
+  "Sécurité sociale": "Sécurité sociale en France", "IVe République": "Quatrième République (France)", "IIIe République": "Troisième République (France)",
+  "rideau de fer": "Rideau de fer", "RFA": "Allemagne de l'Ouest", "RDA": "République démocratique allemande", "Fidel Castro": "Fidel Castro", "doctrine Truman": "Doctrine Truman",
+  "perestroïka": "Perestroïka", "guerre d[’']Indochine": "Guerre d'Indochine", "FLN": "Front de libération nationale (Algérie)", "pieds-noirs": "Pieds-noirs", "harkis": "Harki",
+  "tiers-monde": "Tiers monde", "non-alignés": "Mouvement des non-alignés", "Assemblée nationale": "Assemblée nationale (France)", "Sénat": "Sénat (France)",
+  "Conseil constitutionnel": "Conseil constitutionnel (France)", "Jacques Chirac": "Jacques Chirac", "Giscard d[’']Estaing": "Valéry Giscard d'Estaing", "Pompidou": "Georges Pompidou",
+  "cohabitation": "Cohabitation (politique)", "baby-boom": "Baby-boom", "grands ensembles": "Grand ensemble", "bidonvilles?": "Bidonville", "hypermarchés?": "Hypermarché",
+  "Neuwirth": "Lucien Neuwirth", "CECA": "Communauté européenne du charbon et de l'acier",
+  "CEE": "Communauté économique européenne", "Brexit": "Brexit", "Commission européenne": "Commission européenne", "Banque centrale européenne": "Banque centrale européenne",
+  "euro": "Euro", "Union européenne": "Union européenne", "laïcité": "Laïcité", "prise de la Bastille": "Prise de la Bastille", "fête de la Fédération": "Fête de la Fédération",
+  "JDC": "Journée défense et citoyenneté", "service civique": "Service civique", "Défenseur des droits": "Défenseur des droits", "opération Sentinelle": "Opération Sentinelle",
+  "dissuasion nucléaire": "Force de dissuasion nucléaire française", "Déclaration universelle des droits de l[’']homme": "Déclaration universelle des droits de l'homme",
+  "Napoléon": "Napoléon Ier", "Jean Jaurès": "Jean Jaurès", "Clemenceau": "Georges Clemenceau", "Roosevelt": "Franklin Delano Roosevelt", "Hindenburg": "Paul von Hindenburg",
+  "Tsiganes": "Roms", "Montoire-sur-le-Loir": "Montoire-sur-le-Loir", "Mendès France": "Pierre Mendès France", "Jean Monnet": "Jean Monnet", "Robert Schuman": "Robert Schuman",
+  /* SVT */
+  "gènes?": "Gène", "allèles?": "Allèle", "groupes? sanguins?": "Groupe sanguin", "mucoviscidose": "Mucoviscidose", "drépanocytose": "Drépanocytose",
+  "vrais jumeaux": "Jumeaux", "testicules?": "Testicule", "ovaires?": "Ovaire", "utérus": "Utérus", "trompes?": "Trompe de Fallope", "cycle menstruel": "Cycle menstruel",
+  "testostérone": "Testostérone", "œstrogènes": "Œstrogène", "progestérone": "Progestérone", "hypophyse": "Hypophyse", "hypothalamus": "Hypothalamus",
+  "préservatifs?": "Préservatif", "pilule": "Pilule contraceptive", "stérilet": "Dispositif intra-utérin", "papillomavirus": "Papillomavirus humain",
+  "fécondation in vitro": "Fécondation in vitro", "fœtus": "Fœtus", "fossiles?": "Fossile", "dinosaures": "Dinosauria",
+  "mammifères": "Mammifère", "vertébrés": "Vertebrata", "tétrapodes": "Tetrapoda", "chimpanzés?": "Chimpanzé", "sélection naturelle": "Sélection naturelle",
+  "mutations?": "Mutation (génétique)", "déforestation": "Déforestation", "parcs? nationaux": "Parc national",
+  "abeilles": "Abeille", "coraux": "Corail", "tuberculose": "Tuberculose", "tétanos": "Tétanos", "grippe": "Grippe", "rougeole": "Rougeole", "Covid-19": "Maladie à coronavirus 2019",
+  "antibiotiques?": "Antibiotique", "Pasteur": "Louis Pasteur", "Fleming": "Alexander Fleming", "inflammation": "Inflammation", "phagocytes?": "Phagocyte",
+  "globules? blancs?": "Leucocyte", "globules? rouges?": "Érythrocyte", "allergies?": "Allergie", "greffes?": "Greffe (médecine)", "encéphale": "Encéphale", "cerveau": "Cerveau",
+  "rétine": "Rétine", "oreille interne": "Oreille interne", "œil": "Œil", "réflexes?": "Réflexe", "alcool": "Alcoolisme",
+  "cannabis": "Cannabis (drogue)", "nicotine": "Nicotine", "tabac": "Tabac", "sommeil": "Sommeil", "lithosphère": "Lithosphère", "asthénosphère": "Asthénosphère",
+  "manteau": "Manteau terrestre", "croûte": "Croûte terrestre", "subduction": "Subduction", "fosses? océaniques?": "Fosse océanique", "ceinture de feu": "Ceinture de feu du Pacifique",
+  "failles?": "Faille", "séismes?": "Séisme", "échelle de Richter": "Échelle de Richter", "épicentre": "Épicentre", "volcans?": "Volcan", "lave": "Lave", "nuées? ardentes?": "Nuée ardente", "Vésuve": "Vésuve", "Hawaï": "Hawaï", "constructions? parasismiques?": "Construction parasismique", "météorologie": "Météorologie",
+  "glaciers?": "Glacier", "banquise": "Banquise", "canicules?": "Canicule", "cyclones?": "Cyclone tropical", "courants? marins?": "Courant marin", "dioxyde de carbone": "Dioxyde de carbone",
+  "méthane": "Méthane", "énergies? fossiles?": "Énergie fossile", "pétrole": "Pétrole", "charbon": "Charbon", "gaz naturel": "Gaz naturel", "écosystèmes?": "Écosystème", "chaînes? alimentaires?": "Chaîne alimentaire", "pollinisation": "Pollinisation", "développement durable": "Développement durable",
+  "estomac": "Estomac", "œsophage": "Œsophage", "gros intestin": "Gros intestin", "foie": "Foie", "pancréas": "Pancréas", "salive": "Salive", "enzymes?": "Enzyme",
+  "amylase": "Amylase", "amidon": "Amidon", "glucose": "Glucose", "protéines": "Protéine", "lipides": "Lipide", "fibres alimentaires": "Fibre alimentaire",
+  "villosités": "Villosité intestinale", "cœur": "Cœur humain", "poumons?": "Poumon", "reins?": "Rein", "artères?": "Artère", "veines?": "Veine", "capillaires": "Capillaire sanguin",
+  "respiration cellulaire": "Respiration cellulaire", "urée": "Urée", "liqueur de Fehling": "Liqueur de Fehling",
+  /* Physique-chimie */
+  "glace": "Glace", "vapeur d[’']eau": "Vapeur d'eau", "ébullition": "Ébullition", "électrons?": "Électron", "noyau atomique": "Noyau atomique", "ions?": "Ion", "molécules?": "Molécule",
+  "dioxygène": "Dioxygène", "dihydrogène": "Dihydrogène", "sodium": "Sodium", "chlore": "Chlore", "fer": "Fer", "cuivre": "Cuivre", "aluminium": "Aluminium",
+  "hélium": "Hélium", "hydrogène": "Hydrogène", "carbone": "Carbone", "azote": "Diazote", "uranium": "Uranium", "acide chlorhydrique": "Acide chlorhydrique",
+  "soude": "Hydroxyde de sodium", "eau de Javel": "Eau de Javel", "vinaigre": "Vinaigre", "citron": "Citron", "sulfate de cuivre": "Sulfate de cuivre(II)",
+  "précipités?": "Précipitation (chimie)", "combustions?": "Combustion", "triangle du feu": "Triangle du feu", "monoxyde de carbone": "Monoxyde de carbone",
+  "extincteurs?": "Extincteur", "pluies acides": "Pluie acide", "galaxies?": "Galaxie", "étoiles?": "Étoile", "Soleil": "Soleil", "Lune": "Lune",
+  "Terre": "Terre", "planètes? naines?": "Planète naine", "Pluton": "Pluton (planète naine)", "comètes?": "Comète", "astéroïdes?": "Astéroïde", "satellites? artificiels?": "Satellite artificiel",
+  "unité astronomique": "Unité astronomique", "années?-lumière": "Année-lumière", "supernovas?": "Supernova", "phases de la Lune": "Phase de la Lune",
+  "éclipse de Soleil": "Éclipse solaire", "éclipse de Lune": "Éclipse lunaire", "saisons": "Saison", "trajectoires?": "Trajectoire", "distance d[’']arrêt": "Distance d'arrêt",
+  "marées": "Marée", "turbines?": "Turbine", "alternateurs?": "Alternateur", "barrages?": "Barrage", "centrales? thermiques?": "Centrale thermique", "biomasse": "Biomasse (énergie)",
+  "géothermie": "Géothermie", "lampe à incandescence": "Lampe à incandescence", "batteries?": "Batterie d'accumulateurs",
+  "ampèremètres?": "Ampèremètre", "voltmètres?": "Voltmètre", "ampères?": "Ampère", "volts?": "Volt", "ohms?": "Ohm (unité)", "court-circuit": "Court-circuit", "disjoncteurs?": "Disjoncteur", "prise de terre": "Prise de terre", "DEL": "Diode électroluminescente", "LED": "Diode électroluminescente", "sonomètre": "Sonomètre", "chauves?-souris": "Chiroptera", "dauphins": "Dauphin", "éléphants": "Éléphant", "sonar": "Sonar", "arc-en-ciel": "Arc-en-ciel",
+  "orages?": "Orage", "ondes radio": "Onde radio", "Wi-Fi": "Wi-Fi", "Bluetooth": "Bluetooth", "lumière blanche": "Lumière",
+  "spectre": "Spectre visible", "Station spatiale internationale": "Station spatiale internationale",
+  /* Technologie */
+  "CAO": "Conception assistée par ordinateur", "prototypes?": "Prototype", "gourde": "Gourde (récipient)",
+  "capteurs?": "Capteur", "actionneurs?": "Actionneur", "microcontrôleurs?": "Microcontrôleur",
+  "relais": "Relais électromécanique", "moteurs? électriques?": "Moteur électrique", "vérins?": "Vérin", "engrenages?": "Engrenage", "courroies?": "Courroie", "poulies?": "Poulie",
+  "crémaillère": "Crémaillère", "photorésistance": "Photorésistance", "robot aspirateur": "Robot aspirateur", "feu tricolore": "Feu de circulation routière",
+  "objets? connectés?": "Internet des objets", "algorithmes?": "Algorithme", "logigramme": "Organigramme de programmation", "Python": "Python (langage)", "binaire": "Système binaire", "acier": "Acier", "bois": "Bois", "plastiques?": "Matière plastique", "verre": "Verre", "porcelaine": "Porcelaine", "béton": "Béton", "contreplaqué": "Contreplaqué", "composites?": "Matériau composite", "corrosion": "Corrosion", "analyse du cycle de vie": "Analyse du cycle de vie", "obsolescence programmée": "Obsolescence programmée", "compost": "Compost", "tri": "Tri des déchets",
+  "usinage": "Usinage", "découpe laser": "Découpe laser", "smartphones?": "Smartphone", "téléphone portable": "Téléphone mobile",
+  "SMS": "Short Message Service", "brevets?": "Brevet", "INPI": "Institut national de la propriété industrielle", "Internet": "Internet",
+  "Web": "World Wide Web", "adresses? IP": "Adresse IP", "routeurs?": "Routeur", "commutateurs?": "Commutateur réseau", "serveurs?": "Serveur informatique",
+  "navigateurs?": "Navigateur web", "box": "Box internet", "HTTPS": "HyperText Transfer Protocol Secure", "hameçonnage": "Hameçonnage", "centres de données": "Centre de données", /* Français */
+  "journal intime": "Journal intime", "fables?": "Fable", "contes? philosophiques?": "Conte philosophique",
+  "caricatures?": "Caricature", "poèmes? en prose": "Poème en prose", "calligrammes?": "Calligramme",
+  "sonnets?": "Sonnet", "science-fiction": "Science-fiction", "utopies?": "Utopie", "théâtre": "Théâtre",
+  "tragédies?": "Tragédie", "comédies?": "Comédie", "romans?": "Roman (littérature)", "Molière": "Molière", "Comédie-Française": "Comédie-Française",
+  "Gustave Flaubert": "Gustave Flaubert", "Émile Zola": "Émile Zola", "Guy de Maupassant": "Guy de Maupassant", "Charles Perrault": "Charles Perrault",
+  "dictée": "Dictée"
+});
+
+/* Mots illustrés : mathématiques */
+Object.assign(BREVET_WIKI, {
+  "cylindres?": "Cylindre", "cônes?": "Cône (géométrie)", "sphères?": "Sphère", "boules?": "Boule (mathématiques)", "pyramides?": "Pyramide", "cubes?": "Cube",
+  "pavés? droits?": "Pavé droit", "prismes? droits?": "Prisme droit", "triangles? rectangles?": "Triangle rectangle", "hypoténuse": "Hypoténuse", "cercles?": "Cercle",
+  "disques?": "Disque (géométrie)", "losanges?": "Losange", "parallélogrammes?": "Parallélogramme", "triangles? équilatéra(?:l|ux)": "Triangle équilatéral",
+  "triangles? isocèles?": "Triangle isocèle", "hexagones?": "Hexagone", "pentagones?": "Pentagone (figure)", "calculatrices?": "Calculatrice", "tableurs?": "Tableur",
+  "rapporteur": "Rapporteur", "compas": "Compas (géométrie)", "dés?": "Dé", "diagrammes? circulaires?": "Diagramme circulaire", "histogrammes?": "Histogramme",
+  "nombres? premiers?": "Nombre premier", "racines? carrées?": "Racine carrée", "médiatrices?": "Médiatrice", "homothéties?": "Homothétie", "symétries? axiales?": "Symétrie axiale",
+  "symétries? centrales?": "Symétrie centrale", "translations?": "Translation (géométrie)", "rosaces?": "Rosace (architecture)",
+  "latitude": "Latitude", "longitude": "Longitude", "méridien de Greenwich": "Méridien de Greenwich", "équateur": "Équateur terrestre", "patrons?": "Patron (géométrie)",
+  "pourcentages?": "Pourcentage", "TVA": "Taxe sur la valeur ajoutée", "Euclide": "Euclide", "pavages?": "Pavage du plan", "polygones? réguliers?": "Polygone régulier",
+  "repère": "Système de coordonnées", "angle droit": "Angle droit", "rapporteurs?": "Rapporteur", "carrés? parfaits?": "Carré parfait",
+  "Thalès": "Thalès", "π": "Pi", "fractions?": "Fraction (mathématiques)", "aquarium": "Aquarium", "théorème de Pythagore": "Théorème de Pythagore"
+});
+
+/* Schémas et photos illustrés (Wikimedia Commons, licences libres), affichés en tête de l’onglet Schémas */
+BREVET_IMGS = {
+  "svt-genetique": [
+    { title: "De la cellule à l’ADN", file: "Chromosome fr.svg", cap: "La cellule contient un noyau ; le noyau contient les chromosomes ; chaque chromosome est une molécule d’ADN enroulée, en double hélice." },
+    { title: "Un caryotype humain", file: "NHGRI human male karyotype.png", cap: "Les 46 chromosomes d’un homme rangés par paires et par taille. La dernière paire est XY." },
+    { title: "Les étapes de la mitose", file: "Événements importants en mitose.svg", cap: "Les chromosomes copiés se séparent : on obtient deux cellules identiques." }
+  ],
+  "svt-reproduction": [
+    { title: "La fécondation", file: "Sperm-egg.jpg", cap: "Un spermatozoïde au contact d’un ovule, vu au microscope électronique." },
+    { title: "Le déroulement de la méiose", file: "Le déroulement de la méiose.svg", cap: "La méiose sépare les chromosomes de chaque paire : chaque gamète n’en reçoit qu’un." }
+  ],
+  "svt-immunite": [
+    { title: "Un lymphocyte", file: "SEM Lymphocyte.jpg", cap: "Un lymphocyte vu au microscope électronique (fausses couleurs)." }
+  ],
+  "svt-nerveux": [
+    { title: "Le neurone", file: "Neurone - commenté.svg", cap: "Le corps cellulaire, les dendrites et l’axone, qui conduit le message nerveux jusqu’aux terminaisons." }
+  ],
+  "svt-terre": [
+    { title: "Les plaques lithosphériques", file: "Tectonic plates boundaries detailed-fr.svg", cap: "Carte des plaques et de leurs frontières. Séismes et volcans se concentrent le long de ces limites." },
+    { title: "Une zone de subduction", file: "Subduction-fr2.svg", cap: "La plaque océanique plonge sous la plaque continentale : formation d’une fosse, de magma et d’un arc volcanique." },
+    { title: "Une marge active", file: "Active Margin-fr.svg", cap: "Coupe d’une zone de convergence : croûte océanique, lithosphère, asthénosphère." },
+    { title: "L’intérieur de la Terre", file: "Earth cutaway.png", cap: "Croûte, manteau, noyau externe liquide et noyau interne solide." }
+  ],
+  "svt-climat": [
+    { title: "L’effet de serre", file: "Effet de Serre.png", cap: "Une partie du rayonnement émis par la Terre est retenue par les gaz à effet de serre." },
+    { title: "Le cycle du carbone", file: "Cycle du carbone2.svg", cap: "Le carbone circule entre l’atmosphère, la biosphère, l’hydrosphère et la lithosphère." }
+  ],
+  "svt-nutrition": [
+    { title: "L’appareil digestif", file: "Digestive appareil-fr.svg", cap: "De l’œsophage à l’anus : estomac, foie, intestin grêle (duodénum, iléon), côlon, rectum." }
+  ],
+  "pc-matiere": [
+    { title: "Les changements d’état", file: "Phase change - fr.svg", cap: "Fusion, solidification, vaporisation, liquéfaction, sublimation et condensation." },
+    { title: "Le modèle de l’atome", file: "Atome bohr.svg", cap: "Un noyau central entouré d’électrons (modèle simplifié, pas à l’échelle)." }
+  ],
+  "pc-univers": [
+    { title: "Le système solaire", file: "Solar sys8.jpg", cap: "Le Soleil et les planètes (tailles et distances non respectées)." }
+  ],
+  "pc-transformations": [
+    { title: "L’échelle de pH", file: "Eau PH.png", cap: "De 0 à 14 : acide en dessous de 7, neutre à 7, basique (alcalin) au-dessus." },
+    { title: "Des indicateurs colorés", file: "Colored pH indicator (circle).png", cap: "Un indicateur coloré change de couleur selon le pH de la solution." }
+  ],
+  "pc-signaux": [
+    { title: "La lumière décomposée par un prisme", file: "Refraction of daylight through a prism.jpg", cap: "La lumière blanche est un mélange de lumières colorées." }
+  ],
+  "pc-energie": [
+    { title: "Une centrale hydroélectrique", file: "Hydroelectric dam-letters.svg", cap: "A : réservoir · B : centrale · C : turbine · D : alternateur · E : prise d’eau · F : conduite forcée · G : lignes électriques · H : rivière." }
+  ],
+  "pc-forces": [
+    { title: "Le canon de Newton", file: "Newton Cannon.svg", cap: "Plus un boulet est lancé vite, plus il tombe loin. Assez vite, il ne retombe plus et tourne autour de la Terre : c’est un satellite." },
+    { title: "L’interaction gravitationnelle", file: "Force de gravitation.svg", cap: "Deux objets s’attirent avec des forces de même valeur et de sens opposés." }
+  ],
+  "hg-1gm": [
+    { title: "L’Europe des alliances en 1914", file: "Map Europe alliances 1914-fr.svg", cap: "Triple-Entente et Triple-Alliance à la veille de la guerre." },
+    { title: "Des soldats dans les tranchées", file: "French soldiers of the 87th Regiment shelter in their trenches at Hill 304 at Verdun.jpg", cap: "Soldats français du 87e régiment à la cote 304, près de Verdun, en 1916." },
+    { title: "La « zone rouge »", file: "Red Zone Map-fr.svg", cap: "Les zones du nord-est de la France si dévastées par les combats qu’elles ont été interdites après la guerre." }
+  ],
+  "hg-2gm": [
+    { title: "L’attaque de Pearl Harbor", file: "Attack on Pearl Harbor.jpg", cap: "7 décembre 1941 : le Japon attaque la flotte américaine, les États-Unis entrent en guerre." }
+  ],
+  "hg-guerre-froide": [
+    { title: "Le monde de la guerre froide en 1959", file: "Cold War Map 1959.svg", cap: "En bleu, les États-Unis et leurs alliés ; en rouge, l’URSS et ses alliés." },
+    { title: "Le pont aérien de Berlin", file: "C-54 landing at Tempelhof.jpg", cap: "Des Berlinois regardent un avion américain atterrir à Tempelhof pendant le blocus (1948-1949)." },
+    { title: "Les conflits de la guerre froide", file: "Carte des conflits durant la guerre froide (1945-1991).png", cap: "Les guerres et crises indirectes entre les deux blocs." }
+  ],
+  "hg-decolonisation": [
+    { title: "Les empires coloniaux en 1945", file: "Colonization 1945 français.png", cap: "Les territoires colonisés par les puissances européennes à la fin de la Seconde Guerre mondiale." }
+  ],
+  "hg-ve-republique": [
+    { title: "L’hémicycle de l’Assemblée nationale", file: "Hémicycle 2 Palais Bourbon scropped and smaller.jpg", cap: "Les 577 députés siègent au palais Bourbon, à Paris." }
+  ],
+  "hg-ue": [
+    { title: "Les régions françaises", file: "Regions France 2016.svg", cap: "Les 13 régions métropolitaines et les régions d’outre-mer depuis 2016." }
+  ],
+  "ma-pythagore": [
+    { title: "Pythagore en animation", file: "Pythag anim.gif", cap: "Les carrés construits sur les deux petits côtés recouvrent exactement le carré construit sur l’hypoténuse." }
+  ],
+  "ma-thales": [
+    { title: "Configuration emboîtée", file: "Thales theorem 1.svg", cap: "Les droites (DE) et (BC) sont parallèles : AD/AB = AE/AC = DE/BC." },
+    { title: "Configuration papillon", file: "Thales theorem 2.svg", cap: "Même égalité quand les deux triangles sont opposés par le sommet A." }
+  ],
+  "ma-trigo": [
+    { title: "Les côtés par rapport à l’angle", file: "Triangle rectangle trigo.svg", cap: "Hypoténuse, côté opposé et côté adjacent à l’angle choisi." }
+  ],
+  "ma-espace": [
+    { title: "Patron d’un cylindre", file: "Patrons cylindre alternatifs.svg", cap: "Deux disques et un rectangle dont la longueur est égale au périmètre des disques." }
+  ],
+  "te-reseaux": [
+    { title: "Le modèle client-serveur", file: "Modèle client serveur.png", cap: "Le client envoie une requête, le serveur lui renvoie une réponse." }
+  ]
 };
 
 /* Cours complets : français */
@@ -6474,6 +6676,7 @@ var CP = window.BREVET_COURS_PLUS || {};
 var MO = window.BREVET_MORE || {};
 var WKD = window.BREVET_WIKI || {};
 var COVERS = window.BREVET_COVERS || {};
+var IMGS = window.BREVET_IMGS || {};
 
 /* ---------- stockage local (facultatif) ---------- */
 var store = {
@@ -6493,6 +6696,7 @@ SUBJECTS.forEach(function (s) {
   (B[s.id] || []).forEach(function (c, i) { c.sub = s.id; c.n = i + 1; if (EX[c.id]) c.quiz = c.quiz.concat(EX[c.id]);
     var co = CO[c.id]; if (co) { if (co.cours) c.cours = co.cours; if (co.resume) c.resume = co.resume; if (co.schema) c.schema = c.schema.concat(co.schema); }
     if (CP[c.id]) c.cours = c.cours.concat(CP[c.id]);
+    if (IMGS[c.id]) c.schema = IMGS[c.id].map(function (x) { return { type: "img", title: x.title, file: x.file, cap: x.cap }; }).concat(c.schema);
     if (MO[c.id]) { if (MO[c.id].c) c.cards = c.cards.concat(MO[c.id].c); if (MO[c.id].q) c.quiz = c.quiz.concat(MO[c.id].q); } CH.push(c); CHI[c.id] = c; });
 });
 function cardsOf(c) { return c.cards.map(function (x, i) { return { id: c.id + "/" + i, q: x[0], a: x[1], sub: c.sub, chap: c.title }; }); }
@@ -6567,6 +6771,9 @@ function diagram(d) {
     }).join("") + '</div></div>';
   } else if (d.type === "cycle") {
     body = '<div class="dg-svg">' + cycleSvg(d) + '</div>';
+  } else if (d.type === "img") {
+    return '<figure class="dg dg-img"><figcaption class="dg-h">' + d.title + '</figcaption><button type="button" class="dimg" data-file="' + esc(d.file) + '" data-cap="' + esc(d.cap || "") + '" aria-label="Agrandir le schéma"><img loading="lazy" alt="' + esc(d.title) + '" src="' + fileUrl(d.file, 960) + '"><span class="dimg-z">Agrandir</span></button>' +
+      '<p class="dg-cap">' + (d.cap || "") + ' <a href="https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(d.file.replace(/ /g, "_")) + '" target="_blank" rel="noopener">Source : Wikimedia Commons</a></p></figure>';
   } else if (d.type === "svg") {
     body = '<div class="dg-svg">' + d.svg + '</div>';
   }
@@ -6710,7 +6917,7 @@ function mountQuiz(root, list, opt) {
 }
 
 /* ---------- illustrations Wikipédia ---------- */
-var wkRe = null, wkTitles = [], wkCache = {};
+var wkRe = null, wkTitles = [], wkCache = {}, wkBlk = 0;
 var WK_SKIP = "svg,pre,h1,h2,h3,figcaption,.wk,.tab,.chip,.opt,.qz-q,.fc-front,.tl-d,.dg-h,.pill,.key > span,.cex > span,.cwarn > span";
 function esc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
 function buildWk() {
@@ -6731,8 +6938,9 @@ function linkify(root) {
     while ((m = wkRe.exec(t))) {
       var gi = 1; while (m[gi] === undefined && gi < m.length) gi++;
       var title = wkTitles[gi - 1];
-      if (!title || used[title]) continue;
-      used[title] = 1;
+      var blk = node.parentNode.closest(".cs,.resume li,.dg,.fc-back,.qz-fb,.qz-rev-i") || root, bk = blk.dataset.wkb || (blk.dataset.wkb = String(++wkBlk));
+      if (!title || used[bk + title]) continue;
+      used[bk + title] = 1;
       frag = frag || document.createDocumentFragment();
       frag.appendChild(document.createTextNode(t.slice(last, m.index)));
       var sp = document.createElement("span");
@@ -6758,6 +6966,11 @@ var sheet = document.createElement("div");
 sheet.className = "wk-sheet"; sheet.hidden = true;
 sheet.innerHTML = '<div class="wk-back" data-close></div><div class="wk-card" role="dialog" aria-modal="true" aria-label="Illustration"><button class="wk-x" data-close aria-label="Fermer">✕</button><div class="wk-body"></div></div>';
 document.body.appendChild(sheet);
+function fileUrl(f, w) { return "https://fr.wikipedia.org/wiki/Special:FilePath/" + encodeURIComponent(f) + "?width=" + w; }
+function openImg(file, cap) {
+  sheet.hidden = false; document.body.classList.add("wk-open");
+  sheet.querySelector(".wk-body").innerHTML = '<div class="wk-img wk-big"><img src="' + fileUrl(file, 1280) + '" alt=""></div><p class="wk-e">' + esc(cap) + '</p><a class="btn" href="https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(file.replace(/ /g, "_")) + '" target="_blank" rel="noopener">Voir l’original sur Wikimedia Commons</a>';
+}
 function closeWk() { sheet.hidden = true; document.body.classList.remove("wk-open"); }
 function openWk(title) {
   sheet.hidden = false; document.body.classList.add("wk-open");
@@ -6778,6 +6991,8 @@ document.addEventListener("click", function (e) {
   var t = e.target.closest ? e.target : e.target.parentNode;
   var w = t.closest(".wk");
   if (w) { e.preventDefault(); e.stopPropagation(); openWk(w.dataset.wk); return; }
+  var di = t.closest(".dimg");
+  if (di) { e.preventDefault(); e.stopPropagation(); openImg(di.dataset.file, di.dataset.cap); return; }
   if (t.closest("[data-close]")) { e.preventDefault(); closeWk(); }
 }, true);
 document.addEventListener("keydown", function (e) {
