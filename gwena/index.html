@@ -987,6 +987,12 @@ main#app{overflow-x:clip}
 .hero h1{white-space:nowrap;font-size:clamp(2.3rem,4.4vw,4rem)}
 .hero-lead{font-size:15px;line-height:1.35}
 @media (max-width:760px){ .hero h1{font-size:min(2.05rem, calc((100vw - 32px) / 12.4))} .hero-lead{font-size:14px;line-height:1.35} }
+
+/* titres, intertitres et onglets en majuscules */
+.hero h1,.page-h h1,.sec-h h2,.nav a,.tabbar a span{text-transform:uppercase}
+.hero h1 sup{text-transform:none}
+.tabbar a span{letter-spacing:.02em}
+@media (max-width:760px){ .hero h1{font-size:min(2.05rem, calc((100vw - 32px) / 14.6))} }
 </style>
 </head>
 <body>
@@ -997,7 +1003,7 @@ main#app{overflow-x:clip}
       <a href="#" data-nav="home">Matières</a>
       <a href="#flashcards" data-nav="flashcards">Flashcards</a>
       <a href="#quiz" data-nav="quiz">Quiz</a>
-      <a href="#examen" data-nav="examen">L’examen</a>
+      <a href="#examen" data-nav="examen">Examen</a>
     </nav>
     <div class="top-act">
       <button type="button" class="srch-btn" id="btn-search" aria-label="Rechercher"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg><span>Rechercher</span></button>
@@ -1010,7 +1016,7 @@ main#app{overflow-x:clip}
   <a href="#" data-nav="home"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg><span>Matières</span></a>
   <a href="#flashcards" data-nav="flashcards"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6.5" width="13" height="14" rx="2.5"/><path d="M8 3.5h9.5a3 3 0 0 1 3 3V17"/></svg><span>Flashcards</span></a>
   <a href="#quiz" data-nav="quiz"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.3l2.4 2.4 4.8-5"/></svg><span>Quiz</span></a>
-  <a href="#examen" data-nav="examen"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>L’examen</span></a>
+  <a href="#examen" data-nav="examen"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Examen</span></a>
 </nav>
 <footer><div class="wrap foot"><span>GWENA · Programme de 3<sup>e</sup>, cycle 4</span><span>Ta progression est enregistrée en ligne avec ton compte.</span></div></footer>
 <script>
@@ -8555,7 +8561,7 @@ function viewExam() {
     { d: "Avant les écrits", e: [["oral", "Date fixée par le collège", "Oral", "15 min. Présentation d’un projet mené au collège, puis entretien avec le jury."]] }
   ];
   function sw(id) { return id === "sci" || id === "oral" ? "var(--fg)" : col(id); }
-  return '<section class="wrap page-h"><p class="eyebrow">Session 2027</p><h1>L’examen</h1><p class="lead">Le calendrier officiel, ce qui t’attend à chaque épreuve, et un plan pour arriver prête.</p></section>' +
+  return '<section class="wrap page-h"><p class="eyebrow">Session 2027</p><h1>Examen</h1><p class="lead">Le calendrier officiel, ce qui t’attend à chaque épreuve, et un plan pour arriver prête.</p></section>' +
   '<section class="wrap"><div class="stats" style="margin-top:0"><div class="stat"><b>' + daysLeft() + '</b><span>jours avant le 24 juin</span></div><div class="stat"><b>5</b><span>épreuves finales</span></div><div class="stat"><b>' + CH.length + '</b><span>chapitres à réviser</span></div><div class="stat"><b>' + Math.ceil(CH.length / Math.max(1, Math.floor(daysLeft() / 7))) + '</b><span>chapitres par semaine pour tout voir</span></div></div></section>' +
   '<section class="wrap sec"><div class="sec-h"><h2>Le calendrier</h2><span>Toutes les épreuves le matin</span></div><div class="days">' +
     days.map(function (d) { return '<div class="day"><h3>' + d.d + '</h3>' + d.e.map(function (e) { return '<div class="ev"><span class="ev-sw" style="background:' + sw(e[0]) + '"></span><div><span class="ev-t">' + e[1] + '</span><b>' + e[2] + '</b><p>' + e[3] + '</p></div></div>'; }).join("") + '</div>'; }).join("") +
@@ -9156,7 +9162,7 @@ function tutoSteps() {
       v: '<svg class="tv-mm" viewBox="0 0 320 150"><path d="M160 75 C120 75 110 35 70 35" stroke="#00C04B" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C120 75 110 115 70 115" stroke="#0057FF" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C200 75 210 35 250 35" stroke="#FF1F3D" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C200 75 210 115 250 115" stroke="#A600FF" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="160" cy="75" r="26" fill="#fff" stroke="#FF7A00" stroke-width="5"/><text x="160" y="81" text-anchor="middle" font-size="18">🌍</text><text x="20" y="28" font-size="11" font-weight="800" fill="#00C04B">Causes</text><text x="20" y="108" font-size="11" font-weight="800" fill="#0057FF">Fin</text><text x="256" y="28" font-size="11" font-weight="800" fill="#FF1F3D">Crises</text><rect x="252" y="98" width="46" height="24" rx="7" fill="#fff" stroke="#A600FF" stroke-dasharray="4 3" stroke-width="2"/><text x="275" y="115" text-anchor="middle" font-size="14" font-weight="800" fill="#A600FF">?</text></svg>' },
     { t: "La recherche", d: "La <b>loupe</b> en haut de l’écran cherche dans tous les cours et toutes les flashcards. Tape un mot, une date ou une notion, puis touche un résultat pour aller directement à la bonne partie du cours.",
       v: '<div class="tv-search"><div class="tv-bar">🔍 pythagore</div><div class="tv-res"><small>Mathématiques · Pythagore</small><b>Le théorème de <mark>Pythagore</mark></b></div></div>' },
-    { s: 3, t: "Ta progression, ton compte", d: "Ton compte est <b>en ligne</b> : connecte-toi avec ton prénom et ton mot de passe sur n’importe quel téléphone ou ordinateur, tu retrouves tout (flammes, cartes sues, scores, erreurs, carnet). Le rond avec ton initiale, en haut à droite, permet de te déconnecter ou de revoir ce tutoriel. La page <b>L’examen</b> donne le calendrier et un plan de révision.",
+    { s: 3, t: "Ta progression, ton compte", d: "Ton compte est <b>en ligne</b> : connecte-toi avec ton prénom et ton mot de passe sur n’importe quel téléphone ou ordinateur, tu retrouves tout (flammes, cartes sues, scores, erreurs, carnet). Le rond avec ton initiale, en haut à droite, permet de te déconnecter ou de revoir ce tutoriel. La page <b>Examen</b> donne le calendrier et un plan de révision.",
       v: '<div class="tv-prog"><span class="avatar tv-av">' + esc(USER ? USER.name.charAt(0).toUpperCase() : "L") + '</span><div><b>Mathématiques</b><i><em style="width:62%"></em></i></div><div><b>Histoire-Géo</b><i><em style="width:35%;background:var(--hg)"></em></i></div></div>' },
     { t: "Astuce : comme une vraie appli", d: "Sur iPhone, ouvre le site dans Safari, touche le bouton <b>Partager</b>, puis <b>« Sur l’écran d’accueil »</b>. L’appli s’ouvre alors en plein écran, avec son icône.",
       v: '<div class="tv-home"><span class="tv-ico">' + GLOGO + '</span><b>GWENA</b></div>' },
@@ -9556,7 +9562,7 @@ function route() {
     app.innerHTML = '<section class="wrap defi-page" id="defi"></section>'; setNav("home"); document.title = "Défi du jour · GWENA";
     document.body.classList.add("defi-mode"); mountDefi(document.getElementById("defi"));
   } else if (h === "examen") {
-    app.innerHTML = viewExam(); setNav("examen"); document.title = "L’examen · GWENA";
+    app.innerHTML = viewExam(); setNav("examen"); document.title = "Examen · GWENA";
   } else {
     app.innerHTML = viewHome(); setNav("home"); document.title = "GWENA";
     clearInterval(cdT); tickCount(); cdT = setInterval(tickCount, 1000);
