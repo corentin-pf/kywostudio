@@ -975,6 +975,7 @@ main#app{overflow-x:clip}
 .tv-n div{display:flex;flex-direction:column;font-size:13px;line-height:1.3}
 .tv-n div span{color:var(--mute)}
 .tv-n small{font-size:11px;color:var(--mute)}
+.acc-push > .link{align-self:flex-start}
 </style>
 </head>
 <body>
@@ -8702,7 +8703,7 @@ function pushBlock() {
   if (!pushSupported() && IS_IOS && !STANDALONE) return h + '<p>Sur iPhone, les rappels marchent quand l’appli est sur l’écran d’accueil : dans Safari, touche <b>Partager</b> puis <b>« Sur l’écran d’accueil »</b>, ouvre l’appli depuis son icône et reviens ici.</p></div>';
   if (!pushSupported()) return h + '<p>Ce navigateur ne gère pas les notifications. Essaie avec Safari (iPhone, appli sur l’écran d’accueil) ou Chrome.</p></div>';
   if (Notification.permission === "denied") return h + '<p>Les notifications sont bloquées pour l’appli. Autorise-les dans les réglages du téléphone (Réglages → Notifications → Brevet), puis reviens ici.</p></div>';
-  if (on) return h + '<p>✅ Activés : un rappel à <b>15 h</b> et à <b>19 h</b>, seulement si ton défi du jour n’est pas encore fait.</p><div class="row"><button type="button" class="btn" data-push="test">Voir un exemple de rappel</button><button type="button" class="link" data-push="off">Désactiver</button></div><p class="acc-push-msg" hidden></p></div>';
+  if (on) return h + '<p>✅ Activés : un rappel à <b>15 h</b> et à <b>19 h</b>, seulement si ton défi du jour n’est pas encore fait.</p><button type="button" class="link" data-push="off">Désactiver les rappels</button><p class="acc-push-msg" hidden></p></div>';
   return h + '<p>Reçois un rappel à <b>15 h</b> et à <b>19 h</b> si tu n’as pas encore fait ton défi du jour, pour ne jamais perdre ta flamme.</p><button type="button" class="btn btn-sub defi-push-on" data-push="on">Activer les rappels</button><p class="acc-push-msg" hidden></p></div>';
 }
 function bindPush(root) {
@@ -8712,9 +8713,8 @@ function bindPush(root) {
     var box = document.getElementById("acc-push"), msg = function (t) { var m = box.querySelector(".acc-push-msg"); if (m) { m.hidden = false; m.textContent = t; } };
     b.disabled = true;
     var a = b.dataset.push;
-    var p = a === "on" ? enablePush().then(function () { box.outerHTML = pushBlock(); var m = document.querySelector("#acc-push .acc-push-msg"); return testPush().then(function (r) { if (m) { m.hidden = false; m.textContent = r && r.ok ? "Voici à quoi ressemblera ton rappel : regarde tes notifications." : "Rappels enregistrés. (Le test n’a pas pu partir pour l’instant.)"; } }, function () {}); })
-      : a === "off" ? disablePush().then(function () { box.outerHTML = pushBlock(); })
-      : testPush().then(function (r) { b.disabled = false; msg(r && r.ok ? "Exemple envoyé : c’est exactement le rappel que tu recevras s’il te reste ton défi à faire." : "L’envoi a échoué. Désactive puis réactive les rappels."); });
+    var p = a === "on" ? enablePush().then(function () { box.outerHTML = pushBlock(); var m = document.querySelector("#acc-push .acc-push-msg"); return testPush().then(function (r) { if (m) { m.hidden = false; m.textContent = r && r.ok ? "C’est activé ! Un premier rappel vient de t’être envoyé pour te montrer à quoi il ressemble." : "C’est activé ! Tu recevras tes rappels à 15 h et 19 h."; } }, function () {}); })
+      : disablePush().then(function () { box.outerHTML = pushBlock(); });
     p.catch(function (err) { b.disabled = false; msg(err && err.message === "denied" ? "Tu as refusé les notifications. Autorise-les dans les réglages du téléphone." : "Impossible d’activer les rappels pour l’instant. Vérifie ta connexion et réessaie."); });
   });
 }
