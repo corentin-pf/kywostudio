@@ -607,6 +607,64 @@ mark{background:color-mix(in srgb, #ffd60a 55%, transparent);color:inherit;borde
   .srch-btn{width:38px;padding:0;justify-content:center}
   .avatar{width:34px;height:34px;font-size:15px}
 }
+
+/* ---------- Dictionnaire et carnet ---------- */
+.dk{text-decoration:underline dotted;text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-color:var(--mute);cursor:help;border-radius:4px}
+.dk:hover{background:var(--soft)}
+.fc-back .dk{text-decoration-color:var(--on)}
+#app{-webkit-touch-callout:none}
+.dk-k{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.dk-ex{font-style:italic;color:var(--mute);font-size:15px}
+.dk-ok{font-size:13px;font-weight:700;color:var(--ok)}
+.dk-nat{font-size:13px;font-weight:800;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+.wk-body .row .btn{margin-top:0}
+.today{grid-template-columns:repeat(4,1fr)}
+@media (max-width:900px){ .today{grid-template-columns:repeat(2,1fr)} }
+.carnet-chip{margin-top:12px}
+.carnet-top{margin-bottom:16px}
+.carnet-list{display:flex;flex-direction:column;gap:8px}
+.carnet-it{display:flex;gap:12px;align-items:flex-start;border:var(--bw) solid var(--hair);border-radius:var(--r);padding:12px 14px}
+.carnet-it > div{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.carnet-it b{font-size:18px;font-weight:800}
+.carnet-it p{font-size:15px}
+.carnet-it small{font-size:12px;color:var(--mute)}
+.carnet-x{flex:none;width:34px;height:34px;border-radius:50%;border:0;background:var(--soft);cursor:pointer;font-weight:800}
+
+/* ---------- Cartes mentales ---------- */
+.mm-bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.mm-score{font-weight:800;font-variant-numeric:tabular-nums}
+.mm-help{font-size:13px;color:var(--mute);margin:10px 0 12px}
+.mm-wrap{border:var(--bw) solid var(--hair);border-radius:var(--r-lg);background:var(--soft);padding:10px;overflow-x:auto}
+.mm-svg{display:block;width:100%;height:auto;min-width:300px}
+.mm-svg text{font:600 13px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:var(--fg)}
+.mm-center{fill:var(--fg)}
+.mm-svg .mm-ct{font-size:19px;font-weight:800;fill:var(--bg)}
+.mm-ln{fill:none;stroke:var(--sub);stroke-width:2;opacity:.6}
+.mm-main{stroke-width:3.5;opacity:.85}
+.mm-br{cursor:pointer}
+.mm-br rect{fill:var(--sub)}
+.mm-svg .mm-br text{fill:var(--on);font-size:15px;font-weight:800}
+.mm-svg .mm-br .mm-tg{font-size:18px}
+.mm-leaf rect{fill:var(--bg);stroke:var(--sub);stroke-width:1.5}
+.mm-q{cursor:pointer}
+.mm-q rect{stroke-dasharray:5 4;stroke-width:2;fill:var(--bg)}
+.mm-svg .mm-q text{font-weight:800;fill:var(--sub);font-size:16px}
+.mm-sel rect{fill:color-mix(in srgb, var(--sub) 18%, var(--bg));stroke-dasharray:none;stroke-width:3}
+.mm-ok rect{fill:var(--ok);stroke:var(--ok)}
+.mm-svg .mm-ok text{fill:var(--on);font-weight:800}
+.mm-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.mm-opts .chip{cursor:pointer}
+.mm-bad{background:var(--ko)!important;border-color:var(--ko)!important;color:var(--on)!important;animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.mm-end{margin-top:14px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;border:var(--bw) solid var(--ok);border-radius:var(--r);padding:16px}
+.mm-end b{font-size:20px;color:var(--ok)}
+@media (max-width:760px){
+  .tabs{grid-template-columns:repeat(6,1fr)}
+  .tab{font-size:12px;padding:9px 0}
+  .mm-wrap{padding:4px;border-radius:var(--r)}
+  .mm-opts{position:sticky;bottom:calc(72px + env(safe-area-inset-bottom,0px));background:var(--bg);padding:10px 0;border-top:1px solid var(--hair)}
+}
+.mm-opts{max-height:38vh;overflow:auto}
 </style>
 </head>
 <body>
@@ -635,7 +693,7 @@ mark{background:color-mix(in srgb, #ffd60a 55%, transparent);color:inherit;borde
 </nav>
 <footer><div class="wrap foot"><span>Objectif Brevet · Programme de 3<sup>e</sup>, cycle 4</span><span>Ta progression est enregistrée sur cet appareil uniquement.</span></div></footer>
 <script>
-window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {}; var BREVET_COURS_PLUS = {}; var BREVET_MORE = {}; var BREVET_WIKI = {}; var BREVET_COVERS = {}; var BREVET_IMGS = {};
+window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {}; var BREVET_COURS_PLUS = {}; var BREVET_MORE = {}; var BREVET_WIKI = {}; var BREVET_COVERS = {}; var BREVET_IMGS = {}; var BREVET_DICO = {}; var BREVET_MAPS = {};
 BREVET.fr = [
 {
   id: "fr-phrase", tag: "Grammaire", title: "La phrase complexe",
@@ -3217,6 +3275,663 @@ Object.assign(BREVET_IMGS, {
     { title: "L’ampoule d’Edison", file: "Edison bulb.jpg", cap: "Une ampoule à incandescence de la fin du XIXe siècle : un filament chauffé produit la lumière." },
     { title: "Des DEL de forte puissance", file: "2007-07-24 High-power light emitting diodes (Luxeon, Lumiled).jpg", cap: "Les DEL éclairent autant en consommant beaucoup moins : une étape de la lignée de l’éclairage." }
   ]
+});
+
+/* Glossaire des mots difficiles : motif → [définition simple, exemple]. Un motif en minuscule accepte la majuscule initiale. */
+BREVET_DICO = {
+  /* Vocabulaire général des cours */
+  "rétrospectif|rétrospective": ["Qui regarde vers le passé, qui revient sur ce qui s’est déjà passé.", "Un récit rétrospectif raconte des souvenirs."],
+  "fatalité": ["Destin auquel on ne peut pas échapper.", "Dans la tragédie, le héros est victime de la fatalité."],
+  "ostensibles?": ["Qui se voit beaucoup, qu’on montre volontairement.", "Un signe religieux ostensible est très visible."],
+  "endiguer": ["Arrêter, contenir quelque chose qui se répand.", "Endiguer le communisme, c’est l’empêcher de s’étendre."],
+  "ductiles?": ["Qui peut se déformer lentement sans se casser.", "L’asthénosphère est ductile, contrairement à la lithosphère rigide."],
+  "pathogènes?": ["Qui provoque une maladie.", "Certaines bactéries sont pathogènes."],
+  "antérieure?s?|antériorité": ["Qui se passe avant autre chose.", "Le plus-que-parfait exprime une action antérieure."],
+  "postérieure?s?": ["Qui se passe après autre chose.", "Une action postérieure vient ensuite."],
+  "lacunaire": ["Qui comporte des trous, des vides.", "La structure de l’atome est lacunaire : il est presque vide."],
+  "proportionnelles?|proportionnels?": ["Qui varient ensemble en étant toujours multipliés par le même nombre.", "Le prix est proportionnel à la masse."],
+  "réciproques?": ["Qui va dans les deux sens ; pour un théorème, l’énoncé « à l’envers ».", "La réciproque de Pythagore prouve qu’un triangle est rectangle."],
+  "contraposée": ["Forme d’un théorème qui permet de prouver que quelque chose est faux.", "Si l’égalité est fausse, le triangle n’est pas rectangle."],
+  "hypothèses?": ["Supposition, idée qu’on admet pour raisonner.", "« Si j’avais le temps » exprime une hypothèse."],
+  "conjonctions?": ["Petit mot invariable qui relie des mots ou des propositions.", "« mais », « parce que » sont des conjonctions."],
+  "antécédent": ["Mot que remplace ou complète un pronom relatif.", "Dans « la ville où je vis », l’antécédent est « ville »."],
+  "subordonnées?": ["Proposition qui dépend d’une autre (la principale).", "« parce qu’il pleut » est une subordonnée."],
+  "juxtaposées?|juxtaposition": ["Placées côte à côte, séparées par une ponctuation.", "Je suis venu, j’ai vu : deux propositions juxtaposées."],
+  "invariables?": ["Qui ne change jamais de forme.", "« Toujours » est un mot invariable."],
+  "homophones?": ["Mots qui se prononcent pareil mais s’écrivent différemment.", "« a » et « à » sont des homophones."],
+  "connotations?": ["Sens suggéré par un mot, en plus de son sens premier.", "« Rouge » peut évoquer le danger ou l’amour."],
+  "mélioratif|méliorative": ["Qui présente quelque chose de façon positive.", "« Splendide » est mélioratif."],
+  "péjoratif|péjorative": ["Qui présente quelque chose de façon négative.", "« Bicoque » est péjoratif pour « maison »."],
+  "modalisateurs?": ["Mot qui montre le degré de certitude de celui qui parle.", "« Peut-être », « sans doute » sont des modalisateurs."],
+  "polysémie|polysémique": ["Fait qu’un mot ait plusieurs sens.", "« Feuille » est polysémique : d’arbre ou de papier."],
+  "registres?": ["Ton d’un texte, l’effet qu’il cherche à produire.", "Le registre comique fait rire."],
+  "lyrique": ["Qui exprime les sentiments personnels.", "Un poème d’amour est lyrique."],
+  "épique": ["Qui raconte des exploits héroïques de façon grandiose.", "Un récit de bataille peut être épique."],
+  "pathétique": ["Qui cherche à émouvoir, à faire naître la pitié.", "La mort d’un enfant est une scène pathétique."],
+  "satiriques?": ["Qui se moque pour critiquer.", "Un dessin satirique ridiculise les puissants."],
+  "didascalies?": ["Indication de mise en scène dans un texte de théâtre.", "« (Il sort.) » est une didascalie."],
+  "tirades?": ["Longue réplique d’un personnage au théâtre.", "Cyrano dit une célèbre tirade sur son nez."],
+  "apartés?": ["Réplique dite au public, que les autres personnages n’entendent pas.", "Le valet fait un aparté pour se moquer."],
+  "dénouement": ["Moment où l’intrigue se résout.", "Le dénouement révèle le coupable."],
+  "péripéties": ["Rebondissements, événements qui font avancer l’histoire.", "Le héros traverse de nombreuses péripéties."],
+  "ellipses?": ["Saut dans le temps dans un récit.", "« Dix ans passèrent » est une ellipse."],
+  "omniscient": ["Qui sait tout.", "Un narrateur omniscient connaît les pensées de tous."],
+  "autoportraits?": ["Portrait qu’un artiste fait de lui-même.", "Van Gogh a peint de nombreux autoportraits."],
+  "témoigner|témoignages?": ["Raconter ce qu’on a vu ou vécu pour le faire connaître.", "Primo Levi témoigne de la vie à Auschwitz."],
+  "dénoncer": ["Montrer publiquement que quelque chose est injuste ou mauvais.", "Hugo dénonce la peine de mort."],
+  "anticipation": ["Récit qui imagine l’avenir.", "Fahrenheit 451 est un roman d’anticipation."],
+  "amorce": ["Première phrase d’une introduction, qui amène le sujet.", "Une citation peut servir d’amorce."],
+  "argumentatif|argumenter|arguments?": ["Qui cherche à convaincre en donnant des raisons.", "Un argument doit être illustré par un exemple."],
+  "nuancée?|nuancer": ["Qui tient compte des différents points de vue, sans être catégorique.", "Une conclusion nuancée reconnaît les limites."],
+  "concession": ["Fait de reconnaître une idée opposée avant de défendre la sienne.", "« Bien que » exprime la concession."],
+  "consécutifs?|consécutives?": ["Qui se suivent sans interruption.", "5, 6 et 7 sont trois entiers consécutifs."],
+  "équiprobables?": ["Qui ont tous la même chance de se produire.", "Les faces d’un dé équilibré sont équiprobables."],
+  "irréductibles?": ["Qu’on ne peut plus simplifier.", "3/4 est une fraction irréductible."],
+  "dispersion": ["Fait que des valeurs soient éloignées les unes des autres.", "L’étendue mesure la dispersion d’une série."],
+  "superposables?": ["Qu’on peut placer exactement l’une sur l’autre.", "Une figure et son symétrique sont superposables."],
+  "perpendiculaires?": ["Qui se coupent en formant un angle droit.", "Les deux murs d’une pièce sont perpendiculaires."],
+  "sécantes?": ["Qui se coupent en un point.", "Deux droites sécantes ne sont pas parallèles."],
+  "homologues?": ["Qui se correspondent dans deux figures semblables.", "Les côtés homologues sont face aux angles égaux."],
+  "complémentaires?": ["Se dit de deux angles dont la somme fait 90°.", "Dans un triangle rectangle, les angles aigus sont complémentaires."],
+  "coefficients?": ["Nombre par lequel on multiplie.", "Une hausse de 20 % correspond au coefficient 1,2."],
+  "inéquations?": ["Inégalité qui contient une inconnue.", "2x + 1 > 7 est une inéquation."],
+  "quotients?": ["Résultat d’une division.", "Le quotient de 12 par 4 est 3."],
+  "dénominateurs?": ["Nombre placé sous la barre d’une fraction.", "Dans 3/7, le dénominateur est 7."],
+  "numérateurs?": ["Nombre placé au-dessus de la barre d’une fraction.", "Dans 3/7, le numérateur est 3."],
+  /* Histoire-géographie-EMC */
+  "mobilisation|mobilisés?": ["Appel des soldats et de toutes les ressources d’un pays pour la guerre.", "En août 1914, 8 millions de Français sont mobilisés."],
+  "propagande": ["Ensemble des moyens pour imposer des idées à la population.", "Les affiches de propagande glorifient le chef."],
+  "censure": ["Contrôle et interdiction de ce qui peut être publié ou dit.", "Les lettres des soldats étaient soumises à la censure."],
+  "embrigadement|embrigader": ["Fait d’encadrer et de contrôler les esprits, surtout des jeunes.", "Les régimes totalitaires embrigadent la jeunesse."],
+  "idéologies?": ["Ensemble d’idées qui guident une politique.", "Le nazisme est une idéologie raciste."],
+  "totalitaires?|totalitarisme": ["Régime qui contrôle toute la société et les individus.", "L’URSS de Staline est un régime totalitaire."],
+  "antisémitisme|antisémites?": ["Hostilité ou haine envers les Juifs.", "Les lois de Nuremberg sont antisémites."],
+  "génocides?": ["Extermination volontaire et organisée d’un peuple.", "La Shoah est un génocide."],
+  "déportés?|déportation": ["Personnes envoyées de force dans des camps ou des pays lointains.", "Des milliers de résistants ont été déportés."],
+  "collaboration|collaborateurs?": ["Coopération avec l’ennemi, ici l’Allemagne nazie.", "Le régime de Vichy pratique la collaboration."],
+  "armistice": ["Accord qui arrête les combats entre des armées.", "L’armistice de 1918 est signé le 11 novembre."],
+  "capitulation|capitule": ["Fait de se rendre, de reconnaître sa défaite.", "L’Allemagne capitule le 8 mai 1945."],
+  "réparations": ["Sommes d’argent qu’un pays vaincu doit payer aux vainqueurs.", "L’Allemagne doit payer des réparations après 1918."],
+  "mutineries?|mutins?": ["Révolte de soldats qui refusent d’obéir.", "Les mutineries de 1917 suivent l’échec du Chemin des Dames."],
+  "usure": ["Fait d’épuiser l’ennemi lentement.", "Verdun est une bataille d’usure."],
+  "superpuissances?": ["Pays qui domine dans tous les domaines (armée, économie, culture).", "Les États-Unis et l’URSS sont des superpuissances."],
+  "bipolaire|bipolarisation": ["Organisé autour de deux pôles opposés.", "Pendant la guerre froide, le monde est bipolaire."],
+  "dissuasion": ["Fait de décourager une attaque par la menace d’une riposte.", "L’arme nucléaire sert à la dissuasion."],
+  "blocus": ["Encerclement qui empêche tout ravitaillement.", "Le blocus de Berlin dure de 1948 à 1949."],
+  "colonies?|colonisés?|colonisation": ["Territoire dominé et exploité par un pays étranger.", "L’Algérie était une colonie française."],
+  "métropoles?": ["Pays qui possède des colonies ; ou très grande ville.", "La France était la métropole de l’Algérie."],
+  "décolonisation": ["Processus par lequel les colonies deviennent indépendantes.", "L’Inde est l’un des premiers pays décolonisés."],
+  "non-violence": ["Méthode de lutte sans violence.", "Gandhi prônait la non-violence."],
+  "nationalistes?|nationalisme": ["Attachement très fort à sa nation, volonté qu’elle soit indépendante ou puissante.", "Les mouvements nationalistes réclament l’indépendance."],
+  "alternance": ["Changement de majorité politique au pouvoir.", "1981 marque la première alternance de la Ve République."],
+  "suffrage": ["Vote.", "Le suffrage universel permet à tous les citoyens de voter."],
+  "référendums?": ["Vote où les citoyens répondent par oui ou par non à une question.", "La Constitution de 1958 est adoptée par référendum."],
+  "promulguer|promulgue|promulgation": ["Signer une loi pour qu’elle s’applique.", "Le président promulgue les lois."],
+  "législatif": ["Qui concerne le vote des lois.", "Le pouvoir législatif appartient au Parlement."],
+  "exécutif": ["Qui concerne l’application des lois.", "Le gouvernement exerce le pouvoir exécutif."],
+  "croissance": ["Augmentation de la production et des richesses d’un pays.", "Les Trente Glorieuses sont une période de forte croissance."],
+  "émancipation": ["Fait de se libérer d’une domination.", "L’émancipation des femmes progresse après 1945."],
+  "consommation": ["Achat et utilisation de biens et de services.", "La télévision devient un objet de consommation courante."],
+  "urbanisation": ["Développement des villes et augmentation de la population urbaine.", "L’urbanisation s’accélère pendant les Trente Glorieuses."],
+  "métropolisation": ["Concentration des habitants, des activités et des pouvoirs dans les grandes villes.", "Lyon profite de la métropolisation."],
+  "périurbain|périurbaine|périurbanisation": ["Situé autour de la ville, entre ville et campagne.", "Les lotissements périurbains se multiplient."],
+  "pendulaires?": ["Qui fait l’aller-retour chaque jour.", "Les migrations pendulaires relient domicile et travail."],
+  "enclavés?|désenclaver": ["Isolé, difficile d’accès ; désenclaver, c’est relier au reste du territoire.", "Une autoroute désenclave une vallée."],
+  "aménagement|aménager": ["Organisation de l’espace pour améliorer la vie des habitants.", "Construire une ligne de TGV est un aménagement."],
+  "inégalités?": ["Différences injustes entre personnes ou territoires.", "L’État cherche à réduire les inégalités territoriales."],
+  "attractivité|attractifs?|attractive": ["Capacité à attirer des habitants, des entreprises, des touristes.", "Le soleil renforce l’attractivité du littoral."],
+  "mondialisation": ["Mise en relation de toutes les régions du monde par les échanges.", "Les ports profitent de la mondialisation."],
+  "reconversion": ["Changement d’activité d’une région ou d’une personne.", "Le Nord a dû se reconvertir après la fermeture des mines."],
+  "ultramarins?|ultramarines?": ["Qui se trouve outre-mer, loin de la France métropolitaine.", "La Guyane est un territoire ultramarin."],
+  "insularité": ["Fait d’être une île.", "L’insularité complique les transports."],
+  "souverains?|souveraineté": ["Qui décide librement, sans dépendre d’un autre pouvoir.", "Chaque État de l’UE reste souverain."],
+  "citoyenneté": ["Fait d’être citoyen, avec des droits et des devoirs.", "Le vote est un acte de citoyenneté."],
+  "neutralité": ["Fait de ne pas prendre parti.", "L’État est neutre face aux religions."],
+  "discriminations?": ["Traitement injuste d’une personne à cause de son origine, son sexe, etc.", "Refuser un emploi à cause de l’origine est une discrimination."],
+  "présomption d’innocence": ["Principe selon lequel une personne est innocente tant qu’on n’a pas prouvé sa culpabilité.", "Un accusé bénéficie de la présomption d’innocence."],
+  "constitution": ["Texte fondamental qui organise les pouvoirs d’un pays.", "La Constitution de la Ve République date de 1958."],
+  /* SVT */
+  "héréditaires?|hérédité": ["Qui se transmet des parents aux enfants.", "Le groupe sanguin est un caractère héréditaire."],
+  "dominant": ["Se dit d’un allèle qui s’exprime même en un seul exemplaire.", "L’allèle A est dominant sur O."],
+  "récessifs?|récessive": ["Se dit d’un allèle qui ne s’exprime que s’il est présent deux fois.", "L’allèle O est récessif."],
+  "chromatides?": ["Chacune des deux copies d’un chromosome avant la division.", "Avant la mitose, chaque chromosome a deux chromatides."],
+  "gamètes?": ["Cellule reproductrice : spermatozoïde ou ovule.", "Les gamètes contiennent 23 chromosomes."],
+  "nidation": ["Fixation de l’embryon dans la paroi de l’utérus.", "La nidation a lieu une semaine après la fécondation."],
+  "ovulation": ["Libération d’un ovule par l’ovaire.", "L’ovulation a lieu vers le 14e jour du cycle."],
+  "contraceptions?|contraceptifs?|contraceptive": ["Méthode pour éviter une grossesse.", "Le préservatif est un moyen de contraception."],
+  "attributs?": ["Caractère que possède un être vivant (poils, plumes…).", "Les poils sont un attribut des mammifères."],
+  "parenté": ["Lien entre des êtres vivants qui ont des ancêtres communs.", "L’humain et le chimpanzé ont une parenté proche."],
+  "aléatoire|aléatoires": ["Qui dépend du hasard.", "Les mutations sont aléatoires."],
+  "spécifiques?": ["Qui concerne une seule chose précise.", "Un anticorps est spécifique d’un microbe."],
+  "antigènes?": ["Molécule qu’un organisme reconnaît comme étrangère.", "Les anticorps reconnaissent les antigènes du microbe."],
+  "immunisée?|immunité": ["Protégé contre une maladie.", "Après un vaccin, on est immunisé."],
+  "contamination": ["Entrée d’un microbe dans l’organisme.", "Une plaie peut être une voie de contamination."],
+  "asepsie": ["Ensemble des moyens pour éviter qu’un microbe entre dans l’organisme.", "Se laver les mains relève de l’asepsie."],
+  "antisepsie": ["Destruction des microbes sur une plaie ou la peau.", "Le désinfectant sert à l’antisepsie."],
+  "stimulus|stimulations?": ["Ce qui provoque une réaction d’un organe des sens.", "Un bruit est un stimulus pour l’oreille."],
+  "récepteurs?": ["Ce qui reçoit : en SVT, organe qui capte une information ; en électricité, appareil qui reçoit l’énergie (lampe, moteur).", "La rétine contient des récepteurs à la lumière."],
+  "effecteurs?": ["Organe qui réalise une réponse, comme un muscle.", "Le muscle du bras est l’effecteur."],
+  "dépendance": ["Besoin irrésistible de consommer une substance.", "Le tabac crée une forte dépendance."],
+  "plasticité": ["Capacité à se transformer.", "Grâce à sa plasticité, le cerveau apprend toute la vie."],
+  "convection": ["Mouvement lent de matière chaude qui monte et froide qui descend.", "La convection du manteau fait bouger les plaques."],
+  "convergence|convergent": ["Rapprochement de deux plaques.", "La subduction est une zone de convergence."],
+  "divergence|divergent": ["Écartement de deux plaques.", "Les dorsales sont des zones de divergence."],
+  "visqueuse|visqueux": ["Épais, qui coule difficilement.", "La lave visqueuse provoque des éruptions explosives."],
+  "effusif|effusive": ["Se dit d’un volcan qui émet des coulées de lave fluide.", "Le Piton de la Fournaise est effusif."],
+  "aléa": ["Phénomène naturel qui peut se produire, et sa probabilité.", "Un séisme est un aléa."],
+  "enjeux": ["Personnes, biens et activités qui peuvent être touchés par un aléa.", "Une ville est un enjeu important."],
+  "vulnérabilité|vulnérables?": ["Fragilité face à un danger.", "Les constructions parasismiques réduisent la vulnérabilité."],
+  "atténuation|atténuer": ["Réduction ; pour le climat, réduction des émissions de gaz à effet de serre.", "Isoler sa maison relève de l’atténuation."],
+  "adaptation": ["Fait de s’ajuster à une nouvelle situation.", "Construire des digues est une mesure d’adaptation."],
+  "ressources?": ["Ce que la nature fournit et que l’humain utilise.", "L’eau est une ressource renouvelable."],
+  "renouvelables?": ["Qui se reconstitue rapidement à l’échelle humaine.", "Le vent est une énergie renouvelable."],
+  "nutriments?": ["Petites molécules issues de la digestion, utilisables par les cellules.", "Le glucose est un nutriment."],
+  "absorption": ["Passage des nutriments de l’intestin vers le sang.", "L’absorption a lieu dans l’intestin grêle."],
+  /* Physique-chimie */
+  "homogènes?": ["Dont on ne distingue pas les constituants.", "L’eau salée est un mélange homogène."],
+  "hétérogènes?": ["Dont on distingue les constituants à l’œil nu.", "L’eau et l’huile forment un mélange hétérogène."],
+  "soluté": ["Substance qu’on dissout dans un liquide.", "Le sucre est le soluté dans l’eau sucrée."],
+  "solvant": ["Liquide dans lequel on dissout une substance.", "L’eau est le solvant le plus courant."],
+  "saturée?": ["Qui ne peut plus rien dissoudre de plus.", "Une solution saturée laisse le sel au fond."],
+  "dissolution|dissoudre|dissous": ["Fait de mélanger une substance dans un liquide jusqu’à ce qu’elle disparaisse.", "La dissolution du sucre dans le thé."],
+  "palier": ["Partie horizontale d’une courbe : la température ne change pas.", "Un corps pur fond avec un palier de température."],
+  "réactifs?": ["Espèce chimique consommée lors d’une réaction.", "Le carbone et le dioxygène sont les réactifs."],
+  "produits?": ["Espèce chimique formée lors d’une réaction ; ou résultat d’une multiplication.", "Le CO₂ est le produit de la combustion."],
+  "ajustée?": ["Équilibrée : avec autant d’atomes de chaque sorte de chaque côté.", "Une équation ajustée respecte la conservation des atomes."],
+  "corrosifs?": ["Qui ronge, attaque les matières et la peau.", "Un acide concentré est corrosif."],
+  "comburant": ["Substance qui permet la combustion (souvent le dioxygène).", "Sans comburant, le feu s’éteint."],
+  "combustible": ["Matière qui peut brûler.", "Le bois est un combustible."],
+  "référentiels?": ["Objet par rapport auquel on étudie un mouvement.", "Le quai est le référentiel terrestre."],
+  "uniforme": ["Qui garde la même vitesse.", "Un mouvement uniforme a une vitesse constante."],
+  "interactions?": ["Action réciproque entre deux objets.", "La Terre et la Lune sont en interaction."],
+  "dynamomètre": ["Appareil qui mesure la valeur d’une force.", "On mesure un poids avec un dynamomètre."],
+  "inertie": ["Tendance d’un objet à garder son mouvement ou son immobilité.", "Si rien ne le freine, un objet garde sa vitesse par inertie."],
+  "convertisseurs?": ["Appareil qui transforme une forme d’énergie en une autre.", "Une lampe est un convertisseur d’énergie."],
+  "rendement": ["Part de l’énergie reçue qui est vraiment utile.", "Une DEL a un meilleur rendement qu’une ampoule classique."],
+  "intermittente?s?": ["Qui s’arrête et reprend, pas continu.", "L’énergie solaire est intermittente."],
+  "dérivation": ["Branchement en plusieurs boucles parallèles.", "Les prises de la maison sont en dérivation."],
+  "surintensité": ["Courant trop fort pour l’installation.", "Le fusible coupe le courant en cas de surintensité."],
+  "électrocution": ["Accident grave dû au passage du courant électrique dans le corps.", "La prise de terre protège de l’électrocution."],
+  "propage|propagation": ["Fait de se déplacer, de se transmettre de proche en proche.", "Le son se propage dans l’air."],
+  "fréquences?": ["Nombre de vibrations par seconde, en hertz.", "Un son aigu a une fréquence élevée."],
+  "période": ["Durée d’une vibration complète ; ou durée en histoire.", "f = 1 ÷ T, où T est la période."],
+  /* Technologie */
+  "fonction d’usage": ["Ce à quoi sert un objet pour son utilisateur.", "La fonction d’usage d’un vélo : se déplacer."],
+  "fonction d’estime": ["Ce qui donne envie d’acheter un objet (beauté, marque).", "La couleur d’un téléphone relève de la fonction d’estime."],
+  "critères?": ["Ce qu’on mesure pour juger si une exigence est respectée.", "L’autonomie est un critère pour une lampe."],
+  "conformes?|conformité": ["Qui respecte les exigences prévues.", "L’objet est conforme au cahier des charges."],
+  "automatisés?": ["Qui fonctionne tout seul, sans intervention humaine permanente.", "Un portail automatisé s’ouvre avec une télécommande."],
+  "acquérir": ["Pour un système, recueillir une information grâce à un capteur.", "Le capteur acquiert la distance."],
+  "analogique": ["Qui varie de façon continue.", "Une température est une information analogique."],
+  "numérique": ["Codé avec des 0 et des 1.", "Une photo numérique est faite de nombres."],
+  "initialiser": ["Donner une valeur de départ à une variable.", "Mettre le score à 0 au début du jeu."],
+  "incrémenter": ["Ajouter 1 à une variable.", "À chaque bonne réponse, on incrémente le score."],
+  "recyclables?": ["Qui peut être récupéré pour fabriquer de nouveaux objets.", "Le verre est recyclable."],
+  "éco-conception": ["Conception d’un objet en limitant son impact sur l’environnement.", "Utiliser du plastique recyclé relève de l’éco-conception."],
+  "obsolescence": ["Fait qu’un objet devienne inutilisable ou dépassé.", "L’obsolescence programmée est interdite en France."],
+  "protocoles?": ["Ensemble de règles de communication entre machines.", "HTTP est un protocole du Web."],
+  "chiffrés?|chiffrement": ["Transformés en code secret pour être protégés.", "Avec HTTPS, les échanges sont chiffrés."],
+  "innovations?": ["Invention mise sur le marché et adoptée par les utilisateurs.", "Le smartphone est une innovation."],
+  "incrémentale": ["Qui avance par petites améliorations successives.", "Un nouveau modèle de téléphone chaque année : innovation incrémentale."]
+};
+
+/* Glossaire : vocabulaire de la langue et notions clés */
+Object.assign(BREVET_DICO, {
+  /* Grammaire et conjugaison */
+  "attribut du sujet": ["Mot relié au sujet par un verbe d’état (être, sembler, devenir…), qui donne une qualité au sujet.", "Dans « Elle semble fatiguée », « fatiguée » est attribut du sujet."],
+  "COD": ["Complément d’objet direct : complément du verbe sans préposition. Il répond à « quoi ? » ou « qui ? ».", "Je lis un livre : « un livre » est COD."],
+  "COI": ["Complément d’objet indirect : complément du verbe introduit par une préposition (à, de).", "Je parle à mon frère : « à mon frère » est COI."],
+  "épithètes?": ["Adjectif placé juste à côté du nom qu’il qualifie.", "Un vieux livre : « vieux » est épithète."],
+  "appositions?": ["Mot ou groupe séparé par une virgule, qui apporte une précision.", "Furieux, il partit : « furieux » est apposé."],
+  "propositions?": ["Partie d’une phrase organisée autour d’un verbe conjugué.", "« Il pleut et je reste » contient deux propositions."],
+  "principale": ["Proposition dont dépend une subordonnée.", "Dans « Je sors quand il fait beau », « je sors » est la principale."],
+  "indépendante": ["Proposition qui ne dépend d’aucune autre.", "« Le chat dort. » est une proposition indépendante."],
+  "participes? passés?": ["Forme du verbe utilisée dans les temps composés ou comme adjectif.", "Dans « j’ai mangé », « mangé » est un participe passé."],
+  "infinitif": ["Forme du verbe non conjuguée, celle du dictionnaire.", "Chanter, finir, prendre sont des infinitifs."],
+  "subjonctif": ["Mode du souhait, du doute ou de l’obligation.", "Il faut que tu viennes."],
+  "conditionnel": ["Mode de l’hypothèse, de la politesse ou du futur vu du passé.", "Je voudrais un verre d’eau."],
+  "impératif": ["Mode de l’ordre ou du conseil, sans sujet exprimé.", "Viens ici !"],
+  "indicatif": ["Mode des actions réelles, certaines.", "Il pleut, il pleuvait, il pleuvra."],
+  "gérondif": ["Forme « en + participe présent » qui indique une action simultanée.", "Il chante en marchant."],
+  "auxiliaires?": ["Verbe « être » ou « avoir » utilisé pour former les temps composés.", "J’ai fini : « ai » est l’auxiliaire avoir."],
+  "pronominaux|pronominal": ["Se dit d’un verbe conjugué avec un pronom de la même personne que le sujet.", "Se laver : je me lave."],
+  "passé simple": ["Temps du récit pour les actions brèves de premier plan.", "Il ouvrit la porte et entra."],
+  "imparfait": ["Temps du passé pour les descriptions, les habitudes, les actions qui durent.", "Il pleuvait depuis le matin."],
+  "plus-que-parfait": ["Temps qui exprime une action antérieure à une autre action passée.", "Il avait plu toute la nuit."],
+  "futur antérieur": ["Temps qui exprime une action future accomplie avant une autre.", "Quand tu auras fini, tu sortiras."],
+  "discours direct": ["Paroles rapportées telles quelles, entre guillemets.", "Il dit : « Je pars. »"],
+  "discours indirect": ["Paroles rapportées dans une subordonnée, sans guillemets.", "Il dit qu’il part."],
+  "focalisation|points? de vue": ["Angle choisi par le narrateur pour raconter : ce qu’il voit et sait.", "En focalisation interne, on voit par les yeux d’un personnage."],
+  "champs? lexica(?:l|ux)": ["Ensemble des mots qui se rapportent à un même thème.", "Vague, écume, marin : champ lexical de la mer."],
+  "comparaisons?": ["Figure qui rapproche deux éléments avec un outil (comme, tel…).", "Rusé comme un renard."],
+  "métaphores?": ["Figure qui rapproche deux éléments sans outil de comparaison.", "Cet homme est un renard."],
+  "personnifications?": ["Figure qui donne des traits humains à un objet ou un animal.", "Le vent hurle."],
+  "hyperboles?": ["Figure d’exagération.", "Je meurs de faim."],
+  "anaphores?": ["Répétition d’un mot en début de phrase ou de vers.", "Paris ! Paris outragé !"],
+  "gradations?": ["Suite de mots d’intensité croissante.", "Va, cours, vole !"],
+  "antithèses?": ["Figure qui oppose deux idées dans une même phrase.", "Je vis, je meurs."],
+  "oxymores?": ["Association de deux mots de sens contraire.", "Un silence assourdissant."],
+  "litotes?": ["Figure qui dit moins pour faire entendre plus.", "Ce n’est pas mauvais (= c’est très bon)."],
+  "euphémismes?": ["Figure qui adoucit une réalité pénible.", "Il nous a quittés (= il est mort)."],
+  "allitérations?": ["Répétition d’un même son consonne.", "Pour qui sont ces serpents qui sifflent… (son [s])."],
+  "assonances?": ["Répétition d’un même son voyelle.", "Les sanglots longs des violons (sons [on], [an])."],
+  "enjambements?": ["Phrase qui continue sur le vers suivant.", "L’enjambement met en valeur le mot rejeté."],
+  "rimes?": ["Retour d’un même son à la fin de deux vers.", "Plates (AABB), croisées (ABAB), embrassées (ABBA)."],
+  "autobiographies?": ["Récit qu’une personne réelle fait de sa propre vie.", "Les Confessions de Rousseau sont une autobiographie."],
+  "satire": ["Texte ou dessin qui se moque pour critiquer.", "La satire vise souvent les puissants."],
+  "ironie|ironique": ["Fait de dire le contraire de ce qu’on pense pour se moquer ou critiquer.", "« Quelle belle réussite ! » devant un échec."],
+  "dystopies?": ["Récit qui imagine une société cauchemardesque.", "1984 et Fahrenheit 451 sont des dystopies."],
+  "alexandrins?": ["Vers de douze syllabes.", "Le vers classique du théâtre français est l’alexandrin."],
+  "vers libres?": ["Vers sans rime ni nombre fixe de syllabes.", "Apollinaire utilise souvent le vers libre."],
+  /* Histoire-géo-EMC */
+  "insurrection": ["Soulèvement armé contre le pouvoir.", "Le 1er novembre 1954, le FLN lance une insurrection."],
+  "indépendantistes?": ["Personnes qui réclament l’indépendance de leur pays.", "Les indépendantistes algériens du FLN."],
+  "répression": ["Action violente d’un pouvoir pour faire taire une opposition.", "La répression de Sétif en 1945."],
+  "persécutions?|persécutés?": ["Mauvais traitements répétés infligés à un groupe.", "Les Juifs sont persécutés par les nazis."],
+  "clandestine?s?": ["Caché, interdit par le pouvoir.", "Les résistants imprimaient des journaux clandestins."],
+  "réfractaires?": ["Personnes qui refusent d’obéir à une obligation.", "Les réfractaires au STO rejoignent les maquis."],
+  "occupant": ["Armée qui contrôle un pays vaincu.", "Les résistants luttent contre l’occupant allemand."],
+  "autoritaires?": ["Qui impose son pouvoir sans laisser de liberté.", "Le régime de Vichy est autoritaire."],
+  "démocraties?|démocratique": ["Régime où le pouvoir appartient au peuple, qui élit ses représentants.", "La France est une démocratie."],
+  "dictatures?": ["Régime où une personne ou un groupe a tous les pouvoirs, sans contrôle.", "Mussolini instaure une dictature."],
+  "opposants?": ["Personnes qui s’opposent au pouvoir en place.", "Les opposants sont envoyés au goulag."],
+  "purges": ["Éliminations massives d’opposants, réels ou supposés.", "Les grandes purges de Staline en 1936-1938."],
+  "famine": ["Manque très grave de nourriture qui provoque des morts.", "La famine en Ukraine en 1932-1933."],
+  "planifiée": ["Organisée à l’avance par l’État, selon un plan.", "L’économie soviétique est planifiée."],
+  "collectivisation": ["Suppression de la propriété privée au profit de la propriété collective.", "La collectivisation des terres en URSS."],
+  "annexions?|annexe|annexée": ["Rattachement par la force d’un territoire à un autre pays.", "L’Allemagne annexe l’Autriche en 1938."],
+  "réunifiée|réunification": ["Réunie à nouveau après une séparation.", "L’Allemagne est réunifiée en 1990."],
+  "partition": ["Partage d’un territoire en plusieurs États.", "La partition de l’Inde en 1947."],
+  "plein emploi": ["Situation où presque tout le monde a un travail.", "Les Trente Glorieuses connaissent le plein emploi."],
+  "chômage": ["Situation des personnes qui cherchent un travail sans en trouver.", "Le chômage augmente après 1973."],
+  "nationalisations?": ["Passage d’une entreprise privée sous le contrôle de l’État.", "Renault est nationalisé en 1945."],
+  "parité": ["Égalité du nombre de femmes et d’hommes.", "La loi sur la parité date de 2000."],
+  "tertiaires?|tertiarisation": ["Qui concerne les services (commerce, santé, éducation…).", "La plupart des Français travaillent dans le tertiaire."],
+  "densité": ["Nombre d’habitants par km².", "Paris a une très forte densité."],
+  "littora(?:l|ux)": ["Zone de contact entre la terre et la mer.", "Les littoraux attirent les touristes."],
+  "collectivités?": ["Communes, départements et régions, qui gèrent des affaires locales.", "Les collectivités financent les écoles."],
+  "laïque": ["Neutre vis-à-vis des religions.", "L’école publique est laïque."],
+  "indivisible": ["Qui ne peut pas être divisé.", "La République est indivisible : la loi est la même partout."],
+  "fraternité": ["Lien de solidarité entre les citoyens.", "Liberté, Égalité, Fraternité."],
+  "délits?": ["Infraction punie par la loi (moins grave qu’un crime).", "Le harcèlement est un délit."],
+  "jurés?": ["Citoyen tiré au sort pour participer à un jugement.", "Les jurés d’assises jugent les crimes."],
+  /* Sciences */
+  "puberté": ["Période où le corps devient capable de se reproduire.", "La puberté commence vers 10-14 ans."],
+  "hormones?": ["Substance produite par une glande et transportée par le sang, qui agit sur un organe.", "La testostérone est une hormone."],
+  "glandes?": ["Organe qui produit une substance (hormone, salive…).", "Les ovaires sont des glandes."],
+  "descendance": ["Ensemble des enfants, petits-enfants…", "Une espèce donne une descendance fertile."],
+  "fertiles?": ["Capable de se reproduire ; ou sol riche.", "Une descendance fertile peut avoir des petits."],
+  "invasives?": ["Se dit d’une espèce venue d’ailleurs qui se répand et nuit aux espèces locales.", "Le frelon asiatique est une espèce invasive."],
+  "microbes?|micro-organismes?": ["Être vivant trop petit pour être vu à l’œil nu.", "Bactéries et virus sont des micro-organismes."],
+  "infections?": ["Multiplication d’un microbe dans l’organisme.", "Une plaie mal soignée peut provoquer une infection."],
+  "immunitaire": ["Qui concerne les défenses de l’organisme contre les microbes.", "Les globules blancs font partie du système immunitaire."],
+  "magnitude": ["Mesure de l’énergie libérée par un séisme.", "Un séisme de magnitude 7 est très puissant."],
+  "foyer": ["Point en profondeur où les roches se cassent lors d’un séisme ; ou maison familiale.", "L’épicentre est au-dessus du foyer."],
+  "émissions?": ["Rejets de gaz ou de substances dans l’air.", "Les émissions de CO₂ réchauffent le climat."],
+  "acidification": ["Fait de devenir plus acide.", "L’acidification des océans menace les coraux."],
+  "préindustrielle": ["D’avant la révolution industrielle (avant 1850 environ).", "Depuis l’ère préindustrielle, la Terre s’est réchauffée."],
+  "masse volumique": ["Masse d’un volume donné de substance (ρ = m / V).", "L’eau a une masse volumique de 1 g/cm³."],
+  "protons?": ["Particule positive du noyau de l’atome.", "Un atome a autant de protons que d’électrons."],
+  "neutrons?": ["Particule sans charge du noyau de l’atome.", "Le noyau contient des protons et des neutrons."],
+  "joules?": ["Unité de l’énergie (J).", "Une énergie de 1 000 J."],
+  "kilowattheures?|kWh": ["Unité d’énergie utilisée pour l’électricité : 1 kWh = 3 600 000 J.", "La facture d’électricité se compte en kWh."],
+  "hertz|Hz": ["Unité de la fréquence : nombre de vibrations par seconde.", "L’oreille entend de 20 à 20 000 Hz."],
+  "décibels?|dB": ["Unité du niveau sonore.", "Au-delà de 85 dB, l’audition est en danger."],
+  "ultrasons?": ["Sons trop aigus pour l’oreille humaine (plus de 20 000 Hz).", "L’échographie utilise des ultrasons."],
+  "infrasons?": ["Sons trop graves pour l’oreille humaine (moins de 20 Hz).", "Les éléphants communiquent par infrasons."],
+  "énergie cinétique": ["Énergie liée à la vitesse d’un objet : Ec = ½ m v².", "Une voiture rapide a beaucoup d’énergie cinétique."],
+  "énergie potentielle": ["Énergie liée à la hauteur d’un objet.", "L’eau d’un barrage a de l’énergie potentielle."],
+  "cahier des charges": ["Document qui liste ce qu’un objet doit faire, avec des critères mesurables.", "Le cahier des charges fixe l’autonomie à 3 h."],
+  "variables?": ["En programmation, « boîte » nommée qui contient une valeur.", "Le score est une variable."],
+  "boucles?": ["En programmation, structure qui répète des instructions.", "« Répéter 10 fois » est une boucle."],
+  "bits?": ["Plus petite unité d’information : 0 ou 1.", "Un octet contient 8 bits."],
+  "octets?": ["Groupe de 8 bits.", "Un texte court pèse quelques kilo-octets."],
+  "DNS": ["Service qui traduit un nom de site en adresse IP, comme un annuaire.", "Le DNS trouve l’adresse de www.exemple.fr."],
+  "RGPD": ["Règlement européen qui protège les données personnelles.", "Le RGPD impose de demander ton accord."]
+});
+
+/* Cartes mentales : centre + branches [titre, [notions]] — français et maths */
+BREVET_MAPS = {
+  "fr-phrase": { c: "Phrase complexe", b: [
+    ["Proposition", ["1 verbe conjugué", "Principale", "Indépendante"]],
+    ["Juxtaposition", [", ; :", "Pas de mot de liaison"]],
+    ["Coordination", ["mais ou et donc or ni car", "puis, pourtant"]],
+    ["Relative", ["qui que dont où", "Antécédent", "Compl. de l’antécédent"]],
+    ["Complétive", ["« que »", "COD du verbe", "Remplaçable par « cela »"]],
+    ["Circonstancielle", ["Temps, cause, but", "Conséquence", "Concession, condition"]] ] },
+  "fr-conjugaison": { c: "Temps et modes", b: [
+    ["Indicatif", ["Le réel", "Présent, imparfait", "Passé simple, futur"]],
+    ["Subjonctif", ["Souhait, doute", "Il faut que…", "Bien que, pour que"]],
+    ["Conditionnel", ["Hypothèse", "Politesse", "Futur dans le passé"]],
+    ["Impératif", ["Ordre, conseil", "Sans sujet"]],
+    ["Récit au passé", ["Imparfait = décor", "Passé simple = action", "Plus-que-parfait = avant"]],
+    ["Si…", ["Si + présent → futur", "Si + imparfait → cond.", "Jamais « si j’aurais »"]] ] },
+  "fr-figures": { c: "Figures de style", b: [
+    ["Rapprocher", ["Comparaison (comme)", "Métaphore (sans outil)", "Personnification", "Allégorie"]],
+    ["Insister", ["Hyperbole", "Anaphore", "Gradation", "Accumulation"]],
+    ["Opposer", ["Antithèse", "Oxymore"]],
+    ["Atténuer", ["Litote", "Euphémisme", "Antiphrase (ironie)"]],
+    ["Sons", ["Allitération", "Assonance", "Rimes"]],
+    ["Méthode", ["Citer", "Nommer", "Expliquer l’effet"]] ] },
+  "fr-narration": { c: "Récit et narration", b: [
+    ["Narrateur", ["≠ auteur", "Interne (je)", "Externe (il)"]],
+    ["Point de vue", ["Interne", "Externe", "Omniscient"]],
+    ["Schéma narratif", ["Situation initiale", "Élément perturbateur", "Péripéties", "Dénouement"]],
+    ["Discours", ["Direct « »", "Indirect (que)", "Indirect libre"]],
+    ["Registres", ["Lyrique", "Épique", "Tragique", "Pathétique"]],
+    ["Théâtre", ["Répliques", "Didascalies", "Monologue, aparté"]] ] },
+  "fr-orthographe": { c: "Orthographe", b: [
+    ["Sujet-verbe", ["Qui est-ce qui ?", "Sujet inversé", "C’est moi qui suis"]],
+    ["Participe avec être", ["Accord avec le sujet", "Elles sont parties"]],
+    ["Participe avec avoir", ["COD avant → accord", "COD après → invariable"]],
+    ["-er / -é", ["vendre → -er", "vendu → -é"]],
+    ["Homophones", ["a / à", "et / est", "son / sont", "ces / ses / c’est"]],
+    ["Pluriels", ["-al → -aux", "bijoux, cailloux…", "Couleurs : marron"]] ] },
+  "fr-redaction": { c: "Rédaction", b: [
+    ["Consigne", ["Contraintes", "Personne, temps", "Longueur"]],
+    ["Imagination", ["Schéma narratif", "Description", "Dialogue", "Sentiments"]],
+    ["Réflexion", ["Introduction", "2-3 parties", "Conclusion"]],
+    ["Paragraphe", ["Argument", "Exemple", "Explication"]],
+    ["Connecteurs", ["D’abord, ensuite", "Cependant", "Ainsi, donc"]],
+    ["Temps", ["20 min brouillon", "1 h rédaction", "10 min relecture"]] ] },
+  "fr-themes": { c: "Thèmes de 3e", b: [
+    ["Se raconter", ["Autobiographie", "Rousseau, Sartre", "Sarraute, Perec"]],
+    ["Dénoncer", ["Fable, conte", "Voltaire, Candide", "Hugo"]],
+    ["Poésie", ["Baudelaire", "Rimbaud", "Apollinaire", "Ponge, Prévert"]],
+    ["Agir dans la cité", ["Éluard, « Liberté »", "Primo Levi", "Anouilh, Antigone"]],
+    ["Progrès et science", ["Jules Verne", "Frankenstein", "Fahrenheit 451", "Dystopie"]] ] },
+  "ma-pythagore": { c: "Pythagore", b: [
+    ["Vocabulaire", ["Triangle rectangle", "Hypoténuse", "= plus long côté"]],
+    ["Théorème", ["BC² = AB² + AC²", "Calculer une longueur"]],
+    ["Côté de l’angle droit", ["On soustrait", "AC² = BC² − AB²"]],
+    ["Réciproque", ["Égalité vraie", "→ triangle rectangle"]],
+    ["Contraposée", ["Égalité fausse", "→ pas rectangle"]],
+    ["À savoir", ["3-4-5", "5-12-13", "Carrés de 1 à 15"]] ] },
+  "ma-thales": { c: "Thalès", b: [
+    ["Conditions", ["Droites sécantes", "Droites parallèles"]],
+    ["Configurations", ["Emboîtée", "Papillon"]],
+    ["Égalité", ["AM/AB = AN/AC", "= MN/BC", "Produit en croix"]],
+    ["Réciproque", ["Rapports égaux", "Points dans le même ordre", "→ parallèles"]],
+    ["Agrandir / réduire", ["Longueurs × k", "Aires × k²", "Volumes × k³"]] ] },
+  "ma-trigo": { c: "Trigonométrie", b: [
+    ["Côtés", ["Hypoténuse", "Opposé", "Adjacent"]],
+    ["Formules", ["sin = opp / hyp", "cos = adj / hyp", "tan = opp / adj"]],
+    ["SOH CAH TOA", ["Moyen mnémotechnique"]],
+    ["Calculer un angle", ["sin⁻¹ cos⁻¹ tan⁻¹", "Mode degrés"]],
+    ["Valeurs", ["cos 60° = 0,5", "sin 30° = 0,5", "tan 45° = 1"]] ] },
+  "ma-transformations": { c: "Transformations", b: [
+    ["Symétrie axiale", ["Pliage", "Axe = médiatrice"]],
+    ["Symétrie centrale", ["Demi-tour", "Centre = milieu"]],
+    ["Translation", ["Glissement", "Parallélogramme"]],
+    ["Rotation", ["Centre", "Angle", "Sens"]],
+    ["Homothétie", ["Centre, rapport k", "Longueurs × k", "Aires × k²"]],
+    ["Conservent", ["Longueurs, angles", "Alignement", "Parallélisme"]] ] },
+  "ma-espace": { c: "Aires et volumes", b: [
+    ["Aires", ["Triangle : b × h ÷ 2", "Disque : π r²", "Cercle : 2 π r"]],
+    ["Volumes droits", ["Pavé : L × l × h", "Prisme : B × h", "Cylindre : π r² h"]],
+    ["Volumes pointus", ["Pyramide : B × h ÷ 3", "Cône : π r² h ÷ 3"]],
+    ["Boule", ["V = 4/3 π r³", "Sphère : 4 π r²"]],
+    ["Conversions", ["1 L = 1 dm³", "1 mL = 1 cm³", "1 m³ = 1 000 L"]],
+    ["Sections", ["Boule → cercle", "Cylindre → disque", "Pyramide → réduction"]] ] },
+  "ma-fonctions": { c: "Fonctions", b: [
+    ["Vocabulaire", ["Image f(x)", "Antécédent", "Courbe"]],
+    ["Linéaire", ["f(x) = ax", "Passe par l’origine", "Proportionnalité"]],
+    ["Affine", ["f(x) = ax + b", "a : coeff. directeur", "b : ordonnée à l’origine"]],
+    ["Signe de a", ["a > 0 : monte", "a < 0 : descend", "a = 0 : constante"]],
+    ["Calcul de a", ["(f(x₂) − f(x₁)) ÷ (x₂ − x₁)"]],
+    ["Problèmes", ["Comparer des tarifs", "Tableur", "Lecture graphique"]] ] },
+  "ma-proportionnalite": { c: "Proportionnalité", b: [
+    ["Reconnaître", ["Quotients égaux", "Droite par l’origine"]],
+    ["Calculer", ["Passage à l’unité", "Produit en croix", "Coefficient"]],
+    ["Pourcentages", ["t % de x = t/100 × x", "+t % : × (1 + t/100)", "−t % : × (1 − t/100)"]],
+    ["Pièges", ["+10 % puis −10 % ≠ 0", "Prix initial : diviser"]],
+    ["Applications", ["Échelle", "Vitesse", "Ratio"]] ] },
+  "ma-calcul": { c: "Calcul littéral", b: [
+    ["Développer", ["Produit → somme", "k(a + b) = ka + kb", "Double distributivité"]],
+    ["Factoriser", ["Somme → produit", "Facteur commun", "a² − b²"]],
+    ["Identités", ["(a + b)²", "(a − b)²", "(a + b)(a − b)"]],
+    ["Réduire", ["3x + 2x = 5x", "x × x = x²"]],
+    ["Démontrer", ["Lettre = tous les nombres", "Contre-exemple = faux"]] ] },
+  "ma-equations": { c: "Équations", b: [
+    ["Résoudre", ["Même opération des 2 côtés", "Isoler x", "Vérifier"]],
+    ["Produit nul", ["A × B = 0", "A = 0 ou B = 0"]],
+    ["x² = a", ["a > 0 : 2 solutions", "a = 0 : x = 0", "a < 0 : aucune"]],
+    ["Inéquations", ["× ou ÷ par négatif", "→ on change le sens"]],
+    ["Problèmes", ["Choisir x", "Mettre en équation", "Conclure"]] ] },
+  "ma-stats": { c: "Statistiques et probas", b: [
+    ["Moyenne", ["Somme ÷ effectif", "Pondérée"]],
+    ["Médiane", ["Série rangée", "Valeur du milieu"]],
+    ["Étendue", ["Max − min", "Dispersion"]],
+    ["Probabilité", ["Favorables ÷ possibles", "Entre 0 et 1", "P(non A) = 1 − P(A)"]],
+    ["Arbre", ["× sur les branches", "+ entre chemins"]],
+    ["Graphiques", ["Barres", "Circulaire : × 360°", "Histogramme"]] ] },
+  "ma-arithmetique": { c: "Arithmétique", b: [
+    ["Diviseurs", ["Reste nul", "Multiples"]],
+    ["Critères", ["2 : pair", "3 et 9 : somme des chiffres", "5 : 0 ou 5"]],
+    ["Nombres premiers", ["2 diviseurs", "2, 3, 5, 7, 11, 13…", "1 n’est pas premier"]],
+    ["Décomposer", ["60 = 2² × 3 × 5", "Unique"]],
+    ["Applications", ["Fraction irréductible", "Paquets identiques", "Cycles"]] ] },
+  "ma-puissances": { c: "Puissances", b: [
+    ["Définition", ["aⁿ = a × … × a", "a⁰ = 1", "a⁻ⁿ = 1/aⁿ"]],
+    ["Puissances de 10", ["10³ = 1 000", "10⁻³ = 0,001"]],
+    ["Règles", ["10ⁿ × 10ᵐ = 10ⁿ⁺ᵐ", "10ⁿ ÷ 10ᵐ = 10ⁿ⁻ᵐ", "(10ⁿ)ᵐ = 10ⁿˣᵐ"]],
+    ["Notation scientifique", ["a × 10ⁿ", "1 ≤ a < 10"]],
+    ["Préfixes", ["giga 10⁹", "méga 10⁶", "milli 10⁻³", "nano 10⁻⁹"]] ] }
+};
+
+/* Cartes mentales : histoire-géo-EMC, sciences, technologie */
+Object.assign(BREVET_MAPS, {
+  "hg-1gm": { c: "1914-1918", b: [
+    ["Causes", ["Alliances", "Sarajevo 28/06/1914", "Nationalismes"]],
+    ["Guerre de position", ["Marne 1914", "Tranchées", "Poilus"]],
+    ["Violence de masse", ["Verdun 1916", "Somme 1916", "Génocide arménien"]],
+    ["Guerre totale", ["Hommes", "Économie", "Propagande", "Femmes au travail"]],
+    ["1917", ["États-Unis entrent en guerre", "Révolution russe", "Mutineries"]],
+    ["Fin", ["Armistice 11/11/1918", "Versailles 1919", "SDN"]] ] },
+  "hg-totalitarismes": { c: "Totalitarismes", b: [
+    ["Crise", ["Krach de 1929", "Chômage de masse"]],
+    ["URSS de Staline", ["Communisme", "Collectivisation", "Goulag", "Grande Terreur"]],
+    ["Allemagne d’Hitler", ["Chancelier 1933", "Nazisme raciste", "Lois de Nuremberg 1935", "Nuit de Cristal 1938"]],
+    ["Points communs", ["Parti unique", "Culte du chef", "Propagande", "Terreur"]],
+    ["France", ["6 février 1934", "Front populaire 1936", "Congés payés"]] ] },
+  "hg-2gm": { c: "1939-1945", b: [
+    ["Début", ["Pologne 1/09/1939", "Défaite française 1940", "Blitzkrieg"]],
+    ["Mondiale", ["Barbarossa 1941", "Pearl Harbor 1941", "Axe / Alliés"]],
+    ["Tournant", ["Stalingrad 1943", "Midway 1942"]],
+    ["Anéantissement", ["Civils visés", "Bombardements", "Oradour"]],
+    ["Shoah", ["6 millions de Juifs", "Wannsee 1942", "Auschwitz"]],
+    ["Fin", ["6 juin 1944", "8 mai 1945", "Hiroshima, Nagasaki", "ONU"]] ] },
+  "hg-france-occupee": { c: "France 1940-1946", b: [
+    ["Défaite", ["Juin 1940", "Armistice 22/06", "Zones occupée et libre"]],
+    ["Vichy", ["Pétain", "Travail Famille Patrie", "Régime autoritaire"]],
+    ["Collaboration", ["Montoire", "STO, Milice", "Vél’d’Hiv 1942"]],
+    ["Résistance", ["Appel du 18 juin", "France libre", "Jean Moulin, CNR"]],
+    ["Libération", ["Paris 25/08/1944", "GPRF"]],
+    ["Refondation", ["Vote des femmes", "Sécurité sociale", "IVe République"]] ] },
+  "hg-guerre-froide": { c: "Guerre froide", b: [
+    ["Deux blocs", ["États-Unis : capitalisme", "URSS : communisme"]],
+    ["Alliances", ["OTAN 1949", "Pacte de Varsovie 1955"]],
+    ["Berlin", ["Blocus 1948-49", "Mur 1961", "Chute 1989"]],
+    ["Crises", ["Corée", "Cuba 1962", "Vietnam"]],
+    ["Équilibre", ["Arme nucléaire", "Dissuasion", "Conquête spatiale"]],
+    ["Fin", ["Gorbatchev", "Fin de l’URSS 1991"]] ] },
+  "hg-decolonisation": { c: "Décolonisation", b: [
+    ["Causes", ["Métropoles affaiblies", "Nationalismes", "ONU, superpuissances"]],
+    ["Négociée", ["Inde 1947, Gandhi", "Afrique 1960"]],
+    ["Par la guerre", ["Indochine 1946-54", "Algérie 1954-62"]],
+    ["Algérie", ["FLN", "Accords d’Évian 1962", "Pieds-noirs, harkis"]],
+    ["Tiers-monde", ["Bandung 1955", "Non-alignés"]] ] },
+  "hg-ve-republique": { c: "Ve République", b: [
+    ["Naissance", ["1958", "De Gaulle", "Crise algérienne"]],
+    ["Président", ["Suffrage direct (1962)", "5 ans", "Nomme le Premier ministre"]],
+    ["Parlement", ["Assemblée : 577 députés", "Sénat : 348 sénateurs", "Vote les lois"]],
+    ["Évolutions", ["Alternance 1981", "Cohabitations", "Quinquennat 2000"]],
+    ["Société", ["Majorité 18 ans 1974", "Loi Veil 1975", "Peine de mort abolie 1981"]] ] },
+  "hg-societe": { c: "Société 1950-1980", b: [
+    ["Trente Glorieuses", ["Forte croissance", "Plein emploi", "Baby-boom"]],
+    ["Transformations", ["Exode rural", "Grands ensembles", "Consommation"]],
+    ["Immigration", ["Main-d’œuvre", "Bidonvilles"]],
+    ["Femmes", ["1965 : travail libre", "1967 : contraception", "1975 : loi Veil"]],
+    ["Jeunesse", ["Mai 68", "Majorité à 18 ans"]],
+    ["Crise", ["Choc pétrolier 1973", "Chômage"]] ] },
+  "hg-territoires": { c: "Territoires français", b: [
+    ["Aires urbaines", ["Pôle", "Couronne", "80 % des Français"]],
+    ["Métropoles", ["Paris ville mondiale", "Lyon, Marseille…"]],
+    ["Périurbanisation", ["Étalement", "Mobilités pendulaires", "Voiture"]],
+    ["Espaces productifs", ["Industrie, ports", "Agriculture", "Tourisme", "Technopôles"]],
+    ["Faible densité", ["Diagonale du vide", "Déclin ou renouveau"]] ] },
+  "hg-ue": { c: "Aménager, l’UE", b: [
+    ["Aménager", ["Réduire les inégalités", "Désenclaver"]],
+    ["Acteurs", ["État", "Régions, communes", "Union européenne"]],
+    ["Outre-mer", ["5 DROM", "Éloignement", "2e espace maritime"]],
+    ["Construction européenne", ["CECA 1951", "Rome 1957", "Maastricht 1992", "Euro 2002"]],
+    ["UE aujourd’hui", ["27 pays", "Schengen", "Brexit 2020"]] ] },
+  "hg-emc": { c: "République et citoyen", b: [
+    ["Valeurs", ["Liberté", "Égalité", "Fraternité", "Laïcité"]],
+    ["Symboles", ["Marianne", "Drapeau", "Marseillaise", "14 juillet"]],
+    ["Textes", ["DDHC 1789", "Loi de 1905", "Constitution 1958"]],
+    ["Citoyen", ["Vote à 18 ans", "Droits et devoirs", "Engagement"]],
+    ["Défense", ["Recensement à 16 ans", "JDC", "Dissuasion"]] ] },
+  "svt-genetique": { c: "Génétique", b: [
+    ["Information", ["Noyau", "Chromosomes", "ADN"]],
+    ["Caryotype", ["46 chromosomes", "23 paires", "XX ou XY"]],
+    ["Gènes", ["Portion d’ADN", "Un caractère"]],
+    ["Allèles", ["Versions d’un gène", "Dominant", "Récessif"]],
+    ["Mitose", ["Copie de l’ADN", "2 cellules identiques"]],
+    ["Environnement", ["Influence aussi", "Ex. : bronzage"]] ] },
+  "svt-reproduction": { c: "Reproduction", b: [
+    ["Gamètes", ["Spermatozoïdes", "Ovules", "23 chromosomes"]],
+    ["Méiose", ["Fabrique les gamètes", "Hasard"]],
+    ["Fécondation", ["Cellule-œuf", "46 chromosomes", "Individu unique"]],
+    ["Puberté", ["Hormones", "Testostérone", "Œstrogènes"]],
+    ["Cycle", ["28 jours", "Ovulation J14", "Règles"]],
+    ["Se protéger", ["Préservatif", "IST", "Contraception"]] ] },
+  "svt-evolution": { c: "Biodiversité et évolution", b: [
+    ["Biodiversité", ["Écosystèmes", "Espèces", "Gènes"]],
+    ["Classer", ["Attributs partagés", "Groupes emboîtés", "Ancêtre commun"]],
+    ["Mécanismes", ["Mutations", "Sélection naturelle", "Dérive"]],
+    ["Histoire de la vie", ["Terre : 4,6 Ga", "Dinosaures : −66 Ma", "Homo sapiens : 300 000 ans"]],
+    ["Menaces", ["Habitats détruits", "Pollution", "Réchauffement"]] ] },
+  "svt-immunite": { c: "Immunité", b: [
+    ["Microbes", ["Bactéries", "Virus"]],
+    ["Barrières", ["Peau", "Muqueuses"]],
+    ["Réaction rapide", ["Inflammation", "Phagocytose"]],
+    ["Réaction ciblée", ["Lymphocytes B → anticorps", "Lymphocytes T"]],
+    ["Mémoire", ["Lymphocytes mémoire", "Vaccination"]],
+    ["Aides", ["Antibiotiques (bactéries)", "Asepsie", "Antisepsie"]] ] },
+  "svt-nerveux": { c: "Système nerveux", b: [
+    ["Organisation", ["Cerveau", "Moelle épinière", "Nerfs"]],
+    ["Trajet", ["Récepteur", "Nerf sensitif", "Centre nerveux", "Nerf moteur", "Muscle"]],
+    ["Neurone", ["Message électrique", "Axone"]],
+    ["Synapse", ["Message chimique", "Neurotransmetteurs"]],
+    ["Réflexe", ["Moelle épinière", "Involontaire"]],
+    ["Santé", ["Sommeil", "Alcool, drogues", "Écrans"]] ] },
+  "svt-terre": { c: "Tectonique", b: [
+    ["Structure", ["Lithosphère rigide", "Asthénosphère", "Manteau, noyau"]],
+    ["Frontières", ["Divergence : dorsale", "Subduction", "Collision"]],
+    ["Séismes", ["Foyer", "Épicentre", "Magnitude"]],
+    ["Volcans", ["Effusif : lave fluide", "Explosif : lave visqueuse"]],
+    ["Risque", ["Aléa × enjeux", "Prévention"]] ] },
+  "svt-climat": { c: "Climat", b: [
+    ["Météo / climat", ["Court terme", "Moyenne sur 30 ans"]],
+    ["Effet de serre", ["Naturel : vital", "CO₂, méthane"]],
+    ["Réchauffement", ["+1,2 °C", "Activités humaines", "GIEC"]],
+    ["Conséquences", ["Fonte des glaces", "Montée des océans", "Canicules"]],
+    ["Agir", ["Atténuer", "S’adapter", "Accord de Paris"]] ] },
+  "svt-nutrition": { c: "Nutrition", b: [
+    ["Besoins", ["Glucose", "Dioxygène"]],
+    ["Digestion", ["Enzymes", "Amidon → glucose", "Protéines → acides aminés"]],
+    ["Absorption", ["Intestin grêle", "Villosités"]],
+    ["Transport", ["Cœur", "Sang", "Poumons"]],
+    ["Cellules", ["Respiration cellulaire", "Énergie + CO₂"]],
+    ["Équilibre", ["Varier", "Microbiote", "Activité physique"]] ] },
+  "pc-matiere": { c: "Matière", b: [
+    ["États", ["Solide", "Liquide", "Gaz"]],
+    ["Changements", ["Fusion", "Vaporisation", "Masse conservée"]],
+    ["Masse volumique", ["ρ = m / V", "Eau : 1 g/cm³", "Flotter ou couler"]],
+    ["Atome", ["Noyau : protons + neutrons", "Électrons", "Neutre"]],
+    ["Ions", ["+ : électrons perdus", "− : électrons gagnés"]],
+    ["Molécules", ["H₂O", "CO₂", "O₂"]] ] },
+  "pc-univers": { c: "Univers", b: [
+    ["Origine", ["Big Bang", "13,8 milliards d’années", "Expansion"]],
+    ["Galaxies", ["Voie lactée", "Milliards d’étoiles"]],
+    ["Système solaire", ["Soleil", "8 planètes", "4,6 milliards d’années"]],
+    ["Planètes", ["Telluriques", "Géantes gazeuses"]],
+    ["Distances", ["Unité astronomique", "Année-lumière"]] ] },
+  "pc-transformations": { c: "Transformations chimiques", b: [
+    ["Principe", ["Réactifs → produits", "Atomes conservés", "Masse conservée"]],
+    ["Équations", ["C + O₂ → CO₂", "Ajuster"]],
+    ["Tests", ["CO₂ : eau de chaux", "Eau : sulfate de cuivre", "H₂ : détonation"]],
+    ["pH", ["< 7 acide", "= 7 neutre", "> 7 basique"]],
+    ["Acide + métal", ["Dihydrogène", "Ions fer II"]],
+    ["Combustion", ["Triangle du feu", "Monoxyde de carbone"]] ] },
+  "pc-mouvement": { c: "Mouvement", b: [
+    ["Référentiel", ["Mouvement relatif", "Terrestre"]],
+    ["Trajectoire", ["Rectiligne", "Circulaire", "Curviligne"]],
+    ["Vitesse", ["v = d / t", "km/h ÷ 3,6 = m/s"]],
+    ["Types", ["Uniforme", "Accéléré", "Ralenti"]],
+    ["Sécurité", ["Distance de réaction", "Distance de freinage"]] ] },
+  "pc-forces": { c: "Forces", b: [
+    ["Interactions", ["De contact", "À distance", "Réciproques"]],
+    ["Force", ["Point d’application", "Direction, sens", "Valeur en N"]],
+    ["Gravitation", ["Masses qui s’attirent", "Newton", "Marées, orbites"]],
+    ["Poids", ["P = m × g", "g Terre = 9,8 N/kg", "Dynamomètre"]],
+    ["Masse ≠ poids", ["kg / N", "Balance / dynamomètre"]] ] },
+  "pc-energie": { c: "Énergie", b: [
+    ["Formes", ["Cinétique", "Potentielle", "Électrique", "Chimique"]],
+    ["Conservation", ["Conversion", "Pertes thermiques", "Rendement"]],
+    ["Cinétique", ["Ec = ½ m v²", "v × 2 → Ec × 4"]],
+    ["Puissance", ["E = P × t", "W, kWh"]],
+    ["Sources", ["Renouvelables", "Fossiles", "Nucléaire"]] ] },
+  "pc-electricite": { c: "Électricité", b: [
+    ["Circuit", ["Générateur", "Récepteurs", "Conducteurs / isolants"]],
+    ["Série", ["Même intensité", "Tensions s’ajoutent"]],
+    ["Dérivation", ["Même tension", "Intensités s’ajoutent"]],
+    ["Mesures", ["Ampèremètre en série", "Voltmètre en dérivation"]],
+    ["Lois", ["U = R × I", "P = U × I"]],
+    ["Sécurité", ["Court-circuit", "Fusible, disjoncteur", "Prise de terre"]] ] },
+  "pc-signaux": { c: "Signaux", b: [
+    ["Son", ["Vibration", "Milieu matériel", "340 m/s dans l’air"]],
+    ["Fréquence", ["Hz", "Audible : 20 à 20 000 Hz", "Ultrasons, infrasons"]],
+    ["Niveau sonore", ["dB", "Danger > 85 dB"]],
+    ["Lumière", ["300 000 km/s", "Vide", "Prisme"]],
+    ["Calculs", ["d = v × t", "Écho : ÷ 2"]] ] },
+  "te-besoin": { c: "Besoin et conception", b: [
+    ["Besoin", ["Objet technique", "Utilisateur"]],
+    ["Bête à cornes", ["À qui ?", "Sur quoi ?", "Dans quel but ?"]],
+    ["Fonctions", ["Usage", "Estime", "Service", "Technique"]],
+    ["Cahier des charges", ["Fonction", "Critère", "Niveau"]],
+    ["Conception", ["Croquis", "CAO", "Prototype", "Tests"]] ] },
+  "te-chaines": { c: "Systèmes automatisés", b: [
+    ["Information", ["Acquérir", "Traiter", "Communiquer"]],
+    ["Énergie", ["Alimenter", "Distribuer", "Convertir", "Transmettre"]],
+    ["Capteurs", ["Ultrasons", "Lumière", "Température"]],
+    ["Actionneurs", ["Moteur", "Vérin", "Lampe"]],
+    ["Exemple", ["Portail automatique", "Objets connectés"]] ] },
+  "te-programmation": { c: "Programmation", b: [
+    ["Algorithme", ["Suite d’instructions", "Logigramme"]],
+    ["Structures", ["Séquence", "Boucle", "Condition"]],
+    ["Variables", ["Initialiser", "Incrémenter"]],
+    ["Scratch", ["Événements", "Blocs"]],
+    ["Polygones", ["Angle = 360 ÷ n", "Carré 90°", "Hexagone 60°"]] ] },
+  "te-materiaux": { c: "Matériaux", b: [
+    ["Familles", ["Métalliques", "Organiques", "Céramiques", "Composites"]],
+    ["Propriétés", ["Mécaniques", "Thermiques", "Électriques"]],
+    ["Cycle de vie", ["Extraction", "Fabrication", "Utilisation", "Fin de vie"]],
+    ["Fin de vie", ["Réduire", "Réutiliser", "Recycler"]],
+    ["Éco-conception", ["Moins de matière", "Réparabilité"]] ] },
+  "te-reseaux": { c: "Réseaux", b: [
+    ["Réseau", ["Local", "Internet", "Filaire / sans fil"]],
+    ["Équipements", ["Box", "Routeur", "Commutateur", "Serveur"]],
+    ["Adresses", ["Adresse IP", "DNS"]],
+    ["Données", ["Paquets", "TCP/IP", "HTTPS"]],
+    ["Sécurité", ["Mots de passe", "Hameçonnage", "RGPD"]] ] },
+  "te-innovation": { c: "Innovation", b: [
+    ["Évolution", ["Progrès techniques", "Matériaux", "Énergie", "Besoins"]],
+    ["Invention / innovation", ["Idée nouvelle", "Adoptée par le marché"]],
+    ["Lignées", ["Téléphone", "Éclairage"]],
+    ["Comparer", ["Fonction", "Énergie", "Matériaux"]],
+    ["Protéger", ["Brevet 20 ans", "INPI"]] ] }
 });
 
 /* Cours complets : français */
@@ -6852,6 +7567,7 @@ var MO = window.BREVET_MORE || {};
 var WKD = window.BREVET_WIKI || {};
 var COVERS = window.BREVET_COVERS || {};
 var IMGS = window.BREVET_IMGS || {};
+var MAPS = window.BREVET_MAPS || {};
 
 /* ---------- stockage local (facultatif) ---------- */
 /* ---------- comptes (enregistrés sur l’appareil) ---------- */
@@ -7108,38 +7824,42 @@ function mountQuiz(root, list, opt) {
 
 /* ---------- illustrations Wikipédia ---------- */
 var wkRe = null, wkTitles = [], wkCache = {}, wkBlk = 0;
-var WK_SKIP = "svg,pre,h1,h2,h3,figcaption,.wk,.tab,.chip,.opt,.qz-q,.fc-front,.tl-d,.dg-h,.pill,.key > span,.cex > span,.cwarn > span";
+var WK_SKIP = "svg,pre,h1,h2,h3,figcaption,.wk,.dk,.tab,.chip,.opt,.qz-q,.fc-front,.tl-d,.dg-h,.pill,.key > span,.cex > span,.cwarn > span";
 function esc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
-function buildWk() {
-  var keys = Object.keys(WKD).sort(function (a, b) { return b.length - a.length; });
-  wkTitles = keys.map(function (k) { return WKD[k]; });
+function buildRe(dict) {
+  var keys = Object.keys(dict).sort(function (a, b) { return b.length - a.length; });
   var parts = keys.map(function (k) { var c = k.charAt(0); return "(" + (c !== c.toUpperCase() ? "[" + c + c.toUpperCase() + "]" + k.slice(1) : k) + ")"; });
-  try { wkRe = new RegExp("(?<![\\p{L}\\d])(?:" + parts.join("|") + ")(?![\\p{L}])", "gu"); } catch (e) { wkRe = false; }
+  try { return { re: new RegExp("(?<![\\p{L}\\d])(?:" + parts.join("|") + ")(?![\\p{L}])", "gu"), keys: keys }; } catch (e) { return false; }
 }
-function linkify(root) {
-  if (!root || wkRe === false) return;
-  if (!wkRe) buildWk();
-  if (!wkRe) return;
+var DK = window.BREVET_DICO || {}, dkRe = null;
+function linkPass(root, R, cls, getVal) {
   var used = {}, nodes = [], w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
   while ((n = w.nextNode())) { if (n.nodeValue.trim() && !(n.parentNode.closest && n.parentNode.closest(WK_SKIP))) nodes.push(n); }
   nodes.forEach(function (node) {
     var t = node.nodeValue, m, last = 0, frag = null;
-    wkRe.lastIndex = 0;
-    while ((m = wkRe.exec(t))) {
+    R.re.lastIndex = 0;
+    while ((m = R.re.exec(t))) {
       var gi = 1; while (m[gi] === undefined && gi < m.length) gi++;
-      var title = wkTitles[gi - 1];
+      var key = R.keys[gi - 1], val = getVal(key);
       var blk = node.parentNode.closest(".cs,.resume li,.dg,.fc-back,.qz-fb,.qz-rev-i") || root, bk = blk.dataset.wkb || (blk.dataset.wkb = String(++wkBlk));
-      if (!title || used[bk + title]) continue;
-      used[bk + title] = 1;
+      if (!val || used[bk + key]) continue;
+      used[bk + key] = 1;
       frag = frag || document.createDocumentFragment();
       frag.appendChild(document.createTextNode(t.slice(last, m.index)));
       var sp = document.createElement("span");
-      sp.className = "wk"; sp.setAttribute("role", "button"); sp.tabIndex = 0; sp.dataset.wk = title; sp.textContent = m[0];
+      sp.className = cls; sp.setAttribute("role", "button"); sp.tabIndex = 0; sp.dataset[cls] = cls === "wk" ? val : key; sp.textContent = m[0];
       frag.appendChild(sp);
       last = m.index + m[0].length;
     }
     if (frag) { frag.appendChild(document.createTextNode(t.slice(last))); node.parentNode.replaceChild(frag, node); }
   });
+}
+function linkify(root) {
+  if (!root) return;
+  if (wkRe === null) wkRe = buildRe(WKD);
+  if (dkRe === null) dkRe = buildRe(DK);
+  if (wkRe) linkPass(root, wkRe, "wk", function (k) { return WKD[k]; });
+  if (dkRe) linkPass(root, dkRe, "dk", function (k) { return DK[k]; });
 }
 function wkFetch(title) {
   if (!wkCache[title]) wkCache[title] = fetch("https://fr.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(title.replace(/ /g, "_")))
@@ -7181,6 +7901,8 @@ document.addEventListener("click", function (e) {
   var t = e.target.closest ? e.target : e.target.parentNode;
   var w = t.closest(".wk");
   if (w) { e.preventDefault(); e.stopPropagation(); openWk(w.dataset.wk); return; }
+  var dk = t.closest(".dk");
+  if (dk) { e.preventDefault(); e.stopPropagation(); openDico(dk.dataset.dk, dk.textContent); return; }
   var di = t.closest(".dimg");
   if (di) { e.preventDefault(); e.stopPropagation(); openImg(di.dataset.file, di.dataset.cap); return; }
   if (t.closest("[data-close]")) { e.preventDefault(); closeWk(); }
@@ -7249,6 +7971,7 @@ function viewHome() {
     '<a class="tcard" href="#flashcards"><b>' + (review || nCards - seen) + '</b><h3>' + (review ? "Cartes à revoir" : "Cartes jamais vues") + '</h3><p>' + (review ? "Les cartes que tu as marquées « à revoir ». Elles reviennent jusqu’à ce que tu les saches." : "Commence par un paquet de flashcards toutes matières confondues.") + '</p><span class="go">Réviser →</span></a>' +
     (nMiss ? '<a class="tcard" href="#quiz-erreurs"><b>' + nMiss + '</b><h3>Questions ratées</h3><p>Les questions où tu t’es trompée. Une bonne réponse les retire de la liste.</p><span class="go">Les retravailler →</span></a>'
       : '<a class="tcard" href="#quiz"><b>10</b><h3>Quiz express</h3><p>Dix questions tirées au hasard parmi les ' + nQ + ' du programme, avec la correction expliquée.</p><span class="go">Commencer →</span></a>') +
+    '<a class="tcard" href="#carnet"><b>' + store.get("words", []).length + '</b><h3>Mon carnet de mots</h3><p>Les mots dont tu as regardé la définition, à réviser en flashcards.</p><span class="go">Ouvrir le carnet →</span></a>' +
     '<a class="tcard" href="#' + last.id + '" style="--sub:' + col(last.sub) + '"><b style="color:var(--sub)">' + pad(last.n) + '</b><h3>' + last.title + '</h3><p>' + S[last.sub].name + ' · ' + (store.get("last", "") ? "Reprends là où tu t’es arrêtée." : "Un bon chapitre pour commencer.") + '</p><span class="go">Ouvrir le chapitre →</span></a>' +
   '</div>' +
   '<div class="stats"><div class="stat"><b>' + CH.length + '</b><span>chapitres</span></div><div class="stat"><b>' + nDg + '</b><span>schémas</span></div><div class="stat"><b>' + nCards + '</b><span>flashcards</span></div><div class="stat"><b>' + nQ + '</b><span>questions de quiz</span></div></div>' +
@@ -7272,10 +7995,10 @@ function viewSubject(s) {
   '</ol></section>';
 }
 
-var TABS = [["resume", "Résumé"], ["cours", "Cours"], ["schemas", "Schémas"], ["flashcards", '<span class="t-long">Flashcards</span><span class="t-short">Cartes</span>'], ["quiz", "Quiz"]];
+var TABS = [["resume", "Résumé"], ["cours", "Cours"], ["carte", '<span class="t-long">Carte mentale</span><span class="t-short">Carte</span>'], ["schemas", "Schémas"], ["flashcards", '<span class="t-long">Flashcards</span><span class="t-short">Flash</span>'], ["quiz", "Quiz"]];
 function viewChapter(c) {
   var s = S[c.sub], list = B[c.sub], prev = list[c.n - 2], next = list[c.n];
-  var counts = { resume: c.resume.length, cours: c.cours.length, schemas: c.schema.length, flashcards: c.cards.length, quiz: c.quiz.length };
+  var counts = { carte: MAPS[c.id] ? MAPS[c.id].b.length : 0, resume: c.resume.length, cours: c.cours.length, schemas: c.schema.length, flashcards: c.cards.length, quiz: c.quiz.length };
   return '' +
   '<section class="chead"><div class="wrap">' +
     '<nav class="crumb"><a href="#">Matières</a><span>/</span><a href="#' + s.id + '">' + s.name + '</a></nav>' +
@@ -7299,6 +8022,9 @@ function drawPanel(c, tab) {
       c.cours.map(function (x, k) {
         return section(x, k);
       }).join("") + '<div class="row"><button class="btn btn-sub" data-goto="schemas">Voir les schémas</button><button class="btn" data-goto="quiz">Tester mes connaissances</button></div></div></div>';
+  } else if (tab === "carte") {
+    p.innerHTML = '<div id="mm"></div>';
+    mountMap(document.getElementById("mm"), c);
   } else if (tab === "schemas") {
     p.innerHTML = '<div class="dgs">' + c.schema.map(diagram).join("") + '</div>';
   } else if (tab === "flashcards") {
@@ -7337,6 +8063,7 @@ function pickFresh(pool, n) {
 }
 function viewDeck(f, ch) {
   return '<section class="wrap page-h"><p class="eyebrow">Mode révision</p><h1>Flashcards</h1><p class="lead">Choisis une matière, puis un chapitre ou tous à la fois. Lis la question, réponds dans ta tête, retourne la carte et classe-la : « Je sais » ou « À revoir ».</p>' + chips("flashcards", f, ch, function (c) { return c.cards.length; }) +
+    '<a class="chip carnet-chip" href="#carnet">Mon carnet de mots <small>' + store.get("words", []).length + '</small></a>' +
     '<label class="toggle" for="only-review"><input type="checkbox" id="only-review"> Seulement les cartes à revoir ou jamais vues</label></section>' +
     '<section class="wrap"><div class="deck" id="deck"></div>' + DECK_HINT + '</section>';
 }
@@ -7443,7 +8170,7 @@ function openAccount() {
   sheet.hidden = false; document.body.classList.add("wk-open");
   sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Connecté sur cet appareil</p></div></div>' +
     '<p class="wk-e">Ta progression (cartes sues, scores, erreurs) est enregistrée dans ce compte, sur cet appareil.</p>' +
-    '<button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
+    '<a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a><button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
   document.getElementById("btn-logout").onclick = logout;
 }
 
@@ -7540,6 +8267,218 @@ document.addEventListener("keydown", function (e) {
 document.getElementById("btn-search").onclick = openSearch;
 document.getElementById("btn-user").onclick = function () { if (USER) openAccount(); };
 
+/* ---------- dictionnaire et carnet ---------- */
+function addWord(w, d, src) {
+  if (!USER || !w || !d) return;
+  var list = store.get("words", []), k = norm(w);
+  if (list.some(function (x) { return norm(x.w) === k; })) return;
+  list.unshift({ w: w, d: d, src: src, t: Date.now() });
+  store.set("words", list.slice(0, 500));
+}
+function dicoBody(word, def, ex, src, link) {
+  return '<p class="dk-k">' + (src === "wikt" ? "Wiktionnaire" : "Définition") + '</p><h3>' + esc(word) + '</h3><p class="wk-e">' + def + '</p>' + (ex ? '<p class="dk-ex">' + esc(ex) + '</p>' : "") +
+    '<p class="dk-ok">✓ Ajouté à ton carnet de mots</p><div class="row"><a class="btn" href="#carnet" data-close>Ouvrir mon carnet</a><a class="btn" href="' + link + '" target="_blank" rel="noopener">Wiktionnaire</a></div>';
+}
+function wiktLink(w) { return "https://fr.wiktionary.org/wiki/" + encodeURIComponent(w.replace(/ /g, "_")); }
+function openDico(key, shown) {
+  var v = DK[key]; if (!v) return;
+  var word = shown.toLowerCase() === shown ? shown : (shown.charAt(0).toLowerCase() + shown.slice(1));
+  addWord(word, v[0], "dico");
+  sheet.hidden = false; document.body.classList.add("wk-open");
+  sheet.querySelector(".wk-body").innerHTML = dicoBody(word, esc(v[0]), v[1], "dico", wiktLink(word));
+}
+var wtCache = {};
+function wiktFetch(w) {
+  if (!wtCache[w]) wtCache[w] = fetch("https://fr.wiktionary.org/w/api.php?" + new URLSearchParams({ action: "query", prop: "extracts", titles: w, explaintext: 1, redirects: 1, format: "json", origin: "*" }))
+    .then(function (r) { return r.json(); }).then(function (d) { var p = Object.values(d.query.pages)[0]; return p && p.extract ? parseWikt(p.extract) : null; }).catch(function () { return null; });
+  return wtCache[w];
+}
+function parseWikt(txt) {
+  var fr = txt.split(/\n== Français ==\n/)[1];
+  if (!fr) return null;
+  fr = fr.split(/\n== [^=]/)[0];
+  var secs = fr.split(/\n=== /).slice(1);
+  var found = [];
+  for (var i = 0; i < secs.length; i++) {
+    var head = secs[i].split(" ===")[0].trim();
+    if (/tymologie|rononciation|Voir aussi|Références|Anagrammes|Traductions|Dérivés|Apparentés|Vocabulaire|Synonymes|Hyperonymes|Variantes|Paronymes|Homophones/.test(head)) continue;
+    var lines = secs[i].split("\n").slice(1).map(function (l) { return l.trim(); }), defs = [], started = false;
+    for (var j = 0; j < lines.length; j++) {
+      var l = lines[j];
+      if (!l) continue;
+      if (/^=/.test(l)) break;
+      if (!started) { started = true; continue; }
+      if (/ — \(|^\[|^…|^Note/.test(l) || l.length < 4) continue;
+      defs.push(l);
+      if (defs.length >= 3) break;
+    }
+    if (defs.length) found.push({ nat: head, defs: defs });
+  }
+  if (!found.length) return null;
+  var pri = ["Nom commun", "Verbe", "Adjectif", "Adverbe", "Forme de verbe", "Forme de nom commun", "Forme d’adjectif"];
+  found.sort(function (x, y) { var a = pri.indexOf(x.nat), b = pri.indexOf(y.nat); return (a < 0 ? 99 : a) - (b < 0 ? 99 : b); });
+  var form = found.filter(function (f) { return /^Forme/.test(f.nat); })[0];
+  return /^Forme/.test(found[0].nat) || !form ? found[0] : (found[0].nat.indexOf("Nom") === 0 || found[0].nat === "Verbe" ? found[0] : form);
+}
+function openWikt(word) {
+  word = word.toLowerCase();
+  sheet.hidden = false; document.body.classList.add("wk-open");
+  var body = sheet.querySelector(".wk-body");
+  body.innerHTML = '<p class="dk-k">Wiktionnaire</p><h3>' + esc(word) + '</h3><p class="wk-d">Recherche de la définition…</p>';
+  wiktFetch(word).then(function (r) {
+    var lemma = r && r.defs[0].match(/(?:Pluriel|Féminin|Masculin|personne|Participe|singulier|Forme)[^.]*\bde ([a-zàâäçéèêëîïôöûùüÿœæ’'-]+)\.?\s*$/i);
+    if (r && lemma && lemma[1].toLowerCase() !== word) {
+      var base = lemma[1].toLowerCase();
+      return wiktFetch(base).then(function (r2) { return r2 ? { word: base, r: r2, note: r.defs[0] } : { word: word, r: r }; });
+    }
+    return r ? { word: word, r: r } : null;
+  }).then(function (x) {
+    if (sheet.hidden) return;
+    if (!x) { body.innerHTML = '<p class="dk-k">Wiktionnaire</p><h3>' + esc(word) + '</h3><p class="wk-e">Pas de définition trouvée pour ce mot. Vérifie ta connexion, ou essaie un autre mot.</p><a class="btn" href="' + wiktLink(word) + '" target="_blank" rel="noopener">Chercher sur le Wiktionnaire</a>'; return; }
+    var def = x.r.defs.map(function (d, i) { return (x.r.defs.length > 1 ? (i + 1) + ". " : "") + esc(d); }).join("<br>");
+    addWord(x.word, x.r.defs[0], "wikt");
+    body.innerHTML = dicoBody(x.word, '<span class="dk-nat">' + esc(x.r.nat) + '</span><br>' + def, x.note ? "(" + word + " : " + x.note + ")" : "", "wikt", wiktLink(x.word));
+  });
+}
+function wordAt(x, y) {
+  var r = document.caretRangeFromPoint ? document.caretRangeFromPoint(x, y) : null, node, off;
+  if (r) { node = r.startContainer; off = r.startOffset; }
+  else if (document.caretPositionFromPoint) { var cp = document.caretPositionFromPoint(x, y); if (cp) { node = cp.offsetNode; off = cp.offset; } }
+  if (!node || node.nodeType !== 3) return null;
+  var t = node.nodeValue, re = /[\p{L}’'-]/u, a = off, b = off;
+  while (a > 0 && re.test(t[a - 1])) a--;
+  while (b < t.length && re.test(t[b])) b++;
+  var w = t.slice(a, b).replace(/^[’'-]+|[’'-]+$/g, "").replace(/^(?:[ldjmtsnc]|qu)[’']/i, "");
+  return w.length > 1 ? w : null;
+}
+var LP_SKIP = "button,a,input,svg,.wk,.dk,.tabs,.chip,.opt,.fc,.tabbar,.seg,.srch";
+var lpT = null, lpXY = null, lpFired = false;
+app.addEventListener("touchstart", function (e) {
+  if (!USER || e.touches.length !== 1 || e.target.closest(LP_SKIP)) return;
+  var t = e.touches[0]; lpXY = [t.clientX, t.clientY]; lpFired = false;
+  clearTimeout(lpT);
+  lpT = setTimeout(function () { var w = wordAt(lpXY[0], lpXY[1]); if (w) { lpFired = true; try { getSelection().removeAllRanges(); } catch (er) {} openWikt(w); } }, 550);
+}, { passive: true });
+app.addEventListener("touchmove", function (e) { if (lpXY && (Math.abs(e.touches[0].clientX - lpXY[0]) > 10 || Math.abs(e.touches[0].clientY - lpXY[1]) > 10)) clearTimeout(lpT); }, { passive: true });
+app.addEventListener("touchend", function () { clearTimeout(lpT); }, { passive: true });
+app.addEventListener("click", function (e) { if (lpFired) { e.preventDefault(); e.stopPropagation(); lpFired = false; } }, true);
+app.addEventListener("dblclick", function (e) {
+  if (!USER || e.target.closest(LP_SKIP)) return;
+  var w = wordAt(e.clientX, e.clientY); if (w) { try { getSelection().removeAllRanges(); } catch (er) {} openWikt(w); }
+});
+function viewCarnet() {
+  var words = store.get("words", []);
+  return '<section class="wrap page-h"><p class="eyebrow">Vocabulaire</p><h1>Mon carnet de mots</h1><p class="lead">Chaque mot dont tu regardes la définition s’ajoute ici. Révise-les comme des flashcards.</p></section>' +
+    '<section class="wrap" id="carnet">' + (words.length ?
+      '<div class="row carnet-top"><button type="button" class="btn btn-fill" data-cact="rev">Réviser mes ' + words.length + ' mots en flashcards</button></div><div class="carnet-list">' +
+      words.map(function (x, i) { return '<div class="carnet-it"><div><b>' + esc(x.w) + '</b><p>' + esc(x.d) + '</p><small>' + (x.src === "wikt" ? "Wiktionnaire" : "Glossaire de l’appli") + '</small></div><button type="button" class="carnet-x" data-cact="del" data-i="' + i + '" aria-label="Retirer ' + esc(x.w) + '">✕</button></div>'; }).join("") + '</div>'
+      : '<div class="empty"><b>Ton carnet est vide pour l’instant.</b><p class="mute">Dans les cours, touche un mot <span class="dk">souligné en pointillés</span> ou fais un appui long sur n’importe quel mot (double-clic sur ordinateur) : sa définition s’affiche et le mot s’ajoute ici.</p></div>') + '</section>';
+}
+function bindCarnet(rev) {
+  var box = document.getElementById("carnet"), words = store.get("words", []);
+  function revise() {
+    box.innerHTML = '<div class="deck" id="deck"></div>' + DECK_HINT + '<p class="kbd"><a href="#carnet">← Retour au carnet</a></p>';
+    mountDeck(document.getElementById("deck"), shuffle(words.map(function (x) { return { id: "w:" + norm(x.w), q: x.w, a: x.d, sub: "fr", chap: "Mon carnet" }; })), { empty: "Ajoute des mots à ton carnet d’abord." });
+  }
+  if (rev && words.length) return revise();
+  box.onclick = function (e) {
+    var b = e.target.closest("[data-cact]"); if (!b) return;
+    if (b.dataset.cact === "rev") revise();
+    else if (b.dataset.cact === "del") { words.splice(+b.dataset.i, 1); store.set("words", words); app.innerHTML = viewCarnet(); bindCarnet(); }
+  };
+}
+
+/* ---------- cartes mentales ---------- */
+var mctx = document.createElement("canvas").getContext("2d");
+function tw(t, size, bold) { mctx.font = (bold ? "800 " : "600 ") + size + 'px "Helvetica Neue", Helvetica, Arial, sans-serif'; return mctx.measureText(t).width; }
+function mountMap(root, c) {
+  var M = MAPS[c.id];
+  if (!M) { root.innerHTML = '<div class="empty"><b>Carte mentale en préparation.</b></div>'; return; }
+  var st = { closed: {}, game: false, hidden: {}, sel: null, found: {}, errors: 0, opts: [] };
+  function leaves() { var a = []; M.b.forEach(function (br, i) { br[1].forEach(function (l, j) { a.push({ i: i, j: j, t: l }); }); }); return a; }
+  function startGame() {
+    var all = shuffle(leaves()), n = Math.max(4, Math.min(8, Math.round(all.length * 0.35)));
+    st.game = true; st.hidden = {}; st.found = {}; st.errors = 0; st.sel = null; st.closed = {};
+    all.slice(0, n).forEach(function (x) { st.hidden[x.i + "-" + x.j] = x.t; });
+    st.opts = shuffle(all.slice(0, n).map(function (x) { return x.t; }));
+    draw();
+  }
+  function svg() {
+    var narrow = root.clientWidth < 640, out = [], W, H;
+    function leafLabel(i, j, t) { var k = i + "-" + j; return st.hidden[k] && !st.found[k] ? "?" : t; }
+    function leafCls(i, j) { var k = i + "-" + j; return st.hidden[k] ? (st.found[k] ? "mm-leaf mm-ok" : "mm-leaf mm-q" + (st.sel === k ? " mm-sel" : "")) : "mm-leaf"; }
+    if (narrow) {
+      W = 360; var y = 76;
+      out.push('<rect class="mm-center" x="8" y="8" width="344" height="50" rx="14"/><text class="mm-ct" x="180" y="39" text-anchor="middle">' + esc(M.c) + '</text>');
+      var lastY = 0;
+      M.b.forEach(function (br, i) {
+        var open = !st.closed[i];
+        out.push('<path class="mm-ln" d="M24 ' + (lastY || 58) + ' V' + (y + 18) + ' H40"/>');
+        out.push('<g class="mm-br" data-b="' + i + '"><rect x="40" y="' + y + '" width="312" height="36" rx="10"/><text x="54" y="' + (y + 23) + '">' + esc(br[0]) + '</text><text class="mm-tg" x="338" y="' + (y + 23) + '" text-anchor="end">' + (open ? "−" : "+") + '</text></g>');
+        lastY = y + 18; y += 44;
+        if (open) {
+          var ly0 = y - 8;
+          br[1].forEach(function (l, j) {
+            out.push('<path class="mm-ln mm-lnl" d="M58 ' + ly0 + ' V' + (y + 15) + ' H70"/>');
+            out.push('<g class="' + leafCls(i, j) + '" data-l="' + i + "-" + j + '"><rect x="70" y="' + y + '" width="282" height="30" rx="8"/><text x="82" y="' + (y + 20) + '">' + esc(leafLabel(i, j, l)) + '</text></g>');
+            y += 36;
+          });
+          y += 6;
+        }
+      });
+      H = y + 6;
+    } else {
+      W = 1100; var cx = 550, rowH = 38, gap = 22;
+      var right = M.b.map(function (b, i) { return i; }).slice(0, Math.ceil(M.b.length / 2)), left = M.b.map(function (b, i) { return i; }).slice(Math.ceil(M.b.length / 2));
+      function sideH(ids) { return ids.reduce(function (a, i) { return a + (st.closed[i] ? 1 : Math.max(1, M.b[i][1].length)) * rowH + gap; }, -gap); }
+      H = Math.max(sideH(right), sideH(left), 120) + 60; var cy = H / 2;
+      var cw = Math.min(260, tw(M.c, 20, true) + 48);
+      [[right, 1], [left, -1]].forEach(function (side) {
+        var ids = side[0], dir = side[1], yy = cy - sideH(ids) / 2;
+        ids.forEach(function (i) {
+          var br = M.b[i], open = !st.closed[i], rows = open ? Math.max(1, br[1].length) : 1, by = yy + rows * rowH / 2;
+          var bw = Math.min(200, tw(br[0], 15, true) + 44), bx = cx + dir * 215 - bw / 2;
+          out.push('<path class="mm-ln mm-main" style="stroke:' + col(c.sub) + '" d="M' + (cx + dir * cw / 2) + ' ' + cy + ' C' + (cx + dir * 150) + ' ' + cy + ' ' + (cx + dir * 140) + ' ' + by + ' ' + (bx + (dir > 0 ? 0 : bw)) + ' ' + by + '"/>');
+          out.push('<g class="mm-br" data-b="' + i + '"><rect x="' + bx + '" y="' + (by - 17) + '" width="' + bw + '" height="34" rx="10"/><text x="' + (bx + bw / 2 - 6) + '" y="' + (by + 5) + '" text-anchor="middle">' + esc(br[0]) + '</text><text class="mm-tg" x="' + (bx + bw - 12) + '" y="' + (by + 5) + '" text-anchor="middle">' + (open ? "−" : "+") + '</text></g>');
+          if (open) br[1].forEach(function (l, j) {
+            var ly = yy + j * rowH + rowH / 2, lab = leafLabel(i, j, l), lw = Math.max(46, tw(lab, 13) + 24), lx = dir > 0 ? cx + 330 : cx - 330 - lw;
+            out.push('<path class="mm-ln" style="stroke:' + col(c.sub) + '" d="M' + (dir > 0 ? bx + bw : bx) + ' ' + by + ' C' + (cx + dir * 310) + ' ' + by + ' ' + (cx + dir * 300) + ' ' + ly + ' ' + (dir > 0 ? lx : lx + lw) + ' ' + ly + '"/>');
+            out.push('<g class="' + leafCls(i, j) + '" data-l="' + i + "-" + j + '"><rect x="' + lx + '" y="' + (ly - 14) + '" width="' + lw + '" height="28" rx="8"/><text x="' + (lx + lw / 2) + '" y="' + (ly + 5) + '" text-anchor="middle">' + esc(lab) + '</text></g>');
+          });
+          yy += rows * rowH + gap;
+        });
+      });
+      out.push('<rect class="mm-center" x="' + (cx - cw / 2) + '" y="' + (cy - 30) + '" width="' + cw + '" height="60" rx="18"/><text class="mm-ct" x="' + cx + '" y="' + (cy + 7) + '" text-anchor="middle">' + esc(M.c) + '</text>');
+    }
+    return '<svg class="mm-svg" viewBox="0 0 ' + W + ' ' + H + '" style="--sub:' + col(c.sub) + '" role="img" aria-label="Carte mentale : ' + esc(M.c) + '">' + out.join("") + '</svg>';
+  }
+  function draw() {
+    var total = Object.keys(st.hidden).length, done = Object.keys(st.found).length;
+    root.innerHTML = '<div class="mm-bar">' + (st.game
+      ? '<span class="mm-score">' + done + ' / ' + total + ' trouvées' + (st.errors ? ' · ' + st.errors + ' erreur' + (st.errors > 1 ? "s" : "") : "") + '</span><button type="button" class="btn" data-mm="quit">Quitter le jeu</button>'
+      : '<button type="button" class="btn btn-sub" data-mm="game">Jouer : complète la carte</button><button type="button" class="link" data-mm="open">Tout déplier</button><button type="button" class="link" data-mm="close">Tout replier</button>') + '</div>' +
+      (st.game ? '<p class="mm-help">' + (done === total ? "" : st.sel ? "Choisis la bonne réponse ci-dessous." : "Touche une case « ? », puis la bonne réponse.") + '</p>' : '<p class="mm-help">Touche une branche pour la déplier ou la replier.</p>') +
+      '<div class="mm-wrap">' + svg() + '</div>' +
+      (st.game ? (done === total
+        ? '<div class="mm-end"><b>Bravo, carte complétée !</b><span>' + (st.errors ? st.errors + " erreur" + (st.errors > 1 ? "s" : "") + " en chemin." : "Sans aucune erreur.") + '</span><button type="button" class="btn btn-sub" data-mm="game">Rejouer avec d’autres cases</button></div>'
+        : '<div class="mm-opts">' + st.opts.map(function (o, k) { return '<button type="button" class="chip" data-opt="' + k + '">' + esc(o) + '</button>'; }).join("") + '</div>') : "");
+  }
+  root.onclick = function (e) {
+    var b = e.target.closest("[data-mm]");
+    if (b) { var a = b.dataset.mm; if (a === "game") startGame(); else if (a === "quit") { st.game = false; st.hidden = {}; draw(); } else if (a === "open") { st.closed = {}; draw(); } else if (a === "close") { M.b.forEach(function (x, i) { st.closed[i] = true; }); draw(); } return; }
+    var br = e.target.closest(".mm-br"); if (br && !st.game) { var i = +br.dataset.b; st.closed[i] = !st.closed[i]; draw(); return; }
+    var lf = e.target.closest(".mm-q"); if (lf && st.game) { st.sel = lf.dataset.l; draw(); return; }
+    var op = e.target.closest("[data-opt]");
+    if (op && st.game) {
+      if (!st.sel) { var first = Object.keys(st.hidden).filter(function (k) { return !st.found[k]; })[0]; st.sel = first; }
+      var txt = st.opts[+op.dataset.opt];
+      if (st.hidden[st.sel] === txt) { st.found[st.sel] = true; st.opts.splice(+op.dataset.opt, 1); st.sel = null; draw(); }
+      else { st.errors++; op.classList.add("mm-bad"); var sc = root.querySelector(".mm-score"); if (sc) sc.textContent = Object.keys(st.found).length + " / " + Object.keys(st.hidden).length + " trouvées · " + st.errors + " erreur" + (st.errors > 1 ? "s" : ""); setTimeout(function () { op.classList.remove("mm-bad"); }, 500); }
+    }
+  };
+  draw();
+}
+
 /* ---------- routeur ---------- */
 function setNav(k) {
   Array.prototype.forEach.call(document.querySelectorAll(".nav a, .tabbar a"), function (a) { a.classList.toggle("on", a.dataset.nav === k); });
@@ -7597,6 +8536,9 @@ function route() {
     };
     seg.onclick = function (e) { var b = e.target.closest("[data-mode]"); if (!b) return; qmode = b.dataset.mode; store.set("qmode", qmode); run(); };
     run();
+  } else if (parts[0] === "carnet") {
+    app.innerHTML = viewCarnet(); setNav(""); document.title = "Mon carnet · Objectif Brevet";
+    bindCarnet(parts[1] === "revision");
   } else if (h === "examen") {
     app.innerHTML = viewExam(); setNav("examen"); document.title = "L’examen · Objectif Brevet";
   } else {
