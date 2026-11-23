@@ -1030,6 +1030,69 @@ main#app{overflow-x:clip}
 
 /* la flamme est un emoji : jamais d’italique, même dans un <i> */
 .flame-svg,.ws i{font-style:normal}
+
+/* ---------- comptes parents ---------- */
+.auth-role{margin-bottom:4px}
+.auth-role button{font-size:14px}
+.field small{font-weight:500;color:var(--mute);font-size:12px}
+.parent-mode .tabbar{grid-template-columns:repeat(3,1fr)}
+.parent-mode .tile .bar,.parent-mode .mini,.parent-mode .band-meta span:last-child,.parent-mode a[href^="#flashcards"],.parent-mode a[href^="#quiz"],.parent-mode [data-goto="flashcards"],.parent-mode [data-goto="quiz"],.parent-mode [data-mm="game"],.parent-mode .chead-meta span:has(#best){display:none!important}
+.tv-code{display:flex;flex-direction:column;align-items:center;gap:4px;padding:18px 16px;border:2px dashed var(--fg);border-radius:var(--r);background:var(--bg)}
+.tv-code small{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.tv-code b{font-size:34px;font-weight:800;letter-spacing:.12em;font-family:var(--mono)}
+.tv-code span{font-size:12px;color:var(--mute)}
+.tv-code.big b{font-size:40px}
+.acc-kids{border:1.5px solid var(--hair);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.acc-kids > b{font-size:16px}
+.acc-kids .mute{color:var(--mute)}
+.acc-kids > .btn{align-self:flex-start}
+.link-f{display:flex;flex-direction:column;gap:8px}
+.link-f input{text-transform:uppercase;letter-spacing:.15em;font-family:var(--mono);font-size:18px}
+.link-f .btn{align-self:flex-start}
+.link-msg{font-size:14px;font-weight:600;color:var(--ko)}
+.link-msg.ok{color:var(--ok)}
+.suivi{padding-top:22px;padding-bottom:30px;display:flex;flex-direction:column;gap:22px}
+.sv-load{padding:40px 0;text-align:center}
+.sv-head h1{font-size:clamp(2rem,8vw,3.4rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin:6px 0 6px;text-transform:uppercase}
+.sv-upd{color:var(--mute);font-size:14px}
+.sv-kids{margin:10px 0 6px}
+.sv-empty{display:flex;flex-direction:column;gap:12px;max-width:520px}
+.sv-empty h1{font-size:2.2rem;font-weight:800;letter-spacing:-.04em;text-transform:uppercase}
+.sv-card{border:var(--bw) solid var(--fg);border-radius:var(--r-lg);padding:16px 18px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(160deg,color-mix(in srgb,var(--hg) 10%,var(--bg)),var(--bg) 60%)}
+.sv-today{font-weight:700;font-size:15px}
+.sv-defi.is-done .sv-today{color:var(--ok)}
+.sv-sec{display:flex;flex-direction:column;gap:10px}
+.sv-sec h2{font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;border-bottom:2px solid var(--fg);padding-bottom:8px;display:flex;align-items:baseline;gap:8px}
+.sv-sec h2 small{font-size:13px;font-weight:700;color:var(--mute)}
+.sv-subs{display:flex;flex-direction:column;gap:8px}
+.sv-sub{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;text-decoration:none;border:1.5px solid var(--hair);border-left:6px solid var(--sub);border-radius:var(--r-sm);padding:10px 12px}
+.sv-sub b{font-size:15px}
+.sv-sub span{display:block;font-size:12px;color:var(--mute)}
+.sv-sub strong{font-size:20px;font-weight:800;color:var(--sub);font-variant-numeric:tabular-nums}
+.sv-bar{grid-column:1 / -1;height:6px;border-radius:3px;background:var(--soft);overflow:hidden}
+.sv-bar em{display:block;height:100%;background:var(--sub);border-radius:3px}
+.sv-stats{margin-top:0}
+.sv-list{display:flex;flex-direction:column;gap:6px}
+.sv-row{display:flex;align-items:center;gap:10px;text-decoration:none;padding:9px 12px;border:1.5px solid var(--hair);border-radius:var(--r-sm);font-size:14px}
+.sv-row i{width:10px;height:10px;border-radius:50%;background:var(--sub);flex:none}
+.sv-row span{flex:1;min-width:0}
+.sv-row b{font-variant-numeric:tabular-nums}
+.sv-row b.good{color:var(--ok)}
+.sv-row b.low{color:var(--ko)}
+.sv-errs{display:flex;flex-direction:column;gap:8px}
+.sv-err{border-left:4px solid var(--sub);background:var(--soft);border-radius:var(--r-xs);padding:10px 12px;display:flex;flex-direction:column;gap:3px;font-size:14px}
+.sv-err small{font-size:11px;font-weight:700;color:var(--mute)}
+.sv-err p{font-weight:700}
+.sv-err span{color:var(--mute)}
+.sv-err span b{color:var(--fg)}
+.sv-words{display:flex;flex-wrap:wrap;gap:6px}
+.sv-words span{border:1.5px solid var(--hair);border-radius:999px;padding:4px 10px;font-size:13px;font-weight:600}
+.sv-foot{font-size:12px;color:var(--mute);text-align:center}
+.sv-hint{font-size:12px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+.sv-more summary{cursor:pointer;font-weight:700;font-size:14px;padding:8px 2px;list-style:none;text-decoration:underline;text-underline-offset:3px}
+.sv-more summary::-webkit-details-marker{display:none}
+.sv-more[open] summary{margin-bottom:6px}
+.sv-kids{margin-inline:0!important;padding-inline:0!important}
 </style>
 </head>
 <body>
@@ -9705,7 +9768,7 @@ function viewSubject(s) {
     '<nav class="crumb"><a href="#">Matières</a><span>/</span><span style="opacity:1">' + s.name + '</span></nav>' +
     '<h1>' + s.name + '</h1><p>' + s.blurb + '</p>' +
     '<div class="band-meta"><span>' + s.exam + '</span><span>' + plural(list.length, "chapitre") + '</span><span>' + p + ' % maîtrisé</span></div>' +
-    '<div class="row"><a class="btn" href="#' + list[0].id + '">Commencer au chapitre 1</a><a class="btn ghost" href="#flashcards-' + s.id + '">Flashcards</a><a class="btn ghost" href="#quiz-' + s.id + '">Quiz de la matière</a></div>' +
+    '<div class="row"><a class="btn" href="#' + list[0].id + '">' + (PARENT ? "Lire le chapitre 1" : "Commencer au chapitre 1") + '</a><a class="btn ghost" href="#flashcards-' + s.id + '">Flashcards</a><a class="btn ghost" href="#quiz-' + s.id + '">Quiz de la matière</a></div>' +
   '</div></section>' +
   '<section class="wrap sec"><div class="sec-h"><h2>Programme</h2><span>Ordre conseillé</span></div><ol class="chaps">' +
     list.map(function (c) {
@@ -9726,7 +9789,7 @@ function viewChapter(c) {
     '<div class="ccover wk" id="ccover" role="button" tabindex="0" hidden></div>' +
     '<div class="chead-meta"><span>≈ <b>' + readMin(c) + ' min</b> de lecture</span><span><b>' + c.cours.length + '</b> parties de cours</span><span><b>' + c.schema.length + '</b> ' + (c.schema.length > 1 ? "schémas" : "schéma") + '</span><span><b>' + c.cards.length + '</b> flashcards</span><span><b>' + c.quiz.length + '</b> questions</span><span>Meilleur score : <b id="best">' + (scores[c.id] != null ? scores[c.id] + " %" : "pas encore") + '</b></span></div>' +
   '</div></section>' +
-  '<div class="tabs-wrap"><div class="wrap"><div class="tabs" role="tablist">' + TABS.map(function (t) { return '<button role="tab" class="tab" data-tab="' + t[0] + '">' + t[1] + '<small>' + counts[t[0]] + '</small></button>'; }).join("") + '</div></div></div>' +
+  '<div class="tabs-wrap"><div class="wrap"><div class="tabs" role="tablist">' + TABS.filter(function (t) { return !PARENT || (t[0] !== "flashcards" && t[0] !== "quiz"); }).map(function (t) { return '<button role="tab" class="tab" data-tab="' + t[0] + '">' + t[1] + '<small>' + counts[t[0]] + '</small></button>'; }).join("") + '</div></div></div>' +
   '<section class="wrap panel" id="panel"></section>' +
   '<nav class="wrap pn">' + (prev ? '<a href="#' + prev.id + '" class="pn-a"><span>← Chapitre précédent</span><b>' + prev.title + '</b></a>' : '<span></span>') + (next ? '<a href="#' + next.id + '" class="pn-a pn-next"><span>Chapitre suivant →</span><b>' + next.title + '</b></a>' : '<a href="#' + s.id + '" class="pn-a pn-next"><span>Fin de la matière</span><b>Retour au programme</b></a>') + '</nav>';
 }
@@ -9842,10 +9905,10 @@ function logout() {
   pushNow().then(function () { return rawGet("brevet:push", null) ? disablePush() : null; }).then(done, done);
 }
 /* ---------- contrôle d'accès : chaque nouveau compte doit être validé ---------- */
-var ACC_KEY = USER ? "brevet:access:" + USER.id : "", ACC = USER ? rawGet(ACC_KEY, null) : null, ADMIN = !!(ACC && ACC.a);
+var ACC_KEY = USER ? "brevet:access:" + USER.id : "", ACC = USER ? rawGet(ACC_KEY, null) : null, ADMIN = !!(ACC && ACC.a), PARENT = !!(ACC && ACC.r === "parent");
 function checkAccess() {
-  return getToken().then(function (t) { return sbReq("/rest/v1/access?select=status,is_admin&user_id=eq." + USER.id, { token: t }); })
-    .then(function (rows) { var r = rows && rows[0], v = r ? { s: r.status, a: !!r.is_admin } : { s: "pending", a: false }; rawSet(ACC_KEY, v); ACC = v; ADMIN = v.a; return v; },
+  return getToken().then(function (t) { return sbReq("/rest/v1/access?select=*&user_id=eq." + USER.id, { token: t }); })
+    .then(function (rows) { var r = rows && rows[0], v = r ? { s: r.status, a: !!r.is_admin, r: r.role || "eleve" } : { s: "pending", a: false, r: "eleve" }; var changed = !ACC || ACC.r !== v.r; rawSet(ACC_KEY, v); ACC = v; ADMIN = v.a; if (changed && USER && (v.r === "parent") !== PARENT && v.s === "ok" && document.body.classList.contains("app-on")) location.reload(); PARENT = v.r === "parent"; return v; },
       function (e) { var m = String((e && e.code) || "") + " " + String((e && e.message) || ""); if (e && (e.status === 404 || /PGRST205|42P01/.test(m))) { var v0 = { s: "ok", a: false }; rawSet(ACC_KEY, v0); return v0; } return null; });
 }
 var waitBox = null, waitT = null;
@@ -9882,7 +9945,7 @@ function loadAdmin(focus) {
   var box = document.getElementById("acc-adm"); if (!box) return;
   if (focus) box.scrollIntoView({ block: "start" });
   var list = box.querySelector(".adm-list");
-  getToken().then(function (t) { return sbReq("/rest/v1/access?select=user_id,name,status,created_at&order=created_at.desc", { token: t }); }).then(function (rows) {
+  getToken().then(function (t) { return sbReq("/rest/v1/access?select=*&order=created_at.desc", { token: t }); }).then(function (rows) {
     rows = (rows || []).filter(function (r) { return r.user_id !== USER.id; });
     var rank = { pending: 0, refused: 1, ok: 2 };
     rows.sort(function (x, y) { return rank[x.status] - rank[y.status]; });
@@ -9890,7 +9953,7 @@ function loadAdmin(focus) {
     var d = function (s) { try { return new Date(s).toLocaleDateString("fr-FR", { day: "numeric", month: "short" }); } catch (e) { return ""; } };
     list.innerHTML = '<p class="adm-n">' + (n ? plural(n, "demande") + " en attente" : "Aucune demande en attente") + '</p>' + rows.map(function (r) {
       var lab = r.status === "pending" ? "En attente" : r.status === "ok" ? "Autorisé" : "Refusé";
-      return '<div class="adm-row is-' + r.status + '"><div><b>' + esc(r.name || "?") + '</b><span>' + lab + ' · ' + d(r.created_at) + '</span></div><div class="adm-b">' +
+      return '<div class="adm-row is-' + r.status + '"><div><b>' + esc(r.name || "?") + '</b><span>' + (r.role === "parent" ? "Parent" : "Élève") + ' · ' + lab + ' · ' + d(r.created_at) + '</span></div><div class="adm-b">' +
         (r.status !== "ok" ? '<button type="button" class="btn btn-fill" data-adm="ok" data-u="' + r.user_id + '">Autoriser</button>' : "") +
         (r.status === "pending" ? '<button type="button" class="btn" data-adm="refused" data-u="' + r.user_id + '">Refuser</button>' : "") +
         (r.status === "ok" ? '<button type="button" class="link" data-adm="refused" data-u="' + r.user_id + '">Retirer l’accès</button>' : "") +
@@ -9905,22 +9968,188 @@ function loadAdmin(focus) {
       .then(function () { loadAdmin(); }, function () { b.disabled = false; alert("La modification n’a pas pu être enregistrée."); });
   };
 }
+/* ---------- comptes parents : suivi en lecture seule ---------- */
+var KIDS = null, KID = USER ? rawGet("brevet:kid:" + USER.id, null) : null, suiviT = null, suiviLast = "";
+function rpc(name, body) { return getToken().then(function (t) { return sbReq("/rest/v1/rpc/" + name, { method: "POST", token: t, body: body || {} }); }); }
+function codeFmt(c) { return String(c || "").slice(0, 3) + " " + String(c || "").slice(3); }
+var ICO_SUIVI = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5h16"/><rect x="5.5" y="11" width="3" height="6" rx="1"/><rect x="10.5" y="7" width="3" height="10" rx="1"/><rect x="15.5" y="4" width="3" height="13" rx="1"/></svg>';
+function setupParent() {
+  document.body.classList.add("parent-mode");
+  var nav = document.querySelector(".nav"), tb = document.querySelector(".tabbar"), ex = tb.querySelector('[data-nav="examen"]').outerHTML, cours = tb.querySelector('[data-nav="home"]').innerHTML.replace(/<span>[^<]*<\/span>/, "<span>Cours</span>");
+  nav.innerHTML = '<a href="#suivi" data-nav="suivi">Suivi</a><a href="#cours" data-nav="cours">Cours</a><a href="#examen" data-nav="examen">Examen</a>';
+  tb.innerHTML = '<a href="#suivi" data-nav="suivi">' + ICO_SUIVI + '<span>Suivi</span></a><a href="#cours" data-nav="cours">' + cours + '</a>' + ex;
+  document.querySelector(".logo").setAttribute("href", "#suivi");
+  var ft = document.querySelector(".foot span:last-child"); if (ft) ft.textContent = "Compte parent · suivi en lecture seule.";
+}
+function viewCours() {
+  return '<section class="wrap page-h"><p class="eyebrow">Lecture seule</p><h1>Cours</h1><p class="lead">Tous les résumés, cours, cartes mentales et schémas du programme de 3<sup>e</sup>, pour savoir ce que ton enfant révise.</p></section>' +
+    '<section class="wrap sec"><div class="tiles">' + SUBJECTS.map(function (s) {
+      return '<a class="tile" href="#' + s.id + '" style="--sub:' + col(s.id) + '"><span class="tile-code">' + s.code + '</span><span class="tile-name">' + s.name + '</span><span class="tile-meta">' + plural(B[s.id].length, "chapitre") + '</span></a>';
+    }).join("") + '</div></section>';
+}
+function linkForm() {
+  return '<form class="link-f" novalidate><label class="field" for="link-code">Code donné par ton enfant<input id="link-code" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="9" placeholder="ABC 123"></label><button class="btn btn-fill">Relier</button><p class="link-msg" hidden></p></form>';
+}
+function bindLinkForm(root, done) {
+  var f = root.querySelector(".link-f"); if (!f) return;
+  f.onsubmit = function (e) {
+    e.preventDefault();
+    var inp = f.querySelector("input"), b = f.querySelector("button"), m = f.querySelector(".link-msg"), c = inp.value.replace(/[^A-Za-z0-9]/g, "").toUpperCase();
+    var say = function (t, ok) { m.hidden = false; m.textContent = t; m.classList.toggle("ok", !!ok); };
+    if (c.length !== 6) return say("Le code contient 6 caractères (lettres et chiffres).");
+    b.disabled = true; b.textContent = "Vérification…";
+    rpc("utiliser_code_parent", { p_code: c }).then(function (nm) {
+      say("✓ Tu suis maintenant la progression de " + (nm || "ton enfant") + ".", true); inp.value = ""; KIDS = null;
+      setTimeout(function () { if (done) done(); }, 900);
+    }, function (err) {
+      var t = String(err && err.message || "");
+      say(/invalide/.test(t) ? "Code invalide ou expiré. Demande à ton enfant d’en créer un nouveau." : /essais/.test(t) ? "Trop d’essais. Réessaie dans une heure." : /parents/.test(t) ? "Ce compte n’est pas un compte parent." : "Impossible de vérifier le code. Vérifie ta connexion.");
+    }).then(function () { b.disabled = false; b.textContent = "Relier"; });
+  };
+}
+/* menu du compte d’un parent : ses enfants */
+function kidsBlock() { return '<div class="acc-kids" id="acc-kids"><b>👨‍👩‍👧 Mes enfants</b><div class="kids-list"><p class="mute">Chargement…</p></div>' + linkForm() + '</div>'; }
+function loadKidsBlock() {
+  var box = document.getElementById("acc-kids"); if (!box) return;
+  var list = box.querySelector(".kids-list");
+  bindLinkForm(box, loadKidsBlock);
+  rpc("mes_enfants").then(function (kids) {
+    KIDS = kids || [];
+    list.innerHTML = KIDS.length ? KIDS.map(function (k) {
+      return '<div class="adm-row"><div><b>' + esc(k.name || "?") + '</b><span>' + (k.updated_at ? "Dernière activité " + ago(new Date(k.updated_at).getTime()) : "Pas encore d’activité") + '</span></div><div class="adm-b"><a class="btn" href="#suivi" data-close data-kid="' + k.child_id + '">Voir</a><button type="button" class="link" data-unlink="' + k.child_id + '">Retirer</button></div></div>';
+    }).join("") : '<p class="mute">Aucun enfant relié pour l’instant. Demande à ton enfant d’ouvrir son menu (rond avec son initiale) et de toucher <b>« Inviter un parent »</b>, puis tape le code ci-dessous.</p>';
+  }).catch(function () { list.innerHTML = '<p class="mute">Impossible de charger la liste. Vérifie ta connexion.</p>'; });
+  list.onclick = function (e) {
+    var v = e.target.closest("[data-kid]"); if (v) { KID = v.dataset.kid; rawSet("brevet:kid:" + USER.id, KID); closeWk(); if (location.hash === "#suivi") route(); return; }
+    var u = e.target.closest("[data-unlink]"); if (!u || !confirm("Ne plus suivre la progression de cet enfant ?")) return;
+    u.disabled = true;
+    getToken().then(function (t) { return sbReq("/rest/v1/parent_links?parent_id=eq." + USER.id + "&child_id=eq." + u.dataset.unlink, { method: "DELETE", token: t, prefer: "return=minimal" }); })
+      .then(loadKidsBlock, function () { u.disabled = false; alert("La modification n’a pas pu être enregistrée."); });
+  };
+}
+/* menu du compte d’un élève : ses parents */
+function parentsBlock() { return '<div class="acc-kids" id="acc-par"><b>👨‍👩‍👧 Suivi parental</b><p class="mute">Un parent peut suivre tes séries et tes progrès, <b>sans rien pouvoir modifier</b>.</p><div class="kids-list"></div><div class="par-code"></div><button type="button" class="btn" data-invite>Inviter un parent</button></div>'; }
+function loadParentsBlock() {
+  var box = document.getElementById("acc-par"); if (!box) return;
+  var list = box.querySelector(".kids-list"), code = box.querySelector(".par-code");
+  rpc("mes_parents").then(function (ps) {
+    list.innerHTML = (ps || []).map(function (p) { return '<div class="adm-row"><div><b>' + esc(p.name || "?") + '</b><span>Suit ta progression</span></div><div class="adm-b"><button type="button" class="link" data-unpar="' + p.parent_id + '">Retirer</button></div></div>'; }).join("");
+  }).catch(function () { list.innerHTML = ""; });
+  box.onclick = function (e) {
+    var inv = e.target.closest("[data-invite]");
+    if (inv) {
+      inv.disabled = true; inv.textContent = "Création du code…";
+      rpc("creer_code_parent").then(function (c) {
+        code.innerHTML = '<div class="tv-code big"><small>Code à donner à ton parent</small><b>' + esc(codeFmt(c)) + '</b><span>Valable 24 h, une seule fois</span></div><p class="mute">Ton parent crée un compte « Je suis parent » sur GWENA, puis tape ce code dans son menu.</p>';
+        inv.textContent = "Créer un nouveau code"; inv.disabled = false;
+      }, function () { inv.disabled = false; inv.textContent = "Inviter un parent"; code.innerHTML = '<p class="auth-err">Impossible de créer un code pour l’instant. Vérifie ta connexion.</p>'; });
+      return;
+    }
+    var u = e.target.closest("[data-unpar]"); if (!u || !confirm("Ce parent ne pourra plus voir ta progression. Continuer ?")) return;
+    u.disabled = true;
+    getToken().then(function (t) { return sbReq("/rest/v1/parent_links?child_id=eq." + USER.id + "&parent_id=eq." + u.dataset.unpar, { method: "DELETE", token: t, prefer: "return=minimal" }); })
+      .then(loadParentsBlock, function () { u.disabled = false; alert("La modification n’a pas pu être enregistrée."); });
+  };
+}
+/* tableau de bord */
+function mountSuivi() {
+  var root = document.getElementById("suivi"); if (!root) return;
+  clearInterval(suiviT); suiviLast = "";
+  rpc("mes_enfants").then(function (kids) {
+    KIDS = kids || [];
+    if (!document.getElementById("suivi")) return;
+    if (!KIDS.length) {
+      root.innerHTML = '<div class="sv-empty"><p class="eyebrow">Suivi parental</p><h1>Relie ton enfant</h1><p class="lead">Sur son téléphone, ton enfant ouvre son menu (le rond avec son initiale, en haut à droite) et touche <b>« Inviter un parent »</b>. Tape ici le code qui s’affiche.</p>' + linkForm() + '</div>';
+      bindLinkForm(root, mountSuivi); return;
+    }
+    if (!KIDS.some(function (k) { return k.child_id === KID; })) KID = KIDS[0].child_id;
+    loadKid(root);
+    suiviT = setInterval(function () { var r = document.getElementById("suivi"); if (!r) { clearInterval(suiviT); return; } if (document.visibilityState === "visible") loadKid(r); }, 30000);
+  }).catch(function () {
+    root.innerHTML = '<div class="empty"><b>Impossible de charger le suivi.</b><p class="mute">Vérifie ta connexion internet, puis réessaie.</p><button type="button" class="btn" data-retry>Réessayer</button></div>';
+    root.querySelector("[data-retry]").onclick = mountSuivi;
+  });
+}
+function loadKid(root) {
+  var id = KID;
+  return getToken().then(function (t) { return sbReq("/rest/v1/progress?select=data,updated_at&user_id=eq." + id, { token: t }); }).then(function (rows) {
+    if (id !== KID || !document.getElementById("suivi")) return;
+    var r = rows && rows[0], key = id + JSON.stringify(r || null);
+    if (key === suiviLast) { var up = root.querySelector(".sv-upd"); if (up && r) up.textContent = "Dernière activité " + ago(new Date(r.updated_at).getTime()); return; }
+    suiviLast = key;
+    var y = window.scrollY;
+    root.innerHTML = viewSuivi(r ? r.data || {} : {}, r ? r.updated_at : null);
+    window.scrollTo(0, y);
+    root.querySelector(".sv-kids") && (root.querySelector(".sv-kids").onclick = function (e) { var b = e.target.closest("[data-k]"); if (!b) return; KID = b.dataset.k; rawSet("brevet:kid:" + USER.id, KID); suiviLast = ""; loadKid(root); });
+  }).catch(function () { var up = root.querySelector(".sv-upd"); if (up) up.textContent = "Hors ligne · dernières données affichées"; });
+}
+function chapPctD(c, kn, sc) { var cs = cardsOf(c), k = cs.filter(function (x) { return kn[x.id] === 1; }).length; return Math.round(k / cs.length * 50 + (sc[c.id] || 0) / 2); }
+function viewSuivi(d, upd) {
+  var kid = KIDS.filter(function (k) { return k.child_id === KID; })[0] || {}, nm = esc(kid.name || "Ton enfant"), first = nm.split(" ")[0];
+  var days = d.defiDays || {}, kn = d.known || {}, sc = d.scores || {}, miss = d.missed || {}, words = d.words || [];
+  var t = new Date(), tk = dayKey(t), today = days[tk] != null, n = 0, x = today ? t : addDays(t, -1);
+  while (days[dayKey(x)] != null) { n++; x = addDays(x, -1); }
+  var best = Math.max(n, +d.defiBest || 0);
+  var allCards = flat(CH, cardsOf), sues = allCards.filter(function (c) { return kn[c.id] === 1; }).length, rev = allCards.filter(function (c) { return kn[c.id] === 0; }).length;
+  var scored = CH.filter(function (c) { return sc[c.id] != null; }), moy = scored.length ? Math.round(scored.reduce(function (a, c) { return a + sc[c.id]; }, 0) / scored.length) : 0;
+  var errs = Object.keys(miss).map(function (k) { var p = k.split("/"), c = CHI[p[0]], q = c && c.quiz[+p[1]]; return q ? { c: c, q: q } : null; }).filter(Boolean);
+  var last = CHI[d.last];
+  return '<div class="sv-head"><p class="eyebrow">Suivi parental · lecture seule</p>' +
+    (KIDS.length > 1 ? '<div class="chips sv-kids">' + KIDS.map(function (k) { return '<button type="button" class="chip' + (k.child_id === KID ? " on" : "") + '" data-k="' + k.child_id + '">' + esc(k.name || "?") + '</button>'; }).join("") + '</div>' : "") +
+    '<h1>' + nm + '</h1><p class="sv-upd">' + (upd ? "Dernière activité " + ago(new Date(upd).getTime()) : "Pas encore d’activité enregistrée") + '</p></div>' +
+    '<div class="sv-card sv-defi' + (today ? " is-done" : "") + '"><div class="defi-top"><span class="flame' + (today ? "" : " off") + '">' + FLAME + '</span><div class="defi-n"><b>' + n + '</b><span>' + (n > 1 ? "jours de suite" : "jour de suite") + '</span></div><span class="defi-best">Record<br><b>' + best + '</b></span></div>' +
+      '<p class="sv-today">' + (today ? "✓ Défi du jour fait · " + days[tk] + "/10" : "Défi du jour pas encore fait") + '</p>' + weekStrip(days) + '</div>' +
+    '<section class="sv-sec"><h2>Calendrier des défis</h2>' + defiCal(5, days) + '</section>' +
+    '<section class="sv-sec"><h2>Progression par matière</h2><div class="sv-subs">' + SUBJECTS.map(function (s) {
+      var l = B[s.id], p = Math.round(l.reduce(function (a, c) { return a + chapPctD(c, kn, sc); }, 0) / l.length), cs = flat(l, cardsOf), k = cs.filter(function (c) { return kn[c.id] === 1; }).length, qs = l.filter(function (c) { return sc[c.id] != null; });
+      return '<a class="sv-sub" href="#' + s.id + '" style="--sub:' + col(s.id) + '"><div><b>' + s.name + '</b><span>' + k + '/' + cs.length + ' cartes sues · ' + (qs.length ? qs.length + " quiz faits" : "aucun quiz") + '</span></div><strong>' + p + ' %</strong><i class="sv-bar"><em style="width:' + p + '%"></em></i></a>';
+    }).join("") + '</div></section>' +
+    '<section class="sv-sec"><h2>Flashcards</h2><div class="stats sv-stats"><div class="stat"><b>' + sues + '</b><span>sues</span></div><div class="stat"><b>' + rev + '</b><span>à revoir</span></div><div class="stat"><b>' + (allCards.length - sues - rev) + '</b><span>jamais vues</span></div><div class="stat"><b>' + Math.round(sues / allCards.length * 100) + ' %</b><span>du programme</span></div></div></section>' +
+    '<section class="sv-sec"><h2>Quiz</h2>' + (scored.length ? '<p class="mute">' + plural(scored.length, "chapitre") + ' avec un quiz · ' + moy + ' % de moyenne (meilleur score par chapitre)</p><div class="sv-list">' + (function () {
+      var rows = scored.slice().sort(function (a, b) { return sc[a.id] - sc[b.id]; }).map(function (c) {
+        return '<a class="sv-row" href="#' + c.id + '" style="--sub:' + col(c.sub) + '"><i></i><span>' + c.title + '</span><b class="' + (sc[c.id] >= 80 ? "good" : sc[c.id] < 50 ? "low" : "") + '">' + sc[c.id] + ' %</b></a>';
+      });
+      return (rows.length > 5 ? '<p class="sv-hint">Les plus faibles d’abord</p>' : "") + rows.slice(0, 5).join("") + (rows.length > 5 ? '<details class="sv-more"><summary>Voir les ' + (rows.length - 5) + ' autres chapitres</summary><div class="sv-list">' + rows.slice(5).join("") + '</div></details>' : "");
+    })() + '</div>' : '<p class="mute">Aucun quiz terminé pour l’instant.</p>') + '</section>' +
+    '<section class="sv-sec"><h2>Erreurs à retravailler <small>' + errs.length + '</small></h2>' + (errs.length ? (function () {
+      var rows = errs.map(function (e) { return '<div class="sv-err" style="--sub:' + col(e.c.sub) + '"><small>' + S[e.c.sub].name + ' · ' + e.c.title + '</small><p>' + e.q[0] + '</p><span>Bonne réponse : <b>' + e.q[1][0] + '</b></span></div>'; });
+      return '<div class="sv-errs">' + rows.slice(0, 4).join("") + (rows.length > 4 ? '<details class="sv-more"><summary>Voir les ' + (rows.length - 4) + ' autres erreurs</summary><div class="sv-errs">' + rows.slice(4).join("") + '</div></details>' : "") + '</div>';
+    })() : '<p class="mute">Aucune erreur en attente : toutes les questions ratées ont été retravaillées.</p>') + '</section>' +
+    '<section class="sv-sec"><h2>Mots cherchés <small>' + words.length + '</small></h2>' + (words.length ? '<div class="sv-words">' + words.slice(0, 40).map(function (w) { return '<span title="' + esc(strip(w.d || "")) + '">' + esc(w.w) + '</span>'; }).join("") + '</div>' : '<p class="mute">Aucun mot dans le carnet pour l’instant.</p>') + '</section>' +
+    (last ? '<section class="sv-sec"><h2>Dernier chapitre ouvert</h2><a class="sv-row" href="#' + last.id + '" style="--sub:' + col(last.sub) + '"><i></i><span>' + S[last.sub].name + ' · ' + last.title + '</span><b>Lire →</b></a></section>' : "") +
+    '<p class="sv-foot">Le suivi se met à jour tout seul toutes les 30 secondes. Tu ne peux rien modifier chez ' + first + '.</p>';
+}
+function parentSteps() {
+  var nm = USER ? esc(USER.name.split(" ")[0]) : "";
+  return [
+    { t: "Bienvenue" + (nm ? ", " + nm : "") + " !", d: "GWENA aide ton enfant à réviser le brevet. Avec ton compte parent, tu suis ses révisions <b>en lecture seule</b> : tu vois tout, sans rien pouvoir modifier.", v: '<div class="tv-go">👨‍👩‍👧</div>' },
+    { t: "Relie ton enfant", d: "Ton enfant ouvre son menu (le rond avec son initiale) et touche <b>« Inviter un parent »</b>. Tape le code affiché sur la page <b>Suivi</b> ou dans ton menu. Tu peux suivre plusieurs enfants.", v: '<div class="tv-code"><small>Code donné par ton enfant</small><b>K7P 2QX</b><span>Valable 24 h, une seule fois</span></div>' },
+    { t: "Le suivi", d: "Série de défis du jour et calendrier, progression par matière, flashcards sues, scores de quiz, erreurs à retravailler et mots cherchés. La page se met à jour toute seule.",
+      v: '<div class="tv-prog"><span class="avatar tv-av">L</span><div><b>Mathématiques</b><i><em style="width:62%"></em></i></div><div><b>Histoire-Géo</b><i><em style="width:35%;background:var(--hg)"></em></i></div></div>' },
+    { t: "Les cours", d: "L’onglet <b>Cours</b> donne accès à tous les résumés, cours, cartes mentales et schémas, pour savoir ce que ton enfant révise.", v: '<div class="tv-go">📚</div>' },
+    { t: "Notification et récap 🔔", d: "Dans ton menu, active la <b>notification du soir</b> : à 20 h si le défi du jour n’est pas fait. Si tu as donné ton e-mail, tu reçois un <b>récap chaque dimanche</b>.",
+      v: '<div class="tv-notif"><div class="tv-n"><span class="tv-n-ic">' + GLOGO + '</span><div><b>🔥 Défi du jour pas encore fait</b><span>Léa n’a pas encore fait le défi du jour. Il reste jusqu’à minuit pour garder la série !</span></div><small>20:00</small></div></div>' },
+    { t: "Astuce : comme une vraie appli", d: "Sur iPhone, ouvre le site dans Safari, touche le bouton <b>Partager</b>, puis <b>« Sur l’écran d’accueil »</b>. Indispensable pour recevoir la notification du soir.", v: '<div class="tv-home"><span class="tv-ico">' + GLOGO + '</span><b>GWENA</b></div>' }
+  ];
+}
 window.addEventListener("hashchange", function () { if (location.hash === "#acces" && ADMIN) { history.replaceState(null, "", location.pathname); openAccount(true); } });
 function showLogin() {
   document.body.classList.add("locked");
   var box = document.createElement("div");
   box.className = "auth"; document.body.appendChild(box);
-  var olds = rawGet("brevet:users", []).filter(function (u) { return !u.moved; }), mode = olds.length ? "new" : "login", busy = false;
+  var olds = rawGet("brevet:users", []).filter(function (u) { return !u.moved; }), mode = olds.length ? "new" : "login", busy = false, role = "eleve", mailV = "";
   function draw(msg) {
     var isNew = mode === "new";
     box.innerHTML = '<div class="auth-card">' +
       '<div class="auth-logo">' + GLOGO + 'GWENA</div>' +
       '<h1>' + (isNew ? "Créer ton compte" : "Bon retour !") + '</h1>' +
-      '<p class="auth-lead">' + (isNew ? "Un prénom et un mot de passe suffisent. Ton compte marche sur tous tes appareils." : "Connecte-toi pour retrouver ta progression, sur n’importe quel appareil.") + '</p>' +
+      '<p class="auth-lead">' + (!isNew ? "Connecte-toi pour retrouver ta progression, sur n’importe quel appareil." : role === "parent" ? "Suis les révisions de ton enfant : séries, flashcards, quiz et erreurs, en lecture seule." : "Un prénom et un mot de passe suffisent. Ton compte marche sur tous tes appareils.") + '</p>' +
       (olds.length ? '<p class="auth-new"><b>Nouveau : les comptes sont en ligne.</b> Crée ton compte avec le même prénom (' + olds.map(function (u) { return esc(u.name); }).join(", ") + ') : ta progression de cet appareil sera reprise automatiquement.</p>' : "") +
       '<div class="seg auth-seg"><button type="button" data-mode="login" class="' + (isNew ? "" : "on") + '">Se connecter</button><button type="button" data-mode="new" class="' + (isNew ? "on" : "") + '">Créer un compte</button></div>' +
       '<form id="auth-form" novalidate>' +
-        '<label class="field" for="auth-name">Prénom<input id="auth-name" autocomplete="username" autocapitalize="words" maxlength="30" required></label>' +
+        (isNew ? '<div class="seg auth-role" role="radiogroup" aria-label="Type de compte"><button type="button" data-role="eleve" class="' + (role === "eleve" ? "on" : "") + '">🎒&nbsp; Je suis élève</button><button type="button" data-role="parent" class="' + (role === "parent" ? "on" : "") + '">👨‍👩‍👧&nbsp; Je suis parent</button></div>' : "") +
+        '<label class="field" for="auth-name">' + (isNew && role === "parent" ? "Prénom et nom" : "Prénom") + '<input id="auth-name" autocomplete="username" autocapitalize="words" maxlength="40" required></label>' +
+        (isNew && role === "parent" ? '<label class="field" for="auth-mail">E-mail <small>pour le récap du dimanche (facultatif)</small><input id="auth-mail" type="email" autocomplete="email" inputmode="email" maxlength="120"></label>' : "") +
         '<label class="field" for="auth-pass">Mot de passe<input id="auth-pass" type="password" autocomplete="' + (isNew ? "new-password" : "current-password") + '" required></label>' +
         (isNew ? '<label class="field" for="auth-pass2">Confirme le mot de passe<input id="auth-pass2" type="password" autocomplete="new-password" required></label>' : "") +
         '<label class="toggle" for="auth-keep"><input type="checkbox" id="auth-keep" checked> Rester connecté pendant 5 jours</label>' +
@@ -9930,18 +10159,22 @@ function showLogin() {
       '<p class="auth-note">Ta progression est enregistrée en ligne et sur ton appareil : tu la retrouves partout avec ton prénom et ton mot de passe. Note bien ton mot de passe : il n’y a pas encore de récupération automatique.</p>' +
     '</div>';
     box.querySelector(".auth-seg").onclick = function (e) { var b = e.target.closest("[data-mode]"); if (b && !busy) { mode = b.dataset.mode; draw(); } };
+    var rs = box.querySelector(".auth-role"); if (rs) rs.onclick = function (e) { var b = e.target.closest("[data-role]"); if (!b || busy) return; var nm = box.querySelector("#auth-name").value; role = b.dataset.role; draw(); box.querySelector("#auth-name").value = nm; };
+    var me = box.querySelector("#auth-mail"); if (me) me.value = mailV;
     box.querySelector("#auth-form").onsubmit = function (e) {
       e.preventDefault();
       if (busy) return;
       if (!LS) return draw("Ton navigateur bloque l’enregistrement (navigation privée ?). Ouvre l’appli dans une fenêtre normale.");
       var nameEl = box.querySelector("#auth-name"), name = nameEl.value.trim().replace(/\s+/g, " "), pass = box.querySelector("#auth-pass").value, keep = box.querySelector("#auth-keep").checked;
-      if (!name) return draw("Indique ton prénom.");
+      var mailEl = box.querySelector("#auth-mail"); mailV = mailEl ? mailEl.value.trim() : "";
+      if (!name) return draw(role === "parent" && mode === "new" ? "Indique ton prénom et ton nom." : "Indique ton prénom.");
+      if (mailV && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mailV)) { draw("Cette adresse e-mail ne semble pas valide."); box.querySelector("#auth-name").value = name; return; }
       if (pass.length < 6) return draw("Le mot de passe doit contenir au moins 6 caractères.");
       if (mode === "new" && pass !== box.querySelector("#auth-pass2").value) return draw("Les deux mots de passe ne sont pas identiques.");
       if (navigator.onLine === false) return draw("Pas de connexion internet. Connecte-toi au réseau pour " + (mode === "new" ? "créer ton compte." : "te connecter la première fois."));
       busy = true; draw(); box.querySelector("#auth-name").value = name;
       var req = mode === "new"
-        ? sbReq("/auth/v1/signup", { method: "POST", body: { email: emailOf(name), password: pass, data: { name: name } } })
+        ? sbReq("/auth/v1/signup", { method: "POST", body: { email: emailOf(name), password: pass, data: role === "parent" ? { name: name, role: "parent", contact: mailV } : { name: name, role: "eleve" } } })
         : sbReq("/auth/v1/token?grant_type=password", { method: "POST", body: { email: emailOf(name), password: pass } });
       req.then(function (j) {
         if (!j || !j.access_token) throw new Error("no-token");
@@ -9966,11 +10199,12 @@ function openAccount(focusAdmin) {
   sheet.hidden = false; document.body.classList.add("wk-open");
   sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Compte en ligne · tous tes appareils</p></div></div>' +
     '<p class="wk-e acc-sync" id="acc-sync"></p>' +
-    '<div class="acc-streak"><span class="flame' + (streakInfo().today ? "" : " off") + '">' + FLAME + '</span><div><b>' + plural(streakInfo().n, "jour") + ' de suite</b><span>Record : ' + plural(streakInfo().best, "jour") + '</span></div></div>' + defiCal(5) + pushBlock() +
-    '<button type="button" class="btn" id="btn-sound">' + (soundOn() ? "🔊 Sons activés" : "🔇 Sons coupés") + '</button><button type="button" class="btn" id="btn-tuto">Revoir le tutoriel</button><a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a><button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
+    (PARENT ? kidsBlock() : '<div class="acc-streak"><span class="flame' + (streakInfo().today ? "" : " off") + '">' + FLAME + '</span><div><b>' + plural(streakInfo().n, "jour") + ' de suite</b><span>Record : ' + plural(streakInfo().best, "jour") + '</span></div></div>' + defiCal(5) + parentsBlock()) + pushBlock() +
+    '<button type="button" class="btn" id="btn-sound">' + (soundOn() ? "🔊 Sons activés" : "🔇 Sons coupés") + '</button><button type="button" class="btn" id="btn-tuto">Revoir le tutoriel</button>' + (PARENT ? "" : '<a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a>') + '<button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
   document.getElementById("btn-logout").onclick = function () { this.disabled = true; this.textContent = "Déconnexion…"; logout(); };
   syncBadge(); pushNow().then(syncBadge); bindPush(sheet.querySelector(".wk-body"));
   document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(false); };
+  if (PARENT) loadKidsBlock(); else loadParentsBlock();
   if (ADMIN) { var ab = document.createElement("div"); ab.innerHTML = adminBlock(); var acc = sheet.querySelector(".wk-body .acc-push") || sheet.querySelector(".wk-body #btn-sound"); acc.parentNode.insertBefore(ab.firstChild, acc); loadAdmin(focusAdmin); }
   document.getElementById("btn-sound").onclick = function () { var on = !soundOn(); rawSet("brevet:sound", on ? 1 : 0); this.textContent = on ? "🔊 Sons activés" : "🔇 Sons coupés"; if (on) softTap(); };
 }
@@ -10006,7 +10240,7 @@ function disablePush() {
 function testPush() {
   return currentSub().then(function (sub) {
     if (!sub) throw new Error("nosub");
-    return fetch(SB_URL + "/functions/v1/rappels", { method: "POST", headers: { "Content-Type": "application/json", apikey: SB_KEY }, body: JSON.stringify({ test: true, sub: sub.toJSON(), name: USER ? USER.name : "", days: store.get("defiDays", {}), slot: new Date().getHours() >= 17 ? 19 : 15 }) }).then(function (r) { return r.json(); });
+    return fetch(SB_URL + "/functions/v1/rappels", { method: "POST", headers: { "Content-Type": "application/json", apikey: SB_KEY }, body: JSON.stringify({ test: true, kind: PARENT ? "parent" : "eleve", kids: (KIDS || []).map(function (k) { return k.name; }), sub: sub.toJSON(), name: USER ? USER.name : "", days: store.get("defiDays", {}), slot: new Date().getHours() >= 17 ? 19 : 15 }) }).then(function (r) { return r.json(); });
   });
 }
 function refreshPush() {
@@ -10015,10 +10249,12 @@ function refreshPush() {
 }
 function pushBlock() {
   var on = pushSupported() && Notification.permission === "granted" && rawGet("brevet:push", null) === (USER && USER.id);
-  var h = '<div class="acc-push" id="acc-push"><b>🔔 Rappels du défi</b>';
+  var h = '<div class="acc-push" id="acc-push"><b>' + (PARENT ? "🔔 Notification du soir" : "🔔 Rappels du défi") + '</b>';
   if (!pushSupported() && IS_IOS && !STANDALONE) return h + '<p>Sur iPhone, les rappels marchent quand l’appli est sur l’écran d’accueil : dans Safari, touche <b>Partager</b> puis <b>« Sur l’écran d’accueil »</b>, ouvre l’appli depuis son icône et reviens ici.</p></div>';
   if (!pushSupported()) return h + '<p>Ce navigateur ne gère pas les notifications. Essaie avec Safari (iPhone, appli sur l’écran d’accueil) ou Chrome.</p></div>';
   if (Notification.permission === "denied") return h + '<p>Les notifications sont bloquées pour l’appli. Autorise-les dans les réglages du téléphone (Réglages → Notifications → GWENA), puis reviens ici.</p></div>';
+  if (on && PARENT) return h + '<p>✅ Activée : une notification à <b>20 h</b> si ton enfant n’a pas encore fait son défi du jour.</p><button type="button" class="link" data-push="off">Désactiver la notification</button><p class="acc-push-msg" hidden></p></div>';
+  if (!on && PARENT) return h + '<p>Reçois une notification à <b>20 h</b> si ton enfant n’a pas encore fait son défi du jour.</p><button type="button" class="btn btn-sub defi-push-on" data-push="on">Activer la notification</button><p class="acc-push-msg" hidden></p></div>';
   if (on) return h + '<p>✅ Activés : un rappel à <b>15 h</b> et à <b>19 h</b>, seulement si ton défi du jour n’est pas encore fait.</p><button type="button" class="link" data-push="off">Désactiver les rappels</button><p class="acc-push-msg" hidden></p></div>';
   return h + '<p>Reçois un rappel à <b>15 h</b> et à <b>19 h</b> si tu n’as pas encore fait ton défi du jour, pour ne jamais perdre ta flamme.</p><button type="button" class="btn btn-sub defi-push-on" data-push="on">Activer les rappels</button><p class="acc-push-msg" hidden></p></div>';
 }
@@ -10446,8 +10682,9 @@ function mountMap(root, c) {
    TUTO_V : à augmenter à chaque nouvelle fonctionnalité importante.
    Chaque étape porte « s » = version où elle est apparue (1 par défaut) :
    les comptes qui ont vu une version plus ancienne voient seulement les nouveautés. */
-var TUTO_V = 6;
+var TUTO_V = 7;
 function tutoSteps() {
+  if (PARENT) return parentSteps();
   var tiles = '<div class="tv-tiles">' + SUBJECTS.map(function (s) { return '<span style="background:' + col(s.id) + '"><b>' + s.code + '</b><i>' + s.name.split(" ")[0] + '</i></span>'; }).join("") + '</div>';
   return [
     { t: "Bienvenue" + (USER ? ", " + esc(USER.name) : "") + " !", d: "GWENA regroupe tout le programme de 3e : <b>52 chapitres</b> dans les 6 matières de l’examen. Voici un tour rapide de l’appli, en une minute.", v: tiles },
@@ -10473,6 +10710,8 @@ function tutoSteps() {
       v: '<div class="tv-search"><div class="tv-bar">🔍 pythagore</div><div class="tv-res"><small>Mathématiques · Pythagore</small><b>Le théorème de <mark>Pythagore</mark></b></div></div>' },
     { s: 6, t: "Ta progression, ton compte", d: "Ton compte est <b>en ligne</b> : connecte-toi avec ton prénom et ton mot de passe sur n’importe quel téléphone ou ordinateur, tu retrouves tout (flammes, cartes sues, scores, erreurs, carnet). Le rond avec ton initiale, en haut à droite, permet de <b>couper ou remettre les sons</b>, de te déconnecter ou de revoir ce tutoriel. La page <b>Examen</b> donne le calendrier et un plan de révision.",
       v: '<div class="tv-prog"><span class="avatar tv-av">' + esc(USER ? USER.name.charAt(0).toUpperCase() : "L") + '</span><div><b>Mathématiques</b><i><em style="width:62%"></em></i></div><div><b>Histoire-Géo</b><i><em style="width:35%;background:var(--hg)"></em></i></div></div>' },
+    { s: 7, t: "Un parent peut te suivre 👨‍👩‍👧", d: "Dans le rond avec ton initiale, touche <b>« Inviter un parent »</b> : un code s’affiche. Ton parent le tape dans son compte GWENA pour voir tes séries et tes progrès, <b>sans rien pouvoir modifier</b>. Tu peux le retirer quand tu veux.",
+      v: '<div class="tv-code"><small>Code à donner à ton parent</small><b>K7P 2QX</b><span>Valable 24 h, une seule fois</span></div>' },
     { t: "Astuce : comme une vraie appli", d: "Sur iPhone, ouvre le site dans Safari, touche le bouton <b>Partager</b>, puis <b>« Sur l’écran d’accueil »</b>. L’appli s’ouvre alors en plein écran, avec son icône.",
       v: '<div class="tv-home"><span class="tv-ico">' + GLOGO + '</span><b>GWENA</b></div>' },
     { t: "C’est parti !", d: "Conseil : commence par le <b>Résumé</b> d’un chapitre, lis le <b>Cours</b>, puis vérifie avec les <b>Flashcards</b> et le <b>Quiz</b>. Bonnes révisions !", v: '<div class="tv-go">🎯</div>' }
@@ -10517,15 +10756,15 @@ function streakInfo() {
 }
 var FLAME = '<span class="flame-svg" aria-hidden="true">🔥</span>';
 var WD = ["L", "M", "M", "J", "V", "S", "D"];
-function weekStrip() {
-  var days = defiDays(), t = new Date(), mon = addDays(t, -((t.getDay() + 6) % 7)), tk = dayKey(t);
+function weekStrip(dd) {
+  var days = dd || defiDays(), t = new Date(), mon = addDays(t, -((t.getDay() + 6) % 7)), tk = dayKey(t);
   return '<div class="wk-strip">' + WD.map(function (l, k) {
     var d = addDays(mon, k), key = dayKey(d), done = days[key] != null, fut = key > tk;
     return '<span class="ws' + (done ? " ws-on" : "") + (key === tk ? " ws-today" : "") + (fut ? " ws-fut" : "") + '"><small>' + l + '</small><i>' + (done ? FLAME : "") + '</i></span>';
   }).join("") + '</div>';
 }
-function defiCal(weeks) {
-  var days = defiDays(), t = new Date(), tk = dayKey(t), mon = addDays(t, -((t.getDay() + 6) % 7) - 7 * (weeks - 1)), cells = [], nDone = 0;
+function defiCal(weeks, dd) {
+  var days = dd || defiDays(), t = new Date(), tk = dayKey(t), mon = addDays(t, -((t.getDay() + 6) % 7) - 7 * (weeks - 1)), cells = [], nDone = 0;
   for (var k = 0; k < weeks * 7; k++) {
     var d = addDays(mon, k), key = dayKey(d), v = days[key], fut = key > tk;
     if (v != null) nDone++;
@@ -10836,11 +11075,18 @@ function countHtml() {
 document.addEventListener("click", function (e) { if (e.target.closest("[data-open-acc]")) openAccount(); });
 /* ---------- routeur ---------- */
 function setNav(k) {
+  if (PARENT && k === "home") k = "cours";
   Array.prototype.forEach.call(document.querySelectorAll(".nav a, .tabbar a"), function (a) { a.classList.toggle("on", a.dataset.nav === k); });
 }
 function route() {
   keyFn = null; document.body.classList.remove("defi-mode");
   var h = decodeURIComponent(location.hash.slice(1)), parts = h.split("-");
+  if (PARENT) {
+    app.style.setProperty("--sub", "var(--fg)");
+    if (/^(flashcards|quiz|defi|carnet)/.test(h)) { location.replace("#suivi"); return; }
+    if (h === "" || h === "suivi") { app.innerHTML = '<section class="wrap suivi" id="suivi"><p class="mute sv-load">Chargement du suivi…</p></section>'; setNav("suivi"); document.title = "Suivi · GWENA"; window.scrollTo(0, 0); mountSuivi(); return; }
+    if (h === "cours") { app.innerHTML = viewCours(); setNav("cours"); document.title = "Cours · GWENA"; window.scrollTo(0, 0); return; }
+  }
   app.style.setProperty("--sub", "var(--fg)");
   if (S[h]) {
     app.style.setProperty("--sub", col(h)); app.innerHTML = viewSubject(S[h]); setNav("home");
@@ -10914,6 +11160,8 @@ document.getElementById("logo-dots").innerHTML = GLOGO;
 window.addEventListener("hashchange", route);
 function reloadState() { known = store.get("known", {}); scores = store.get("scores", {}); missed = store.get("missed", {}); qmode = store.get("qmode", "10"); }
 function startApp() {
+  document.body.classList.add("app-on");
+  if (PARENT) setupParent();
   pullNow(true).then(function (changed) { if (changed) { reloadState(); var h = location.hash; if (!/^#?(quiz|flashcards|defi)/.test(h) || !document.querySelector(".df-body, .opt, .fc")) route(); } });
   document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") pushNow(true); else pullNow().then(function (ch) { if (ch) { reloadState(); if (!document.querySelector(".df-body, .opt.is-right, .fc")) route(); } }); });
   window.addEventListener("online", function () { pushNow(); });
