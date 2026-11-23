@@ -942,6 +942,20 @@ body.defi-mode .tabbar,body.defi-mode footer{display:none}
 .tv-defi-wk small{font-size:10px;font-weight:800;color:var(--mute)}
 .tv-defi-wk i{width:26px;height:26px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-style:normal;font-size:14px}
 .tv-defi-btn{background:#2FB344;color:#fff;border-radius:12px;padding:10px;text-align:center;font-weight:800;font-size:14px;box-shadow:0 3px 0 #1E8A31}
+main#app{overflow-x:clip}
+/* défi : variantes sombres */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .df-fb.ok{background:#0E2A16}
+  :root:not([data-theme="light"]) .df-fb.ko{background:#33110F}
+  :root:not([data-theme="light"]) .df-fb-t{color:#ececf0}
+  :root:not([data-theme="light"]) .df-more{color:#b4b4bc}
+  :root:not([data-theme="light"]) .df-fb.ok .df-fb-h b{color:#5BD975}
+  :root:not([data-theme="light"]) .df-fb.ko .df-fb-h b,:root:not([data-theme="light"]) .df-override{color:#FF7A72}
+  :root:not([data-theme="light"]) .dopt.sel:not(:disabled),:root:not([data-theme="light"]) .dpair.sel{color:#7DB8FF}
+  :root:not([data-theme="light"]) .dopt.is-wrong,:root:not([data-theme="light"]) .dpair.bad{color:#FF7A72}
+  :root:not([data-theme="light"]) .dopt.is-right,:root:not([data-theme="light"]) .dpair.matched{color:#5BD975}
+  :root:not([data-theme="light"]) .ws.ws-on i{background:#4A2A10}
+}
 </style>
 </head>
 <body>
@@ -7929,6 +7943,7 @@ var qmode = store.get("qmode", "10");
 function isTF(o) { return o.length === 2 && o.indexOf("Vrai") > -1 && o.indexOf("Faux") > -1; }
 
 /* ---------- index ---------- */
+function uniqBy(a, key) { var seen = {}; return a.filter(function (x) { var k = String(key(x)).replace(/<[^>]+>/g, "").toLowerCase().replace(/\s+/g, " ").trim(); if (seen[k]) return false; seen[k] = 1; return true; }); }
 var S = {}; SUBJECTS.forEach(function (s) { S[s.id] = s; });
 var CH = [], CHI = {};
 SUBJECTS.forEach(function (s) {
@@ -7936,7 +7951,9 @@ SUBJECTS.forEach(function (s) {
     var co = CO[c.id]; if (co) { if (co.cours) c.cours = co.cours; if (co.resume) c.resume = co.resume; if (co.schema) c.schema = c.schema.concat(co.schema); }
     if (CP[c.id]) c.cours = c.cours.concat(CP[c.id]);
     if (IMGS[c.id]) c.schema = IMGS[c.id].map(function (x) { return { type: "img", title: x.title, file: x.file, cap: x.cap }; }).concat(c.schema);
-    if (MO[c.id]) { if (MO[c.id].c) c.cards = c.cards.concat(MO[c.id].c); if (MO[c.id].q) c.quiz = c.quiz.concat(MO[c.id].q); } CH.push(c); CHI[c.id] = c; });
+    if (MO[c.id]) { if (MO[c.id].c) c.cards = c.cards.concat(MO[c.id].c); if (MO[c.id].q) c.quiz = c.quiz.concat(MO[c.id].q); }
+    c.cards = uniqBy(c.cards, function (x) { return x[0]; }); c.quiz = uniqBy(c.quiz, function (x) { return x[0] + "|" + x[1][0]; });
+    CH.push(c); CHI[c.id] = c; });
 });
 function cardsOf(c) { return c.cards.map(function (x, i) { return { id: c.id + "/" + i, q: x[0], a: x[1], sub: c.sub, chap: c.title }; }); }
 function quizOf(c) { return c.quiz.map(function (x, i) { return { id: c.id + "/" + i, q: x[0], opts: x[1], ex: x[2], sub: c.sub, chap: c.title }; }); }
@@ -9050,14 +9067,16 @@ function buildDefi(seed) {
     multi: function () {
       var c = fresh(P.maps, function (x) { return "m" + x.id; }), M = MAPS[c.id];
       var bi = rp(M.b.map(function (b, i) { return i; }).filter(function (i) { return M.b[i][1].length >= 2; }));
-      var good = rs(M.b[bi][1]).slice(0, Math.min(3, M.b[bi][1].length)), bad = rs(flat(M.b.filter(function (b, i) { return i !== bi; }), function (b) { return b[1]; })).slice(0, 5 - good.length);
+      var good = rs(M.b[bi][1]).slice(0, Math.min(3, M.b[bi][1].length)), inB = {}; M.b[bi][1].forEach(function (t) { inB[t] = 1; });
+      var bad = uniqBy(rs(flat(M.b.filter(function (b, i) { return i !== bi; }), function (b) { return b[1]; })).filter(function (t) { return !inB[t]; }), function (t) { return t; }).slice(0, 5 - good.length);
       return { k: "multi", sub: c.sub, chap: c.title, q: "Carte « " + M.c + " » : coche toutes les notions de la branche « " + M.b[bi][0] + " ».", opts: rs(good.map(function (t) { return { t: t, ok: true }; }).concat(bad.map(function (t) { return { t: t, ok: false }; }))) };
     },
     map: function () {
       var c = fresh(P.maps, function (x) { return "c" + x.id; }), M = MAPS[c.id], ids = rs(M.b.map(function (b, i) { return i; }));
       var show = ids.slice(0, 3).sort(function (a, b) { return a - b; }), rest = ids.slice(3);
       var hb = rp(show), hj = Math.floor(R() * M.b[hb][1].length), ans = M.b[hb][1][hj];
-      var bad = rs(flat(rest, function (i) { return M.b[i][1]; })).filter(function (t) { return t !== ans; }).slice(0, 3);
+      var vis = {}; show.forEach(function (i) { M.b[i][1].forEach(function (t) { vis[t] = 1; }); });
+      var bad = uniqBy(rs(flat(rest, function (i) { return M.b[i][1]; })).filter(function (t) { return t !== ans && !vis[t]; }), function (t) { return t; }).slice(0, 3);
       return { k: "map", sub: c.sub, chap: c.title, cid: c.id, q: "Complète la carte mentale", show: show, hb: hb, hj: hj, ans: ans, opts: rs([{ t: ans, ok: true }].concat(bad.map(function (t) { return { t: t, ok: false }; }))) };
     },
     photo: function () {
