@@ -550,6 +550,63 @@ footer{margin-top:56px;border-top:var(--bw) solid var(--fg)}
 .dg-img .dg-cap a{color:var(--link);font-weight:700;white-space:nowrap}
 .wk-big img{max-height:70vh;background:#fff}
 @media (max-width:760px){ .dimg img{max-height:360px} }
+
+/* ---------- Comptes ---------- */
+body.locked .top, body.locked main, body.locked .tabbar, body.locked footer{display:none}
+body.locked{padding-bottom:0}
+.auth{min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:max(28px, env(safe-area-inset-top,0px)) max(16px, env(safe-area-inset-right,0px)) 40px max(16px, env(safe-area-inset-left,0px))}
+.auth-card{width:100%;max-width:420px;display:flex;flex-direction:column;gap:14px;margin-top:4vh}
+.auth-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.03em}
+.auth-logo .logo-dots i{width:9px;height:9px}
+.auth-logo .logo-dots{grid-template-columns:repeat(3,9px)}
+.auth h1{font-size:clamp(2.2rem,9vw,3rem);font-weight:800;letter-spacing:-.045em;line-height:1;margin-top:18px}
+.auth-lead{color:var(--mute);font-size:16px}
+.auth-seg{width:100%;display:grid;grid-template-columns:1fr 1fr;margin-top:6px}
+.auth-users{display:flex;flex-wrap:wrap;gap:8px}
+.auth-av,.acc-av{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--fg);color:var(--bg);font-size:12px}
+#auth-form{display:flex;flex-direction:column;gap:12px}
+.field{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:var(--mute)}
+.field input{font:inherit;font-size:17px;font-weight:600;color:var(--fg);background:var(--bg);border:var(--bw) solid var(--fg);border-radius:var(--r-sm);padding:13px 14px;min-height:50px}
+.field input:focus{outline:3px solid var(--link);outline-offset:1px}
+.auth-err{background:color-mix(in srgb, var(--ko) 12%, transparent);color:var(--ko);border-radius:var(--r-sm);padding:10px 12px;font-size:14px;font-weight:700}
+.auth-go{min-height:54px;font-size:17px;border-radius:var(--r)}
+.auth-note{font-size:12px;color:var(--mute)}
+.acc{display:flex;gap:14px;align-items:center}
+.acc-av{width:52px;height:52px;font-size:24px;font-weight:800}
+.acc h3{padding-right:0}
+
+/* ---------- Barre d'actions et recherche ---------- */
+.top-act{display:flex;align-items:center;gap:8px;margin-left:8px}
+.srch-btn{display:flex;align-items:center;gap:8px;border:0;background:var(--soft);color:var(--mute);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer;min-height:38px}
+.srch-btn svg,.srch-bar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;flex:none}
+.avatar{width:38px;height:38px;border-radius:50%;border:0;background:var(--fg);color:var(--bg);font-weight:800;font-size:16px;cursor:pointer}
+.avatar:empty{display:none}
+.srch{position:fixed;inset:0;z-index:55;background:var(--bg);overflow:auto;padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))}
+.srch-top{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--hair);padding-top:env(safe-area-inset-top,0px);z-index:2}
+.srch-bar{display:flex;align-items:center;gap:10px;min-height:64px}
+.srch-bar svg{color:var(--mute);width:22px;height:22px}
+#srch-in{flex:1;min-width:0;font:inherit;font-size:18px;font-weight:600;color:var(--fg);background:var(--soft);border:0;border-radius:var(--r-sm);padding:12px 14px}
+#srch-in:focus{outline:3px solid var(--link);outline-offset:1px}
+.srch-x{flex:none}
+.srch-res{padding-block:10px 20px;max-width:760px}
+.srch-h{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:18px 0 8px}
+.srch-h small{background:var(--soft);border-radius:999px;padding:2px 8px;margin-left:6px;color:var(--fg)}
+.srch-list{display:flex;flex-direction:column;gap:8px}
+.srch-it,.srch-card{display:flex;flex-direction:column;gap:5px;text-align:left;width:100%;border:var(--bw) solid var(--hair);border-left:5px solid var(--sub);border-radius:var(--r);background:var(--bg);color:var(--fg);padding:12px 14px;font:inherit;cursor:pointer}
+.srch-card{cursor:default}
+.srch-it b,.srch-card b{font-size:16px;font-weight:800;line-height:1.3}
+.srch-sn,.srch-card > span:not(.pill){font-size:14px;color:var(--mute);line-height:1.45}
+.srch-go{font-size:13px;font-weight:700;color:var(--link);text-decoration:none;margin-top:2px}
+mark{background:color-mix(in srgb, #ffd60a 55%, transparent);color:inherit;border-radius:3px;padding:0 1px}
+.cs-hit{animation:hit 2.4s ease-out}
+@keyframes hit{0%,30%{background:color-mix(in srgb, #ffd60a 25%, transparent)}100%{background:transparent}}
+@media (hover:hover){ .srch-it:hover{border-color:var(--sub)} .srch-btn:hover{color:var(--fg)} }
+@media (max-width:760px){
+  .top-act{margin-left:auto}
+  .srch-btn span{display:none}
+  .srch-btn{width:38px;padding:0;justify-content:center}
+  .avatar{width:34px;height:34px;font-size:15px}
+}
 </style>
 </head>
 <body>
@@ -562,6 +619,10 @@ footer{margin-top:56px;border-top:var(--bw) solid var(--fg)}
       <a href="#quiz" data-nav="quiz">Quiz</a>
       <a href="#examen" data-nav="examen">L’examen</a>
     </nav>
+    <div class="top-act">
+      <button type="button" class="srch-btn" id="btn-search" aria-label="Rechercher"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg><span>Rechercher</span></button>
+      <button type="button" class="avatar" id="btn-user" aria-label="Mon compte"></button>
+    </div>
   </div>
   <div class="strip" id="strip"></div>
 </header>
@@ -6793,9 +6854,24 @@ var COVERS = window.BREVET_COVERS || {};
 var IMGS = window.BREVET_IMGS || {};
 
 /* ---------- stockage local (facultatif) ---------- */
+/* ---------- comptes (enregistrés sur l’appareil) ---------- */
+var LS = (function () { try { localStorage.setItem("__t", "1"); localStorage.removeItem("__t"); return localStorage; } catch (e) { return null; } })();
+function rawGet(k, d) { try { var v = LS && LS.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
+function rawSet(k, v) { try { if (LS) LS.setItem(k, JSON.stringify(v)); } catch (e) {} }
+var SESSION_DAYS = 5;
+function readSession() {
+  var s = null;
+  try { s = JSON.parse((LS && LS.getItem("brevet:session")) || "null"); } catch (e) {}
+  if (!s) { try { s = JSON.parse(sessionStorage.getItem("brevet:session") || "null"); } catch (e) {} }
+  if (!s || !s.id || (s.exp && s.exp < Date.now())) return null;
+  var u = rawGet("brevet:users", []).filter(function (x) { return x.id === s.id; })[0];
+  return u ? { id: u.id, name: u.name } : null;
+}
+var USER = readSession();
+var PREFIX = USER ? "brevet:u:" + USER.id + ":" : "brevet:anon:";
 var store = {
-  get: function (k, d) { try { var v = localStorage.getItem("brevet:" + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
-  set: function (k, v) { try { localStorage.setItem("brevet:" + k, JSON.stringify(v)); } catch (e) {} }
+  get: function (k, d) { return rawGet(PREFIX + k, d); },
+  set: function (k, v) { rawSet(PREFIX + k, v); }
 };
 var known = store.get("known", {});
 var scores = store.get("scores", {});
@@ -7156,7 +7232,7 @@ function viewHome() {
   var last = CHI[store.get("last", "")] || CH[0];
   return '' +
   '<section class="wrap hero">' +
-    '<div><p class="eyebrow">Diplôme national du brevet · Session 2027</p>' +
+    '<div><p class="eyebrow">' + (USER ? 'Bonjour ' + esc(USER.name) + ' · ' : '') + 'Brevet · Session 2027</p>' +
     '<h1>Tout le programme de 3<sup style="font-size:.45em">e</sup>.<br>Une page à la fois.</h1>' +
     '<p class="lead">Résumés, cours complets, schémas, flashcards et quiz pour les six matières de l’examen. Ta progression reste enregistrée sur ton appareil.</p>' +
     '<div class="row"><a class="btn" href="#quiz">Lancer un quiz express</a><a class="btn" href="#flashcards">Réviser les flashcards</a></div></div>' +
@@ -7296,6 +7372,174 @@ function viewExam() {
   '</ul></section>';
 }
 
+/* ---------- connexion ---------- */
+function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (x) { return ("0" + x.toString(16)).slice(-2); }).join(""); }
+function sha(t) { return crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)).then(hex); }
+function newSalt() { var a = new Uint8Array(16); crypto.getRandomValues(a); return hex(a.buffer); }
+function startSession(u, keep) {
+  try { sessionStorage.removeItem("brevet:session"); } catch (e) {}
+  if (LS) LS.removeItem("brevet:session");
+  if (keep) rawSet("brevet:session", { id: u.id, exp: Date.now() + SESSION_DAYS * 864e5 });
+  else { try { sessionStorage.setItem("brevet:session", JSON.stringify({ id: u.id })); } catch (e) { rawSet("brevet:session", { id: u.id, exp: Date.now() + 864e5 }); } }
+  location.reload();
+}
+function logout() {
+  try { sessionStorage.removeItem("brevet:session"); } catch (e) {}
+  if (LS) LS.removeItem("brevet:session");
+  location.hash = ""; location.reload();
+}
+function showLogin() {
+  document.body.classList.add("locked");
+  var box = document.createElement("div");
+  box.className = "auth"; document.body.appendChild(box);
+  var users = rawGet("brevet:users", []), mode = users.length ? "login" : "new";
+  function draw(msg) {
+    var isNew = mode === "new";
+    box.innerHTML = '<div class="auth-card">' +
+      '<div class="auth-logo"><span class="logo-dots">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("") + '</span>Objectif Brevet</div>' +
+      '<h1>' + (isNew ? "Créer ton compte" : "Bon retour !") + '</h1>' +
+      '<p class="auth-lead">' + (isNew ? "Un prénom et un mot de passe suffisent. Chaque compte garde sa propre progression." : "Connecte-toi pour retrouver ta progression.") + '</p>' +
+      '<div class="seg auth-seg"><button type="button" data-mode="login" class="' + (isNew ? "" : "on") + '">Se connecter</button><button type="button" data-mode="new" class="' + (isNew ? "on" : "") + '">Créer un compte</button></div>' +
+      (!isNew && users.length ? '<div class="auth-users">' + users.map(function (u) { return '<button type="button" class="chip" data-name="' + esc(u.name) + '"><b class="auth-av">' + esc(u.name.charAt(0).toUpperCase()) + '</b>' + esc(u.name) + '</button>'; }).join("") + '</div>' : "") +
+      '<form id="auth-form" novalidate>' +
+        '<label class="field" for="auth-name">Prénom<input id="auth-name" autocomplete="username" autocapitalize="words" maxlength="30" required></label>' +
+        '<label class="field" for="auth-pass">Mot de passe<input id="auth-pass" type="password" autocomplete="' + (isNew ? "new-password" : "current-password") + '" required></label>' +
+        (isNew ? '<label class="field" for="auth-pass2">Confirme le mot de passe<input id="auth-pass2" type="password" autocomplete="new-password" required></label>' : "") +
+        '<label class="toggle" for="auth-keep"><input type="checkbox" id="auth-keep" checked> Rester connecté pendant 5 jours</label>' +
+        '<p class="auth-err"' + (msg ? "" : " hidden") + '>' + (msg || "") + '</p>' +
+        '<button class="btn btn-fill auth-go">' + (isNew ? "Créer mon compte" : "Se connecter") + '</button>' +
+      '</form>' +
+      '<p class="auth-note">Les comptes et la progression sont enregistrés sur cet appareil uniquement. Il n’y a pas de récupération de mot de passe : si tu l’oublies, crée un nouveau compte.</p>' +
+    '</div>';
+    box.querySelector(".auth-seg").onclick = function (e) { var b = e.target.closest("[data-mode]"); if (b) { mode = b.dataset.mode; draw(); } };
+    Array.prototype.forEach.call(box.querySelectorAll("[data-name]"), function (b) { b.onclick = function () { box.querySelector("#auth-name").value = b.dataset.name; box.querySelector("#auth-pass").focus(); }; });
+    box.querySelector("#auth-form").onsubmit = function (e) {
+      e.preventDefault();
+      if (!LS || !window.crypto || !crypto.subtle) return draw("Ton navigateur bloque l’enregistrement (navigation privée ?). Ouvre l’appli dans une fenêtre normale.");
+      var name = box.querySelector("#auth-name").value.trim().replace(/\s+/g, " "), pass = box.querySelector("#auth-pass").value, keep = box.querySelector("#auth-keep").checked;
+      if (!name) return draw("Indique ton prénom.");
+      if (pass.length < 4) return draw("Le mot de passe doit contenir au moins 4 caractères.");
+      var key = norm(name), existing = users.filter(function (u) { return norm(u.name) === key; })[0];
+      if (mode === "new") {
+        if (pass !== box.querySelector("#auth-pass2").value) return draw("Les deux mots de passe ne sont pas identiques.");
+        if (existing) return draw("Ce prénom a déjà un compte sur cet appareil. Connecte-toi, ou ajoute une initiale (ex. « Léa M. »).");
+        var salt = newSalt();
+        sha(salt + pass).then(function (h) {
+          var u = { id: "u" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: name, salt: salt, hash: h, created: Date.now() };
+          if (!users.length) ["known", "scores", "missed", "seenQ", "qmode", "last"].forEach(function (k) { var v = LS.getItem("brevet:" + k); if (v != null) { LS.setItem("brevet:u:" + u.id + ":" + k, v); LS.removeItem("brevet:" + k); } });
+          users.push(u); rawSet("brevet:users", users);
+          startSession(u, keep);
+        });
+      } else {
+        if (!existing) return draw("Aucun compte « " + esc(name) + " » sur cet appareil. Vérifie l’orthographe ou crée un compte.");
+        sha(existing.salt + pass).then(function (h) { if (h === existing.hash) startSession(existing, keep); else draw("Mot de passe incorrect."); });
+      }
+    };
+    var first = box.querySelector("#auth-name"); if (first && !matchMedia("(hover:none)").matches) first.focus();
+  }
+  draw();
+}
+function openAccount() {
+  sheet.hidden = false; document.body.classList.add("wk-open");
+  sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Connecté sur cet appareil</p></div></div>' +
+    '<p class="wk-e">Ta progression (cartes sues, scores, erreurs) est enregistrée dans ce compte, sur cet appareil.</p>' +
+    '<button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
+  document.getElementById("btn-logout").onclick = logout;
+}
+
+/* ---------- recherche ---------- */
+var SIDX = null;
+function norm(t) { return String(t).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
+function plain(t) { return String(t).replace(/<svg[\s\S]*?<\/svg>/g, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(); }
+function sectionText(x) {
+  var a = [];
+  [x.p, x.l, x.p2].forEach(function (v) { if (v) a = a.concat(v); });
+  if (x.tab) { a = a.concat(x.tab.h); x.tab.r.forEach(function (r) { a = a.concat(r); }); }
+  if (x.code) a.push(x.code);
+  if (x.ex) { a.push(x.ex.q); a = a.concat(x.ex.s); }
+  if (x.warn) a.push(x.warn);
+  if (x.k) a.push(x.k);
+  return plain(a.join(" · "));
+}
+function buildIndex() {
+  SIDX = [];
+  CH.forEach(function (c) {
+    SIDX.push({ t: "chap", c: c, title: c.title, text: plain(c.resume.join(" ")) });
+    c.cours.forEach(function (x, k) { SIDX.push({ t: "sec", c: c, k: k, title: plain(x.h), text: sectionText(x) }); });
+    c.cards.forEach(function (x, i) { SIDX.push({ t: "card", c: c, i: i, title: plain(x[0]), q: plain(x[0]), a: plain(x[1]), text: plain(x[0] + " — " + x[1]) }); });
+  });
+  SIDX.forEach(function (e) { e.n = norm(e.text); e.nt = norm(e.title + " " + e.c.title + " " + e.c.tag); });
+}
+function searchAll(q) {
+  var terms = norm(q).split(/[^a-z0-9œæ²³]+/).filter(function (w) { return w.length > 1 || /\d/.test(w); });
+  if (!terms.length) return { terms: [], res: [] };
+  if (!SIDX) buildIndex();
+  var res = [];
+  SIDX.forEach(function (e) {
+    var all = e.n + " " + e.nt, ok = terms.every(function (w) { return all.indexOf(w) > -1; });
+    if (!ok) return;
+    var sc = 0;
+    terms.forEach(function (w) { if (e.nt.indexOf(w) > -1) sc += 6; sc += Math.min(4, e.n.split(w).length - 1); });
+    if (e.t === "chap") sc += 1;
+    res.push({ e: e, s: sc });
+  });
+  res.sort(function (a, b) { return b.s - a.s; });
+  return { terms: terms, res: res };
+}
+function hl(s, terms) { return s.split(/(\s+)/).map(function (w) { var n = norm(w); return terms.some(function (t) { return n.indexOf(t) > -1; }) ? "<mark>" + esc(w) + "</mark>" : esc(w); }).join(""); }
+function snip(e, terms) {
+  var t = e.text, i = Math.max(0, e.n.indexOf(terms[0])), st = Math.max(0, i - 70);
+  if (st) { var sp = t.indexOf(" ", st); st = sp > -1 && sp < i ? sp + 1 : st; }
+  var s = t.slice(st, st + 190);
+  return (st ? "… " : "") + hl(s, terms) + (st + 190 < t.length ? " …" : "");
+}
+var srch = document.createElement("div");
+srch.className = "srch"; srch.hidden = true;
+srch.innerHTML = '<div class="srch-top"><div class="wrap srch-bar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg><input id="srch-in" type="search" placeholder="Un mot, une notion, une date…" autocomplete="off" enterkeyhint="search" aria-label="Rechercher"><button type="button" class="link srch-x">Fermer</button></div></div><div class="wrap srch-res" id="srch-res"></div>';
+document.body.appendChild(srch);
+var srchIn = srch.querySelector("#srch-in"), srchRes = srch.querySelector("#srch-res"), srchT = null;
+var SUGG = ["Verdun", "Pythagore", "ADN", "subjonctif", "énergie cinétique", "de Gaulle", "volcan", "métaphore", "pH", "guerre froide"];
+function drawSearch() {
+  var q = srchIn.value.trim();
+  if (!q) { srchRes.innerHTML = '<p class="srch-h">Exemples</p><div class="chips">' + SUGG.map(function (s) { return '<button type="button" class="chip" data-q="' + esc(s) + '">' + esc(s) + '</button>'; }).join("") + '</div>'; return; }
+  var r = searchAll(q), terms = r.terms;
+  var cours = r.res.filter(function (x) { return x.e.t !== "card"; }), cards = r.res.filter(function (x) { return x.e.t === "card"; });
+  if (!r.res.length) { srchRes.innerHTML = '<div class="empty"><b>Aucun résultat pour « ' + esc(q) + ' ».</b><p class="mute">Essaie un autre mot, ou une orthographe plus simple.</p></div>'; return; }
+  srchRes.innerHTML =
+    (cours.length ? '<p class="srch-h">Cours <small>' + cours.length + '</small></p><div class="srch-list">' + cours.slice(0, 40).map(function (x) {
+      var e = x.e, s = S[e.c.sub];
+      return '<button type="button" class="srch-it" style="--sub:' + col(e.c.sub) + '" data-ch="' + e.c.id + '" data-tab="' + (e.t === "sec" ? "cours" : "resume") + '"' + (e.t === "sec" ? ' data-sec="' + e.k + '"' : "") + '>' +
+        '<span class="pill"><span>' + s.name + ' · ' + pad(e.c.n) + ' ' + esc(e.c.title) + '</span></span>' +
+        '<b>' + (e.t === "sec" ? hl(e.title, terms) : "Résumé du chapitre") + '</b><span class="srch-sn">' + snip(e, terms) + '</span></button>';
+    }).join("") + '</div>' : "") +
+    (cards.length ? '<p class="srch-h">Flashcards <small>' + cards.length + '</small></p><div class="srch-list">' + cards.slice(0, 40).map(function (x) {
+      var e = x.e;
+      return '<div class="srch-card" style="--sub:' + col(e.c.sub) + '"><span class="pill"><span>' + S[e.c.sub].name + ' · ' + esc(e.c.title) + '</span></span><b>' + hl(e.q, terms) + '</b><span>' + hl(e.a, terms) + '</span><a href="#flashcards-' + e.c.id + '" class="srch-go">Réviser les cartes du chapitre →</a></div>';
+    }).join("") + '</div>' : "") +
+    (cours.length > 40 || cards.length > 40 ? '<p class="note">Seuls les 40 premiers résultats de chaque type sont affichés : précise ta recherche.</p>' : "");
+}
+function openSearch() { srch.hidden = false; document.body.classList.add("wk-open"); drawSearch(); setTimeout(function () { srchIn.focus(); srchIn.select(); }, 30); }
+function closeSearch() { srch.hidden = true; document.body.classList.remove("wk-open"); }
+srchIn.addEventListener("input", function () { clearTimeout(srchT); srchT = setTimeout(drawSearch, 140); });
+srch.addEventListener("click", function (e) {
+  if (e.target.closest(".srch-x")) return closeSearch();
+  var sg = e.target.closest("[data-q]"); if (sg) { srchIn.value = sg.dataset.q; drawSearch(); return; }
+  if (e.target.closest(".srch-go")) { closeSearch(); return; }
+  var it = e.target.closest(".srch-it");
+  if (it) {
+    window.__goto = { tab: it.dataset.tab, sec: it.dataset.sec != null ? +it.dataset.sec : null };
+    closeSearch();
+    if (location.hash.slice(1) === it.dataset.ch) route(); else location.hash = it.dataset.ch;
+  }
+});
+document.addEventListener("keydown", function (e) {
+  if (!USER) return;
+  if (e.key === "Escape" && !srch.hidden) { closeSearch(); return; }
+  if (e.key === "/" && srch.hidden && !(e.target.closest && e.target.closest("input,textarea"))) { e.preventDefault(); openSearch(); }
+});
+document.getElementById("btn-search").onclick = openSearch;
+document.getElementById("btn-user").onclick = function () { if (USER) openAccount(); };
+
 /* ---------- routeur ---------- */
 function setNav(k) {
   Array.prototype.forEach.call(document.querySelectorAll(".nav a, .tabbar a"), function (a) { a.classList.toggle("on", a.dataset.nav === k); });
@@ -7311,7 +7555,8 @@ function route() {
     var c = CHI[h]; store.set("last", c.id);
     app.style.setProperty("--sub", col(c.sub)); app.innerHTML = viewChapter(c); setNav("home");
     document.title = c.title + " · Objectif Brevet";
-    var cur = "resume";
+    var go = window.__goto; window.__goto = null;
+    var cur = go ? go.tab : "resume";
     app.querySelector(".tabs").onclick = function (e) { var b = e.target.closest("[data-tab]"); if (b) { cur = b.dataset.tab; drawPanel(c, cur); } };
     document.getElementById("panel").addEventListener("click", function (e) {
       var g = e.target.closest("[data-goto]"); if (g) { cur = g.dataset.goto; drawPanel(c, cur); var t = document.querySelector(".tabs-wrap"); if (t) window.scrollTo({ top: t.offsetTop - 70, behavior: "smooth" }); return; }
@@ -7319,6 +7564,7 @@ function route() {
     });
     drawPanel(c, cur);
     loadCover(c);
+    if (go && go.sec != null) setTimeout(function () { var el = document.getElementById("cs" + go.sec); if (el) { el.scrollIntoView({ behavior: "smooth", block: "start" }); el.parentNode.classList.add("cs-hit"); } }, 120);
   } else if (parts[0] === "flashcards") {
     var fch = CHI[parts.slice(1).join("-")] || null;
     var f = fch ? fch.sub : S[parts[1]] ? parts[1] : "all";
@@ -7366,7 +7612,8 @@ function route() {
 document.getElementById("strip").innerHTML = SUBJECTS.map(function (s) { return '<a href="#' + s.id + '" style="background:' + col(s.id) + '" aria-label="' + s.name + '"></a>'; }).join("");
 document.getElementById("logo-dots").innerHTML = SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("");
 window.addEventListener("hashchange", route);
-route();
+if (USER) { document.getElementById("btn-user").textContent = USER.name.charAt(0).toUpperCase(); route(); }
+else showLogin();
 })();
 </script>
 </body>
