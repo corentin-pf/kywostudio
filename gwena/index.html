@@ -993,6 +993,20 @@ main#app{overflow-x:clip}
 .hero h1 sup{text-transform:none}
 .tabbar a span{letter-spacing:.02em}
 @media (max-width:760px){ .hero h1{font-size:min(2.05rem, calc((100vw - 32px) / 14.6))} }
+
+/* flashcards : la carte rentre dans le bouton, arrivée de la carte suivante, mélange du paquet */
+.deck-actions .btn{position:relative;z-index:6;transition:transform .2s cubic-bezier(.3,1.6,.5,1),box-shadow .2s}
+.deck-actions .btn.is-target{transform:scale(1.06);box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--fg)}
+.deck-actions .btn.is-gulp{animation:gulp .42s cubic-bezier(.3,1.5,.5,1)}
+@keyframes gulp{0%{transform:scale(1.08)}35%{transform:scale(.9,1.12)}70%{transform:scale(1.04,.96)}100%{transform:scale(1)}}
+.fc-enter-up{animation:fcUp .38s cubic-bezier(.2,.9,.3,1.15)}
+@keyframes fcUp{from{transform:translateY(26px) scale(.92);opacity:0}to{transform:none;opacity:1}}
+.fc-enter-pop{animation:fcPop .34s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes fcPop{from{transform:scale(.94)}to{transform:none}}
+.shf{position:fixed;z-index:60;pointer-events:none}
+.shf i{position:absolute;inset:0;border-radius:var(--r-lg);background:var(--bg);border:2px solid var(--fg);box-shadow:0 2px 8px rgba(0,0,0,.08);overflow:hidden}
+.shf i::before{content:"";position:absolute;inset:14px;border-radius:calc(var(--r-lg) - 8px);background:var(--c);opacity:.9}
+.shf i::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font-size:64px;font-weight:800;color:#fff}
 </style>
 </head>
 <body>
@@ -9327,7 +9341,8 @@ function diagram(d) {
 /* ---------- flashcards ---------- */
 function mountDeck(root, list, opt) {
   opt = opt || {};
-  var order = list.slice(), i = 0;
+  var order = list.slice(), i = 0, busy = false, enter = "";
+  var calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
   function draw() {
     if (!order.length) {
       root.innerHTML = '<div class="empty"><b>Aucune carte ici.</b><p class="mute">' + (opt.empty || "Change de filtre pour voir d’autres cartes.") + '</p></div>';
@@ -9348,10 +9363,64 @@ function mountDeck(root, list, opt) {
         '</span></button>' +
       '<div class="deck-actions"><button class="btn" data-act="no">✕ À revoir</button><button class="btn btn-fill" data-act="yes">✓ Je sais</button></div>' +
       '<div class="deck-foot"><button class="link" data-act="prev"' + (i ? "" : ' style="visibility:hidden"') + '>← Précédente</button><button class="link" data-act="shuffle">Mélanger le paquet</button></div>';
-    bindSwipe(root.querySelector(".fc"));
+    var fcEl = root.querySelector(".fc");
+    if (enter && !calm) { fcEl.classList.add("fc-enter-" + enter); fcEl.addEventListener("animationend", function () { fcEl.classList.remove("fc-enter-" + enter); }, { once: true }); }
+    enter = "";
+    bindSwipe(fcEl);
     linkify(root.querySelector(".fc-back"));
   }
-  function rate(a) { known[order[i].id] = a === "yes" ? 1 : 0; store.set("known", known); i++; draw(); if (opt.onChange) opt.onChange(); }
+  /* la carte « rentre » dans le bouton choisi, comme dans un dossier */
+  function rate(a) {
+    if (busy) return;
+    known[order[i].id] = a === "yes" ? 1 : 0; store.set("known", known); i++;
+    if (opt.onChange) opt.onChange();
+    var fc = root.querySelector(".fc"), btn = root.querySelector('[data-act="' + a + '"]');
+    if (calm || !fc || !btn || !fc.animate) { draw(); return; }
+    busy = true;
+    var r = fc.getBoundingClientRect(), b = btn.getBoundingClientRect();
+    var dx = b.left + b.width / 2 - (r.left + r.width / 2), dy = b.top + b.height / 2 - (r.top + r.height / 2);
+    var start = fc.style.transform || "none", s = Math.max(0.08, b.height / r.height * 0.7);
+    fc.style.transition = "none"; fc.style.zIndex = 5; fc.dataset.sw = "";
+    btn.classList.add("is-target");
+    var anim = fc.animate([
+      { transform: start, opacity: 1 },
+      { transform: "translate(" + (dx * 0.35) + "px," + (dy * 0.25 - 24) + "px) scale(.72) rotate(" + (a === "yes" ? 6 : -6) + "deg)", opacity: 1, offset: 0.4 },
+      { transform: "translate(" + dx + "px," + dy + "px) scale(" + s + ") rotate(0deg)", opacity: 0.15 }
+    ], { duration: 460, easing: "cubic-bezier(.45,0,.2,1)", fill: "forwards" });
+    anim.onfinish = function () {
+      btn.classList.remove("is-target"); void btn.offsetWidth; btn.classList.add("is-gulp");
+      setTimeout(function () { btn.classList.remove("is-gulp"); }, 420);
+      busy = false; enter = "up"; draw();
+      var nb = root.querySelector('[data-act="' + a + '"]'); if (nb) { nb.classList.add("is-gulp"); setTimeout(function () { nb.classList.remove("is-gulp"); }, 420); }
+    };
+  }
+  /* mélange : le paquet se coupe en deux et se mélange */
+  function shuffleAnim() {
+    if (busy) return;
+    order = shuffle(order); i = 0;
+    var fc = root.querySelector(".fc");
+    if (calm || !fc || !fc.animate) { draw(); return; }
+    busy = true;
+    var r = fc.getBoundingClientRect(), box = document.createElement("div"), n = 8, w = Math.min(r.width * 0.32, 120), cols = SUBJECTS.map(function (s) { return col(s.id); });
+    box.className = "shf"; box.style.cssText = "left:" + r.left + "px;top:" + r.top + "px;width:" + r.width + "px;height:" + r.height + "px";
+    document.body.appendChild(box);
+    fc.style.visibility = "hidden";
+    var done = 0;
+    for (var k = 0; k < n; k++) {
+      var c = document.createElement("i"); c.style.setProperty("--c", cols[k % cols.length]); c.style.zIndex = k; box.appendChild(c);
+      var side = k % 2 ? 1 : -1, y0 = -k * 1.5;
+      c.animate([
+        { transform: "translate(0," + y0 + "px) rotate(0deg)" },
+        { transform: "translate(" + (side * w) + "px," + (y0 - 10) + "px) rotate(" + (side * 9) + "deg)", offset: 0.28 },
+        { transform: "translate(" + (side * w * 0.2) + "px," + (-(n - k) * 1.5 - 18) + "px) rotate(" + (-side * 3) + "deg)", offset: 0.55 },
+        { transform: "translate(" + (-side * w * 0.8) + "px," + (-k * 1.5 - 6) + "px) rotate(" + (-side * 7) + "deg)", offset: 0.78 },
+        { transform: "translate(0,0) rotate(0deg)" }
+      ], { duration: 1000, delay: k * 35, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" }).onfinish = function () {
+        if (++done < n) return;
+        box.remove(); busy = false; enter = "pop"; draw();
+      };
+    }
+  }
   function bindSwipe(fc) {
     var x0 = null, y0 = 0, dx = 0, moved = false;
     fc.addEventListener("pointerdown", function (e) { x0 = e.clientX; y0 = e.clientY; dx = 0; moved = false; fc.style.transition = "none"; });
@@ -9364,7 +9433,7 @@ function mountDeck(root, list, opt) {
     function up() {
       if (x0 === null && !moved) return;
       x0 = null; fc.style.transition = "";
-      if (Math.abs(dx) > 90) { var a = dx > 0 ? "yes" : "no"; fc.style.transform = "translateX(" + (dx > 0 ? 700 : -700) + "px) rotate(" + (dx > 0 ? 20 : -20) + "deg)"; setTimeout(function () { rate(a); }, 160); }
+      if (Math.abs(dx) > 90) rate(dx > 0 ? "yes" : "no");
       else { fc.style.transform = ""; fc.dataset.sw = ""; }
     }
     fc.addEventListener("pointerup", up);
@@ -9377,7 +9446,7 @@ function mountDeck(root, list, opt) {
     if (a === "flip") b.classList.toggle("is-flipped");
     else if (a === "yes" || a === "no") rate(a);
     else if (a === "prev") { if (i > 0) { i--; draw(); } }
-    else if (a === "shuffle") { order = shuffle(order); i = 0; draw(); }
+    else if (a === "shuffle") shuffleAnim();
     else if (a === "again") { i = 0; draw(); }
     else if (a === "review") { order = list.filter(function (c) { return known[c.id] !== 1; }); i = 0; draw(); }
   };
