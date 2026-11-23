@@ -633,26 +633,27 @@ mark{background:color-mix(in srgb, #ffd60a 55%, transparent);color:inherit;borde
 /* ---------- Cartes mentales ---------- */
 .mm-bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
 .mm-score{font-weight:800;font-variant-numeric:tabular-nums}
+.mm-zoom{margin-left:auto;display:flex;gap:6px}
+.mm-zoom button{width:38px;height:38px;border-radius:50%;border:var(--bw) solid var(--fg);background:var(--bg);font-size:20px;font-weight:800;cursor:pointer;line-height:1}
 .mm-help{font-size:13px;color:var(--mute);margin:10px 0 12px}
-.mm-wrap{border:var(--bw) solid var(--hair);border-radius:var(--r-lg);background:var(--soft);padding:10px;overflow-x:auto}
-.mm-svg{display:block;width:100%;height:auto;min-width:300px}
-.mm-svg text{font:600 13px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:var(--fg)}
-.mm-center{fill:var(--fg)}
-.mm-svg .mm-ct{font-size:19px;font-weight:800;fill:var(--bg)}
-.mm-ln{fill:none;stroke:var(--sub);stroke-width:2;opacity:.6}
-.mm-main{stroke-width:3.5;opacity:.85}
+.mm-wrap{border:var(--bw) solid var(--hair);border-radius:var(--r-lg);background:#fffdf8;overflow:auto;-webkit-overflow-scrolling:touch;max-height:78vh}
+.mm-in{margin:0 auto}
+.mm-svg{display:block;width:100%;height:auto}
+.mm-svg text{font:600 14px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:#1b1b1f}
+.mm-svg .mm-bt{font-size:17px;font-weight:800}
+.mm-svg .mm-ico{font-size:24px}
+.mm-svg .mm-tg{fill:#fff;font-size:16px;font-weight:800}
+.mm-svg .mm-ct{fill:#fff;font-size:20px;font-weight:800}
+.mm-svg .mm-c-ico{font-size:52px}
+.mm-c-bg{fill:#fff;stroke-width:6}
 .mm-br{cursor:pointer}
-.mm-br rect{fill:var(--sub)}
-.mm-svg .mm-br text{fill:var(--on);font-size:15px;font-weight:800}
-.mm-svg .mm-br .mm-tg{font-size:18px}
-.mm-leaf rect{fill:var(--bg);stroke:var(--sub);stroke-width:1.5}
 .mm-q{cursor:pointer}
-.mm-q rect{stroke-dasharray:5 4;stroke-width:2;fill:var(--bg)}
-.mm-svg .mm-q text{font-weight:800;fill:var(--sub);font-size:16px}
-.mm-sel rect{fill:color-mix(in srgb, var(--sub) 18%, var(--bg));stroke-dasharray:none;stroke-width:3}
-.mm-ok rect{fill:var(--ok);stroke:var(--ok)}
-.mm-svg .mm-ok text{fill:var(--on);font-weight:800}
-.mm-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.mm-q rect{fill:#fff;stroke:var(--c);stroke-width:2;stroke-dasharray:5 4}
+.mm-svg .mm-q text{font-weight:800;fill:var(--c);font-size:17px}
+.mm-sel rect{fill:color-mix(in srgb, var(--c) 22%, #fff);stroke-dasharray:none;stroke-width:3}
+.mm-ok text{font-weight:800}
+.mm-svg .mm-ok text{fill:#178A3E}
+.mm-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;max-height:38vh;overflow:auto}
 .mm-opts .chip{cursor:pointer}
 .mm-bad{background:var(--ko)!important;border-color:var(--ko)!important;color:var(--on)!important;animation:shake .4s}
 @keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
@@ -661,10 +662,9 @@ mark{background:color-mix(in srgb, #ffd60a 55%, transparent);color:inherit;borde
 @media (max-width:760px){
   .tabs{grid-template-columns:repeat(6,1fr)}
   .tab{font-size:12px;padding:9px 0}
-  .mm-wrap{padding:4px;border-radius:var(--r)}
+  .mm-wrap{border-radius:var(--r);max-height:70vh}
   .mm-opts{position:sticky;bottom:calc(72px + env(safe-area-inset-bottom,0px));background:var(--bg);padding:10px 0;border-top:1px solid var(--hair)}
 }
-.mm-opts{max-height:38vh;overflow:auto}
 </style>
 </head>
 <body>
@@ -693,7 +693,7 @@ mark{background:color-mix(in srgb, #ffd60a 55%, transparent);color:inherit;borde
 </nav>
 <footer><div class="wrap foot"><span>Objectif Brevet · Programme de 3<sup>e</sup>, cycle 4</span><span>Ta progression est enregistrée sur cet appareil uniquement.</span></div></footer>
 <script>
-window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {}; var BREVET_COURS_PLUS = {}; var BREVET_MORE = {}; var BREVET_WIKI = {}; var BREVET_COVERS = {}; var BREVET_IMGS = {}; var BREVET_DICO = {}; var BREVET_MAPS = {};
+window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {}; var BREVET_COURS_PLUS = {}; var BREVET_MORE = {}; var BREVET_WIKI = {}; var BREVET_COVERS = {}; var BREVET_IMGS = {}; var BREVET_DICO = {}; var BREVET_MAPS = {}; var BREVET_MAP_ICONS = {};
 BREVET.fr = [
 {
   id: "fr-phrase", tag: "Grammaire", title: "La phrase complexe",
@@ -3933,6 +3933,62 @@ Object.assign(BREVET_MAPS, {
     ["Comparer", ["Fonction", "Énergie", "Matériaux"]],
     ["Protéger", ["Brevet 20 ans", "INPI"]] ] }
 });
+
+/* Pictogramme de chaque branche des cartes mentales (même ordre que les branches) */
+BREVET_MAP_ICONS = {
+  "fr-phrase": ["🧩", "📍", "🔗", "👉", "💬", "⏰"],
+  "fr-conjugaison": ["✅", "🤞", "🤔", "📣", "📖", "🔀"],
+  "fr-figures": ["🪞", "📢", "⚔️", "🤫", "🎵", "🧭"],
+  "fr-narration": ["🗣️", "👁️", "🗺️", "💬", "🎭", "🎬"],
+  "fr-orthographe": ["🔗", "🧍", "🎒", "✏️", "👂", "➕"],
+  "fr-redaction": ["📋", "🦄", "🧠", "🧱", "🔗", "⏱️"],
+  "fr-themes": ["🪞", "📢", "🌸", "✊", "🚀"],
+  "ma-pythagore": ["📐", "🟰", "➖", "✅", "❌", "💡"],
+  "ma-thales": ["📏", "🦋", "🟰", "✅", "🔍"],
+  "ma-trigo": ["📐", "🧮", "🗣️", "🎯", "💡"],
+  "ma-transformations": ["🪞", "🔄", "➡️", "🌀", "🔍", "🔒"],
+  "ma-espace": ["⬛", "🥫", "🍦", "⚽", "🔁", "🔪"],
+  "ma-fonctions": ["📈", "📏", "📉", "↗️", "🧮", "🎟️"],
+  "ma-proportionnalite": ["🔎", "🧮", "💯", "⚠️", "🗺️"],
+  "ma-calcul": ["🌱", "📦", "⭐", "🧹", "🧠"],
+  "ma-equations": ["⚖️", "0️⃣", "✌️", "↔️", "🧩"],
+  "ma-stats": ["➗", "🎯", "↔️", "🎲", "🌳", "📊"],
+  "ma-arithmetique": ["➗", "✔️", "💎", "🧱", "🍬"],
+  "ma-puissances": ["🔢", "🔟", "📜", "🔬", "💾"],
+  "hg-1gm": ["🧨", "🪖", "💀", "🏭", "🇺🇸", "🕊️"],
+  "hg-totalitarismes": ["📉", "🔴", "⚫", "📢", "🇫🇷"],
+  "hg-2gm": ["💥", "🌍", "❄️", "🔥", "🕯️", "🕊️"],
+  "hg-france-occupee": ["🏳️", "👴", "🤝", "✊", "🎉", "🗳️"],
+  "hg-guerre-froide": ["⚖️", "🛡️", "🧱", "🚀", "☢️", "🔨"],
+  "hg-decolonisation": ["🌍", "🤝", "⚔️", "🇩🇿", "🌐"],
+  "hg-ve-republique": ["📜", "🏛️", "🗳️", "🔄", "⚖️"],
+  "hg-societe": ["📈", "🏙️", "🧳", "♀️", "🎸", "⛽"],
+  "hg-territoires": ["🏙️", "🌆", "🏡", "🏭", "🌾"],
+  "hg-ue": ["🛤️", "👥", "🏝️", "🧱", "🇪🇺"],
+  "hg-emc": ["🤝", "🇫🇷", "📜", "🗳️", "🛡️"],
+  "svt-genetique": ["🧬", "🔬", "🧩", "🔀", "➗", "☀️"],
+  "svt-reproduction": ["🥚", "🔀", "👶", "🌱", "📅", "🛡️"],
+  "svt-evolution": ["🌍", "🗂️", "🔀", "🦕", "⚠️"],
+  "svt-immunite": ["🦠", "🧱", "⚡", "🎯", "🧠", "💉"],
+  "svt-nerveux": ["🧠", "⚡", "🔌", "💧", "🔥", "😴"],
+  "svt-terre": ["🌍", "🗺️", "📳", "🌋", "⚠️"],
+  "svt-climat": ["🌦️", "🌍", "🌡️", "🧊", "🌱"],
+  "svt-nutrition": ["🍎", "🍽️", "🧽", "❤️", "⚡", "🥗"],
+  "pc-matiere": ["🧊", "🔁", "⚖️", "⚛️", "➕", "💧"],
+  "pc-univers": ["💥", "🌌", "☀️", "🪐", "📏"],
+  "pc-transformations": ["🧪", "🟰", "🔎", "🍋", "🫧", "🔥"],
+  "pc-mouvement": ["🚆", "〰️", "⏱️", "🏎️", "🚦"],
+  "pc-forces": ["🤝", "➡️", "🍎", "⚖️", "🌙"],
+  "pc-energie": ["⚡", "♻️", "🚗", "💡", "☀️"],
+  "pc-electricite": ["🔋", "➖", "🔀", "📟", "📜", "⚠️"],
+  "pc-signaux": ["🔊", "〰️", "🎧", "💡", "🧮"],
+  "te-besoin": ["🙋", "🐮", "⚙️", "📋", "✏️"],
+  "te-chaines": ["📡", "⚡", "👁️", "⚙️", "🚪"],
+  "te-programmation": ["📝", "🔁", "📦", "🐱", "🔷"],
+  "te-materiaux": ["🧱", "🔬", "♻️", "🗑️", "🌱"],
+  "te-reseaux": ["🌐", "📶", "🏷️", "📦", "🔒"],
+  "te-innovation": ["📈", "💡", "📱", "⚖️", "🛡️"]
+};
 
 /* Cours complets : français */
 BREVET_COURS["fr-phrase"] = {
@@ -8388,13 +8444,26 @@ function bindCarnet(rev) {
   };
 }
 
-/* ---------- cartes mentales ---------- */
+/* ---------- cartes mentales (style organique) ---------- */
 var mctx = document.createElement("canvas").getContext("2d");
 function tw(t, size, bold) { mctx.font = (bold ? "800 " : "600 ") + size + 'px "Helvetica Neue", Helvetica, Arial, sans-serif'; return mctx.measureText(t).width; }
+var MM_ICONS = window.BREVET_MAP_ICONS || {};
+var MM_COLORS = ["#E5302A", "#F28C28", "#D9A400", "#2FA45C", "#2E86DE", "#8E44AD", "#E84393", "#14A3A3"];
+function bez(p0, p1, p2, p3, t) { var m = 1 - t; return [m * m * m * p0[0] + 3 * m * m * t * p1[0] + 3 * m * t * t * p2[0] + t * t * t * p3[0], m * m * m * p0[1] + 3 * m * m * t * p1[1] + 3 * m * t * t * p2[1] + t * t * t * p3[1]]; }
+function taper(p0, p1, p2, p3, w0, w1) {
+  var L = [], R = [], N = 26;
+  for (var k = 0; k <= N; k++) {
+    var t = k / N, a = bez(p0, p1, p2, p3, Math.max(0, t - 0.01)), b = bez(p0, p1, p2, p3, Math.min(1, t + 0.01)), p = bez(p0, p1, p2, p3, t);
+    var dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, w = (w0 + (w1 - w0) * Math.pow(t, 0.8)) / 2;
+    L.push([p[0] - dy / len * w, p[1] + dx / len * w]); R.push([p[0] + dy / len * w, p[1] - dx / len * w]);
+  }
+  var pts = L.concat(R.reverse());
+  return "M" + pts.map(function (q) { return q[0].toFixed(1) + " " + q[1].toFixed(1); }).join(" L") + "Z";
+}
 function mountMap(root, c) {
   var M = MAPS[c.id];
   if (!M) { root.innerHTML = '<div class="empty"><b>Carte mentale en préparation.</b></div>'; return; }
-  var st = { closed: {}, game: false, hidden: {}, sel: null, found: {}, errors: 0, opts: [] };
+  var icons = MM_ICONS[c.id] || [], st = { closed: {}, game: false, hidden: {}, sel: null, found: {}, errors: 0, opts: [], z: null, img: null };
   function leaves() { var a = []; M.b.forEach(function (br, i) { br[1].forEach(function (l, j) { a.push({ i: i, j: j, t: l }); }); }); return a; }
   function startGame() {
     var all = shuffle(leaves()), n = Math.max(4, Math.min(8, Math.round(all.length * 0.35)));
@@ -8404,79 +8473,92 @@ function mountMap(root, c) {
     draw();
   }
   function svg() {
-    var narrow = root.clientWidth < 640, out = [], W, H;
-    function leafLabel(i, j, t) { var k = i + "-" + j; return st.hidden[k] && !st.found[k] ? "?" : t; }
-    function leafCls(i, j) { var k = i + "-" + j; return st.hidden[k] ? (st.found[k] ? "mm-leaf mm-ok" : "mm-leaf mm-q" + (st.sel === k ? " mm-sel" : "")) : "mm-leaf"; }
-    if (narrow) {
-      W = 360; var y = 76;
-      out.push('<rect class="mm-center" x="8" y="8" width="344" height="50" rx="14"/><text class="mm-ct" x="180" y="39" text-anchor="middle">' + esc(M.c) + '</text>');
-      var lastY = 0;
-      M.b.forEach(function (br, i) {
-        var open = !st.closed[i];
-        out.push('<path class="mm-ln" d="M24 ' + (lastY || 58) + ' V' + (y + 18) + ' H40"/>');
-        out.push('<g class="mm-br" data-b="' + i + '"><rect x="40" y="' + y + '" width="312" height="36" rx="10"/><text x="54" y="' + (y + 23) + '">' + esc(br[0]) + '</text><text class="mm-tg" x="338" y="' + (y + 23) + '" text-anchor="end">' + (open ? "−" : "+") + '</text></g>');
-        lastY = y + 18; y += 44;
+    var rowH = 40, gap = 36, out = [], defs = [];
+    var right = [], left = [];
+    M.b.forEach(function (b, i) { (i < Math.ceil(M.b.length / 2) ? right : left).push(i); });
+    function blockH(i) { return (st.closed[i] ? 1 : Math.max(1, M.b[i][1].length)) * rowH; }
+    function sideH(ids) { return ids.reduce(function (a, i) { return a + blockH(i) + gap; }, -gap); }
+    function labW(i) { return tw(M.b[i][0], 17, true) + 34; }
+    function leafW(i) { return M.b[i][1].reduce(function (m, l) { return Math.max(m, tw(l, 14) + 14); }, 60); }
+    var reach = M.b.reduce(function (m, b, i) { return Math.max(m, 250 + labW(i) + 70 + (st.closed[i] ? 0 : leafW(i)) + 30); }, 520);
+    var W = Math.round(reach * 2), cx = W / 2, H = Math.max(sideH(right), sideH(left), 260) + 170, cy = H / 2 - 10;
+    [[right, 1], [left, -1]].forEach(function (side) {
+      var ids = side[0], dir = side[1], yy = cy - sideH(ids) / 2;
+      ids.forEach(function (i) {
+        var br = M.b[i], color = MM_COLORS[i % MM_COLORS.length], open = !st.closed[i], bh = blockH(i), by = yy + bh / 2;
+        var S = [cx + dir * 60, cy + (by - cy) * 0.18], E = [cx + dir * 250, by];
+        out.push('<path class="mm-trunk" fill="' + color + '" d="' + taper(S, [cx + dir * 140, cy + (by - cy) * 0.1], [cx + dir * 165, by + (by > cy ? -18 : 18)], E, 26, 7) + '"/>');
+        var lw = labW(i), lx2 = E[0] + dir * lw;
+        out.push('<g class="mm-br" data-b="' + i + '"><path d="M' + E[0] + ' ' + by + ' L' + lx2 + ' ' + by + '" stroke="' + color + '" stroke-width="7" stroke-linecap="round"/>' +
+          '<rect x="' + Math.min(E[0], lx2) + '" y="' + (by - 34) + '" width="' + lw + '" height="40" fill="transparent"/>' +
+          '<text class="mm-bt" x="' + (E[0] + dir * 6) + '" y="' + (by - 11) + '" text-anchor="' + (dir > 0 ? "start" : "end") + '" fill="' + color + '">' + esc(br[0]) + '</text>' +
+          '<circle cx="' + (lx2 + dir * 4) + '" cy="' + by + '" r="11" fill="' + color + '"/><text class="mm-tg" x="' + (lx2 + dir * 4) + '" y="' + (by + 5) + '" text-anchor="middle">' + (open ? "−" : "+") + '</text></g>');
+        if (icons[i]) out.push('<text class="mm-ico" x="' + (E[0] - dir * 6) + '" y="' + (by - 14) + '" text-anchor="' + (dir > 0 ? "end" : "start") + '">' + icons[i] + '</text>');
         if (open) {
-          var ly0 = y - 8;
+          var T = [lx2 + dir * 18, by];
           br[1].forEach(function (l, j) {
-            out.push('<path class="mm-ln mm-lnl" d="M58 ' + ly0 + ' V' + (y + 15) + ' H70"/>');
-            out.push('<g class="' + leafCls(i, j) + '" data-l="' + i + "-" + j + '"><rect x="70" y="' + y + '" width="282" height="30" rx="8"/><text x="82" y="' + (y + 20) + '">' + esc(leafLabel(i, j, l)) + '</text></g>');
-            y += 36;
+            var ly = yy + j * rowH + rowH / 2 + 6, k = i + "-" + j, hid = st.hidden[k] && !st.found[k], lab = hid ? "?" : l, w = hid ? 70 : tw(l, 14) + 14;
+            var P = [T[0] + dir * 58, ly];
+            out.push('<path fill="' + color + '" opacity=".75" d="' + taper(T, [T[0] + dir * 28, by], [T[0] + dir * 24, ly], P, 6, 2.2) + '"/>');
+            var x2 = P[0] + dir * w, cls = st.hidden[k] ? (st.found[k] ? "mm-lf mm-ok" : "mm-lf mm-q" + (st.sel === k ? " mm-sel" : "")) : "mm-lf";
+            out.push('<g class="' + cls + '" data-l="' + k + '" style="--c:' + color + '">' +
+              (hid ? '<rect x="' + Math.min(P[0], x2) + '" y="' + (ly - 26) + '" width="' + w + '" height="30" rx="9"/>' : "") +
+              '<path d="M' + P[0] + ' ' + ly + ' L' + x2 + ' ' + ly + '" stroke="' + color + '" stroke-width="2.4" stroke-linecap="round"/>' +
+              '<text x="' + (hid ? (P[0] + x2) / 2 : P[0] + dir * 7) + '" y="' + (ly - 7) + '" text-anchor="' + (hid ? "middle" : dir > 0 ? "start" : "end") + '">' + esc(lab) + '</text></g>');
           });
-          y += 6;
         }
+        yy += bh + gap;
       });
-      H = y + 6;
-    } else {
-      W = 1100; var cx = 550, rowH = 38, gap = 22;
-      var right = M.b.map(function (b, i) { return i; }).slice(0, Math.ceil(M.b.length / 2)), left = M.b.map(function (b, i) { return i; }).slice(Math.ceil(M.b.length / 2));
-      function sideH(ids) { return ids.reduce(function (a, i) { return a + (st.closed[i] ? 1 : Math.max(1, M.b[i][1].length)) * rowH + gap; }, -gap); }
-      H = Math.max(sideH(right), sideH(left), 120) + 60; var cy = H / 2;
-      var cw = Math.min(260, tw(M.c, 20, true) + 48);
-      [[right, 1], [left, -1]].forEach(function (side) {
-        var ids = side[0], dir = side[1], yy = cy - sideH(ids) / 2;
-        ids.forEach(function (i) {
-          var br = M.b[i], open = !st.closed[i], rows = open ? Math.max(1, br[1].length) : 1, by = yy + rows * rowH / 2;
-          var bw = Math.min(200, tw(br[0], 15, true) + 44), bx = cx + dir * 215 - bw / 2;
-          out.push('<path class="mm-ln mm-main" style="stroke:' + col(c.sub) + '" d="M' + (cx + dir * cw / 2) + ' ' + cy + ' C' + (cx + dir * 150) + ' ' + cy + ' ' + (cx + dir * 140) + ' ' + by + ' ' + (bx + (dir > 0 ? 0 : bw)) + ' ' + by + '"/>');
-          out.push('<g class="mm-br" data-b="' + i + '"><rect x="' + bx + '" y="' + (by - 17) + '" width="' + bw + '" height="34" rx="10"/><text x="' + (bx + bw / 2 - 6) + '" y="' + (by + 5) + '" text-anchor="middle">' + esc(br[0]) + '</text><text class="mm-tg" x="' + (bx + bw - 12) + '" y="' + (by + 5) + '" text-anchor="middle">' + (open ? "−" : "+") + '</text></g>');
-          if (open) br[1].forEach(function (l, j) {
-            var ly = yy + j * rowH + rowH / 2, lab = leafLabel(i, j, l), lw = Math.max(46, tw(lab, 13) + 24), lx = dir > 0 ? cx + 330 : cx - 330 - lw;
-            out.push('<path class="mm-ln" style="stroke:' + col(c.sub) + '" d="M' + (dir > 0 ? bx + bw : bx) + ' ' + by + ' C' + (cx + dir * 310) + ' ' + by + ' ' + (cx + dir * 300) + ' ' + ly + ' ' + (dir > 0 ? lx : lx + lw) + ' ' + ly + '"/>');
-            out.push('<g class="' + leafCls(i, j) + '" data-l="' + i + "-" + j + '"><rect x="' + lx + '" y="' + (ly - 14) + '" width="' + lw + '" height="28" rx="8"/><text x="' + (lx + lw / 2) + '" y="' + (ly + 5) + '" text-anchor="middle">' + esc(lab) + '</text></g>');
-          });
-          yy += rows * rowH + gap;
-        });
-      });
-      out.push('<rect class="mm-center" x="' + (cx - cw / 2) + '" y="' + (cy - 30) + '" width="' + cw + '" height="60" rx="18"/><text class="mm-ct" x="' + cx + '" y="' + (cy + 7) + '" text-anchor="middle">' + esc(M.c) + '</text>');
-    }
-    return '<svg class="mm-svg" viewBox="0 0 ' + W + ' ' + H + '" style="--sub:' + col(c.sub) + '" role="img" aria-label="Carte mentale : ' + esc(M.c) + '">' + out.join("") + '</svg>';
+    });
+    var R = 70;
+    defs.push('<clipPath id="mmclip-' + c.id + '"><circle cx="' + cx + '" cy="' + cy + '" r="' + (R - 5) + '"/></clipPath>');
+    out.push('<circle cx="' + cx + '" cy="' + cy + '" r="' + R + '" class="mm-c-bg" style="stroke:' + col(c.sub) + '"/>');
+    if (st.img) out.push('<image href="' + esc(st.img) + '" x="' + (cx - R) + '" y="' + (cy - R) + '" width="' + 2 * R + '" height="' + 2 * R + '" preserveAspectRatio="xMidYMid slice" clip-path="url(#mmclip-' + c.id + ')"/>');
+    else out.push('<text class="mm-c-ico" x="' + cx + '" y="' + (cy + 16) + '" text-anchor="middle">' + (icons[0] || "★") + '</text>');
+    var tW = tw(M.c, 20, true) + 36;
+    out.push('<rect x="' + (cx - tW / 2) + '" y="' + (cy + R - 14) + '" width="' + tW + '" height="40" rx="20" style="fill:' + col(c.sub) + '"/><text class="mm-ct" x="' + cx + '" y="' + (cy + R + 13) + '" text-anchor="middle">' + esc(M.c) + '</text>');
+    return { w: W, h: H, s: '<svg class="mm-svg" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Carte mentale : ' + esc(M.c) + '"><defs>' + defs.join("") + '</defs>' + out.join("") + '</svg>' };
   }
   function draw() {
-    var total = Object.keys(st.hidden).length, done = Object.keys(st.found).length;
+    var total = Object.keys(st.hidden).length, done = Object.keys(st.found).length, g = svg(), narrow = root.clientWidth < 700;
+    var fit = Math.min(1, (root.clientWidth - 4) / g.w);
+    if (st.z === null) st.z = fit;
+    var keepX = root.querySelector(".mm-wrap") ? root.querySelector(".mm-wrap").scrollLeft : null;
     root.innerHTML = '<div class="mm-bar">' + (st.game
       ? '<span class="mm-score">' + done + ' / ' + total + ' trouvées' + (st.errors ? ' · ' + st.errors + ' erreur' + (st.errors > 1 ? "s" : "") : "") + '</span><button type="button" class="btn" data-mm="quit">Quitter le jeu</button>'
-      : '<button type="button" class="btn btn-sub" data-mm="game">Jouer : complète la carte</button><button type="button" class="link" data-mm="open">Tout déplier</button><button type="button" class="link" data-mm="close">Tout replier</button>') + '</div>' +
-      (st.game ? '<p class="mm-help">' + (done === total ? "" : st.sel ? "Choisis la bonne réponse ci-dessous." : "Touche une case « ? », puis la bonne réponse.") + '</p>' : '<p class="mm-help">Touche une branche pour la déplier ou la replier.</p>') +
-      '<div class="mm-wrap">' + svg() + '</div>' +
+      : '<button type="button" class="btn btn-sub" data-mm="game">Jouer : complète la carte</button><button type="button" class="link" data-mm="open">Tout déplier</button><button type="button" class="link" data-mm="close">Tout replier</button>') +
+      '<span class="mm-zoom"><button type="button" data-mm="zout" aria-label="Dézoomer">−</button><button type="button" data-mm="zin" aria-label="Zoomer">+</button></span></div>' +
+      '<p class="mm-help">' + (st.game ? (done === total ? "" : st.sel ? "Choisis la bonne réponse ci-dessous." : "Touche une case « ? », puis la bonne réponse.") : (narrow ? (st.z <= fit + 0.01 ? "Vue d’ensemble : touche + pour zoomer et lire, puis fais glisser." : "Fais glisser pour explorer · − pour revoir toute la carte.") : "Touche une branche pour la replier ou la déplier.")) + '</p>' +
+      '<div class="mm-wrap"><div class="mm-in" style="width:' + Math.round(g.w * st.z) + 'px">' + g.s + '</div></div>' +
       (st.game ? (done === total
         ? '<div class="mm-end"><b>Bravo, carte complétée !</b><span>' + (st.errors ? st.errors + " erreur" + (st.errors > 1 ? "s" : "") + " en chemin." : "Sans aucune erreur.") + '</span><button type="button" class="btn btn-sub" data-mm="game">Rejouer avec d’autres cases</button></div>'
         : '<div class="mm-opts">' + st.opts.map(function (o, k) { return '<button type="button" class="chip" data-opt="' + k + '">' + esc(o) + '</button>'; }).join("") + '</div>') : "");
+    var wrap = root.querySelector(".mm-wrap");
+    wrap.scrollLeft = keepX !== null ? keepX : Math.max(0, (g.w * st.z - wrap.clientWidth) / 2);
   }
   root.onclick = function (e) {
     var b = e.target.closest("[data-mm]");
-    if (b) { var a = b.dataset.mm; if (a === "game") startGame(); else if (a === "quit") { st.game = false; st.hidden = {}; draw(); } else if (a === "open") { st.closed = {}; draw(); } else if (a === "close") { M.b.forEach(function (x, i) { st.closed[i] = true; }); draw(); } return; }
+    if (b) {
+      var a = b.dataset.mm, wrap = root.querySelector(".mm-wrap"), mid = wrap ? (wrap.scrollLeft + wrap.clientWidth / 2) / (wrap.scrollWidth || 1) : 0.5;
+      if (a === "game") startGame();
+      else if (a === "quit") { st.game = false; st.hidden = {}; draw(); }
+      else if (a === "open") { st.closed = {}; draw(); }
+      else if (a === "close") { M.b.forEach(function (x, i) { st.closed[i] = true; }); draw(); }
+      else if (a === "zin" || a === "zout") { var fitZ = Math.min(1, (root.clientWidth - 4) / (root.querySelector('.mm-svg').viewBox.baseVal.width || 1000)); st.z = Math.max(fitZ, Math.min(1.6, st.z * (a === "zin" ? 1.5 : 1 / 1.5))); draw(); var w2 = root.querySelector(".mm-wrap"); w2.scrollLeft = mid * w2.scrollWidth - w2.clientWidth / 2; w2.scrollTop = (w2.scrollHeight - w2.clientHeight) / 2; }
+      return;
+    }
     var br = e.target.closest(".mm-br"); if (br && !st.game) { var i = +br.dataset.b; st.closed[i] = !st.closed[i]; draw(); return; }
     var lf = e.target.closest(".mm-q"); if (lf && st.game) { st.sel = lf.dataset.l; draw(); return; }
     var op = e.target.closest("[data-opt]");
     if (op && st.game) {
-      if (!st.sel) { var first = Object.keys(st.hidden).filter(function (k) { return !st.found[k]; })[0]; st.sel = first; }
+      if (!st.sel) st.sel = Object.keys(st.hidden).filter(function (k) { return !st.found[k]; })[0];
       var txt = st.opts[+op.dataset.opt];
       if (st.hidden[st.sel] === txt) { st.found[st.sel] = true; st.opts.splice(+op.dataset.opt, 1); st.sel = null; draw(); }
       else { st.errors++; op.classList.add("mm-bad"); var sc = root.querySelector(".mm-score"); if (sc) sc.textContent = Object.keys(st.found).length + " / " + Object.keys(st.hidden).length + " trouvées · " + st.errors + " erreur" + (st.errors > 1 ? "s" : ""); setTimeout(function () { op.classList.remove("mm-bad"); }, 500); }
     }
   };
   draw();
+  if (COVERS[c.id]) wkFetch(COVERS[c.id]).then(function (d) { var im = wkImg(d); if (im && document.body.contains(root)) { st.img = im; draw(); } });
 }
 
 /* ---------- routeur ---------- */
