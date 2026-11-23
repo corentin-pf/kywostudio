@@ -982,6 +982,11 @@ main#app{overflow-x:clip}
 .chip.chip-sub.on::before{content:"✓";font-weight:800}
 @media (hover:hover){ .chip.chip-sub:not(.on):hover{background:var(--sub);filter:brightness(1.08)} }
 .chips:has(.chip-sub){padding-block:5px;margin-top:9px}
+
+/* accueil : titre sur une ligne, petit texte plus discret */
+.hero h1{white-space:nowrap;font-size:clamp(2.3rem,4.4vw,4rem)}
+.hero-lead{font-size:15px;line-height:1.35}
+@media (max-width:760px){ .hero h1{font-size:min(2.05rem, calc((100vw - 32px) / 12.4))} .hero-lead{font-size:14px;line-height:1.35} }
 </style>
 </head>
 <body>
@@ -8429,8 +8434,8 @@ function viewHome() {
   return '' +
   '<section class="wrap hero">' +
     '<div><p class="eyebrow">' + (USER ? 'Bonjour ' + esc(USER.name) + ' · ' : '') + 'Brevet · Session 2027</p>' +
-    '<h1>Tout le programme de 3<sup style="font-size:.45em">e</sup>.<br>Une page à la fois.</h1>' +
-    '<p class="lead">Résumés, cours complets, schémas, flashcards et quiz pour les six matières de l’examen. Ta progression te suit sur tous tes appareils.</p>' +
+    '<h1>Tout le programme de 3<sup style="font-size:.45em">e</sup>.</h1>' +
+    '<p class="lead hero-lead">Résumés, cours complets, schémas, flashcards et quiz pour les six matières de l’examen.</p>' +
     defiCard() + '</div>' +
     countHtml() +
   '</section>' +
