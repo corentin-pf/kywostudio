@@ -1,6 +1,10 @@
 {
   "cleanUrls": true,
   "trailingSlash": true,
+  "redirects": [
+    { "source": "/revisions-laureline-brevet", "destination": "/gwena/", "permanent": true },
+    { "source": "/revisions-laureline-brevet/:path*", "destination": "/gwena/:path*", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/assets/fonts/(.*)",

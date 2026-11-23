@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Objectif Brevet</title>
+<title>GWENA</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Brevet">
+<meta name="apple-mobile-web-app-title" content="GWENA">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="manifest" href="/revisions-laureline-brevet/manifest.json">
-<link rel="icon" href="/revisions-laureline-brevet/icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/revisions-laureline-brevet/apple-touch-icon.png">
+<link rel="manifest" href="/gwena/manifest.json">
+<link rel="icon" href="/gwena/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/gwena/apple-touch-icon.png">
 <style>
 :root{padding-top:env(safe-area-inset-top,0px)}
 body{margin:0}
@@ -981,7 +981,7 @@ main#app{overflow-x:clip}
 <body>
 <header class="top">
   <div class="wrap top-in">
-    <a class="logo" href="#"><span class="logo-dots" id="logo-dots"></span>Objectif Brevet</a>
+    <a class="logo" href="#"><span class="logo-dots" id="logo-dots"></span>GWENA</a>
     <nav class="nav" aria-label="Navigation principale">
       <a href="#" data-nav="home">Matières</a>
       <a href="#flashcards" data-nav="flashcards">Flashcards</a>
@@ -1002,7 +1002,7 @@ main#app{overflow-x:clip}
   <a href="#quiz" data-nav="quiz"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.3l2.4 2.4 4.8-5"/></svg><span>Quiz</span></a>
   <a href="#examen" data-nav="examen"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>L’examen</span></a>
 </nav>
-<footer><div class="wrap foot"><span>Objectif Brevet · Programme de 3<sup>e</sup>, cycle 4</span><span>Ta progression est enregistrée sur cet appareil uniquement.</span></div></footer>
+<footer><div class="wrap foot"><span>GWENA · Programme de 3<sup>e</sup>, cycle 4</span><span>Ta progression est enregistrée en ligne avec ton compte.</span></div></footer>
 <script>
 window.BREVET = {}; var BREVET = window.BREVET; var BREVET_EXTRA = {}; var BREVET_COURS = {}; var BREVET_COURS_PLUS = {}; var BREVET_MORE = {}; var BREVET_WIKI = {}; var BREVET_COVERS = {}; var BREVET_IMGS = {}; var BREVET_DICO = {}; var BREVET_MAPS = {}; var BREVET_MAP_ICONS = {};
 BREVET.fr = [
@@ -8600,7 +8600,7 @@ function showLogin() {
   function draw(msg) {
     var isNew = mode === "new";
     box.innerHTML = '<div class="auth-card">' +
-      '<div class="auth-logo"><span class="logo-dots">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("") + '</span>Objectif Brevet</div>' +
+      '<div class="auth-logo"><span class="logo-dots">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("") + '</span>GWENA</div>' +
       '<h1>' + (isNew ? "Créer ton compte" : "Bon retour !") + '</h1>' +
       '<p class="auth-lead">' + (isNew ? "Un prénom et un mot de passe suffisent. Ton compte marche sur tous tes appareils." : "Connecte-toi pour retrouver ta progression, sur n’importe quel appareil.") + '</p>' +
       (olds.length ? '<p class="auth-new"><b>Nouveau : les comptes sont en ligne.</b> Crée ton compte avec le même prénom (' + olds.map(function (u) { return esc(u.name); }).join(", ") + ') : ta progression de cet appareil sera reprise automatiquement.</p>' : "") +
@@ -8702,7 +8702,7 @@ function pushBlock() {
   var h = '<div class="acc-push" id="acc-push"><b>🔔 Rappels du défi</b>';
   if (!pushSupported() && IS_IOS && !STANDALONE) return h + '<p>Sur iPhone, les rappels marchent quand l’appli est sur l’écran d’accueil : dans Safari, touche <b>Partager</b> puis <b>« Sur l’écran d’accueil »</b>, ouvre l’appli depuis son icône et reviens ici.</p></div>';
   if (!pushSupported()) return h + '<p>Ce navigateur ne gère pas les notifications. Essaie avec Safari (iPhone, appli sur l’écran d’accueil) ou Chrome.</p></div>';
-  if (Notification.permission === "denied") return h + '<p>Les notifications sont bloquées pour l’appli. Autorise-les dans les réglages du téléphone (Réglages → Notifications → Brevet), puis reviens ici.</p></div>';
+  if (Notification.permission === "denied") return h + '<p>Les notifications sont bloquées pour l’appli. Autorise-les dans les réglages du téléphone (Réglages → Notifications → GWENA), puis reviens ici.</p></div>';
   if (on) return h + '<p>✅ Activés : un rappel à <b>15 h</b> et à <b>19 h</b>, seulement si ton défi du jour n’est pas encore fait.</p><button type="button" class="link" data-push="off">Désactiver les rappels</button><p class="acc-push-msg" hidden></p></div>';
   return h + '<p>Reçois un rappel à <b>15 h</b> et à <b>19 h</b> si tu n’as pas encore fait ton défi du jour, pour ne jamais perdre ta flamme.</p><button type="button" class="btn btn-sub defi-push-on" data-push="on">Activer les rappels</button><p class="acc-push-msg" hidden></p></div>';
 }
@@ -9099,7 +9099,7 @@ function mountMap(root, c) {
           x.fillStyle = "#1b1b1f"; x.font = '800 22px "Helvetica Neue", Helvetica, Arial, sans-serif';
           x.fillText((subj ? subj.name + " · " : "") + c.title, 30, g.h + 30);
           x.fillStyle = "#8a8a8e"; x.font = '600 16px "Helvetica Neue", Helvetica, Arial, sans-serif'; x.textAlign = "right";
-          x.fillText("Objectif Brevet", g.w - 30, g.h + 30);
+          x.fillText("GWENA", g.w - 30, g.h + 30);
           cv.toBlob(function (b) { b ? ok(b) : ko(); }, "image/png");
         };
         im.onerror = ko;
@@ -9134,7 +9134,7 @@ var TUTO_V = 4;
 function tutoSteps() {
   var tiles = '<div class="tv-tiles">' + SUBJECTS.map(function (s) { return '<span style="background:' + col(s.id) + '"><b>' + s.code + '</b><i>' + s.name.split(" ")[0] + '</i></span>'; }).join("") + '</div>';
   return [
-    { t: "Bienvenue" + (USER ? ", " + esc(USER.name) : "") + " !", d: "Objectif Brevet regroupe tout le programme de 3e : <b>52 chapitres</b> dans les 6 matières de l’examen. Voici un tour rapide de l’appli, en une minute.", v: tiles },
+    { t: "Bienvenue" + (USER ? ", " + esc(USER.name) : "") + " !", d: "GWENA regroupe tout le programme de 3e : <b>52 chapitres</b> dans les 6 matières de l’examen. Voici un tour rapide de l’appli, en une minute.", v: tiles },
     { t: "Choisis une matière, puis un chapitre", d: "Sur l’accueil, touche une case de couleur. Les chapitres s’affichent dans l’ordre du programme, avec une barre qui montre ta progression.",
       v: '<div class="tv-list"><span style="--sub:var(--hg)"><b>01</b> La Première Guerre mondiale<i></i></span><span style="--sub:var(--hg)"><b>02</b> Démocraties et totalitarismes<i style="width:40%"></i></span><span style="--sub:var(--hg)"><b>03</b> La Seconde Guerre mondiale<i style="width:15%"></i></span></div>' },
     { s: 2, t: "Le défi du jour 🔥", d: "Chaque jour, <b>10 exercices variés</b> sur tout le programme : QCM, vrai ou faux, réponses à écrire, cartes mentales à compléter, photos à reconnaître, paires à associer. Fais-le tous les jours pour garder ta <b>flamme</b> allumée et allonger ta série. Ton historique est dans le rond avec ton initiale.",
@@ -9158,7 +9158,7 @@ function tutoSteps() {
     { s: 3, t: "Ta progression, ton compte", d: "Ton compte est <b>en ligne</b> : connecte-toi avec ton prénom et ton mot de passe sur n’importe quel téléphone ou ordinateur, tu retrouves tout (flammes, cartes sues, scores, erreurs, carnet). Le rond avec ton initiale, en haut à droite, permet de te déconnecter ou de revoir ce tutoriel. La page <b>L’examen</b> donne le calendrier et un plan de révision.",
       v: '<div class="tv-prog"><span class="avatar tv-av">' + esc(USER ? USER.name.charAt(0).toUpperCase() : "L") + '</span><div><b>Mathématiques</b><i><em style="width:62%"></em></i></div><div><b>Histoire-Géo</b><i><em style="width:35%;background:var(--hg)"></em></i></div></div>' },
     { t: "Astuce : comme une vraie appli", d: "Sur iPhone, ouvre le site dans Safari, touche le bouton <b>Partager</b>, puis <b>« Sur l’écran d’accueil »</b>. L’appli s’ouvre alors en plein écran, avec son icône.",
-      v: '<div class="tv-home"><span class="tv-ico">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("") + '</span><b>Brevet</b></div>' },
+      v: '<div class="tv-home"><span class="tv-ico">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("") + '</span><b>GWENA</b></div>' },
     { t: "C’est parti !", d: "Conseil : commence par le <b>Résumé</b> d’un chapitre, lis le <b>Cours</b>, puis vérifie avec les <b>Flashcards</b> et le <b>Quiz</b>. Bonnes révisions !", v: '<div class="tv-go">🎯</div>' }
   ];
 }
@@ -9502,11 +9502,11 @@ function route() {
   app.style.setProperty("--sub", "var(--fg)");
   if (S[h]) {
     app.style.setProperty("--sub", col(h)); app.innerHTML = viewSubject(S[h]); setNav("home");
-    document.title = S[h].name + " · Objectif Brevet";
+    document.title = S[h].name + " · GWENA";
   } else if (CHI[h]) {
     var c = CHI[h]; store.set("last", c.id);
     app.style.setProperty("--sub", col(c.sub)); app.innerHTML = viewChapter(c); setNav("home");
-    document.title = c.title + " · Objectif Brevet";
+    document.title = c.title + " · GWENA";
     var go = window.__goto; window.__goto = null;
     var cur = go ? go.tab : "resume";
     app.querySelector(".tabs").onclick = function (e) { var b = e.target.closest("[data-tab]"); if (b) { cur = b.dataset.tab; drawPanel(c, cur); } };
@@ -9521,7 +9521,7 @@ function route() {
     var fch = CHI[parts.slice(1).join("-")] || null;
     var f = fch ? fch.sub : S[parts[1]] ? parts[1] : "all";
     if (f !== "all") app.style.setProperty("--sub", col(f));
-    app.innerHTML = viewDeck(f, fch && fch.id); setNav("flashcards"); document.title = "Flashcards · Objectif Brevet";
+    app.innerHTML = viewDeck(f, fch && fch.id); setNav("flashcards"); document.title = "Flashcards · GWENA";
     var pool = fch ? cardsOf(fch) : flat(f === "all" ? CH : B[f], cardsOf);
     var box = document.getElementById("only-review");
     var start = function () { var l = box.checked ? pool.filter(function (x) { return known[x.id] !== 1; }) : pool; mountDeck(document.getElementById("deck"), shuffle(l), { empty: "Bravo, toutes les cartes de cette sélection sont sues." }); };
@@ -9531,7 +9531,7 @@ function route() {
     var qch = CHI[parts.slice(1).join("-")] || null;
     var fq = qch ? qch.sub : S[parts[1]] ? parts[1] : "all";
     if (fq !== "all") app.style.setProperty("--sub", col(fq));
-    app.innerHTML = viewQuiz(fq, qch && qch.id); setNav("quiz"); document.title = "Quiz · Objectif Brevet";
+    app.innerHTML = viewQuiz(fq, qch && qch.id); setNav("quiz"); document.title = "Quiz · GWENA";
     var qpool = qch ? quizOf(qch) : flat(fq === "all" ? CH : B[fq], quizOf);
     var seg = document.getElementById("qmodes");
     var run = function () {
@@ -9550,15 +9550,15 @@ function route() {
     seg.onclick = function (e) { var b = e.target.closest("[data-mode]"); if (!b) return; qmode = b.dataset.mode; store.set("qmode", qmode); run(); };
     run();
   } else if (parts[0] === "carnet") {
-    app.innerHTML = viewCarnet(); setNav(""); document.title = "Mon carnet · Objectif Brevet";
+    app.innerHTML = viewCarnet(); setNav(""); document.title = "Mon carnet · GWENA";
     bindCarnet(parts[1] === "revision");
   } else if (h === "defi") {
-    app.innerHTML = '<section class="wrap defi-page" id="defi"></section>'; setNav("home"); document.title = "Défi du jour · Objectif Brevet";
+    app.innerHTML = '<section class="wrap defi-page" id="defi"></section>'; setNav("home"); document.title = "Défi du jour · GWENA";
     document.body.classList.add("defi-mode"); mountDefi(document.getElementById("defi"));
   } else if (h === "examen") {
-    app.innerHTML = viewExam(); setNav("examen"); document.title = "L’examen · Objectif Brevet";
+    app.innerHTML = viewExam(); setNav("examen"); document.title = "L’examen · GWENA";
   } else {
-    app.innerHTML = viewHome(); setNav("home"); document.title = "Objectif Brevet";
+    app.innerHTML = viewHome(); setNav("home"); document.title = "GWENA";
     clearInterval(cdT); tickCount(); cdT = setInterval(tickCount, 1000);
   }
   window.scrollTo(0, 0);
