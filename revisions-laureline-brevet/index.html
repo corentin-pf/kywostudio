@@ -728,6 +728,10 @@ mark{background:color-mix(in srgb, #ffd60a 55%, transparent);color:inherit;borde
 .tv-ico i{width:14px;height:14px;border-radius:4px;display:block}
 .tv-go{font-size:64px}
 @media (max-width:760px){ .tuto{align-items:flex-end;padding:0} .tuto-card{border-radius:var(--r-lg) var(--r-lg) 0 0;max-height:92vh;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))} }
+.mm-wrap{touch-action:pan-x pan-y}
+.mm-save-img{background:#fffdf8}
+.mm-save-img img{object-fit:contain;-webkit-touch-callout:default}
+.mm-dl{display:grid;place-items:center}
 </style>
 </head>
 <body>
@@ -8512,6 +8516,8 @@ function bindCarnet(rev) {
 var mctx = document.createElement("canvas").getContext("2d");
 function tw(t, size, bold) { mctx.font = (bold ? "800 " : "600 ") + size + 'px "Helvetica Neue", Helvetica, Arial, sans-serif'; return mctx.measureText(t).width; }
 var MM_ICONS = window.BREVET_MAP_ICONS || {};
+var MM_ZMAX = 2.5;
+var MM_SVG_CSS = 'text{font:600 14px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:#1b1b1f}.mm-bt{font-size:17px;font-weight:800}.mm-ico{font-size:24px}.mm-tg{fill:#fff;font-size:16px;font-weight:800}.mm-ct{fill:#fff;font-size:20px;font-weight:800}.mm-c-ico{font-size:52px}.mm-c-bg{fill:#fff;stroke-width:6}';
 var MM_COLORS = ["#E5302A", "#F28C28", "#D9A400", "#2FA45C", "#2E86DE", "#8E44AD", "#E84393", "#14A3A3"];
 function bez(p0, p1, p2, p3, t) { var m = 1 - t; return [m * m * m * p0[0] + 3 * m * m * t * p1[0] + 3 * m * t * t * p2[0] + t * t * t * p3[0], m * m * m * p0[1] + 3 * m * m * t * p1[1] + 3 * m * t * t * p2[1] + t * t * t * p3[1]]; }
 function taper(p0, p1, p2, p3, w0, w1) {
@@ -8591,8 +8597,8 @@ function mountMap(root, c) {
     root.innerHTML = '<div class="mm-bar">' + (st.game
       ? '<span class="mm-score">' + done + ' / ' + total + ' trouvées' + (st.errors ? ' · ' + st.errors + ' erreur' + (st.errors > 1 ? "s" : "") : "") + '</span><button type="button" class="btn" data-mm="quit">Quitter le jeu</button>'
       : '<button type="button" class="btn btn-sub" data-mm="game">Jouer : complète la carte</button><button type="button" class="link" data-mm="open">Tout déplier</button><button type="button" class="link" data-mm="close">Tout replier</button>') +
-      '<span class="mm-zoom"><button type="button" data-mm="zout" aria-label="Dézoomer">−</button><button type="button" data-mm="zin" aria-label="Zoomer">+</button></span></div>' +
-      '<p class="mm-help">' + (st.game ? (done === total ? "" : st.sel ? "Choisis la bonne réponse ci-dessous." : "Touche une case « ? », puis la bonne réponse.") : (narrow ? (st.z <= fit + 0.01 ? "Vue d’ensemble : touche + pour zoomer et lire, puis fais glisser." : "Fais glisser pour explorer · − pour revoir toute la carte.") : "Touche une branche pour la replier ou la déplier.")) + '</p>' +
+      '<span class="mm-zoom">' + (st.game ? "" : '<button type="button" data-mm="save" class="mm-dl" aria-label="Enregistrer l’image dans Photos" title="Enregistrer l’image"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></button>') + '<button type="button" data-mm="zout" aria-label="Dézoomer">−</button><button type="button" data-mm="zin" aria-label="Zoomer">+</button></span></div>' +
+      '<p class="mm-help">' + (st.game ? (done === total ? "" : st.sel ? "Choisis la bonne réponse ci-dessous." : "Touche une case « ? », puis la bonne réponse.") : (narrow ? (st.z <= fit + 0.01 ? "Vue d’ensemble : pince avec deux doigts (ou touche +) pour zoomer, puis fais glisser." : "Fais glisser pour explorer · pince ou − pour revoir toute la carte.") : "Touche une branche pour la replier ou la déplier.")) + '</p>' +
       '<div class="mm-wrap"><div class="mm-in" style="width:' + Math.round(g.w * st.z) + 'px">' + g.s + '</div></div>' +
       (st.game ? (done === total
         ? '<div class="mm-end"><b>Bravo, carte complétée !</b><span>' + (st.errors ? st.errors + " erreur" + (st.errors > 1 ? "s" : "") + " en chemin." : "Sans aucune erreur.") + '</span><button type="button" class="btn btn-sub" data-mm="game">Rejouer avec d’autres cases</button></div>'
@@ -8608,7 +8614,8 @@ function mountMap(root, c) {
       else if (a === "quit") { st.game = false; st.hidden = {}; draw(); }
       else if (a === "open") { st.closed = {}; draw(); }
       else if (a === "close") { M.b.forEach(function (x, i) { st.closed[i] = true; }); draw(); }
-      else if (a === "zin" || a === "zout") { var fitZ = Math.min(1, (root.clientWidth - 4) / (root.querySelector('.mm-svg').viewBox.baseVal.width || 1000)); st.z = Math.max(fitZ, Math.min(1.6, st.z * (a === "zin" ? 1.5 : 1 / 1.5))); draw(); var w2 = root.querySelector(".mm-wrap"); w2.scrollLeft = mid * w2.scrollWidth - w2.clientWidth / 2; w2.scrollTop = (w2.scrollHeight - w2.clientHeight) / 2; }
+      else if (a === "save") saveMap();
+      else if (a === "zin" || a === "zout") { var fitZ = Math.min(1, (root.clientWidth - 4) / (root.querySelector('.mm-svg').viewBox.baseVal.width || 1000)); st.z = Math.max(fitZ, Math.min(MM_ZMAX, st.z * (a === "zin" ? 1.5 : 1 / 1.5))); draw(); var w2 = root.querySelector(".mm-wrap"); w2.scrollLeft = mid * w2.scrollWidth - w2.clientWidth / 2; w2.scrollTop = (w2.scrollHeight - w2.clientHeight) / 2; }
       return;
     }
     var br = e.target.closest(".mm-br"); if (br && !st.game) { var i = +br.dataset.b; st.closed[i] = !st.closed[i]; draw(); return; }
@@ -8621,6 +8628,79 @@ function mountMap(root, c) {
       else { st.errors++; op.classList.add("mm-bad"); var sc = root.querySelector(".mm-score"); if (sc) sc.textContent = Object.keys(st.found).length + " / " + Object.keys(st.hidden).length + " trouvées · " + st.errors + " erreur" + (st.errors > 1 ? "s" : ""); setTimeout(function () { op.classList.remove("mm-bad"); }, 500); }
     }
   };
+
+  /* pincer pour zoomer */
+  var pz = null;
+  function fitOf() { var v = root.querySelector(".mm-svg"); return Math.min(1, (root.clientWidth - 4) / ((v && v.viewBox.baseVal.width) || 1000)); }
+  function tdist(t) { return Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY); }
+  root.addEventListener("touchstart", function (e) {
+    var wrap = e.target.closest && e.target.closest(".mm-wrap");
+    if (!wrap || e.touches.length !== 2) return;
+    var r = wrap.getBoundingClientRect(), mx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - r.left, my = (e.touches[0].clientY + e.touches[1].clientY) / 2 - r.top;
+    pz = { wrap: wrap, inn: wrap.querySelector(".mm-in"), d0: tdist(e.touches) || 1, z0: st.z, z: st.z, px: (wrap.scrollLeft + mx) / st.z, py: (wrap.scrollTop + my) / st.z, w: wrap.querySelector(".mm-svg").viewBox.baseVal.width, fit: fitOf() };
+  }, { passive: true });
+  root.addEventListener("touchmove", function (e) {
+    if (!pz || e.touches.length !== 2) return;
+    e.preventDefault();
+    var r = pz.wrap.getBoundingClientRect(), mx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - r.left, my = (e.touches[0].clientY + e.touches[1].clientY) / 2 - r.top;
+    pz.z = Math.max(pz.fit, Math.min(MM_ZMAX, pz.z0 * tdist(e.touches) / pz.d0));
+    pz.inn.style.width = Math.round(pz.w * pz.z) + "px";
+    pz.wrap.scrollLeft = pz.px * pz.z - mx; pz.wrap.scrollTop = pz.py * pz.z - my;
+  }, { passive: false });
+  root.addEventListener("touchend", function (e) {
+    if (!pz || e.touches.length >= 2) return;
+    st.z = pz.z; pz = null;
+    var h = root.querySelector(".mm-help"); if (h && !st.game && root.clientWidth < 700) h.textContent = st.z <= fitOf() + 0.01 ? "Vue d’ensemble : pince avec deux doigts (ou touche +) pour zoomer, puis fais glisser." : "Fais glisser pour explorer · pince ou − pour revoir toute la carte.";
+  });
+  root.addEventListener("gesturestart", function (e) { if (e.target.closest && e.target.closest(".mm-wrap")) e.preventDefault(); });
+
+  /* enregistrer la carte en image */
+  function toDataUrl(url) { return fetch(url).then(function (r) { if (!r.ok) throw 0; return r.blob(); }).then(function (b) { return new Promise(function (ok) { var fr = new FileReader(); fr.onload = function () { ok(fr.result); }; fr.onerror = function () { ok(null); }; fr.readAsDataURL(b); }); }).catch(function () { return null; }); }
+  function mapPng() {
+    var save = [st.closed, st.hidden, st.game, st.found, st.sel]; st.closed = {}; st.hidden = {}; st.game = false; st.found = {}; st.sel = null;
+    var g = svg(); st.closed = save[0]; st.hidden = save[1]; st.game = save[2]; st.found = save[3]; st.sel = save[4];
+    var cs = getComputedStyle(document.documentElement);
+    var src = g.s.replace('<svg class="mm-svg"', '<svg xmlns="http://www.w3.org/2000/svg" width="' + g.w + '" height="' + g.h + '" class="mm-svg"')
+      .replace("<defs>", "<defs><style>" + MM_SVG_CSS + "</style>").replace(/<text class="mm-tg"[^>]*>[^<]*<\/text>/g, "")
+      .replace(/var\(--([a-z0-9-]+)\)/g, function (m, n) { return cs.getPropertyValue("--" + n).trim() || "#333"; });
+    var imgP = st.img ? toDataUrl(st.img) : Promise.resolve(null);
+    return imgP.then(function (d) {
+      src = src.replace(/<image [^>]*\/>/, function (m) { return d ? m.replace(/href="[^"]*"/, 'href="' + d + '"') : ""; });
+      return new Promise(function (ok, ko) {
+        var im = new Image();
+        im.onload = function () {
+          var foot = 70, sc = Math.min(2, 4000 / g.w), cv = document.createElement("canvas");
+          cv.width = Math.round(g.w * sc); cv.height = Math.round((g.h + foot) * sc);
+          var x = cv.getContext("2d"); x.scale(sc, sc);
+          x.fillStyle = "#fffdf8"; x.fillRect(0, 0, g.w, g.h + foot);
+          x.drawImage(im, 0, 0, g.w, g.h);
+          var subj = SUBJECTS.filter(function (s) { return s.id === c.sub; })[0];
+          x.fillStyle = "#1b1b1f"; x.font = '800 22px "Helvetica Neue", Helvetica, Arial, sans-serif';
+          x.fillText((subj ? subj.name + " · " : "") + c.title, 30, g.h + 30);
+          x.fillStyle = "#8a8a8e"; x.font = '600 16px "Helvetica Neue", Helvetica, Arial, sans-serif'; x.textAlign = "right";
+          x.fillText("Objectif Brevet", g.w - 30, g.h + 30);
+          cv.toBlob(function (b) { b ? ok(b) : ko(); }, "image/png");
+        };
+        im.onerror = ko;
+        im.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(src);
+      });
+    });
+  }
+  function saveMap() {
+    sheet.hidden = false; document.body.classList.add("wk-open");
+    var body = sheet.querySelector(".wk-body");
+    body.innerHTML = '<h3>Carte mentale</h3><p class="wk-d">Préparation de l’image…</p>';
+    mapPng().then(function (blob) {
+      var name = "carte-mentale-" + c.id + ".png", url = URL.createObjectURL(blob), file = null;
+      try { file = new File([blob], name, { type: "image/png" }); } catch (e) {}
+      var canShare = file && navigator.canShare && navigator.canShare({ files: [file] });
+      body.innerHTML = '<div class="wk-img wk-big mm-save-img"><img src="' + url + '" alt="Carte mentale : ' + esc(M.c) + '"></div><h3>' + esc(M.c) + '</h3>' +
+        (canShare ? '<button type="button" class="btn btn-fill" id="mm-share">Enregistrer dans Photos</button><p class="wk-e">Dans le menu qui s’ouvre, touche « Enregistrer l’image ». Tu peux aussi faire un appui long sur l’image.</p>'
+          : '<a class="btn btn-fill" href="' + url + '" download="' + name + '">Télécharger l’image</a><p class="wk-e">Sur téléphone, tu peux aussi faire un appui long sur l’image puis « Ajouter à Photos ».</p>');
+      var b = document.getElementById("mm-share");
+      if (b) b.onclick = function () { navigator.share({ files: [file], title: M.c }).catch(function () {}); };
+    }).catch(function () { body.innerHTML = '<h3>Carte mentale</h3><p class="wk-d">Impossible de créer l’image. Réessaie dans un instant.</p>'; });
+  }
   draw();
   if (COVERS[c.id]) wkFetch(COVERS[c.id]).then(function (d) { var im = wkImg(d); if (im && document.body.contains(root)) { st.img = im; draw(); } });
 }
@@ -8642,7 +8722,7 @@ function tutoSteps() {
       v: '<div class="tv-fc"><span class="tv-arrow tv-l">← À revoir</span><div class="tv-card"><small>QUESTION</small><b>Date de l’armistice ?</b></div><span class="tv-arrow tv-r">Je sais →</span></div>' },
     { t: "Les quiz", d: "Dans un chapitre, une série de 15 questions. Dans l’onglet Quiz : séries de 10 ou 20, mode <b>Vrai ou faux</b>, et <b>Mes erreurs</b> pour retravailler ce que tu as raté. Chaque réponse est corrigée et expliquée, et les questions que tu n’as jamais vues passent en priorité.",
       v: '<div class="tv-quiz"><b>Qui commet le génocide des Arméniens ?</b><span class="ok"><i>A</i> L’Empire ottoman</span><span><i>B</i> L’Allemagne</span><span><i>C</i> La Russie</span></div>' },
-    { t: "La carte mentale et son jeu", d: "Chaque chapitre a sa carte mentale : tout le chapitre en un seul dessin. Zoome avec + et −, touche une branche pour la replier. Puis joue à <b>« Complète la carte »</b> : retrouve les cases cachées.",
+    { t: "La carte mentale et son jeu", d: "Chaque chapitre a sa carte mentale : tout le chapitre en un seul dessin. Zoome en pinçant avec deux doigts (ou avec + et −), touche une branche pour la replier, et enregistre-la dans tes photos avec le bouton ↓. Puis joue à <b>« Complète la carte »</b> : retrouve les cases cachées.",
       v: '<svg class="tv-mm" viewBox="0 0 320 150"><path d="M160 75 C120 75 110 35 70 35" stroke="#E5302A" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C120 75 110 115 70 115" stroke="#2FA45C" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C200 75 210 35 250 35" stroke="#2E86DE" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C200 75 210 115 250 115" stroke="#F28C28" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="160" cy="75" r="26" fill="#fff" stroke="#C26300" stroke-width="5"/><text x="160" y="81" text-anchor="middle" font-size="18">🌍</text><text x="20" y="28" font-size="11" font-weight="800" fill="#E5302A">Causes</text><text x="20" y="108" font-size="11" font-weight="800" fill="#2FA45C">Fin</text><text x="256" y="28" font-size="11" font-weight="800" fill="#2E86DE">Crises</text><rect x="252" y="98" width="46" height="24" rx="7" fill="#fff" stroke="#F28C28" stroke-dasharray="4 3" stroke-width="2"/><text x="275" y="115" text-anchor="middle" font-size="14" font-weight="800" fill="#F28C28">?</text></svg>' },
     { t: "La recherche", d: "La <b>loupe</b> en haut de l’écran cherche dans tous les cours et toutes les flashcards. Tape un mot, une date ou une notion, puis touche un résultat pour aller directement à la bonne partie du cours.",
       v: '<div class="tv-search"><div class="tv-bar">🔍 pythagore</div><div class="tv-res"><small>Mathématiques · Pythagore</small><b>Le théorème de <mark>Pythagore</mark></b></div></div>' },
