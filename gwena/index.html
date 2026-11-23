@@ -57,8 +57,8 @@ p{margin:0}
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bg);border-bottom:var(--bw) solid var(--fg)}
 .top-in{display:flex;align-items:center;gap:24px;min-height:60px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:19px;letter-spacing:-.03em;white-space:nowrap}
-.logo-dots{display:grid;grid-template-columns:repeat(3,7px);gap:2px}
-.logo-dots i{width:7px;height:7px;display:block;border-radius:2px}
+.logo-dots{display:flex}
+.glogo{width:22px;height:22px;display:block;flex:none}
 .nav{display:flex;gap:4px;margin-left:auto}
 .nav a{text-decoration:none;font-weight:700;font-size:14px;padding:8px 14px;white-space:nowrap;border-radius:999px}
 .nav a.on{background:var(--fg);color:var(--bg)}
@@ -557,8 +557,7 @@ body.locked{padding-bottom:0}
 .auth{min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:max(28px, env(safe-area-inset-top,0px)) max(16px, env(safe-area-inset-right,0px)) 40px max(16px, env(safe-area-inset-left,0px))}
 .auth-card{width:100%;max-width:420px;display:flex;flex-direction:column;gap:14px;margin-top:4vh}
 .auth-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.03em}
-.auth-logo .logo-dots i{width:9px;height:9px}
-.auth-logo .logo-dots{grid-template-columns:repeat(3,9px)}
+.auth-logo .glogo{width:28px;height:28px}
 .auth h1{font-size:clamp(2.2rem,9vw,3rem);font-weight:800;letter-spacing:-.045em;line-height:1;margin-top:18px}
 .auth-lead{color:var(--mute);font-size:16px}
 .auth-seg{width:100%;display:grid;grid-template-columns:1fr 1fr;margin-top:6px}
@@ -724,8 +723,8 @@ mark{background:color-mix(in srgb, #ffd60a 55%, transparent);color:inherit;borde
 .tv-prog em{display:block;height:100%;border-radius:4px;background:var(--ma)}
 .tv-av{display:grid!important;place-items:center}
 .tv-home{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px;font-weight:700}
-.tv-ico{width:72px;height:72px;border-radius:18px;background:#0b0b0c;display:grid;grid-template-columns:repeat(3,14px);gap:5px;align-content:center;justify-content:center}
-.tv-ico i{width:14px;height:14px;border-radius:4px;display:block}
+.tv-ico{width:72px;height:72px;border-radius:18px;background:#fff;color:#000;display:grid;place-items:center;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.tv-ico .glogo{width:48px;height:48px}
 .tv-go{font-size:64px}
 @media (max-width:760px){ .tuto{align-items:flex-end;padding:0} .tuto-card{border-radius:var(--r-lg) var(--r-lg) 0 0;max-height:92vh;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))} }
 .mm-wrap{touch-action:pan-x pan-y}
@@ -7937,6 +7936,7 @@ var IMGS = window.BREVET_IMGS || {};
 var MAPS = window.BREVET_MAPS || {};
 
 /* ---------- stockage local (facultatif) ---------- */
+var GLOGO = '<svg class="glogo" viewBox="20 17 120 126" aria-hidden="true"><path fill="currentColor" d="M77.8 75.4L64.8 75.6L23 75.4L22.8 49.1L22.9 19.5L41.2 19.6L41.6 33.8C48.2 28.5 54.8 24.4 62.7 21.8C83.5 15 106.5 21.3 121.2 37.2C131 47.7 137 61.9 137.2 75.8L109.7 75.6C108.3 65.5 103.1 56.9 94.4 51.8C83.4 45.4 69.3 46.9 60 55.8C66.1 56.3 71.3 56.2 77.6 56.2C77.9 62.6 77.9 68.9 77.8 75.4 M137.3 102.2L137.2 133L136.9 140.7L118 140.7L117.7 126.8C106.5 136.6 93.6 141.2 79.3 140.9C73.8 140.8 68.8 140.2 63.5 138.4C53.3 134.9 44.2 129.3 37.2 121.1C28.4 110.8 23.4 98.1 22.7 84.5L50.2 84.7C50.9 92.1 53.9 97.7 58.2 103.3C69 115.3 88.1 116.5 100.2 104.8C93.8 104.2 88.3 104.5 82.1 104.3L82.2 84.8L108 84.8L137.1 85.1 Z M137.3 102.2"/></svg>';
 /* ---------- comptes en ligne (Supabase) + copie locale ---------- */
 var SB_URL = "https://fbzyxzovtkpxofupykiy.supabase.co", SB_KEY = "sb_publishable_dgcT4CFQ3hhUvwcnUe602A_QV25NDwE";
 var LS = (function () { try { localStorage.setItem("__t", "1"); localStorage.removeItem("__t"); return localStorage; } catch (e) { return null; } })();
@@ -8600,7 +8600,7 @@ function showLogin() {
   function draw(msg) {
     var isNew = mode === "new";
     box.innerHTML = '<div class="auth-card">' +
-      '<div class="auth-logo"><span class="logo-dots">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("") + '</span>GWENA</div>' +
+      '<div class="auth-logo">' + GLOGO + 'GWENA</div>' +
       '<h1>' + (isNew ? "Créer ton compte" : "Bon retour !") + '</h1>' +
       '<p class="auth-lead">' + (isNew ? "Un prénom et un mot de passe suffisent. Ton compte marche sur tous tes appareils." : "Connecte-toi pour retrouver ta progression, sur n’importe quel appareil.") + '</p>' +
       (olds.length ? '<p class="auth-new"><b>Nouveau : les comptes sont en ligne.</b> Crée ton compte avec le même prénom (' + olds.map(function (u) { return esc(u.name); }).join(", ") + ') : ta progression de cet appareil sera reprise automatiquement.</p>' : "") +
@@ -9158,7 +9158,7 @@ function tutoSteps() {
     { s: 3, t: "Ta progression, ton compte", d: "Ton compte est <b>en ligne</b> : connecte-toi avec ton prénom et ton mot de passe sur n’importe quel téléphone ou ordinateur, tu retrouves tout (flammes, cartes sues, scores, erreurs, carnet). Le rond avec ton initiale, en haut à droite, permet de te déconnecter ou de revoir ce tutoriel. La page <b>L’examen</b> donne le calendrier et un plan de révision.",
       v: '<div class="tv-prog"><span class="avatar tv-av">' + esc(USER ? USER.name.charAt(0).toUpperCase() : "L") + '</span><div><b>Mathématiques</b><i><em style="width:62%"></em></i></div><div><b>Histoire-Géo</b><i><em style="width:35%;background:var(--hg)"></em></i></div></div>' },
     { t: "Astuce : comme une vraie appli", d: "Sur iPhone, ouvre le site dans Safari, touche le bouton <b>Partager</b>, puis <b>« Sur l’écran d’accueil »</b>. L’appli s’ouvre alors en plein écran, avec son icône.",
-      v: '<div class="tv-home"><span class="tv-ico">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("") + '</span><b>GWENA</b></div>' },
+      v: '<div class="tv-home"><span class="tv-ico">' + GLOGO + '</span><b>GWENA</b></div>' },
     { t: "C’est parti !", d: "Conseil : commence par le <b>Résumé</b> d’un chapitre, lis le <b>Cours</b>, puis vérifie avec les <b>Flashcards</b> et le <b>Quiz</b>. Bonnes révisions !", v: '<div class="tv-go">🎯</div>' }
   ];
 }
@@ -9569,7 +9569,7 @@ function route() {
 }
 
 document.getElementById("strip").innerHTML = SUBJECTS.map(function (s) { return '<a href="#' + s.id + '" style="background:' + col(s.id) + '" aria-label="' + s.name + '"></a>'; }).join("");
-document.getElementById("logo-dots").innerHTML = SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("");
+document.getElementById("logo-dots").innerHTML = GLOGO;
 window.addEventListener("hashchange", route);
 function reloadState() { known = store.get("known", {}); scores = store.get("scores", {}); missed = store.get("missed", {}); qmode = store.get("qmode", "10"); }
 if (USER) {
