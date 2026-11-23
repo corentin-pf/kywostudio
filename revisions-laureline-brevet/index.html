@@ -956,6 +956,9 @@ main#app{overflow-x:clip}
   :root:not([data-theme="light"]) .dopt.is-right,:root:not([data-theme="light"]) .dpair.matched{color:#5BD975}
   :root:not([data-theme="light"]) .ws.ws-on i{background:#4A2A10}
 }
+.auth-new{font-size:14px;line-height:1.45;background:rgba(47,179,68,.12);border:1.5px solid rgba(47,179,68,.45);border-radius:var(--r);padding:10px 12px}
+.acc-sync{font-size:13px}
+.acc-sync::before{content:"☁︎ ";}
 </style>
 </head>
 <body>
@@ -7917,25 +7920,127 @@ var IMGS = window.BREVET_IMGS || {};
 var MAPS = window.BREVET_MAPS || {};
 
 /* ---------- stockage local (facultatif) ---------- */
-/* ---------- comptes (enregistrés sur l’appareil) ---------- */
+/* ---------- comptes en ligne (Supabase) + copie locale ---------- */
+var SB_URL = "https://fbzyxzovtkpxofupykiy.supabase.co", SB_KEY = "sb_publishable_dgcT4CFQ3hhUvwcnUe602A_QV25NDwE";
 var LS = (function () { try { localStorage.setItem("__t", "1"); localStorage.removeItem("__t"); return localStorage; } catch (e) { return null; } })();
 function rawGet(k, d) { try { var v = LS && LS.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
 function rawSet(k, v) { try { if (LS) LS.setItem(k, JSON.stringify(v)); } catch (e) {} }
 var SESSION_DAYS = 5;
-function readSession() {
-  var s = null;
+function sessGet() {
+  var s = null, where = "ls";
   try { s = JSON.parse((LS && LS.getItem("brevet:session")) || "null"); } catch (e) {}
-  if (!s) { try { s = JSON.parse(sessionStorage.getItem("brevet:session") || "null"); } catch (e) {} }
-  if (!s || !s.id || (s.exp && s.exp < Date.now())) return null;
-  var u = rawGet("brevet:users", []).filter(function (x) { return x.id === s.id; })[0];
-  return u ? { id: u.id, name: u.name } : null;
+  if (!s) { try { s = JSON.parse(sessionStorage.getItem("brevet:session") || "null"); where = "ss"; } catch (e) {} }
+  if (s) s._w = where;
+  return s;
+}
+function sessPut(s) {
+  var w = s._w, c = {}; Object.keys(s).forEach(function (k) { if (k !== "_w") c[k] = s[k]; });
+  if (w === "ss") { try { sessionStorage.setItem("brevet:session", JSON.stringify(c)); return; } catch (e) {} }
+  rawSet("brevet:session", c);
+}
+function sessClear() { try { sessionStorage.removeItem("brevet:session"); } catch (e) {} if (LS) LS.removeItem("brevet:session"); }
+function readSession() {
+  var s = sessGet();
+  if (!s || !s.cloud || !s.id || !s.rt || (s.exp && s.exp < Date.now())) return null;
+  return { id: s.id, name: s.name || "?", cloud: true };
 }
 var USER = readSession();
 var PREFIX = USER ? "brevet:u:" + USER.id + ":" : "brevet:anon:";
 var store = {
   get: function (k, d) { return rawGet(PREFIX + k, d); },
-  set: function (k, v) { rawSet(PREFIX + k, v); }
+  set: function (k, v) { rawSet(PREFIX + k, v); if (USER) { rawSet(PREFIX + "__dirty", 1); schedulePush(); } }
 };
+
+/* --- appels Supabase (sans bibliothèque) --- */
+function sbReq(path, opt) {
+  opt = opt || {};
+  var h = { apikey: SB_KEY, "Content-Type": "application/json" };
+  if (opt.token) h.Authorization = "Bearer " + opt.token;
+  if (opt.prefer) h.Prefer = opt.prefer;
+  return fetch(SB_URL + path, { method: opt.method || "GET", headers: h, body: opt.body ? JSON.stringify(opt.body) : undefined, keepalive: !!opt.keepalive })
+    .then(function (r) { return r.text().then(function (t) { var j = null; try { j = t ? JSON.parse(t) : null; } catch (e) {} if (!r.ok) { var err = new Error((j && (j.msg || j.message || j.error_description || j.error)) || ("HTTP " + r.status)); err.status = r.status; err.code = j && (j.error_code || j.code); throw err; } return j; }); });
+}
+function emailOf(name) {
+  var n = norm(name).replace(/[^a-z0-9]+/g, ".").replace(/^\.+|\.+$/g, "");
+  if (!n) n = "x" + Array.prototype.map.call(name, function (c) { return c.charCodeAt(0).toString(36); }).join("");
+  return n.slice(0, 50) + "@eleves.objectif-brevet.fr";
+}
+function tokenFrom(j, name, keep, prev) {
+  var s = prev || {};
+  s.cloud = 1; s.id = j.user.id; s.at = j.access_token; s.rt = j.refresh_token; s.ate = Date.now() + (j.expires_in || 3600) * 1000;
+  s.name = name || (j.user.user_metadata && j.user.user_metadata.name) || s.name;
+  if (keep != null) { s._w = keep ? "ls" : "ss"; s.exp = keep ? Date.now() + SESSION_DAYS * 864e5 : Date.now() + 864e5; }
+  return s;
+}
+var refreshing = null;
+function getToken() {
+  var s = sessGet();
+  if (!s || !s.rt) return Promise.reject(new Error("no-session"));
+  if (s.at && s.ate - 60000 > Date.now()) return Promise.resolve(s.at);
+  if (!refreshing) refreshing = sbReq("/auth/v1/token?grant_type=refresh_token", { method: "POST", body: { refresh_token: s.rt } })
+    .then(function (j) { var n = tokenFrom(j, null, null, s); sessPut(n); refreshing = null; return n.at; })
+    .catch(function (e) { refreshing = null; if (e.status === 400 || e.status === 401) { sessClear(); location.reload(); } throw e; });
+  return refreshing;
+}
+
+/* --- synchronisation de la progression --- */
+function localData(prefix) {
+  var o = {};
+  if (!LS) return o;
+  for (var i = 0; i < LS.length; i++) { var k = LS.key(i); if (k && k.indexOf(prefix) === 0 && k.slice(prefix.length, prefix.length + 2) !== "__") { try { o[k.slice(prefix.length)] = JSON.parse(LS.getItem(k)); } catch (e) {} } }
+  return o;
+}
+var MAXKEYS = { defiBest: 1, tutoDone: 1 }, MAXMAPS = { scores: 1, defiDays: 1 };
+function isObj(v) { return v && typeof v === "object" && !Array.isArray(v); }
+function mergeData(cloud, local, localFirst) {
+  var out = {}, keys = {};
+  Object.keys(cloud || {}).forEach(function (k) { keys[k] = 1; }); Object.keys(local || {}).forEach(function (k) { keys[k] = 1; });
+  Object.keys(keys).forEach(function (k) {
+    var c = cloud ? cloud[k] : undefined, l = local ? local[k] : undefined;
+    if (c === undefined) { out[k] = l; return; }
+    if (l === undefined) { out[k] = c; return; }
+    if (MAXKEYS[k]) { out[k] = Math.max(+c || 0, +l || 0); return; }
+    if (MAXMAPS[k] && isObj(c) && isObj(l)) { var m = {}; Object.keys(c).concat(Object.keys(l)).forEach(function (x) { m[x] = Math.max(c[x] == null ? -1 : +c[x], l[x] == null ? -1 : +l[x]); }); out[k] = m; return; }
+    if (k === "defiRun") { out[k] = (c.d || "") > (l.d || "") ? c : (l.d || "") > (c.d || "") ? l : ((c.i || 0) >= (l.i || 0) ? c : l); return; }
+    if (Array.isArray(c) && Array.isArray(l)) { var seen = {}, arr = []; (localFirst ? l.concat(c) : c.concat(l)).forEach(function (x) { var id = isObj(x) && x.w ? norm(x.w) : JSON.stringify(x); if (!seen[id]) { seen[id] = 1; arr.push(x); } }); out[k] = arr; return; }
+    if (isObj(c) && isObj(l)) { out[k] = localFirst ? Object.assign({}, c, l) : Object.assign({}, l, c); return; }
+    out[k] = localFirst ? l : c;
+  });
+  return out;
+}
+function writeLocal(prefix, data) { Object.keys(data).forEach(function (k) { rawSet(prefix + k, data[k]); }); }
+var pushT = null, lastPull = 0;
+function schedulePush() { clearTimeout(pushT); pushT = setTimeout(pushNow, 1500); }
+function pushNow(keepalive) {
+  clearTimeout(pushT);
+  if (!USER || !rawGet(PREFIX + "__dirty", 0)) return Promise.resolve();
+  if (navigator.onLine === false) return Promise.resolve();
+  var data = localData(PREFIX);
+  return getToken().then(function (t) {
+    return sbReq("/rest/v1/progress", { method: "POST", token: t, prefer: "resolution=merge-duplicates,return=minimal", keepalive: keepalive, body: { user_id: USER.id, data: data, updated_at: new Date().toISOString() } });
+  }).then(function () { rawSet(PREFIX + "__dirty", 0); rawSet(PREFIX + "__synced", Date.now()); syncBadge(); }).catch(function () { syncBadge(); });
+}
+function pullNow(force) {
+  if (!USER || navigator.onLine === false) return Promise.resolve(false);
+  if (!force && Date.now() - lastPull < 30000) return Promise.resolve(false);
+  lastPull = Date.now();
+  return getToken().then(function (t) { return sbReq("/rest/v1/progress?select=data,updated_at&user_id=eq." + USER.id, { token: t }); })
+    .then(function (rows) {
+      var cloud = rows && rows[0] ? rows[0].data : null, local = localData(PREFIX), dirty = !!rawGet(PREFIX + "__dirty", 0);
+      var merged = mergeData(cloud || {}, local, dirty), before = JSON.stringify(local);
+      writeLocal(PREFIX, merged);
+      if (!cloud || JSON.stringify(merged) !== JSON.stringify(cloud)) { rawSet(PREFIX + "__dirty", 1); pushNow(); }
+      else { rawSet(PREFIX + "__dirty", 0); rawSet(PREFIX + "__synced", Date.now()); }
+      syncBadge();
+      return JSON.stringify(merged) !== before;
+    }).catch(function () { syncBadge(); return false; });
+}
+function syncBadge() {
+  var el = document.getElementById("acc-sync"); if (!el) return;
+  var t = rawGet(PREFIX + "__synced", 0), dirty = rawGet(PREFIX + "__dirty", 0);
+  el.textContent = navigator.onLine === false ? "Hors ligne · la progression sera envoyée au retour du réseau" : dirty ? "Synchronisation en cours…" : t ? "Progression synchronisée " + ago(t) : "Progression synchronisée";
+}
+function ago(t) { var m = Math.round((Date.now() - t) / 60000); return m < 1 ? "à l’instant" : m < 60 ? "il y a " + m + " min" : m < 1440 ? "il y a " + Math.round(m / 60) + " h" : "il y a " + Math.round(m / 1440) + " j"; }
 var known = store.get("known", {});
 var scores = store.get("scores", {});
 var missed = store.get("missed", {});
@@ -8306,7 +8411,7 @@ function viewHome() {
   '<section class="wrap hero">' +
     '<div><p class="eyebrow">' + (USER ? 'Bonjour ' + esc(USER.name) + ' · ' : '') + 'Brevet · Session 2027</p>' +
     '<h1>Tout le programme de 3<sup style="font-size:.45em">e</sup>.<br>Une page à la fois.</h1>' +
-    '<p class="lead">Résumés, cours complets, schémas, flashcards et quiz pour les six matières de l’examen. Ta progression reste enregistrée sur ton appareil.</p>' +
+    '<p class="lead">Résumés, cours complets, schémas, flashcards et quiz pour les six matières de l’examen. Ta progression te suit sur tous tes appareils.</p>' +
     defiCard() + '</div>' +
     countHtml() +
   '</section>' +
@@ -8449,67 +8554,78 @@ function viewExam() {
 }
 
 /* ---------- connexion ---------- */
-function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (x) { return ("0" + x.toString(16)).slice(-2); }).join(""); }
-function sha(t) { return crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)).then(hex); }
-function newSalt() { var a = new Uint8Array(16); crypto.getRandomValues(a); return hex(a.buffer); }
-function startSession(u, keep) {
-  try { sessionStorage.removeItem("brevet:session"); } catch (e) {}
-  if (LS) LS.removeItem("brevet:session");
-  if (keep) rawSet("brevet:session", { id: u.id, exp: Date.now() + SESSION_DAYS * 864e5 });
-  else { try { sessionStorage.setItem("brevet:session", JSON.stringify({ id: u.id })); } catch (e) { rawSet("brevet:session", { id: u.id, exp: Date.now() + 864e5 }); } }
-  location.reload();
+function startSession(j, name, keep) {
+  var s = tokenFrom(j, name, keep, null), uid = s.id, prefix = "brevet:u:" + uid + ":";
+  sessClear(); sessPut(s);
+  /* reprise d’un ancien compte enregistré sur cet appareil (même prénom) */
+  var old = rawGet("brevet:users", []).filter(function (u) { return norm(u.name) === norm(s.name) && !u.moved; })[0];
+  var local = localData(prefix);
+  if (old) {
+    local = mergeData(local, localData("brevet:u:" + old.id + ":"), true);
+    rawSet("brevet:users", rawGet("brevet:users", []).map(function (u) { if (u.id === old.id) u.moved = uid; return u; }));
+  }
+  return sbReq("/rest/v1/progress?select=data&user_id=eq." + uid, { token: s.at }).then(function (rows) {
+    var cloud = rows && rows[0] ? rows[0].data : {}, merged = mergeData(cloud, local, true);
+    writeLocal(prefix, merged);
+    return sbReq("/rest/v1/progress", { method: "POST", token: s.at, prefer: "resolution=merge-duplicates,return=minimal", body: { user_id: uid, data: merged, updated_at: new Date().toISOString() } });
+  }).then(function () { rawSet(prefix + "__dirty", 0); rawSet(prefix + "__synced", Date.now()); }, function () { writeLocal(prefix, local); rawSet(prefix + "__dirty", 1); })
+    .then(function () { location.reload(); });
 }
 function logout() {
-  try { sessionStorage.removeItem("brevet:session"); } catch (e) {}
-  if (LS) LS.removeItem("brevet:session");
-  location.hash = ""; location.reload();
+  var done = function () { sessClear(); location.hash = ""; location.reload(); };
+  pushNow().then(done, done);
 }
 function showLogin() {
   document.body.classList.add("locked");
   var box = document.createElement("div");
   box.className = "auth"; document.body.appendChild(box);
-  var users = rawGet("brevet:users", []), mode = users.length ? "login" : "new";
+  var olds = rawGet("brevet:users", []).filter(function (u) { return !u.moved; }), mode = olds.length ? "new" : "login", busy = false;
   function draw(msg) {
     var isNew = mode === "new";
     box.innerHTML = '<div class="auth-card">' +
       '<div class="auth-logo"><span class="logo-dots">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("") + '</span>Objectif Brevet</div>' +
       '<h1>' + (isNew ? "Créer ton compte" : "Bon retour !") + '</h1>' +
-      '<p class="auth-lead">' + (isNew ? "Un prénom et un mot de passe suffisent. Chaque compte garde sa propre progression." : "Connecte-toi pour retrouver ta progression.") + '</p>' +
+      '<p class="auth-lead">' + (isNew ? "Un prénom et un mot de passe suffisent. Ton compte marche sur tous tes appareils." : "Connecte-toi pour retrouver ta progression, sur n’importe quel appareil.") + '</p>' +
+      (olds.length ? '<p class="auth-new"><b>Nouveau : les comptes sont en ligne.</b> Crée ton compte avec le même prénom (' + olds.map(function (u) { return esc(u.name); }).join(", ") + ') : ta progression de cet appareil sera reprise automatiquement.</p>' : "") +
       '<div class="seg auth-seg"><button type="button" data-mode="login" class="' + (isNew ? "" : "on") + '">Se connecter</button><button type="button" data-mode="new" class="' + (isNew ? "on" : "") + '">Créer un compte</button></div>' +
-      (!isNew && users.length ? '<div class="auth-users">' + users.map(function (u) { return '<button type="button" class="chip" data-name="' + esc(u.name) + '"><b class="auth-av">' + esc(u.name.charAt(0).toUpperCase()) + '</b>' + esc(u.name) + '</button>'; }).join("") + '</div>' : "") +
       '<form id="auth-form" novalidate>' +
         '<label class="field" for="auth-name">Prénom<input id="auth-name" autocomplete="username" autocapitalize="words" maxlength="30" required></label>' +
         '<label class="field" for="auth-pass">Mot de passe<input id="auth-pass" type="password" autocomplete="' + (isNew ? "new-password" : "current-password") + '" required></label>' +
         (isNew ? '<label class="field" for="auth-pass2">Confirme le mot de passe<input id="auth-pass2" type="password" autocomplete="new-password" required></label>' : "") +
         '<label class="toggle" for="auth-keep"><input type="checkbox" id="auth-keep" checked> Rester connecté pendant 5 jours</label>' +
         '<p class="auth-err"' + (msg ? "" : " hidden") + '>' + (msg || "") + '</p>' +
-        '<button class="btn btn-fill auth-go">' + (isNew ? "Créer mon compte" : "Se connecter") + '</button>' +
+        '<button class="btn btn-fill auth-go"' + (busy ? " disabled" : "") + '>' + (busy ? "Un instant…" : isNew ? "Créer mon compte" : "Se connecter") + '</button>' +
       '</form>' +
-      '<p class="auth-note">Les comptes et la progression sont enregistrés sur cet appareil uniquement. Il n’y a pas de récupération de mot de passe : si tu l’oublies, crée un nouveau compte.</p>' +
+      '<p class="auth-note">Ta progression est enregistrée en ligne et sur ton appareil : tu la retrouves partout avec ton prénom et ton mot de passe. Note bien ton mot de passe : il n’y a pas encore de récupération automatique.</p>' +
     '</div>';
-    box.querySelector(".auth-seg").onclick = function (e) { var b = e.target.closest("[data-mode]"); if (b) { mode = b.dataset.mode; draw(); } };
-    Array.prototype.forEach.call(box.querySelectorAll("[data-name]"), function (b) { b.onclick = function () { box.querySelector("#auth-name").value = b.dataset.name; box.querySelector("#auth-pass").focus(); }; });
+    box.querySelector(".auth-seg").onclick = function (e) { var b = e.target.closest("[data-mode]"); if (b && !busy) { mode = b.dataset.mode; draw(); } };
     box.querySelector("#auth-form").onsubmit = function (e) {
       e.preventDefault();
-      if (!LS || !window.crypto || !crypto.subtle) return draw("Ton navigateur bloque l’enregistrement (navigation privée ?). Ouvre l’appli dans une fenêtre normale.");
-      var name = box.querySelector("#auth-name").value.trim().replace(/\s+/g, " "), pass = box.querySelector("#auth-pass").value, keep = box.querySelector("#auth-keep").checked;
+      if (busy) return;
+      if (!LS) return draw("Ton navigateur bloque l’enregistrement (navigation privée ?). Ouvre l’appli dans une fenêtre normale.");
+      var nameEl = box.querySelector("#auth-name"), name = nameEl.value.trim().replace(/\s+/g, " "), pass = box.querySelector("#auth-pass").value, keep = box.querySelector("#auth-keep").checked;
       if (!name) return draw("Indique ton prénom.");
-      if (pass.length < 4) return draw("Le mot de passe doit contenir au moins 4 caractères.");
-      var key = norm(name), existing = users.filter(function (u) { return norm(u.name) === key; })[0];
-      if (mode === "new") {
-        if (pass !== box.querySelector("#auth-pass2").value) return draw("Les deux mots de passe ne sont pas identiques.");
-        if (existing) return draw("Ce prénom a déjà un compte sur cet appareil. Connecte-toi, ou ajoute une initiale (ex. « Léa M. »).");
-        var salt = newSalt();
-        sha(salt + pass).then(function (h) {
-          var u = { id: "u" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: name, salt: salt, hash: h, created: Date.now() };
-          if (!users.length) ["known", "scores", "missed", "seenQ", "qmode", "last"].forEach(function (k) { var v = LS.getItem("brevet:" + k); if (v != null) { LS.setItem("brevet:u:" + u.id + ":" + k, v); LS.removeItem("brevet:" + k); } });
-          users.push(u); rawSet("brevet:users", users);
-          startSession(u, keep);
-        });
-      } else {
-        if (!existing) return draw("Aucun compte « " + esc(name) + " » sur cet appareil. Vérifie l’orthographe ou crée un compte.");
-        sha(existing.salt + pass).then(function (h) { if (h === existing.hash) startSession(existing, keep); else draw("Mot de passe incorrect."); });
-      }
+      if (pass.length < 6) return draw("Le mot de passe doit contenir au moins 6 caractères.");
+      if (mode === "new" && pass !== box.querySelector("#auth-pass2").value) return draw("Les deux mots de passe ne sont pas identiques.");
+      if (navigator.onLine === false) return draw("Pas de connexion internet. Connecte-toi au réseau pour " + (mode === "new" ? "créer ton compte." : "te connecter la première fois."));
+      busy = true; draw(); box.querySelector("#auth-name").value = name;
+      var req = mode === "new"
+        ? sbReq("/auth/v1/signup", { method: "POST", body: { email: emailOf(name), password: pass, data: { name: name } } })
+        : sbReq("/auth/v1/token?grant_type=password", { method: "POST", body: { email: emailOf(name), password: pass } });
+      req.then(function (j) {
+        if (!j || !j.access_token) throw new Error("no-token");
+        return startSession(j, mode === "new" ? name : null, keep);
+      }).catch(function (err) {
+        busy = false;
+        var m = String(err && err.message || ""), c = err && err.code;
+        var msg = c === "user_already_exists" || /already registered|already exists/i.test(m) ? "Ce prénom a déjà un compte. Connecte-toi, ou ajoute une initiale (ex. « Léa M. »)."
+          : c === "invalid_credentials" || /invalid login/i.test(m) ? "Prénom ou mot de passe incorrect."
+          : c === "weak_password" || /password/i.test(m) && /6|weak|short/i.test(m) ? "Mot de passe trop simple : au moins 6 caractères."
+          : c === "over_request_rate_limit" || c === "over_email_send_rate_limit" || err.status === 429 ? "Trop de tentatives. Patiente une minute puis réessaie."
+          : err instanceof TypeError ? "Impossible de joindre le serveur. Vérifie ta connexion internet."
+          : "Une erreur est survenue (" + esc(m) + "). Réessaie dans un instant.";
+        draw(msg); box.querySelector("#auth-name").value = name;
+      });
     };
     var first = box.querySelector("#auth-name"); if (first && !matchMedia("(hover:none)").matches) first.focus();
   }
@@ -8517,11 +8633,12 @@ function showLogin() {
 }
 function openAccount() {
   sheet.hidden = false; document.body.classList.add("wk-open");
-  sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Connecté sur cet appareil</p></div></div>' +
-    '<p class="wk-e">Ta progression (cartes sues, scores, erreurs) est enregistrée dans ce compte, sur cet appareil.</p>' +
+  sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Compte en ligne · tous tes appareils</p></div></div>' +
+    '<p class="wk-e acc-sync" id="acc-sync"></p>' +
     '<div class="acc-streak"><span class="flame' + (streakInfo().today ? "" : " off") + '">' + FLAME + '</span><div><b>' + plural(streakInfo().n, "jour") + ' de suite</b><span>Record : ' + plural(streakInfo().best, "jour") + '</span></div></div>' + defiCal(5) +
     '<button type="button" class="btn" id="btn-tuto">Revoir le tutoriel</button><a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a><button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
-  document.getElementById("btn-logout").onclick = logout;
+  document.getElementById("btn-logout").onclick = function () { this.disabled = true; this.textContent = "Déconnexion…"; logout(); };
+  syncBadge(); pushNow().then(syncBadge);
   document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(false); };
 }
 
@@ -8936,7 +9053,7 @@ function mountMap(root, c) {
    TUTO_V : à augmenter à chaque nouvelle fonctionnalité importante.
    Chaque étape porte « s » = version où elle est apparue (1 par défaut) :
    les comptes qui ont vu une version plus ancienne voient seulement les nouveautés. */
-var TUTO_V = 2;
+var TUTO_V = 3;
 function tutoSteps() {
   var tiles = '<div class="tv-tiles">' + SUBJECTS.map(function (s) { return '<span style="background:' + col(s.id) + '"><b>' + s.code + '</b><i>' + s.name.split(" ")[0] + '</i></span>'; }).join("") + '</div>';
   return [
@@ -8959,7 +9076,7 @@ function tutoSteps() {
       v: '<svg class="tv-mm" viewBox="0 0 320 150"><path d="M160 75 C120 75 110 35 70 35" stroke="#E5302A" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C120 75 110 115 70 115" stroke="#2FA45C" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C200 75 210 35 250 35" stroke="#2E86DE" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C200 75 210 115 250 115" stroke="#F28C28" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="160" cy="75" r="26" fill="#fff" stroke="#C26300" stroke-width="5"/><text x="160" y="81" text-anchor="middle" font-size="18">🌍</text><text x="20" y="28" font-size="11" font-weight="800" fill="#E5302A">Causes</text><text x="20" y="108" font-size="11" font-weight="800" fill="#2FA45C">Fin</text><text x="256" y="28" font-size="11" font-weight="800" fill="#2E86DE">Crises</text><rect x="252" y="98" width="46" height="24" rx="7" fill="#fff" stroke="#F28C28" stroke-dasharray="4 3" stroke-width="2"/><text x="275" y="115" text-anchor="middle" font-size="14" font-weight="800" fill="#F28C28">?</text></svg>' },
     { t: "La recherche", d: "La <b>loupe</b> en haut de l’écran cherche dans tous les cours et toutes les flashcards. Tape un mot, une date ou une notion, puis touche un résultat pour aller directement à la bonne partie du cours.",
       v: '<div class="tv-search"><div class="tv-bar">🔍 pythagore</div><div class="tv-res"><small>Mathématiques · Pythagore</small><b>Le théorème de <mark>Pythagore</mark></b></div></div>' },
-    { t: "Ta progression, ton compte", d: "Chaque compte garde sa progression : cartes sues, scores, erreurs, carnet. Elle est enregistrée <b>sur cet appareil</b>. Le rond avec ton initiale, en haut à droite, permet de te déconnecter ou de revoir ce tutoriel. La page <b>L’examen</b> donne le calendrier et un plan de révision.",
+    { s: 3, t: "Ta progression, ton compte", d: "Ton compte est <b>en ligne</b> : connecte-toi avec ton prénom et ton mot de passe sur n’importe quel téléphone ou ordinateur, tu retrouves tout (flammes, cartes sues, scores, erreurs, carnet). Le rond avec ton initiale, en haut à droite, permet de te déconnecter ou de revoir ce tutoriel. La page <b>L’examen</b> donne le calendrier et un plan de révision.",
       v: '<div class="tv-prog"><span class="avatar tv-av">' + esc(USER ? USER.name.charAt(0).toUpperCase() : "L") + '</span><div><b>Mathématiques</b><i><em style="width:62%"></em></i></div><div><b>Histoire-Géo</b><i><em style="width:35%;background:var(--hg)"></em></i></div></div>' },
     { t: "Astuce : comme une vraie appli", d: "Sur iPhone, ouvre le site dans Safari, touche le bouton <b>Partager</b>, puis <b>« Sur l’écran d’accueil »</b>. L’appli s’ouvre alors en plein écran, avec son icône.",
       v: '<div class="tv-home"><span class="tv-ico">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("") + '</span><b>Brevet</b></div>' },
@@ -9373,6 +9490,13 @@ function route() {
 document.getElementById("strip").innerHTML = SUBJECTS.map(function (s) { return '<a href="#' + s.id + '" style="background:' + col(s.id) + '" aria-label="' + s.name + '"></a>'; }).join("");
 document.getElementById("logo-dots").innerHTML = SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("");
 window.addEventListener("hashchange", route);
+function reloadState() { known = store.get("known", {}); scores = store.get("scores", {}); missed = store.get("missed", {}); qmode = store.get("qmode", "10"); }
+if (USER) {
+  pullNow(true).then(function (changed) { if (changed) { reloadState(); var h = location.hash; if (!/^#?(quiz|flashcards|defi)/.test(h) || !document.querySelector(".df-body, .opt, .fc")) route(); } });
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") pushNow(true); else pullNow().then(function (ch) { if (ch) { reloadState(); if (!document.querySelector(".df-body, .opt.is-right, .fc")) route(); } }); });
+  window.addEventListener("online", function () { pushNow(); });
+  window.addEventListener("pagehide", function () { pushNow(true); });
+}
 if (USER) { document.getElementById("btn-user").textContent = USER.name.charAt(0).toUpperCase(); route(); var tv = +store.get("tutoDone") || 0; if (!tv) setTimeout(showTuto, 300); else if (tv < TUTO_V) setTimeout(function () { showTuto(true); }, 300); }
 else showLogin();
 })();
