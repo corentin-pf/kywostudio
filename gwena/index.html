@@ -1113,6 +1113,19 @@ main#app{overflow-x:clip}
 .rc-row b{font-size:15px}
 .rc-nav{display:flex;justify-content:flex-end}
 .sv-recap{margin:6px 0 4px;min-height:40px;font-size:14px}
+
+/* horaires de notification */
+.nt-card h2{font-size:21px}
+.nt-lead{font-size:15px;color:var(--mute);line-height:1.45}
+.nt-lead b{color:var(--fg)}
+.nt-f{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1.5px solid var(--hair);border-radius:var(--r-sm);padding:10px 12px;font-weight:700;font-size:15px}
+.nt-row{display:flex;gap:6px}
+.nt-sel{font:inherit;font-weight:700;font-size:16px;border:var(--bw) solid var(--fg);border-radius:10px;padding:8px 10px;background:var(--bg);color:var(--fg);min-width:84px}
+.nt-two{justify-content:space-between;align-items:center}
+.nt-msg{font-weight:700;color:var(--ok);font-size:14px}
+.nt-hours{display:flex;flex-direction:column;align-items:flex-start;gap:4px;font-size:14px;color:var(--fg)}
+.nt-hours span b{font-weight:800}
+.nt-f{flex-wrap:wrap;row-gap:8px}
 </style>
 </head>
 <body>
@@ -10141,7 +10154,7 @@ function viewSuivi(d, upd) {
     '<p class="sv-foot">Le suivi se met à jour tout seul toutes les 30 secondes. Tu ne peux rien modifier chez ' + first + '.</p>';
 }
 /* récap de la semaine (parents) : prêt chaque dimanche à midi */
-function recapWeek() { var t = new Date(), d = addDays(t, -(t.getDay())); if (t.getDay() === 0 && t.getHours() < 12) d = addDays(d, -7); return dayKey(d); }
+function recapWeek() { var n = notifPrefs() || {}, dow = n.recap_dow || 7, H = n.recap_h != null ? n.recap_h : 12, t = new Date(), iso = (t.getDay() + 6) % 7 + 1, back = (iso - dow + 7) % 7, d = addDays(t, -back); if (back === 0 && t.getHours() < H) d = addDays(d, -7); return dayKey(d); }
 function recapStats(d, sun) {
   var days = d.defiDays || {}, kn = d.known || {}, sc = d.scores || {}, t = new Date(), wk = [], n = 0, x;
   for (var i = 0; i < 7; i++) { var k = dayKey(addDays(sun, -i)); if (days[k] != null) wk.push(days[k]); }
@@ -10187,7 +10200,7 @@ function parentSteps() {
     { t: "Le suivi", d: "Série de défis du jour et calendrier, progression par matière, flashcards maîtrisées, scores de quiz, erreurs à retravailler et mots cherchés. La page se met à jour toute seule.",
       v: '<div class="tv-prog"><span class="avatar tv-av">L</span><div><b>Mathématiques</b><i><em style="width:62%"></em></i></div><div><b>Histoire-Géo</b><i><em style="width:35%;background:var(--hg)"></em></i></div></div>' },
     { t: "Les cours", d: "L’onglet <b>Cours</b> donne accès à tous les résumés, cours, cartes mentales et schémas, pour savoir ce que ton enfant révise.", v: '<div class="tv-go">📚</div>' },
-    { s: 8, t: "Notifications et récap 🔔", d: "Chaque <b>dimanche à midi</b>, le <b>récap de la semaine</b> s’affiche quand tu ouvres l’appli (et reste disponible sur la page Suivi). Dans ton menu, active les notifications : une le dimanche quand le récap est prêt, une à <b>20 h</b> si le défi du jour n’est pas fait.",
+    { s: 9, t: "Notifications et récap 🔔", d: "Tu choisis <b>tes horaires</b> : l’heure de la notification si le défi du jour n’est pas fait, et le <b>jour et l’heure du récap de la semaine</b>, qui s’affiche alors quand tu ouvres l’appli (et reste disponible sur la page Suivi). Modifiable à tout moment dans ton menu.",
       v: '<div class="tv-notif"><div class="tv-n"><span class="tv-n-ic">' + GLOGO + '</span><div><b>🔥 Défi du jour pas encore fait</b><span>Léa n’a pas encore fait le défi du jour. Il reste jusqu’à minuit pour garder la série !</span></div><small>20:00</small></div></div>' },
     { t: "Astuce : comme une vraie appli", d: "Sur iPhone, ouvre le site dans Safari, touche le bouton <b>Partager</b>, puis <b>« Sur l’écran d’accueil »</b>. Indispensable pour recevoir la notification du soir.", v: '<div class="tv-home"><span class="tv-ico">' + GLOGO + '</span><b>GWENA</b></div>' }
   ];
@@ -10307,20 +10320,85 @@ function refreshPush() {
   if (!USER || !pushSupported() || Notification.permission !== "granted" || rawGet("brevet:push", null) !== USER.id) return;
   currentSub().then(function (sub) { if (sub) saveSub(sub).catch(function () {}); });
 }
+/* ---------- horaires de notification choisis par chacun ---------- */
+var DAYS_FR = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
+function notifPrefs() { var n = store.get("notif", null); return n && (PARENT ? n.soir != null : n.h1 != null) ? n : null; }
+function notifText(n) {
+  if (!n) return "Aucun horaire choisi.";
+  return PARENT ? "à <b>" + n.soir + " h</b> si ton enfant n’a pas fait son défi du jour, et le <b>" + DAYS_FR[n.recap_dow - 1] + " à " + n.recap_h + " h</b> pour le récap de la semaine"
+    : "à <b>" + n.h1 + " h</b> et à <b>" + n.h2 + " h</b>, seulement si ton défi du jour n’est pas encore fait";
+}
+function hourSel(id, v) { var o = ""; for (var h = 6; h <= 23; h++) o += '<option value="' + h + '"' + (h === v ? " selected" : "") + '>' + h + ' h</option>'; return '<select id="' + id + '" class="nt-sel">' + o + '</select>'; }
+function showNotifSetup(mandatory, done) {
+  if (document.querySelector(".nt-ov")) return;
+  var n = notifPrefs() || (PARENT ? { soir: 20, recap_dow: 7, recap_h: 12 } : { h1: 15, h2: 19 });
+  var ov = document.createElement("div"); ov.className = "rc-ov nt-ov";
+  document.body.appendChild(ov); document.body.classList.add("wk-open");
+  var close = function () { ov.remove(); document.body.classList.remove("wk-open"); if (!PARENT && (!location.hash || location.hash === "#")) route(); if (done) done(); };
+  function step1(err) {
+    ov.innerHTML = '<div class="rc-card nt-card" role="dialog" aria-modal="true" aria-label="Horaires de notification">' +
+      '<div class="rc-top"><span class="rc-k">🔔 ' + (mandatory ? "Avant de commencer" : "Mes notifications") + '</span>' + (mandatory ? "" : '<button type="button" class="rc-x" data-nt="close" aria-label="Fermer">✕</button>') + '</div>' +
+      '<h2>' + (PARENT ? "Quand veux-tu recevoir les notifications ?" : "À quelle heure te rappeler ton défi ?") + '</h2>' +
+      '<p class="nt-lead">' + (PARENT ? "Choisis l’heure de la notification si le défi du jour n’est pas fait, et le moment où le récap de la semaine est prêt." : "Choisis <b>2 horaires</b> : tu recevras un rappel à ces heures-là, seulement si ton défi du jour n’est pas encore fait. Le 2<sup>e</sup> rappel est le dernier de la journée.") + '</p>' +
+      (PARENT
+        ? '<label class="nt-f"><span>Si le défi n’est pas fait</span>' + hourSel("nt-soir", n.soir) + '</label>' +
+          '<div class="nt-f"><span>Récap de la semaine</span><div class="nt-row"><select id="nt-dow" class="nt-sel">' + DAYS_FR.map(function (d, k) { return '<option value="' + (k + 1) + '"' + (k + 1 === n.recap_dow ? " selected" : "") + '>' + d.charAt(0).toUpperCase() + d.slice(1) + '</option>'; }).join("") + '</select>' + hourSel("nt-rh", n.recap_h) + '</div></div>'
+        : '<label class="nt-f"><span>1<sup>er</sup> rappel</span>' + hourSel("nt-h1", n.h1) + '</label><label class="nt-f"><span>2<sup>e</sup> rappel (le dernier)</span>' + hourSel("nt-h2", n.h2) + '</label>') +
+      '<p class="auth-err"' + (err ? "" : " hidden") + '>' + (err || "") + '</p>' +
+      '<div class="rc-nav"><button type="button" class="btn btn-fill" data-nt="save">Enregistrer mes horaires</button></div></div>';
+  }
+  function step2() {
+    var on = pushSupported() && Notification.permission === "granted" && rawGet("brevet:push", null) === USER.id;
+    if (on) { close(); return; }
+    var body = !pushSupported() && IS_IOS && !STANDALONE ? '<p class="nt-lead">Dernière étape : sur iPhone, les notifications marchent quand l’appli est sur l’<b>écran d’accueil</b>. Dans Safari, touche <b>Partager</b> puis <b>« Sur l’écran d’accueil »</b>, ouvre GWENA depuis son icône, puis active les notifications dans ton menu (rond avec ton initiale).</p><div class="rc-nav"><button type="button" class="btn btn-fill" data-nt="close">J’ai compris</button></div>'
+      : !pushSupported() ? '<p class="nt-lead">Ce navigateur ne gère pas les notifications. Ouvre GWENA sur ton téléphone (Safari sur iPhone, appli sur l’écran d’accueil) pour recevoir tes rappels.</p><div class="rc-nav"><button type="button" class="btn btn-fill" data-nt="close">J’ai compris</button></div>'
+      : Notification.permission === "denied" ? '<p class="nt-lead">Les notifications sont bloquées pour GWENA. Autorise-les dans les réglages du téléphone (<b>Réglages → Notifications → GWENA</b>) pour recevoir tes rappels.</p><div class="rc-nav"><button type="button" class="btn btn-fill" data-nt="close">J’ai compris</button></div>'
+      : '<p class="nt-lead">Dernière étape : <b>autorise les notifications</b>, sinon tes rappels ne pourront pas t’arriver.</p><div class="rc-nav nt-two"><button type="button" class="link" data-nt="close">Plus tard</button><button type="button" class="btn btn-fill" data-nt="allow">Autoriser les notifications</button></div><p class="nt-msg" hidden></p>';
+    ov.innerHTML = '<div class="rc-card nt-card" role="dialog" aria-modal="true"><div class="rc-top"><span class="rc-k">🔔 Horaires enregistrés ✓</span></div><h2>' + notifText(notifPrefs()).replace(/^à /, "Rappels à ").replace(/^./, function (c) { return c.toUpperCase(); }) + '.</h2>' + body + '</div>';
+  }
+  ov.onclick = function (e) {
+    var b = e.target.closest("[data-nt]"); if (!b) return;
+    var a = b.dataset.nt;
+    if (a === "close") { close(); return; }
+    if (a === "save") {
+      var v = PARENT ? { soir: +ov.querySelector("#nt-soir").value, recap_dow: +ov.querySelector("#nt-dow").value, recap_h: +ov.querySelector("#nt-rh").value }
+        : { h1: +ov.querySelector("#nt-h1").value, h2: +ov.querySelector("#nt-h2").value };
+      if (!PARENT) { if (v.h1 === v.h2) return step1("Choisis deux horaires différents."); if (v.h1 > v.h2) { var x = v.h1; v.h1 = v.h2; v.h2 = x; } }
+      store.set("notif", v); pushNow();
+      var box = document.getElementById("acc-push"); if (box) box.outerHTML = pushBlock();
+      step2(); return;
+    }
+    if (a === "allow") {
+      b.disabled = true; b.textContent = "Un instant…";
+      var m = ov.querySelector(".nt-msg");
+      enablePush().then(function () { return testPush().catch(function () {}); }).then(function () {
+        var box = document.getElementById("acc-push"); if (box) box.outerHTML = pushBlock();
+        m.hidden = false; m.textContent = "C’est activé ! Un premier exemple vient de t’être envoyé."; setTimeout(close, 1400);
+      }, function (err) { b.disabled = false; b.textContent = "Autoriser les notifications"; m.hidden = false; m.textContent = err && err.message === "denied" ? "Tu as refusé les notifications. Tu pourras les autoriser dans les réglages du téléphone." : "Impossible d’activer les notifications pour l’instant. Réessaie depuis ton menu."; });
+    }
+  };
+  step1();
+}
+function ensureNotif() {
+  if (!USER || notifPrefs()) return;
+  if (document.querySelector(".tuto, .rc-ov")) { setTimeout(ensureNotif, 1500); return; }
+  showNotifSetup(true, function () { if (PARENT) showRecap(false); });
+}
 function pushBlock() {
   var on = pushSupported() && Notification.permission === "granted" && rawGet("brevet:push", null) === (USER && USER.id);
-  var h = '<div class="acc-push" id="acc-push"><b>' + (PARENT ? "🔔 Notifications" : "🔔 Rappels du défi") + '</b>';
+  var h = '<div class="acc-push" id="acc-push"><b>' + (PARENT ? "🔔 Notifications" : "🔔 Rappels du défi") + '</b><div class="nt-hours"><span>🕒 ' + (notifPrefs() ? notifText(notifPrefs()).replace(/^à /, "À ").replace(/, seulement si.*$/, "") : "Aucun horaire choisi") + '</span><button type="button" class="link" data-notif-edit>Modifier les horaires</button></div>';
   if (!pushSupported() && IS_IOS && !STANDALONE) return h + '<p>Sur iPhone, les rappels marchent quand l’appli est sur l’écran d’accueil : dans Safari, touche <b>Partager</b> puis <b>« Sur l’écran d’accueil »</b>, ouvre l’appli depuis son icône et reviens ici.</p></div>';
   if (!pushSupported()) return h + '<p>Ce navigateur ne gère pas les notifications. Essaie avec Safari (iPhone, appli sur l’écran d’accueil) ou Chrome.</p></div>';
   if (Notification.permission === "denied") return h + '<p>Les notifications sont bloquées pour l’appli. Autorise-les dans les réglages du téléphone (Réglages → Notifications → GWENA), puis reviens ici.</p></div>';
-  if (on && PARENT) return h + '<p>✅ Activées : à <b>20 h</b> si ton enfant n’a pas encore fait son défi du jour, et le <b>dimanche à midi</b> pour le récap de la semaine.</p><button type="button" class="link" data-push="off">Désactiver la notification</button><p class="acc-push-msg" hidden></p></div>';
-  if (!on && PARENT) return h + '<p>Reçois une notification à <b>20 h</b> si ton enfant n’a pas encore fait son défi du jour, et le <b>dimanche à midi</b> quand le récap de la semaine est prêt.</p><button type="button" class="btn btn-sub defi-push-on" data-push="on">Activer la notification</button><p class="acc-push-msg" hidden></p></div>';
-  if (on) return h + '<p>✅ Activés : un rappel à <b>15 h</b> et à <b>19 h</b>, seulement si ton défi du jour n’est pas encore fait.</p><button type="button" class="link" data-push="off">Désactiver les rappels</button><p class="acc-push-msg" hidden></p></div>';
-  return h + '<p>Reçois un rappel à <b>15 h</b> et à <b>19 h</b> si tu n’as pas encore fait ton défi du jour, pour ne jamais perdre ta flamme.</p><button type="button" class="btn btn-sub defi-push-on" data-push="on">Activer les rappels</button><p class="acc-push-msg" hidden></p></div>';
+  if (on && PARENT) return h + '<p>✅ Notifications activées sur cet appareil.</p><button type="button" class="link" data-push="off">Désactiver la notification</button><p class="acc-push-msg" hidden></p></div>';
+  if (!on && PARENT) return h + '<p>Active les notifications sur cet appareil pour les recevoir aux horaires choisis.</p><button type="button" class="btn btn-sub defi-push-on" data-push="on">Activer la notification</button><p class="acc-push-msg" hidden></p></div>';
+  if (on) return h + '<p>✅ Rappels activés sur cet appareil, seulement les jours où ton défi n’est pas encore fait.</p><button type="button" class="link" data-push="off">Désactiver les rappels</button><p class="acc-push-msg" hidden></p></div>';
+  return h + '<p>Active les rappels sur cet appareil pour ne jamais perdre ta flamme.</p><button type="button" class="btn btn-sub defi-push-on" data-push="on">Activer les rappels</button><p class="acc-push-msg" hidden></p></div>';
 }
 function bindPush(root) {
   if (root.__push) return; root.__push = 1;
   root.addEventListener("click", function (e) {
+    var ed = e.target.closest("[data-notif-edit]"); if (ed) { showNotifSetup(false); return; }
     var b = e.target.closest("[data-push]"); if (!b) return;
     var box = document.getElementById("acc-push"), msg = function (t) { var m = box.querySelector(".acc-push-msg"); if (m) { m.hidden = false; m.textContent = t; } };
     b.disabled = true;
@@ -10742,7 +10820,7 @@ function mountMap(root, c) {
    TUTO_V : à augmenter à chaque nouvelle fonctionnalité importante.
    Chaque étape porte « s » = version où elle est apparue (1 par défaut) :
    les comptes qui ont vu une version plus ancienne voient seulement les nouveautés. */
-var TUTO_V = 8;
+var TUTO_V = 9;
 function tutoSteps() {
   if (PARENT) return parentSteps();
   var tiles = '<div class="tv-tiles">' + SUBJECTS.map(function (s) { return '<span style="background:' + col(s.id) + '"><b>' + s.code + '</b><i>' + s.name.split(" ")[0] + '</i></span>'; }).join("") + '</div>';
@@ -10752,7 +10830,7 @@ function tutoSteps() {
       v: '<div class="tv-list"><span style="--sub:var(--hg)"><b>01</b> La Première Guerre mondiale<i></i></span><span style="--sub:var(--hg)"><b>02</b> Démocraties et totalitarismes<i style="width:40%"></i></span><span style="--sub:var(--hg)"><b>03</b> La Seconde Guerre mondiale<i style="width:15%"></i></span></div>' },
     { s: 2, t: "Le défi du jour 🔥", d: "Chaque jour, <b>10 exercices variés</b> sur tout le programme : QCM, vrai ou faux, réponses à écrire, cartes mentales à compléter, photos à reconnaître, paires à associer. Fais-le tous les jours pour garder ta <b>flamme</b> allumée et allonger ta série. Ton historique est dans le rond avec ton initiale.",
       v: '<div class="tv-defi"><div class="tv-defi-top"><span class="tv-fl">🔥</span><b>3</b><span>jours de suite</span></div><div class="tv-defi-wk">' + WD.map(function (l, k) { return '<span><small>' + l + '</small><i>' + (k < 3 ? "🔥" : "") + '</i></span>'; }).join("") + '</div><span class="tv-defi-btn">Commencer le défi du jour</span></div>' },
-    { s: 4, t: "Les rappels 🔔", d: "Active les rappels dans le rond avec ton initiale : une notification à <b>15 h</b> et à <b>19 h</b>, seulement si ton défi du jour n’est pas fait. Sur iPhone, ajoute d’abord l’appli à l’écran d’accueil.",
+    { s: 9, t: "Tes rappels 🔔", d: "Choisis <b>l’heure de tes 2 rappels</b> (par exemple 8 h et 18 h) : tu reçois une notification à ces heures-là, seulement si ton défi du jour n’est pas fait. Tu peux les changer à tout moment dans le rond avec ton initiale. Sur iPhone, ajoute d’abord l’appli à l’écran d’accueil.",
       v: '<div class="tv-notif"><div class="tv-n"><span class="tv-n-ic">' + GLOGO + '</span><div><b>🔥 12 jours de suite !</b><span>C’est l’heure du défi du jour pour garder ta flamme allumée.</span></div><small>15:00</small></div><div class="tv-n"><span class="tv-n-ic">' + GLOGO + '</span><div><b>⏰ Plus que quelques heures !</b><span>Ta série de 12 jours s’éteint à minuit.</span></div><small>19:00</small></div></div>' },
     { t: "Les 6 onglets d’un chapitre", d: "",
       v: '<div class="tv-tabs">' + [["Résumé", "L’essentiel en quelques points"], ["Cours", "Le cours complet, avec exemples corrigés et pièges"], ["Carte", "La carte mentale du chapitre, et son jeu"], ["Schémas", "Photos et schémas, à agrandir d’un toucher"], ["Flash", "Les flashcards du chapitre"], ["Quiz", "Une série de 15 questions corrigées"]].map(function (x, i) { return '<div class="tv-tab' + (i === 1 ? " on" : "") + '"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join("") + '</div>' },
@@ -10841,7 +10919,7 @@ function defiCard() {
       ? '<div class="defi-ok"><b>✓ Défi du jour réussi · ' + sc + '/10</b><span>Reviens demain pour garder ta flamme.</span></div><a class="defi-btn ghost" href="#defi">Voir mon historique</a>'
       : '<a class="defi-btn" href="#defi">' + (store.get("defiRun", {}).d === dayKey() ? "Reprendre le défi du jour" : "Commencer le défi du jour") + '<small>10 questions · environ 5 min</small></a>' +
         (s.n ? '<p class="defi-warn">Fais ton défi aujourd’hui pour ne pas perdre ta série de ' + plural(s.n, "jour") + ' !</p>' : '<p class="defi-warn">Un défi par jour pour allumer ta flamme.</p>')) +
-    (USER && rawGet("brevet:push", null) !== USER.id ? '<button type="button" class="link defi-bell" data-open-acc>🔔 Me rappeler à 15 h et 19 h</button>' : "") +
+    (USER && rawGet("brevet:push", null) !== USER.id ? '<button type="button" class="link defi-bell" data-open-acc>🔔 ' + (notifPrefs() ? "Activer mes rappels de " + notifPrefs().h1 + " h et " + notifPrefs().h2 + " h" : "Choisir mes horaires de rappel") + '</button>' : "") +
   '</div>';
 }
 
@@ -11223,7 +11301,7 @@ function reloadState() { known = store.get("known", {}); scores = store.get("sco
 function startApp() {
   document.body.classList.add("app-on");
   if (PARENT) { setupParent(); setTimeout(function () { if (!document.querySelector(".tuto")) showRecap(false); }, 1500); document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible") showRecap(false); }); }
-  pullNow(true).then(function (changed) { if (changed) { reloadState(); var h = location.hash; if (!/^#?(quiz|flashcards|defi)/.test(h) || !document.querySelector(".df-body, .opt, .fc")) route(); } });
+  pullNow(true).then(function (r) { setTimeout(ensureNotif, 800); return r; }, function () { setTimeout(ensureNotif, 800); }).then(function (changed) { if (changed) { reloadState(); var h = location.hash; if (!/^#?(quiz|flashcards|defi)/.test(h) || !document.querySelector(".df-body, .opt, .fc")) route(); } });
   document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") pushNow(true); else pullNow().then(function (ch) { if (ch) { reloadState(); if (!document.querySelector(".df-body, .opt.is-right, .fc")) route(); } }); });
   window.addEventListener("online", function () { pushNow(); });
   setTimeout(refreshPush, 2500);
