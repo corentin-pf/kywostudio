@@ -8095,6 +8095,7 @@ function viewHome() {
     (nMiss ? '<a class="tcard" href="#quiz-erreurs"><b>' + nMiss + '</b><h3>Questions ratées</h3><p>Les questions où tu t’es trompée. Une bonne réponse les retire de la liste.</p><span class="go">Les retravailler →</span></a>'
       : '<a class="tcard" href="#quiz"><b>10</b><h3>Quiz express</h3><p>Dix questions tirées au hasard parmi les ' + nQ + ' du programme, avec la correction expliquée.</p><span class="go">Commencer →</span></a>') +
     '<a class="tcard" href="#carnet"><b>' + store.get("words", []).length + '</b><h3>Mon carnet de mots</h3><p>Les mots dont tu as regardé la définition, à réviser en flashcards.</p><span class="go">Ouvrir le carnet →</span></a>' +
+    '<a class="tcard" href="#" data-tuto><b>?</b><h3>Le tutoriel</h3><p>Revois en une minute tout ce que l’appli sait faire : onglets, mots en bleu, flashcards, cartes mentales…</p><span class="go">Revoir le tutoriel →</span></a>' +
     '<a class="tcard" href="#' + last.id + '" style="--sub:' + col(last.sub) + '"><b style="color:var(--sub)">' + pad(last.n) + '</b><h3>' + last.title + '</h3><p>' + S[last.sub].name + ' · ' + (store.get("last", "") ? "Reprends là où tu t’es arrêtée." : "Un bon chapitre pour commencer.") + '</p><span class="go">Ouvrir le chapitre →</span></a>' +
   '</div>' +
   '<div class="stats"><div class="stat"><b>' + CH.length + '</b><span>chapitres</span></div><div class="stat"><b>' + nDg + '</b><span>schémas</span></div><div class="stat"><b>' + nCards + '</b><span>flashcards</span></div><div class="stat"><b>' + nQ + '</b><span>questions de quiz</span></div></div>' +
@@ -8754,6 +8755,7 @@ function showTuto() {
   draw(); box.focus();
 }
 
+document.addEventListener("click", function (e) { var t = e.target.closest("[data-tuto]"); if (t) { e.preventDefault(); showTuto(); } });
 /* ---------- routeur ---------- */
 function setNav(k) {
   Array.prototype.forEach.call(document.querySelectorAll(".nav a, .tabbar a"), function (a) { a.classList.toggle("on", a.dataset.nav === k); });
