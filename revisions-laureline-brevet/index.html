@@ -741,6 +741,189 @@ mark{background:color-mix(in srgb, #ffd60a 55%, transparent);color:inherit;borde
   .tcard p{font-size:13px;line-height:1.4}
   .tcard .go{margin-top:2px;font-size:13px}
 }
+
+/* ---------- Défi du jour, flammes ---------- */
+.flame{display:inline-block;width:46px;height:58px;flex:none}
+.flame-svg{width:100%;height:100%;display:block;overflow:visible}
+.fl-o{fill:#FF7A1A}.fl-m{fill:#FFB020}.fl-c{fill:#FFF0A0}
+.flame:not(.off) .flame-svg,.de-flame .flame-svg,.df-combo.on .flame-svg{transform-origin:50% 100%;animation:flick 1.6s ease-in-out infinite}
+.flame.off .flame-svg{filter:grayscale(1);opacity:.45}
+@keyframes flick{0%,100%{transform:scale(1,1) rotate(-2deg)}30%{transform:scale(1.04,.95) rotate(1.5deg)}60%{transform:scale(.97,1.05) rotate(-1deg)}}
+.defi{margin-top:24px;border:var(--bw) solid var(--fg);border-radius:var(--r-lg);padding:16px;display:flex;flex-direction:column;gap:14px;background:linear-gradient(160deg,rgba(255,138,31,.10),transparent 55%)}
+.defi-top{display:flex;align-items:center;gap:12px}
+.defi-n{display:flex;flex-direction:column;line-height:1}
+.defi-n b{font-size:40px;font-weight:800;letter-spacing:-.04em;color:#FF7A1A;font-variant-numeric:tabular-nums}
+.defi:not(.is-done) .defi-n b{color:var(--fg)}
+.defi-n span{font-size:14px;font-weight:700;color:var(--mute);margin-top:4px}
+.defi-best{margin-left:auto;text-align:center;font-size:11px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+.defi-best b{font-size:22px;color:var(--fg);letter-spacing:0}
+.wk-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.ws{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ws small{font-size:11px;font-weight:800;color:var(--mute)}
+.ws i{width:30px;height:30px;border-radius:50%;background:var(--soft);display:grid;place-items:center;border:2px solid transparent}
+.ws.ws-on i{background:#FFE6CC}
+.ws i .flame-svg{width:16px;height:20px}
+.ws.ws-today i{border-color:#FF7A1A}
+.ws.ws-today small{color:#FF7A1A}
+.ws.ws-fut i{opacity:.5}
+.defi-btn{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;background:#2FB344;color:#fff;border-radius:16px;padding:14px;font-weight:800;font-size:17px;box-shadow:0 4px 0 #1E8A31;transition:transform .08s,box-shadow .08s}
+.defi-btn small{font-weight:600;font-size:12px;opacity:.9}
+.defi-btn:active{transform:translateY(4px);box-shadow:0 0 0 #1E8A31}
+.defi-btn.ghost{background:var(--bg);color:var(--fg);border:2px solid var(--hair);box-shadow:0 4px 0 var(--hair);font-size:15px}
+.defi:not(.is-done) .defi-btn{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+.defi-warn{font-size:13px;color:var(--mute);text-align:center;margin:-4px 0 0}
+.defi-ok{display:flex;flex-direction:column;gap:2px;text-align:center}
+.defi-ok b{color:#1E8A31;font-size:16px}
+.defi-ok span{font-size:13px;color:var(--mute)}
+/* compte à rebours */
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:6px 0 4px}
+.cd span{background:var(--fg);color:var(--bg);border-radius:12px;padding:10px 4px 7px;display:flex;flex-direction:column;align-items:center;line-height:1}
+.cd b{font-size:30px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;display:inline-block}
+.cd b.tk{animation:tick .35s ease}
+@keyframes tick{0%{transform:translateY(-35%);opacity:.2}100%{transform:none;opacity:1}}
+.cd small{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.7;margin-top:5px}
+@media (max-width:760px){
+  .count{display:flex;flex-direction:column;gap:4px;align-items:stretch}
+  .count-l,.count-s{align-self:auto}
+  .count-bar{margin-top:10px}
+  .cd b{font-size:28px}
+}
+/* page du défi */
+body.defi-mode .tabbar,body.defi-mode footer{display:none}
+.defi-page{padding-block:10px 40px;max-width:640px}
+.df{display:flex;flex-direction:column;gap:16px;min-height:calc(100vh - 140px);min-height:calc(100dvh - 140px)}
+.df-top{display:flex;align-items:center;gap:12px}
+.df-x{font-size:20px;font-weight:700;color:var(--mute);text-decoration:none;width:32px;height:32px;display:grid;place-items:center}
+.df-bar{flex:1;height:16px;border-radius:8px;background:var(--soft);overflow:hidden;position:relative}
+.df-bar i{display:block;height:100%;border-radius:8px;background:#2FB344;transition:width .5s cubic-bezier(.3,1.5,.5,1);position:relative}
+.df-bar i::after{content:"";position:absolute;left:8px;right:8px;top:4px;height:4px;border-radius:2px;background:rgba(255,255,255,.35)}
+.df-bar.shine i{animation:glow .6s ease}
+@keyframes glow{50%{filter:brightness(1.25) saturate(1.2)}}
+.df-combo{display:flex;align-items:center;gap:2px;font-weight:800;color:var(--mute);font-size:17px}
+.df-combo .flame-svg{width:20px;height:25px;filter:grayscale(1);opacity:.4}
+.df-combo.on{color:#FF7A1A}
+.df-combo.on .flame-svg{filter:none;opacity:1}
+.df-combo.pop{animation:pop .45s cubic-bezier(.3,1.8,.5,1)}
+@keyframes pop{40%{transform:scale(1.45)}}
+.df-body{display:flex;flex-direction:column;gap:16px;animation:slidein .35s cubic-bezier(.2,.9,.3,1.1)}
+@keyframes slidein{from{transform:translateX(40px);opacity:0}}
+.df-body.shake{animation:shake .4s}
+.df-kind{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.df-kind em{font-style:normal}
+.df-bonus{color:#FF7A1A}
+.df-q{font-size:22px;font-weight:800;line-height:1.25}
+.df-q small{display:block;font-size:14px;color:var(--mute);font-weight:600;margin-top:4px}
+.dopts{display:flex;flex-direction:column;gap:10px}
+.dopt{display:flex;align-items:center;gap:12px;text-align:left;width:100%;border:2px solid var(--hair);border-bottom-width:4px;border-radius:16px;background:var(--bg);color:var(--fg);padding:13px 16px;font:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:transform .08s,background .15s,border-color .15s}
+.dopt:active{transform:translateY(2px);border-bottom-width:2px;margin-bottom:2px}
+.dopt.sel{border-color:#2E86DE;background:rgba(46,134,222,.10);color:#1E66B0}
+.dopt.is-right{border-color:#2FB344;background:rgba(47,179,68,.14);color:#1E8A31;animation:bounce .4s}
+.dopt.is-wrong{border-color:var(--ko);background:rgba(229,48,42,.1);color:var(--ko);animation:shake .4s}
+.dopt.is-miss{border-color:#2FB344;border-style:dashed;color:#1E8A31}
+.dopt.is-dim{opacity:.45}
+.dopt:disabled{cursor:default}
+@keyframes bounce{40%{transform:scale(1.04)}}
+.dvf{flex-direction:row}
+.dvf .dopt{justify-content:center;font-size:18px;font-weight:800;padding:20px}
+.dchips{flex-direction:row;flex-wrap:wrap}
+.dchips .dopt{width:auto;padding:10px 14px;font-size:15px}
+.dbox{width:22px;height:22px;border-radius:7px;border:2px solid var(--hair);flex:none;display:grid;place-items:center;transition:all .15s}
+.dopt.sel .dbox,.dopt.is-right .dbox{background:currentColor;border-color:currentColor}
+.dopt.sel .dbox::after,.dopt.is-right .dbox::after{content:"✓";color:#fff;font-size:14px;font-weight:900}
+.dwrite input{width:100%;font:inherit;font-size:19px;font-weight:600;padding:16px;border:2px solid var(--hair);border-radius:16px;background:var(--soft);color:var(--fg);outline:none;transition:border-color .15s}
+.dwrite input:focus{border-color:#2E86DE;background:var(--bg)}
+.dwrite.is-right input{border-color:#2FB344;color:#1E8A31}
+.dwrite.is-wrong input{border-color:var(--ko);color:var(--ko);text-decoration:line-through}
+.dphoto{border-radius:16px;overflow:hidden;background:#fff;border:2px solid var(--hair);display:flex;justify-content:center;max-height:30vh;animation:zoomin .4s ease}
+.dphoto img{max-width:100%;max-height:30vh;object-fit:contain;display:block}
+.dphoto-err{min-height:120px;align-items:center}
+.dphoto-err::after{content:"Image indisponible hors connexion";color:var(--mute);font-size:13px}
+@keyframes zoomin{from{transform:scale(.92);opacity:0}}
+.dpairs{display:grid;grid-template-columns:1fr 1.5fr;gap:10px}
+.dpairs > div{display:flex;flex-direction:column;gap:10px}
+.dpair{border:2px solid var(--hair);border-bottom-width:4px;border-radius:14px;background:var(--bg);color:var(--fg);padding:10px 12px;font:inherit;font-size:14px;font-weight:600;text-align:left;cursor:pointer;flex:1;transition:all .2s}
+.dpw{font-weight:800;font-size:15px}
+.dpair.sel{border-color:#2E86DE;background:rgba(46,134,222,.10)}
+.dpair.matched{border-color:#2FB344;background:rgba(47,179,68,.12);color:#1E8A31;opacity:.55;transform:scale(.97);cursor:default}
+.dpair.bad{border-color:var(--ko);background:rgba(229,48,42,.1);animation:shake .4s}
+/* mini carte mentale */
+.mmini{background:#fffdf8;border-radius:18px;border:2px solid var(--hair);padding:14px 10px;color:#1b1b1f}
+.mmini-c{margin:0 auto;width:max-content;max-width:90%;background:var(--c);color:#fff;font-weight:800;font-size:16px;padding:9px 16px;border-radius:999px;display:flex;gap:6px;align-items:center}
+.mmini-l{display:block;width:100%;height:30px}
+.mmini-b{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mmini-br{display:flex;flex-direction:column;gap:5px;align-items:center;text-align:center}
+.mmini-br b{color:var(--c);font-size:13px;font-weight:800;line-height:1.2;border-bottom:3px solid var(--c);padding-bottom:3px}
+.mmini-br span{font-size:12px;font-weight:600;line-height:1.25;background:#fff;border-radius:8px;padding:4px 6px;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.mmini-q{border:2px dashed var(--c);color:var(--c);font-weight:800!important;min-width:44px;animation:qpulse 1.3s ease-in-out infinite}
+.mmini-q.filled{animation:none;border-style:solid;background:rgba(46,134,222,.08)!important}
+.mmini-q.good{border-color:#2FB344;color:#1E8A31;background:rgba(47,179,68,.14)!important;animation:bounce .4s}
+.mmini-q.bad{border-color:var(--ko);color:var(--ko);text-decoration:line-through}
+@keyframes qpulse{50%{transform:scale(1.08)}}
+/* pied et retour */
+.df-foot{margin-top:auto;position:sticky;bottom:0;padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--bg) 30%)}
+.df-check{display:flex;align-items:center;justify-content:center;width:100%;border:0;border-radius:16px;padding:16px;font:inherit;font-size:17px;font-weight:800;background:#2FB344;color:#fff;box-shadow:0 4px 0 #1E8A31;cursor:pointer;text-decoration:none;transition:transform .08s,box-shadow .08s}
+.df-check:active{transform:translateY(4px);box-shadow:none}
+.df-check:disabled{background:var(--soft);color:var(--mute);box-shadow:0 4px 0 var(--hair);cursor:default;transform:none}
+.df-fb{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:18px max(16px,env(safe-area-inset-left,0px)) calc(18px + env(safe-area-inset-bottom,0px));animation:fbup .3s cubic-bezier(.2,.9,.3,1.15)}
+.df-fb.ok{background:#D7F5DD}
+.df-fb.ko{background:#FFE1DF}
+@keyframes fbup{from{transform:translateY(100%)}}
+.df-fb-in{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.df-fb-h{display:flex;align-items:center;gap:10px}
+.df-fb-h b{font-size:21px;font-weight:800}
+.df-fb.ok .df-fb-h b{color:#1E8A31}
+.df-fb.ko .df-fb-h b{color:#C0261F}
+.df-fb-ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:900;animation:pop .4s cubic-bezier(.3,1.8,.5,1)}
+.df-fb.ok .df-fb-ic{background:#2FB344}
+.df-fb.ko .df-fb-ic{background:var(--ko)}
+.df-fb-t{font-size:15px;line-height:1.45;color:#1b1b1f;max-height:28vh;overflow:auto}
+.df-more{display:block;color:#4b4b52;font-size:14px;margin-top:4px}
+.df-next{border:0;border-radius:16px;padding:15px;font:inherit;font-size:17px;font-weight:800;color:#fff;cursor:pointer;transition:transform .08s}
+.df-fb.ok .df-next{background:#2FB344;box-shadow:0 4px 0 #1E8A31}
+.df-fb.ko .df-next{background:var(--ko);box-shadow:0 4px 0 #A51F19}
+.df-next:active{transform:translateY(4px);box-shadow:none}
+.df-override{border:0;background:none;color:#C0261F;font:inherit;font-size:14px;font-weight:700;text-decoration:underline;cursor:pointer;align-self:flex-start;padding:0}
+.df-fb a.wk,.df-fb .dk{color:inherit}
+/* écran de fin */
+.df-end{align-items:center;text-align:center;gap:14px;padding-top:10px}
+.de-flame{position:relative;width:130px;height:160px}
+.de-flame.grow{animation:flamein .7s cubic-bezier(.3,1.6,.5,1)}
+.de-flame.bump .flame-svg{animation:bump .6s ease,flick 1.6s ease-in-out .6s infinite}
+@keyframes flamein{from{transform:scale(0) rotate(-20deg)}}
+@keyframes bump{40%{transform:scale(1.25)}}
+.de-n{position:absolute;left:0;right:0;bottom:16px;font-size:40px;font-weight:900;color:#8A3A00;font-variant-numeric:tabular-nums}
+.df-end h2{font-size:28px;font-weight:800;color:#FF7A1A}
+.de-msg{font-size:16px;color:var(--mute)}
+.de-msg b{color:var(--fg)}
+.de-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+.de-stats span{border:2px solid var(--hair);border-radius:14px;padding:10px;display:flex;flex-direction:column;font-size:12px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+.de-stats b{font-size:26px;color:var(--fg);letter-spacing:0}
+.df-end .wk-strip{width:100%}
+.de-h{align-self:flex-start;font-size:17px;font-weight:800;margin-top:6px}
+.de-btns{display:flex;flex-direction:column;gap:12px;width:100%;margin-top:8px}
+.df-bonus-btn{border:0;background:none;color:var(--mute);font:inherit;font-size:14px;font-weight:700;text-decoration:underline;cursor:pointer}
+/* calendrier */
+.dcal{width:100%}
+.dcal-h,.dcal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.dcal-h span{font-size:11px;font-weight:800;color:var(--mute);text-align:center;padding-bottom:4px}
+.dc{aspect-ratio:1;border-radius:10px;background:var(--soft);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05}
+.dc b{font-size:13px;font-weight:700;color:var(--mute)}
+.dc small{font-size:9px;font-weight:800;color:#fff;opacity:.95}
+.dc.dc-on{background:linear-gradient(160deg,#FFB020,#FF7A1A)}
+.dc.dc-on b{color:#fff}
+.dc.dc-today{box-shadow:inset 0 0 0 2px #FF7A1A}
+.dc.dc-fut{opacity:.35}
+.dcal-s{font-size:13px;color:var(--mute);margin-top:8px;text-align:center}
+.acc-streak{display:flex;align-items:center;gap:12px;background:linear-gradient(160deg,rgba(255,138,31,.14),transparent);border-radius:var(--r);padding:10px 12px}
+.acc-streak .flame{width:34px;height:42px}
+.acc-streak div{display:flex;flex-direction:column}
+.acc-streak span{font-size:13px;color:var(--mute)}
+/* confettis */
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:80;overflow:hidden}
+.confetti i{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translate(var(--x),105vh) rotate(var(--r))}}
+@media (prefers-reduced-motion:reduce){.flame-svg,.defi-btn,.df-body,.mmini-q,.confetti{animation:none!important}}
 </style>
 </head>
 <body>
@@ -8089,9 +8272,8 @@ function viewHome() {
     '<div><p class="eyebrow">' + (USER ? 'Bonjour ' + esc(USER.name) + ' · ' : '') + 'Brevet · Session 2027</p>' +
     '<h1>Tout le programme de 3<sup style="font-size:.45em">e</sup>.<br>Une page à la fois.</h1>' +
     '<p class="lead">Résumés, cours complets, schémas, flashcards et quiz pour les six matières de l’examen. Ta progression reste enregistrée sur ton appareil.</p>' +
-    '<div class="row"><a class="btn" href="#quiz">Lancer un quiz express</a><a class="btn" href="#flashcards">Réviser les flashcards</a></div></div>' +
-    '<div class="count"><span class="count-n">' + daysLeft() + '</span><span class="count-l">jours avant les écrits</span><span class="count-s">Jeudi 24 juin 2027 · épreuve de français</span>' +
-      '<div class="count-bar">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + ';opacity:' + (0.35 + subPct(s.id) / 154).toFixed(2) + '" title="' + s.name + ' : ' + subPct(s.id) + ' %"></i>'; }).join("") + '</div></div>' +
+    defiCard() + '</div>' +
+    countHtml() +
   '</section>' +
   '<section class="wrap sec"><div class="sec-h"><h2>Matières</h2><span>' + CH.length + ' chapitres</span></div><div class="tiles">' +
     SUBJECTS.map(function (s) {
@@ -8302,6 +8484,7 @@ function openAccount() {
   sheet.hidden = false; document.body.classList.add("wk-open");
   sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Connecté sur cet appareil</p></div></div>' +
     '<p class="wk-e">Ta progression (cartes sues, scores, erreurs) est enregistrée dans ce compte, sur cet appareil.</p>' +
+    '<div class="acc-streak"><span class="flame' + (streakInfo().today ? "" : " off") + '">' + FLAME + '</span><div><b>' + plural(streakInfo().n, "jour") + ' de suite</b><span>Record : ' + plural(streakInfo().best, "jour") + '</span></div></div>' + defiCal(5) +
     '<button type="button" class="btn" id="btn-tuto">Revoir le tutoriel</button><a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a><button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
   document.getElementById("btn-logout").onclick = logout;
   document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(); };
@@ -8763,12 +8946,304 @@ function showTuto() {
   draw(); box.focus();
 }
 
+/* ---------- défi du jour et flammes ---------- */
+function dayKey(d) { d = d || new Date(); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+function addDays(d, n) { var x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); x.setDate(x.getDate() + n); return x; }
+function defiDays() { return store.get("defiDays", {}); }
+function streakInfo() {
+  var days = defiDays(), t = new Date(), today = !!days[dayKey(t)], n = 0, d = today ? t : addDays(t, -1);
+  while (days[dayKey(d)] != null) { n++; d = addDays(d, -1); }
+  return { n: n, today: today, best: Math.max(n, store.get("defiBest", 0)), total: Object.keys(days).length };
+}
+var FLAME = '<svg class="flame-svg" viewBox="0 0 64 80" aria-hidden="true"><path class="fl-o" d="M32 2c4 16 22 26 22 48a22 22 0 0 1-44 0c0-10 5-17 10-22 1 8 5 12 9 13C27 30 26 16 32 2z"/><path class="fl-m" d="M32 30c3 9 14 15 14 28a14 14 0 0 1-28 0c0-7 4-11 7-15 1 4 3 7 6 7-1-7-1-13 1-20z"/><path class="fl-c" d="M32 52c2 5 7 7 7 13a7 7 0 0 1-14 0c0-4 2-6 4-9 1 2 2 3 3 3 0-3 0-5 0-7z"/></svg>';
+var WD = ["L", "M", "M", "J", "V", "S", "D"];
+function weekStrip() {
+  var days = defiDays(), t = new Date(), mon = addDays(t, -((t.getDay() + 6) % 7)), tk = dayKey(t);
+  return '<div class="wk-strip">' + WD.map(function (l, k) {
+    var d = addDays(mon, k), key = dayKey(d), done = days[key] != null, fut = key > tk;
+    return '<span class="ws' + (done ? " ws-on" : "") + (key === tk ? " ws-today" : "") + (fut ? " ws-fut" : "") + '"><small>' + l + '</small><i>' + (done ? FLAME : "") + '</i></span>';
+  }).join("") + '</div>';
+}
+function defiCal(weeks) {
+  var days = defiDays(), t = new Date(), tk = dayKey(t), mon = addDays(t, -((t.getDay() + 6) % 7) - 7 * (weeks - 1)), cells = [], nDone = 0;
+  for (var k = 0; k < weeks * 7; k++) {
+    var d = addDays(mon, k), key = dayKey(d), v = days[key], fut = key > tk;
+    if (v != null) nDone++;
+    cells.push('<span class="dc' + (v != null ? " dc-on" : "") + (key === tk ? " dc-today" : "") + (fut ? " dc-fut" : "") + '" title="' + key + (v != null ? " : " + v + "/10" : "") + '"><b>' + d.getDate() + '</b>' + (v != null ? '<small>' + v + '/10</small>' : "") + '</span>');
+  }
+  return '<div class="dcal"><div class="dcal-h">' + WD.map(function (l) { return "<span>" + l + "</span>"; }).join("") + '</div><div class="dcal-g">' + cells.join("") + '</div><p class="dcal-s">' + plural(nDone, "défi") + ' réussi' + (nDone > 1 ? "s" : "") + ' sur les ' + weeks + ' dernières semaines</p></div>';
+}
+function defiCard() {
+  var s = streakInfo(), days = defiDays(), sc = days[dayKey()];
+  return '<div class="defi' + (s.today ? " is-done" : "") + '">' +
+    '<div class="defi-top"><span class="flame' + (s.today ? "" : " off") + '">' + FLAME + '</span><div class="defi-n"><b>' + s.n + '</b><span>' + (s.n > 1 ? "jours de suite" : "jour de suite") + '</span></div><span class="defi-best">Record<br><b>' + s.best + '</b></span></div>' +
+    weekStrip() +
+    (s.today
+      ? '<div class="defi-ok"><b>✓ Défi du jour réussi · ' + sc + '/10</b><span>Reviens demain pour garder ta flamme.</span></div><a class="defi-btn ghost" href="#defi">Voir mon historique</a>'
+      : '<a class="defi-btn" href="#defi">' + (store.get("defiRun", {}).d === dayKey() ? "Reprendre le défi du jour" : "Commencer le défi du jour") + '<small>10 questions · environ 5 min</small></a>' +
+        (s.n ? '<p class="defi-warn">Fais ton défi aujourd’hui pour ne pas perdre ta série de ' + plural(s.n, "jour") + ' !</p>' : '<p class="defi-warn">Un défi par jour pour allumer ta flamme.</p>')) +
+  '</div>';
+}
+
+/* hasard reproductible : le même défi toute la journée */
+function seedRng(str) { var h = 1779033703 ^ str.length; for (var i = 0; i < str.length; i++) { h = Math.imul(h ^ str.charCodeAt(i), 3432918353); h = h << 13 | h >>> 19; } return function () { h = Math.imul(h ^ h >>> 16, 2246822507); h = Math.imul(h ^ h >>> 13, 3266489909); h ^= h >>> 16; var t = (h >>> 0) / 4294967296; h = Math.imul(h, 1103515245) + 12345 | 0; return t; }; }
+var DPOOL = null;
+function defiPools() {
+  if (DPOOL) return DPOOL;
+  var qs = flat(CH, quizOf), cards = flat(CH, cardsOf);
+  DPOOL = {
+    qcm: qs.filter(function (q) { return !isTF(q.opts) && q.opts.length >= 3; }),
+    vf: qs.filter(function (q) { return isTF(q.opts); }),
+    write: cards.map(function (c) { return { q: strip(c.q), a: cleanAns(c.a), full: strip(c.a), sub: c.sub, chap: c.chap }; }).filter(function (c) {
+      return /\?\s*$/.test(c.q) && c.a.length >= 2 && c.a.length <= 26 && c.a.split(/\s+/).length <= 4 && !/[×÷√=ⁿᵐ⁻²³⁹⁶<>]/.test(c.a + c.q) && !/^(oui|non)$/i.test(c.a);
+    }),
+    maps: CH.filter(function (c) { return MAPS[c.id] && MAPS[c.id].b.length >= 4; }),
+    photo: flat(CH, function (c) { return (IMGS[c.id] || []).map(function (x) { return { title: x.title, file: x.file, cap: x.cap, sub: c.sub, chap: c.title }; }); }),
+    dico: Object.keys(DK).filter(function (k) { return !/[(\[\\]/.test(k) && DK[k][0].length <= 75; }).map(function (k) { return [k.split("|")[0].replace(/.\?/g, ""), DK[k][0]]; })
+  };
+  return DPOOL;
+}
+function cleanAns(a) { return strip(a).replace(/\s*\([^)]*\)/g, "").replace(/[.\s]+$/, "").trim(); }
+function buildDefi(seed) {
+  var R = seedRng(seed), P = defiPools();
+  function rp(a) { return a[Math.floor(R() * a.length)]; }
+  function rs(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(R() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  var subs = rs(SUBJECTS.map(function (s) { return s.id; })), si = 0;
+  function bySub(pool) { var s = subs[si++ % subs.length], l = pool.filter(function (x) { return x.sub === s; }); return rp(l.length ? l : pool); }
+  var used = {};
+  function fresh(pool, key) { for (var t = 0; t < 30; t++) { var x = bySub(pool), k = key(x); if (!used[k]) { used[k] = 1; return x; } } return rp(pool); }
+  var G = {
+    qcm: function () { var q = fresh(P.qcm, function (x) { return x.id; }); return { k: "qcm", sub: q.sub, chap: q.chap, q: q.q, ex: q.ex, opts: rs(q.opts.map(function (t, i) { return { t: t, ok: i === 0 }; })) }; },
+    vf: function () { var q = fresh(P.vf, function (x) { return x.id; }); return { k: "vf", sub: q.sub, chap: q.chap, q: q.q, ex: q.ex, opts: ["Vrai", "Faux"].map(function (t) { return { t: t, ok: t === q.opts[0] }; }) }; },
+    write: function () { var c = fresh(P.write, function (x) { return x.q; }); return { k: "write", sub: c.sub, chap: c.chap, q: c.q, a: c.a, full: c.full }; },
+    multi: function () {
+      var c = fresh(P.maps, function (x) { return "m" + x.id; }), M = MAPS[c.id];
+      var bi = rp(M.b.map(function (b, i) { return i; }).filter(function (i) { return M.b[i][1].length >= 2; }));
+      var good = rs(M.b[bi][1]).slice(0, Math.min(3, M.b[bi][1].length)), bad = rs(flat(M.b.filter(function (b, i) { return i !== bi; }), function (b) { return b[1]; })).slice(0, 5 - good.length);
+      return { k: "multi", sub: c.sub, chap: c.title, q: "Carte « " + M.c + " » : coche toutes les notions de la branche « " + M.b[bi][0] + " ».", opts: rs(good.map(function (t) { return { t: t, ok: true }; }).concat(bad.map(function (t) { return { t: t, ok: false }; }))) };
+    },
+    map: function () {
+      var c = fresh(P.maps, function (x) { return "c" + x.id; }), M = MAPS[c.id], ids = rs(M.b.map(function (b, i) { return i; }));
+      var show = ids.slice(0, 3).sort(function (a, b) { return a - b; }), rest = ids.slice(3);
+      var hb = rp(show), hj = Math.floor(R() * M.b[hb][1].length), ans = M.b[hb][1][hj];
+      var bad = rs(flat(rest, function (i) { return M.b[i][1]; })).filter(function (t) { return t !== ans; }).slice(0, 3);
+      return { k: "map", sub: c.sub, chap: c.title, cid: c.id, q: "Complète la carte mentale", show: show, hb: hb, hj: hj, ans: ans, opts: rs([{ t: ans, ok: true }].concat(bad.map(function (t) { return { t: t, ok: false }; }))) };
+    },
+    photo: function () {
+      var p = fresh(P.photo, function (x) { return x.file; });
+      var same = P.photo.filter(function (x) { return x.sub === p.sub && x.title !== p.title; }), other = P.photo.filter(function (x) { return x.sub !== p.sub; });
+      var bad = rs(same).slice(0, 3); if (bad.length < 3) bad = bad.concat(rs(other).slice(0, 3 - bad.length));
+      return { k: "photo", sub: p.sub, chap: p.chap, q: "Que montre ce document ?", file: p.file, ex: p.cap, opts: rs([{ t: p.title, ok: true }].concat(bad.map(function (x) { return { t: x.title, ok: false }; }))) };
+    },
+    pairs: function () { var l = rs(P.dico).slice(0, 4); return { k: "pairs", q: "Associe chaque mot à sa définition", pairs: l, right: rs(l.map(function (x, i) { return i; })) }; }
+  };
+  var plan = ["qcm"].concat(rs(["photo", "write", "map", "vf", "pairs", "qcm", "multi", "photo", "write"]));
+  return plan.map(function (k) { return G[k](); });
+}
+
+/* vérification d’une réponse écrite, avec un peu de tolérance */
+var STOP = { le: 1, la: 1, les: 1, l: 1, un: 1, une: 1, des: 1, du: 1, de: 1, d: 1, au: 1, aux: 1, en: 1, et: 1, a: 1 };
+function words(t) { return norm(t).replace(/[’'`]/g, " ").replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter(function (w) { return w && !STOP[w]; }); }
+function lev(a, b) { var m = a.length, n = b.length, d = []; for (var i = 0; i <= m; i++) { d[i] = [i]; } for (var j = 1; j <= n; j++) d[0][j] = j; for (i = 1; i <= m; i++) for (j = 1; j <= n; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return d[m][n]; }
+function answerOk(user, ans) {
+  var u = words(user).join(" "), a = words(ans).join(" ");
+  if (!u) return false;
+  if (u === a) return true;
+  if (lev(u, a) <= (a.length <= 5 ? 0 : a.length <= 9 ? 1 : 2)) return true;
+  var aw = words(ans), uw = words(user);
+  if (aw.every(function (w) { return uw.some(function (x) { return x === w || (w.length > 5 && lev(x, w) <= 1); }); })) return true;
+  if (aw.length >= 2 && uw.length === 1 && uw[0].length >= 4 && aw.some(function (w) { return w === uw[0] || (w.length > 5 && lev(w, uw[0]) <= 1); })) return true;
+  return false;
+}
+
+/* petits sons (Web Audio) */
+var actx = null;
+function beep(notes) {
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    var t = actx.currentTime;
+    notes.forEach(function (n, k) {
+      var o = actx.createOscillator(), g = actx.createGain();
+      o.type = n[2] || "sine"; o.frequency.value = n[0];
+      g.gain.setValueAtTime(0.0001, t + n[1]); g.gain.exponentialRampToValueAtTime(0.18, t + n[1] + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + n[1] + 0.22);
+      o.connect(g); g.connect(actx.destination); o.start(t + n[1]); o.stop(t + n[1] + 0.25);
+    });
+  } catch (e) {}
+}
+var SND = { ok: [[660, 0], [990, 0.09]], ko: [[220, 0, "triangle"], [180, 0.12, "triangle"]], end: [[523, 0], [659, 0.12], [784, 0.24], [1047, 0.38]], tap: [[880, 0]] };
+function confetti(root) {
+  var box = document.createElement("div"), cols = ["#FF8A1F", "#FFC531", "#2FA45C", "#2E86DE", "#E84393", "#8E44AD"];
+  box.className = "confetti";
+  for (var k = 0; k < 70; k++) { var i = document.createElement("i"); i.style.cssText = "left:" + (Math.random() * 100) + "%;background:" + cols[k % cols.length] + ";animation-delay:" + (Math.random() * 0.5).toFixed(2) + "s;animation-duration:" + (1.6 + Math.random() * 1.4).toFixed(2) + "s;--r:" + Math.round(Math.random() * 720 - 360) + "deg;--x:" + Math.round(Math.random() * 120 - 60) + "px"; box.appendChild(i); }
+  root.appendChild(box); setTimeout(function () { box.remove(); }, 3600);
+}
+function countUp(el, from, to, ms) { var t0 = null; function f(t) { if (!t0) t0 = t; var p = Math.min(1, (t - t0) / ms); el.textContent = Math.round(from + (to - from) * p); if (p < 1) requestAnimationFrame(f); } requestAnimationFrame(f); }
+
+var PRAISE = ["Excellent !", "Bravo !", "Parfait !", "Bien joué !", "Super !", "Génial !"];
+var KINDS = { qcm: "Question", vf: "Vrai ou faux", write: "Réponds en quelques mots", multi: "Plusieurs bonnes réponses", map: "Carte mentale", photo: "Photo à identifier", pairs: "Associe les paires" };
+
+function miniMap(x, picked) {
+  var M = MAPS[x.cid], ic = MM_ICONS[x.cid] || [];
+  return '<div class="mmini"><div class="mmini-c" style="--c:' + col(x.sub) + '">' + (ic[0] ? '<span>' + ic[0] + '</span>' : "") + esc(M.c) + '</div>' +
+    '<svg class="mmini-l" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true">' + [50, 150, 250].map(function (xx, k) { return '<path d="M150 0 C150 22 ' + xx + ' 14 ' + xx + ' 40" stroke="' + MM_COLORS[x.show[k] % MM_COLORS.length] + '" stroke-width="' + (k === 1 ? 7 : 6) + '" fill="none" stroke-linecap="round"/>'; }).join("") + '</svg>' +
+    '<div class="mmini-b">' + x.show.map(function (bi) {
+      var b = M.b[bi], c = MM_COLORS[bi % MM_COLORS.length];
+      return '<div class="mmini-br" style="--c:' + c + '"><b>' + (ic[bi] ? ic[bi] + " " : "") + esc(b[0]) + '</b>' + b[1].map(function (l, j) {
+        var hid = bi === x.hb && j === x.hj;
+        return '<span class="' + (hid ? "mmini-q" + (picked != null ? " filled" : "") : "") + '">' + (hid ? (picked != null ? esc(picked) : "?") : esc(l)) + '</span>';
+      }).join("") + '</div>';
+    }).join("") + '</div></div>';
+}
+
+function mountDefi(root, bonus) {
+  var dk = dayKey(), seed = bonus ? "bonus" + Date.now() : (USER ? USER.id : "anon") + ":" + dk;
+  var Q = buildDefi(seed);
+  var run = bonus ? { d: "bonus", i: 0, res: [] } : store.get("defiRun", {});
+  if (run.d !== dk && !bonus) run = { d: dk, i: 0, res: [] };
+  var sel = null, multi = {}, checked = false, pairSel = null, pairDone = {}, pairErr = 0, combo = 0;
+  for (var k = run.res.length - 1; k >= 0 && run.res[k]; k--) combo++;
+  function save() { if (!bonus) store.set("defiRun", run); }
+  function opt(o, k, cls) { return '<button type="button" class="dopt' + (cls || "") + '" data-o="' + k + '">' + esc(strip(o.t)) + '</button>'; }
+  function body(x) {
+    if (x.k === "qcm" || x.k === "photo") return (x.k === "photo" ? '<div class="dphoto"><img src="' + fileUrl(x.file, 960) + '" alt="Document à identifier"></div>' : "") + '<div class="dopts">' + x.opts.map(function (o, k) { return opt(o, k); }).join("") + '</div>';
+    if (x.k === "vf") return '<div class="dopts dvf">' + x.opts.map(function (o, k) { return opt(o, k, o.t === "Vrai" ? " dvf-v" : " dvf-f"); }).join("") + '</div>';
+    if (x.k === "multi") return '<div class="dopts dmulti">' + x.opts.map(function (o, k) { return '<button type="button" class="dopt" data-m="' + k + '"><i class="dbox"></i>' + esc(o.t) + '</button>'; }).join("") + '</div>';
+    if (x.k === "write") return '<form class="dwrite" onsubmit="return false"><input id="dw-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Ta réponse…" enterkeyhint="done"></form>';
+    if (x.k === "map") return miniMap(x, null) + '<div class="dopts dchips">' + x.opts.map(function (o, k) { return opt(o, k); }).join("") + '</div>';
+    if (x.k === "pairs") return '<div class="dpairs"><div>' + x.pairs.map(function (p, k) { return '<button type="button" class="dpair dpw" data-pl="' + k + '">' + esc(p[0]) + '</button>'; }).join("") + '</div><div>' + x.right.map(function (k) { return '<button type="button" class="dpair dpd" data-pr="' + k + '">' + esc(x.pairs[k][1]) + '</button>'; }).join("") + '</div></div>';
+    return "";
+  }
+  function draw() {
+    if (run.i >= Q.length) return finish();
+    var x = Q[run.i]; sel = null; multi = {}; checked = false; pairSel = null; pairDone = {}; pairErr = 0;
+    root.innerHTML = '<div class="df">' +
+      '<div class="df-top"><a class="df-x" href="#" aria-label="Quitter le défi">✕</a><div class="df-bar"><i style="width:' + (run.i / Q.length * 100) + '%"></i></div><span class="df-combo' + (combo >= 2 ? " on" : "") + '">' + FLAME + '<b>' + combo + '</b></span></div>' +
+      '<div class="df-body" key="' + run.i + '">' +
+        '<span class="df-kind">' + KINDS[x.k] + (x.sub ? ' · <em style="color:' + col(x.sub) + '">' + S[x.sub].name + '</em>' : "") + '</span>' +
+        '<h2 class="df-q">' + (x.k === "map" ? x.q + ' <small>' + esc(x.chap) + '</small>' : x.q) + '</h2>' + body(x) +
+      '</div>' +
+      '<div class="df-foot"><button type="button" class="df-check" disabled>' + (x.k === "pairs" ? "Associe toutes les paires" : "Vérifier") + '</button></div>' +
+      '<div class="df-fb" hidden></div></div>';
+    if (bonus) root.querySelector(".df-kind").insertAdjacentHTML("afterbegin", '<b class="df-bonus">Bonus · </b>');
+    var inp = root.querySelector("#dw-in");
+    if (inp) { inp.oninput = function () { root.querySelector(".df-check").disabled = !inp.value.trim(); }; inp.onkeydown = function (e) { if (e.key === "Enter" && inp.value.trim() && !checked) { e.preventDefault(); check(); } }; setTimeout(function () { inp.focus({ preventScroll: true }); }, 350); }
+    var im = root.querySelector(".dphoto img"); if (im) im.onerror = function () { im.parentNode.classList.add("dphoto-err"); };
+    linkify(root.querySelector(".df-q"));
+  }
+  function feedback(ok, html, extra) {
+    checked = true;
+    run.res[run.i] = ok ? 1 : 0; save();
+    combo = ok ? combo + 1 : 0;
+    beep(ok ? SND.ok : SND.ko);
+    if (navigator.vibrate) try { navigator.vibrate(ok ? 15 : [30, 40, 30]); } catch (e) {}
+    var fb = root.querySelector(".df-fb"), cb = root.querySelector(".df-combo");
+    cb.querySelector("b").textContent = combo; cb.classList.toggle("on", combo >= 2); if (ok && combo >= 2) { cb.classList.remove("pop"); void cb.offsetWidth; cb.classList.add("pop"); }
+    root.querySelector(".df-foot").hidden = true;
+    fb.className = "df-fb " + (ok ? "ok" : "ko"); fb.hidden = false;
+    fb.innerHTML = '<div class="df-fb-in"><div class="df-fb-h"><span class="df-fb-ic">' + (ok ? "✓" : "✕") + '</span><b>' + (ok ? (combo >= 3 ? combo + " d’affilée, " + PRAISE[combo % PRAISE.length].toLowerCase() : PRAISE[Math.floor(Math.random() * PRAISE.length)]) : "Pas tout à fait") + '</b></div>' + (html ? '<div class="df-fb-t">' + html + '</div>' : "") + (extra || "") + '<button type="button" class="df-next">Continuer</button></div>';
+    linkify(fb);
+    var bar = root.querySelector(".df-bar i"); bar.style.width = ((run.i + 1) / Q.length * 100) + "%"; if (ok) { bar.parentNode.classList.remove("shine"); void bar.offsetWidth; bar.parentNode.classList.add("shine"); }
+    if (!ok) { var b = root.querySelector(".df-body"); b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); }
+    setTimeout(function () { var n = fb.querySelector(".df-next"); if (n) n.focus({ preventScroll: true }); }, 50);
+  }
+  function check() {
+    if (checked) return;
+    var x = Q[run.i], btns = root.querySelectorAll("[data-o],[data-m]");
+    if (x.k === "write") {
+      var v = root.querySelector("#dw-in").value, ok = answerOk(v, x.a);
+      root.querySelector("#dw-in").disabled = true; root.querySelector(".dwrite").classList.add(ok ? "is-right" : "is-wrong");
+      return feedback(ok, (ok && norm(v.trim()) !== norm(x.a) ? "Réponse attendue : <b>" + esc(x.a) + "</b>" : ok ? "" : "Réponse : <b>" + esc(x.a) + "</b>") + (x.full && x.full.replace(/[.\s]+$/, "") !== x.a ? '<span class="df-more">' + esc(x.full) + '</span>' : ""), ok ? "" : '<button type="button" class="df-override">En fait, j’avais juste</button>');
+    }
+    if (x.k === "multi") {
+      var good = x.opts.every(function (o, k) { return !!multi[k] === o.ok; });
+      Array.prototype.forEach.call(btns, function (b) { var k = +b.dataset.m; b.disabled = true; b.classList.add(x.opts[k].ok ? (multi[k] ? "is-right" : "is-miss") : multi[k] ? "is-wrong" : "is-dim"); });
+      return feedback(good, good ? "" : "Il fallait cocher : <b>" + x.opts.filter(function (o) { return o.ok; }).map(function (o) { return esc(o.t); }).join(", ") + "</b>");
+    }
+    var o = x.opts[sel], okk = o && o.ok;
+    Array.prototype.forEach.call(btns, function (b) { var k = +b.dataset.o; b.disabled = true; b.classList.add(x.opts[k].ok ? "is-right" : k === sel ? "is-wrong" : "is-dim"); });
+    if (x.k === "map") { var mm = root.querySelector(".mmini"); mm.outerHTML = miniMap(x, x.ans); root.querySelector(".mmini-q").classList.add("good"); }
+    var right = x.opts.filter(function (z) { return z.ok; })[0].t;
+    feedback(okk, (okk ? "" : "Réponse : <b>" + right + "</b>") + (x.ex ? '<span class="df-more">' + x.ex + '</span>' : ""));
+  }
+  function pairs(e) {
+    var x = Q[run.i], l = e.target.closest("[data-pl]"), r = e.target.closest("[data-pr]");
+    if (l && !pairDone[l.dataset.pl]) { Array.prototype.forEach.call(root.querySelectorAll(".dpw"), function (b) { b.classList.remove("sel"); }); l.classList.add("sel"); pairSel = l.dataset.pl; beep(SND.tap); return; }
+    if (r && pairSel != null && !pairDone[r.dataset.pr]) {
+      var lb = root.querySelector('[data-pl="' + pairSel + '"]');
+      if (r.dataset.pr === pairSel) {
+        pairDone[pairSel] = 1; lb.classList.remove("sel"); [lb, r].forEach(function (b) { b.classList.add("matched"); b.disabled = true; }); beep(SND.tap); pairSel = null;
+        if (Object.keys(pairDone).length === x.pairs.length) setTimeout(function () { feedback(pairErr <= 1, pairErr ? plural(pairErr, "erreur") + " en chemin." : "Sans aucune erreur."); }, 350);
+      } else {
+        pairErr++; [lb, r].forEach(function (b) { b.classList.remove("bad"); void b.offsetWidth; b.classList.add("bad"); }); beep(SND.ko);
+        setTimeout(function () { lb.classList.remove("bad", "sel"); r.classList.remove("bad"); }, 500); pairSel = null;
+      }
+    }
+  }
+  function finish() {
+    var score = run.res.reduce(function (a, b) { return a + b; }, 0), before = streakInfo();
+    if (!bonus && run.d === dk && defiDays()[dk] == null) {
+      var days = defiDays(); days[dk] = score; store.set("defiDays", days);
+      var after = streakInfo(); store.set("defiBest", Math.max(after.best, store.get("defiBest", 0)));
+      store.set("defiRun", {}); return endScreen(score, before.n, after.n, true);
+    }
+    if (!bonus) store.set("defiRun", {});
+    endScreen(score, before.n, before.n, false);
+  }
+  function endScreen(score, from, to, fresh) {
+    var s = streakInfo(), msg = score >= 9 ? "Incroyable, presque parfait !" : score >= 7 ? "Très beau score !" : score >= 5 ? "Pas mal du tout, continue !" : "Chaque jour compte. Demain sera meilleur !";
+    root.innerHTML = '<div class="df df-end">' +
+      '<div class="de-flame' + (fresh ? " grow" : "") + '">' + FLAME + '<b class="de-n">' + from + '</b></div>' +
+      '<h2>' + (fresh ? (to > 1 ? to + " jours de suite !" : "Ta flamme est allumée !") : bonus ? "Défi bonus terminé" : "Défi du jour réussi") + '</h2>' +
+      '<p class="de-msg">' + (fresh || bonus ? '<b>' + score + ' / 10</b> · ' + msg : 'Ta série : <b>' + plural(s.n, "jour") + '</b>. Reviens demain pour un nouveau défi.') + '</p>' +
+      '<div class="de-stats"><span><b>' + s.n + '</b>série</span><span><b>' + s.best + '</b>record</span><span><b>' + s.total + '</b>défis</span></div>' +
+      weekStrip() + '<h3 class="de-h">Historique</h3>' + defiCal(5) +
+      '<div class="de-btns"><a class="df-check" href="#">Retour à l’accueil</a><button type="button" class="df-bonus-btn" data-bonus>Défi bonus (ne compte pas pour la série)</button></div></div>';
+    if (fresh || bonus) { beep(SND.end); confetti(root); }
+    var n = root.querySelector(".de-n");
+    if (fresh && to !== from) setTimeout(function () { countUp(n, from, to, 700); root.querySelector(".de-flame").classList.add("bump"); }, 650); else n.textContent = s.n;
+  }
+  root.onclick = function (e) {
+    if (e.target.closest("[data-bonus]")) { mountDefi(root, true); window.scrollTo(0, 0); return; }
+    var x = Q[run.i];
+    if (e.target.closest(".df-next")) { run.i++; save(); draw(); window.scrollTo(0, 0); return; }
+    if (e.target.closest(".df-override")) { run.res[run.i] = 1; save(); combo++; var fb = root.querySelector(".df-fb"); fb.className = "df-fb ok"; fb.querySelector(".df-fb-ic").textContent = "✓"; fb.querySelector(".df-fb-h b").textContent = "D’accord, compté juste !"; e.target.remove(); root.querySelector(".df-combo b").textContent = combo; return; }
+    if (e.target.closest(".df-check") && !e.target.closest("a")) { check(); return; }
+    if (!x || checked) return;
+    if (x.k === "pairs") return pairs(e);
+    var o = e.target.closest("[data-o]");
+    if (o) { sel = +o.dataset.o; Array.prototype.forEach.call(root.querySelectorAll("[data-o]"), function (b) { b.classList.toggle("sel", b === o); }); root.querySelector(".df-check").disabled = false; beep(SND.tap); if (x.k === "map") { var q = root.querySelector(".mmini-q"); q.textContent = x.opts[sel].t; q.classList.add("filled"); } return; }
+    var m = e.target.closest("[data-m]");
+    if (m) { var k = +m.dataset.m; multi[k] = !multi[k]; m.classList.toggle("sel", !!multi[k]); root.querySelector(".df-check").disabled = !Object.keys(multi).some(function (z) { return multi[z]; }); beep(SND.tap); }
+  };
+  keyFn = function (e) {
+    if (e.target && e.target.id === "dw-in") return;
+    if (e.key === "Enter") { var n = root.querySelector(".df-next"); if (n) n.click(); else { var c = root.querySelector(".df-check:not([disabled])"); if (c && c.tagName === "BUTTON") c.click(); } return; }
+    var k = "1234".indexOf(e.key); if (k > -1) { var b = root.querySelectorAll("[data-o],[data-m]")[k]; if (b && !b.disabled) b.click(); }
+  };
+  if (!bonus && defiDays()[dk] != null) { var s0 = streakInfo(); endScreen(defiDays()[dk], s0.n, s0.n, false); }
+  else draw();
+}
+
+/* ---------- compte à rebours ---------- */
+var cdT = null;
+function tickCount() {
+  var el = document.getElementById("cd"); if (!el) { clearInterval(cdT); cdT = null; return; }
+  var ms = Math.max(0, EXAM - new Date()), v = [Math.floor(ms / 864e5), Math.floor(ms / 36e5) % 24, Math.floor(ms / 6e4) % 60, Math.floor(ms / 1e3) % 60];
+  Array.prototype.forEach.call(el.querySelectorAll("b"), function (b, k) { var t = k ? pad(v[k]) : String(v[k]); if (b.textContent !== t) { b.textContent = t; if (k === 3) { b.classList.remove("tk"); void b.offsetWidth; b.classList.add("tk"); } } });
+}
+function countHtml() {
+  return '<div class="count"><span class="count-l">Avant les écrits du brevet</span>' +
+    '<div class="cd" id="cd">' + [["jours"], ["heures"], ["min"], ["s"]].map(function (u) { return '<span><b>–</b><small>' + u[0] + '</small></span>'; }).join("") + '</div>' +
+    '<span class="count-s">Jeudi 24 juin 2027 · 8 h · Épreuve de français</span>' +
+    '<div class="count-bar">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + ';opacity:' + (0.35 + subPct(s.id) / 154).toFixed(2) + '" title="' + s.name + ' : ' + subPct(s.id) + ' %"></i>'; }).join("") + '</div></div>';
+}
+
 /* ---------- routeur ---------- */
 function setNav(k) {
   Array.prototype.forEach.call(document.querySelectorAll(".nav a, .tabbar a"), function (a) { a.classList.toggle("on", a.dataset.nav === k); });
 }
 function route() {
-  keyFn = null;
+  keyFn = null; document.body.classList.remove("defi-mode");
   var h = decodeURIComponent(location.hash.slice(1)), parts = h.split("-");
   app.style.setProperty("--sub", "var(--fg)");
   if (S[h]) {
@@ -8823,10 +9298,14 @@ function route() {
   } else if (parts[0] === "carnet") {
     app.innerHTML = viewCarnet(); setNav(""); document.title = "Mon carnet · Objectif Brevet";
     bindCarnet(parts[1] === "revision");
+  } else if (h === "defi") {
+    app.innerHTML = '<section class="wrap defi-page" id="defi"></section>'; setNav("home"); document.title = "Défi du jour · Objectif Brevet";
+    document.body.classList.add("defi-mode"); mountDefi(document.getElementById("defi"));
   } else if (h === "examen") {
     app.innerHTML = viewExam(); setNav("examen"); document.title = "L’examen · Objectif Brevet";
   } else {
     app.innerHTML = viewHome(); setNav("home"); document.title = "Objectif Brevet";
+    clearInterval(cdT); tickCount(); cdT = setInterval(tickCount, 1000);
   }
   window.scrollTo(0, 0);
   Array.prototype.forEach.call(document.querySelectorAll(".chips"), function (row) {
