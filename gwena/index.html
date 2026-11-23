@@ -1007,6 +1007,21 @@ main#app{overflow-x:clip}
 .shf i{position:absolute;inset:0;border-radius:var(--r-lg);background:var(--bg);border:2px solid var(--fg);box-shadow:0 2px 8px rgba(0,0,0,.08);overflow:hidden}
 .shf i::before{content:"";position:absolute;inset:14px;border-radius:calc(var(--r-lg) - 8px);background:var(--c);opacity:.9}
 .shf i::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font-size:64px;font-weight:800;color:#fff}
+
+/* contrôle d'accès : écran d'attente et demandes (admin) */
+.acc-wait .row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.acc-wait .auth-logo .glogo{width:28px;height:28px}
+.acc-adm{border:1.5px solid var(--hair);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.acc-adm > b{font-size:16px}
+.adm-n{color:var(--mute);font-weight:600}
+.adm-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--hair)}
+.adm-row > div:first-child{display:flex;flex-direction:column;min-width:0}
+.adm-row > div:first-child b{font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adm-row > div:first-child span{font-size:12px;color:var(--mute)}
+.adm-row.is-pending > div:first-child span{color:var(--hg);font-weight:700}
+.adm-b{display:flex;gap:6px;align-items:center;flex:none}
+.adm-b .btn{min-height:36px;padding:6px 12px;font-size:13px}
+.adm-b .link{font-size:13px}
 </style>
 </head>
 <body>
@@ -9818,6 +9833,71 @@ function logout() {
   var done = function () { sessClear(); location.hash = ""; location.reload(); };
   pushNow().then(function () { return rawGet("brevet:push", null) ? disablePush() : null; }).then(done, done);
 }
+/* ---------- contrôle d'accès : chaque nouveau compte doit être validé ---------- */
+var ACC_KEY = USER ? "brevet:access:" + USER.id : "", ACC = USER ? rawGet(ACC_KEY, null) : null, ADMIN = !!(ACC && ACC.a);
+function checkAccess() {
+  return getToken().then(function (t) { return sbReq("/rest/v1/access?select=status,is_admin&user_id=eq." + USER.id, { token: t }); })
+    .then(function (rows) { var r = rows && rows[0], v = r ? { s: r.status, a: !!r.is_admin } : { s: "pending", a: false }; rawSet(ACC_KEY, v); ACC = v; ADMIN = v.a; return v; },
+      function (e) { var m = String((e && e.code) || "") + " " + String((e && e.message) || ""); if (e && (e.status === 404 || /PGRST205|42P01/.test(m))) { var v0 = { s: "ok", a: false }; rawSet(ACC_KEY, v0); return v0; } return null; });
+}
+var waitBox = null, waitT = null;
+function showWaiting(state) {
+  document.body.classList.add("locked");
+  if (!waitBox) { waitBox = document.createElement("div"); waitBox.className = "auth"; document.body.appendChild(waitBox); }
+  var name = esc(USER.name), T = {
+    check: ["Un instant…", "On vérifie ton accès."],
+    pending: ["Demande envoyée ✉️", "Ton compte <b>" + name + "</b> est bien créé. Chaque nouveau compte doit être <b>validé</b> avant d’accéder à GWENA : tu pourras entrer dès que ta demande sera acceptée."],
+    refused: ["Accès refusé", "La demande d’accès du compte <b>" + name + "</b> n’a pas été acceptée."],
+    offline: ["Pas de connexion", "Impossible de vérifier ton accès pour l’instant. Vérifie ta connexion internet, puis réessaie."]
+  }[state] || ["Un instant…", ""];
+  waitBox.innerHTML = '<div class="auth-card acc-wait">' +
+    '<div class="auth-logo">' + GLOGO + 'GWENA</div>' +
+    '<h1>' + T[0] + '</h1><p class="auth-lead">' + T[1] + '</p>' +
+    (state === "check" ? "" : '<div class="row">' + (state !== "refused" ? '<button type="button" class="btn btn-fill" data-w="check">' + (state === "offline" ? "Réessayer" : "Vérifier maintenant") + '</button>' : "") + '<button type="button" class="link" data-w="out">Se déconnecter</button></div>') +
+    '<p class="auth-err" hidden></p></div>';
+  waitBox.onclick = function (e) {
+    var b = e.target.closest("[data-w]"); if (!b) return;
+    if (b.dataset.w === "out") { sessClear(); location.hash = ""; location.reload(); return; }
+    b.disabled = true; b.textContent = "Vérification…";
+    checkAccess().then(function (v) {
+      if (v && v.s === "ok") { location.reload(); return; }
+      showWaiting(v ? v.s : "offline");
+      if (v && v.s === "pending") { var er = waitBox.querySelector(".auth-err"); er.hidden = false; er.textContent = "Pas encore validé. Réessaie un peu plus tard."; }
+    });
+  };
+  clearInterval(waitT);
+  if (state === "pending") waitT = setInterval(function () { if (document.visibilityState === "visible") checkAccess().then(function (v) { if (v && v.s === "ok") location.reload(); }); }, 30000);
+}
+/* liste des demandes, visible seulement par l’admin */
+function adminBlock() { return ADMIN ? '<div class="acc-adm" id="acc-adm"><b>🔐 Demandes d’accès</b><div class="adm-list"><p class="mute">Chargement…</p></div></div>' : ""; }
+function loadAdmin(focus) {
+  var box = document.getElementById("acc-adm"); if (!box) return;
+  if (focus) box.scrollIntoView({ block: "start" });
+  var list = box.querySelector(".adm-list");
+  getToken().then(function (t) { return sbReq("/rest/v1/access?select=user_id,name,status,created_at&order=created_at.desc", { token: t }); }).then(function (rows) {
+    rows = (rows || []).filter(function (r) { return r.user_id !== USER.id; });
+    var rank = { pending: 0, refused: 1, ok: 2 };
+    rows.sort(function (x, y) { return rank[x.status] - rank[y.status]; });
+    var n = rows.filter(function (r) { return r.status === "pending"; }).length;
+    var d = function (s) { try { return new Date(s).toLocaleDateString("fr-FR", { day: "numeric", month: "short" }); } catch (e) { return ""; } };
+    list.innerHTML = '<p class="adm-n">' + (n ? plural(n, "demande") + " en attente" : "Aucune demande en attente") + '</p>' + rows.map(function (r) {
+      var lab = r.status === "pending" ? "En attente" : r.status === "ok" ? "Autorisé" : "Refusé";
+      return '<div class="adm-row is-' + r.status + '"><div><b>' + esc(r.name || "?") + '</b><span>' + lab + ' · ' + d(r.created_at) + '</span></div><div class="adm-b">' +
+        (r.status !== "ok" ? '<button type="button" class="btn btn-fill" data-adm="ok" data-u="' + r.user_id + '">Autoriser</button>' : "") +
+        (r.status === "pending" ? '<button type="button" class="btn" data-adm="refused" data-u="' + r.user_id + '">Refuser</button>' : "") +
+        (r.status === "ok" ? '<button type="button" class="link" data-adm="refused" data-u="' + r.user_id + '">Retirer l’accès</button>' : "") +
+      '</div></div>';
+    }).join("");
+  }).catch(function () { list.innerHTML = '<p class="mute">Impossible de charger les demandes. Vérifie ta connexion.</p>'; });
+  box.onclick = function (e) {
+    var b = e.target.closest("[data-adm]"); if (!b) return;
+    if (b.dataset.adm === "refused" && b.classList.contains("link") && !confirm("Retirer l’accès à ce compte ?")) return;
+    b.disabled = true;
+    getToken().then(function (t) { return sbReq("/rest/v1/access?user_id=eq." + b.dataset.u, { method: "PATCH", token: t, prefer: "return=minimal", body: { status: b.dataset.adm, decided_at: new Date().toISOString() } }); })
+      .then(function () { loadAdmin(); }, function () { b.disabled = false; alert("La modification n’a pas pu être enregistrée."); });
+  };
+}
+window.addEventListener("hashchange", function () { if (location.hash === "#acces" && ADMIN) { history.replaceState(null, "", location.pathname); openAccount(true); } });
 function showLogin() {
   document.body.classList.add("locked");
   var box = document.createElement("div");
@@ -9874,7 +9954,7 @@ function showLogin() {
   }
   draw();
 }
-function openAccount() {
+function openAccount(focusAdmin) {
   sheet.hidden = false; document.body.classList.add("wk-open");
   sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Compte en ligne · tous tes appareils</p></div></div>' +
     '<p class="wk-e acc-sync" id="acc-sync"></p>' +
@@ -9883,6 +9963,7 @@ function openAccount() {
   document.getElementById("btn-logout").onclick = function () { this.disabled = true; this.textContent = "Déconnexion…"; logout(); };
   syncBadge(); pushNow().then(syncBadge); bindPush(sheet.querySelector(".wk-body"));
   document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(false); };
+  if (ADMIN) { var ab = document.createElement("div"); ab.innerHTML = adminBlock(); var acc = sheet.querySelector(".wk-body .acc-push") || sheet.querySelector(".wk-body #btn-sound"); acc.parentNode.insertBefore(ab.firstChild, acc); loadAdmin(focusAdmin); }
   document.getElementById("btn-sound").onclick = function () { var on = !soundOn(); rawSet("brevet:sound", on ? 1 : 0); this.textContent = on ? "🔊 Sons activés" : "🔇 Sons coupés"; if (on) softTap(); };
 }
 
@@ -10824,14 +10905,19 @@ function route() {
 document.getElementById("logo-dots").innerHTML = GLOGO;
 window.addEventListener("hashchange", route);
 function reloadState() { known = store.get("known", {}); scores = store.get("scores", {}); missed = store.get("missed", {}); qmode = store.get("qmode", "10"); }
-if (USER) {
+function startApp() {
   pullNow(true).then(function (changed) { if (changed) { reloadState(); var h = location.hash; if (!/^#?(quiz|flashcards|defi)/.test(h) || !document.querySelector(".df-body, .opt, .fc")) route(); } });
   document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") pushNow(true); else pullNow().then(function (ch) { if (ch) { reloadState(); if (!document.querySelector(".df-body, .opt.is-right, .fc")) route(); } }); });
   window.addEventListener("online", function () { pushNow(); });
   setTimeout(refreshPush, 2500);
   window.addEventListener("pagehide", function () { pushNow(true); });
+  document.getElementById("btn-user").textContent = USER.name.charAt(0).toUpperCase(); route(); var tv = +store.get("tutoDone") || 0; if (!tv) setTimeout(showTuto, 300); else if (tv < TUTO_V) setTimeout(function () { showTuto(true); }, 300);
+  if (location.hash === "#acces" && ADMIN) { history.replaceState(null, "", location.pathname); setTimeout(function () { openAccount(true); }, 400); }
 }
-if (USER) { document.getElementById("btn-user").textContent = USER.name.charAt(0).toUpperCase(); route(); var tv = +store.get("tutoDone") || 0; if (!tv) setTimeout(showTuto, 300); else if (tv < TUTO_V) setTimeout(function () { showTuto(true); }, 300); }
+if (USER) {
+  if (ACC && ACC.s === "ok") { startApp(); checkAccess().then(function (v) { if (v && v.s !== "ok") showWaiting(v.s); }); }
+  else { showWaiting("check"); checkAccess().then(function (v) { if (v && v.s === "ok") { if (waitBox) waitBox.remove(); waitBox = null; document.body.classList.remove("locked"); startApp(); } else showWaiting(v ? v.s : "offline"); }); }
+}
 else showLogin();
 })();
 </script>
