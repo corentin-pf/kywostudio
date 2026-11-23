@@ -9506,6 +9506,7 @@ function mountQuiz(root, list, opt) {
   }
   function end() {
     var pct = Math.round(score / items.length * 100);
+    jingle();
     if (opt.save) { scores[opt.save] = Math.max(scores[opt.save] || 0, pct); store.set("scores", scores); }
     var msg = pct >= 80 ? "Excellent, c’est maîtrisé." : pct >= 50 ? "Pas mal. Relis les corrections et recommence." : "Relis le cours, puis retente le quiz.";
     var subs = Object.keys(bySub);
@@ -9878,10 +9879,11 @@ function openAccount() {
   sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Compte en ligne · tous tes appareils</p></div></div>' +
     '<p class="wk-e acc-sync" id="acc-sync"></p>' +
     '<div class="acc-streak"><span class="flame' + (streakInfo().today ? "" : " off") + '">' + FLAME + '</span><div><b>' + plural(streakInfo().n, "jour") + ' de suite</b><span>Record : ' + plural(streakInfo().best, "jour") + '</span></div></div>' + defiCal(5) + pushBlock() +
-    '<button type="button" class="btn" id="btn-tuto">Revoir le tutoriel</button><a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a><button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
+    '<button type="button" class="btn" id="btn-sound">' + (soundOn() ? "🔊 Sons activés" : "🔇 Sons coupés") + '</button><button type="button" class="btn" id="btn-tuto">Revoir le tutoriel</button><a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a><button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
   document.getElementById("btn-logout").onclick = function () { this.disabled = true; this.textContent = "Déconnexion…"; logout(); };
   syncBadge(); pushNow().then(syncBadge); bindPush(sheet.querySelector(".wk-body"));
   document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(false); };
+  document.getElementById("btn-sound").onclick = function () { var on = !soundOn(); rawSet("brevet:sound", on ? 1 : 0); this.textContent = on ? "🔊 Sons activés" : "🔇 Sons coupés"; if (on) beep([[1250, 0, "sine", 0.05]], 0.045); };
 }
 
 
@@ -10355,7 +10357,7 @@ function mountMap(root, c) {
    TUTO_V : à augmenter à chaque nouvelle fonctionnalité importante.
    Chaque étape porte « s » = version où elle est apparue (1 par défaut) :
    les comptes qui ont vu une version plus ancienne voient seulement les nouveautés. */
-var TUTO_V = 5;
+var TUTO_V = 6;
 function tutoSteps() {
   var tiles = '<div class="tv-tiles">' + SUBJECTS.map(function (s) { return '<span style="background:' + col(s.id) + '"><b>' + s.code + '</b><i>' + s.name.split(" ")[0] + '</i></span>'; }).join("") + '</div>';
   return [
@@ -10380,7 +10382,7 @@ function tutoSteps() {
       v: '<svg class="tv-mm" viewBox="0 0 320 150"><path d="M160 75 C120 75 110 35 70 35" stroke="#00C04B" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C120 75 110 115 70 115" stroke="#0057FF" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C200 75 210 35 250 35" stroke="#FF1F3D" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C200 75 210 115 250 115" stroke="#A600FF" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="160" cy="75" r="26" fill="#fff" stroke="#FF7A00" stroke-width="5"/><text x="160" y="81" text-anchor="middle" font-size="18">🌍</text><text x="20" y="28" font-size="11" font-weight="800" fill="#00C04B">Causes</text><text x="20" y="108" font-size="11" font-weight="800" fill="#0057FF">Fin</text><text x="256" y="28" font-size="11" font-weight="800" fill="#FF1F3D">Crises</text><rect x="252" y="98" width="46" height="24" rx="7" fill="#fff" stroke="#A600FF" stroke-dasharray="4 3" stroke-width="2"/><text x="275" y="115" text-anchor="middle" font-size="14" font-weight="800" fill="#A600FF">?</text></svg>' },
     { t: "La recherche", d: "La <b>loupe</b> en haut de l’écran cherche dans tous les cours et toutes les flashcards. Tape un mot, une date ou une notion, puis touche un résultat pour aller directement à la bonne partie du cours.",
       v: '<div class="tv-search"><div class="tv-bar">🔍 pythagore</div><div class="tv-res"><small>Mathématiques · Pythagore</small><b>Le théorème de <mark>Pythagore</mark></b></div></div>' },
-    { s: 3, t: "Ta progression, ton compte", d: "Ton compte est <b>en ligne</b> : connecte-toi avec ton prénom et ton mot de passe sur n’importe quel téléphone ou ordinateur, tu retrouves tout (flammes, cartes sues, scores, erreurs, carnet). Le rond avec ton initiale, en haut à droite, permet de te déconnecter ou de revoir ce tutoriel. La page <b>Examen</b> donne le calendrier et un plan de révision.",
+    { s: 6, t: "Ta progression, ton compte", d: "Ton compte est <b>en ligne</b> : connecte-toi avec ton prénom et ton mot de passe sur n’importe quel téléphone ou ordinateur, tu retrouves tout (flammes, cartes sues, scores, erreurs, carnet). Le rond avec ton initiale, en haut à droite, permet de <b>couper ou remettre les sons</b>, de te déconnecter ou de revoir ce tutoriel. La page <b>Examen</b> donne le calendrier et un plan de révision.",
       v: '<div class="tv-prog"><span class="avatar tv-av">' + esc(USER ? USER.name.charAt(0).toUpperCase() : "L") + '</span><div><b>Mathématiques</b><i><em style="width:62%"></em></i></div><div><b>Histoire-Géo</b><i><em style="width:35%;background:var(--hg)"></em></i></div></div>' },
     { t: "Astuce : comme une vraie appli", d: "Sur iPhone, ouvre le site dans Safari, touche le bouton <b>Partager</b>, puis <b>« Sur l’écran d’accueil »</b>. L’appli s’ouvre alors en plein écran, avec son icône.",
       v: '<div class="tv-home"><span class="tv-ico">' + GLOGO + '</span><b>GWENA</b></div>' },
@@ -10536,18 +10538,37 @@ function answerOk(user, ans, question) {
 
 /* petits sons (Web Audio) */
 var actx = null;
-function beep(notes) {
+function soundOn() { return rawGet("brevet:sound", 1) !== 0; }
+function beep(notes, vol) {
+  if (!soundOn()) return;
   try {
     actx = actx || new (window.AudioContext || window.webkitAudioContext)();
     var t = actx.currentTime;
     notes.forEach(function (n, k) {
       var o = actx.createOscillator(), g = actx.createGain();
       o.type = n[2] || "sine"; o.frequency.value = n[0];
-      g.gain.setValueAtTime(0.0001, t + n[1]); g.gain.exponentialRampToValueAtTime(0.18, t + n[1] + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + n[1] + 0.22);
-      o.connect(g); g.connect(actx.destination); o.start(t + n[1]); o.stop(t + n[1] + 0.25);
+      g.gain.setValueAtTime(0.0001, t + n[1]); var d = n[3] || 0.22;
+      g.gain.exponentialRampToValueAtTime(vol || 0.18, t + n[1] + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + n[1] + d);
+      o.connect(g); g.connect(actx.destination); o.start(t + n[1]); o.stop(t + n[1] + d + 0.03);
     });
   } catch (e) {}
 }
+/* petite musique joyeuse d’environ 3 s (fin du défi, fin d’un quiz) */
+var JINGLE = (function () {
+  var C = 523.25, D = 587.33, E = 659.25, F = 698.46, G = 783.99, A = 880, B = 987.77, C2 = 1046.5, E2 = 1318.5, G2 = 1568;
+  var mel = [[C, 0, .16], [E, .16, .16], [G, .32, .16], [C2, .48, .3], [G, .8, .14], [A, .96, .14], [B, 1.12, .14], [C2, 1.28, .3], [D * 2, 1.6, .14], [E2, 1.76, .14], [D * 2, 1.92, .14], [C2, 2.08, .22], [G2, 2.34, .62]];
+  var bass = [[C / 2, 0, "triangle", .45], [F / 2, .48, "triangle", .45], [G / 2, .96, "triangle", .45], [A / 2, 1.44, "triangle", .45], [F / 2, 1.92, "triangle", .4], [G / 2, 2.12, "triangle", .2], [C / 2, 2.34, "triangle", .62]];
+  var chord = [[C2, 2.34, "sine", .62], [E2, 2.34, "sine", .62]];
+  return { mel: mel.map(function (n) { return [n[0], n[1], "square", n[2]]; }), low: bass.concat(chord) };
+})();
+function jingle() { beep(JINGLE.mel, 0.05); beep(JINGLE.low, 0.12); }
+/* petit son discret au toucher des boutons */
+document.addEventListener("click", function (e) {
+  if (document.body.classList.contains("defi-mode")) return;
+  var b = e.target.closest("button, .btn, .chip, .tile, .tabbar a, .nav a, .chap-row, .seg button, [data-act]");
+  if (!b || b.disabled) return;
+  beep([[1250, 0, "sine", 0.05]], 0.045);
+}, true);
 var SND = { ok: [[660, 0], [990, 0.09]], ko: [[220, 0, "triangle"], [180, 0.12, "triangle"]], end: [[523, 0], [659, 0.12], [784, 0.24], [1047, 0.38]], tap: [[880, 0]] };
 function confetti(root) {
   var box = document.createElement("div"), cols = ["#FF1F3D", "#0057FF", "#FF7A00", "#00C04B", "#A600FF", "#00B3D6"];
@@ -10676,7 +10697,7 @@ function mountDefi(root, bonus) {
       '<div class="de-stats"><span><b>' + s.n + '</b>série</span><span><b>' + s.best + '</b>record</span><span><b>' + s.total + '</b>défis</span></div>' +
       weekStrip() + '<h3 class="de-h">Historique</h3>' + defiCal(5) +
       '<div class="de-btns"><a class="df-check" href="#">Retour à l’accueil</a><button type="button" class="df-bonus-btn" data-bonus>Défi bonus (ne compte pas pour la série)</button></div></div>';
-    if (fresh || bonus) { beep(SND.end); confetti(root); }
+    if (fresh || bonus) { jingle(); confetti(root); }
     var n = root.querySelector(".de-n");
     if (fresh && to !== from) setTimeout(function () { countUp(n, from, to, 700); root.querySelector(".de-flame").classList.add("bump"); }, 650); else n.textContent = s.n;
   }
