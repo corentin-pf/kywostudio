@@ -9883,7 +9883,7 @@ function openAccount() {
   document.getElementById("btn-logout").onclick = function () { this.disabled = true; this.textContent = "Déconnexion…"; logout(); };
   syncBadge(); pushNow().then(syncBadge); bindPush(sheet.querySelector(".wk-body"));
   document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(false); };
-  document.getElementById("btn-sound").onclick = function () { var on = !soundOn(); rawSet("brevet:sound", on ? 1 : 0); this.textContent = on ? "🔊 Sons activés" : "🔇 Sons coupés"; if (on) beep([[1250, 0, "sine", 0.05]], 0.045); };
+  document.getElementById("btn-sound").onclick = function () { var on = !soundOn(); rawSet("brevet:sound", on ? 1 : 0); this.textContent = on ? "🔊 Sons activés" : "🔇 Sons coupés"; if (on) softTap(); };
 }
 
 
@@ -10562,12 +10562,20 @@ var JINGLE = (function () {
   return { mel: mel.map(function (n) { return [n[0], n[1], "square", n[2]]; }), low: bass.concat(chord) };
 })();
 function jingle() { beep(JINGLE.mel, 0.05); beep(JINGLE.low, 0.12); }
-/* petit son discret au toucher des boutons */
+/* petit « pop » doux et grave, seulement dans les flashcards et les quiz */
+function softTap() {
+  if (!soundOn()) return;
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    var t = actx.currentTime, o = actx.createOscillator(), g = actx.createGain();
+    o.type = "sine"; o.frequency.setValueAtTime(420, t); o.frequency.exponentialRampToValueAtTime(240, t + 0.08);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.09, t + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
+    o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t + 0.14);
+  } catch (e) {}
+}
 document.addEventListener("click", function (e) {
-  if (document.body.classList.contains("defi-mode")) return;
-  var b = e.target.closest("button, .btn, .chip, .tile, .tabbar a, .nav a, .chap-row, .seg button, [data-act]");
-  if (!b || b.disabled) return;
-  beep([[1250, 0, "sine", 0.05]], 0.045);
+  var b = e.target.closest(".deck .fc, .deck [data-act], .quiz .opt, .quiz [data-act]");
+  if (b && !b.disabled) softTap();
 }, true);
 var SND = { ok: [[660, 0], [990, 0.09]], ko: [[220, 0, "triangle"], [180, 0.12, "triangle"]], end: [[523, 0], [659, 0.12], [784, 0.24], [1047, 0.38]], tap: [[880, 0]] };
 function confetti(root) {
