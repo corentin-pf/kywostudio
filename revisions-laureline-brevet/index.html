@@ -959,6 +959,22 @@ main#app{overflow-x:clip}
 .auth-new{font-size:14px;line-height:1.45;background:rgba(47,179,68,.12);border:1.5px solid rgba(47,179,68,.45);border-radius:var(--r);padding:10px 12px}
 .acc-sync{font-size:13px}
 .acc-sync::before{content:"☁︎ ";}
+/* rappels */
+.acc-push{border:1.5px solid var(--hair);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.45}
+.acc-push > b{font-size:16px}
+.acc-push p{color:var(--mute)}
+.acc-push p b{color:var(--fg)}
+.acc-push .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.acc-push-msg{color:var(--fg)!important;font-weight:600}
+.defi-push-on{--sub:#FF7A1A;align-self:flex-start}
+.defi-bell{align-self:center;font-size:14px;font-weight:700;color:var(--fg);margin-top:-6px}
+.tv-notif{width:100%;display:flex;flex-direction:column;gap:8px}
+.tv-n{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:start;background:var(--bg);border-radius:14px;padding:10px 12px;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.tv-n-ic{width:34px;height:34px;border-radius:9px;background:#0b0b0c;display:grid;grid-template-columns:repeat(3,7px);gap:2px;align-content:center;justify-content:center}
+.tv-n-ic i{width:7px;height:7px;border-radius:2px;display:block}
+.tv-n div{display:flex;flex-direction:column;font-size:13px;line-height:1.3}
+.tv-n div span{color:var(--mute)}
+.tv-n small{font-size:11px;color:var(--mute)}
 </style>
 </head>
 <body>
@@ -8573,7 +8589,7 @@ function startSession(j, name, keep) {
 }
 function logout() {
   var done = function () { sessClear(); location.hash = ""; location.reload(); };
-  pushNow().then(done, done);
+  pushNow().then(function () { return rawGet("brevet:push", null) ? disablePush() : null; }).then(done, done);
 }
 function showLogin() {
   document.body.classList.add("locked");
@@ -8635,11 +8651,72 @@ function openAccount() {
   sheet.hidden = false; document.body.classList.add("wk-open");
   sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Compte en ligne · tous tes appareils</p></div></div>' +
     '<p class="wk-e acc-sync" id="acc-sync"></p>' +
-    '<div class="acc-streak"><span class="flame' + (streakInfo().today ? "" : " off") + '">' + FLAME + '</span><div><b>' + plural(streakInfo().n, "jour") + ' de suite</b><span>Record : ' + plural(streakInfo().best, "jour") + '</span></div></div>' + defiCal(5) +
+    '<div class="acc-streak"><span class="flame' + (streakInfo().today ? "" : " off") + '">' + FLAME + '</span><div><b>' + plural(streakInfo().n, "jour") + ' de suite</b><span>Record : ' + plural(streakInfo().best, "jour") + '</span></div></div>' + defiCal(5) + pushBlock() +
     '<button type="button" class="btn" id="btn-tuto">Revoir le tutoriel</button><a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a><button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
   document.getElementById("btn-logout").onclick = function () { this.disabled = true; this.textContent = "Déconnexion…"; logout(); };
-  syncBadge(); pushNow().then(syncBadge);
+  syncBadge(); pushNow().then(syncBadge); bindPush(sheet.querySelector(".wk-body"));
   document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(false); };
+}
+
+
+/* ---------- rappels (notifications) ---------- */
+var VAPID_PUB = "BD_ZUrFRy8RKi2BQ9QofrxMAIU-TH4DVKli-7UIDnfRhlE1yezALIL_k8CUhZQBNcpXtnFAu_XXRtiblgPaKnus";
+var IS_IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+var STANDALONE = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+function pushSupported() { return "serviceWorker" in navigator && "PushManager" in window && "Notification" in window; }
+function swReg() { return navigator.serviceWorker.register("sw.js").then(function () { return navigator.serviceWorker.ready; }); }
+function u8(b64) { var p = "=".repeat((4 - b64.length % 4) % 4), s = atob((b64 + p).replace(/-/g, "+").replace(/_/g, "/")), a = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) a[i] = s.charCodeAt(i); return a; }
+function saveSub(sub) {
+  var j = sub.toJSON();
+  return getToken().then(function (t) { return sbReq("/rest/v1/push_subs", { method: "POST", token: t, prefer: "resolution=merge-duplicates,return=minimal", body: { endpoint: j.endpoint, user_id: USER.id, sub: j, updated_at: new Date().toISOString() } }); });
+}
+function currentSub() { if (!pushSupported()) return Promise.resolve(null); return swReg().then(function (r) { return r.pushManager.getSubscription(); }).catch(function () { return null; }); }
+function enablePush() {
+  return Notification.requestPermission().then(function (perm) {
+    if (perm !== "granted") throw new Error("denied");
+    return swReg();
+  }).then(function (r) { return r.pushManager.getSubscription().then(function (s) { return s || r.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: u8(VAPID_PUB) }); }); })
+    .then(function (sub) { return saveSub(sub).then(function () { rawSet("brevet:push", USER.id); return sub; }); });
+}
+function disablePush() {
+  return currentSub().then(function (sub) {
+    rawSet("brevet:push", null);
+    if (!sub) return;
+    var ep = sub.toJSON().endpoint;
+    return getToken().then(function (t) { return sbReq("/rest/v1/push_subs?endpoint=eq." + encodeURIComponent(ep), { method: "DELETE", token: t }); }).catch(function () {}).then(function () { return sub.unsubscribe(); });
+  });
+}
+function testPush() {
+  return currentSub().then(function (sub) {
+    if (!sub) throw new Error("nosub");
+    return fetch(SB_URL + "/functions/v1/rappels", { method: "POST", headers: { "Content-Type": "application/json", apikey: SB_KEY }, body: JSON.stringify({ test: true, sub: sub.toJSON() }) }).then(function (r) { return r.json(); });
+  });
+}
+function refreshPush() {
+  if (!USER || !pushSupported() || Notification.permission !== "granted" || rawGet("brevet:push", null) !== USER.id) return;
+  currentSub().then(function (sub) { if (sub) saveSub(sub).catch(function () {}); });
+}
+function pushBlock() {
+  var on = pushSupported() && Notification.permission === "granted" && rawGet("brevet:push", null) === (USER && USER.id);
+  var h = '<div class="acc-push" id="acc-push"><b>🔔 Rappels du défi</b>';
+  if (!pushSupported() && IS_IOS && !STANDALONE) return h + '<p>Sur iPhone, les rappels marchent quand l’appli est sur l’écran d’accueil : dans Safari, touche <b>Partager</b> puis <b>« Sur l’écran d’accueil »</b>, ouvre l’appli depuis son icône et reviens ici.</p></div>';
+  if (!pushSupported()) return h + '<p>Ce navigateur ne gère pas les notifications. Essaie avec Safari (iPhone, appli sur l’écran d’accueil) ou Chrome.</p></div>';
+  if (Notification.permission === "denied") return h + '<p>Les notifications sont bloquées pour l’appli. Autorise-les dans les réglages du téléphone (Réglages → Notifications → Brevet), puis reviens ici.</p></div>';
+  if (on) return h + '<p>✅ Activés : un rappel à <b>15 h</b> et à <b>19 h</b>, seulement si ton défi du jour n’est pas encore fait.</p><div class="row"><button type="button" class="btn" data-push="test">M’envoyer un test</button><button type="button" class="link" data-push="off">Désactiver</button></div><p class="acc-push-msg" hidden></p></div>';
+  return h + '<p>Reçois un rappel à <b>15 h</b> et à <b>19 h</b> si tu n’as pas encore fait ton défi du jour, pour ne jamais perdre ta flamme.</p><button type="button" class="btn btn-sub defi-push-on" data-push="on">Activer les rappels</button><p class="acc-push-msg" hidden></p></div>';
+}
+function bindPush(root) {
+  if (root.__push) return; root.__push = 1;
+  root.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-push]"); if (!b) return;
+    var box = document.getElementById("acc-push"), msg = function (t) { var m = box.querySelector(".acc-push-msg"); if (m) { m.hidden = false; m.textContent = t; } };
+    b.disabled = true;
+    var a = b.dataset.push;
+    var p = a === "on" ? enablePush().then(function () { box.outerHTML = pushBlock(); var m = document.querySelector("#acc-push .acc-push-msg"); return testPush().then(function (r) { if (m) { m.hidden = false; m.textContent = r && r.ok ? "Une notification de test vient d’être envoyée." : "Rappels enregistrés. (Le test n’a pas pu partir pour l’instant.)"; } }, function () {}); })
+      : a === "off" ? disablePush().then(function () { box.outerHTML = pushBlock(); })
+      : testPush().then(function (r) { b.disabled = false; msg(r && r.ok ? "Notification envoyée : elle arrive dans quelques secondes." : "L’envoi a échoué. Désactive puis réactive les rappels."); });
+    p.catch(function (err) { b.disabled = false; msg(err && err.message === "denied" ? "Tu as refusé les notifications. Autorise-les dans les réglages du téléphone." : "Impossible d’activer les rappels pour l’instant. Vérifie ta connexion et réessaie."); });
+  });
 }
 
 /* ---------- recherche ---------- */
@@ -9053,7 +9130,7 @@ function mountMap(root, c) {
    TUTO_V : à augmenter à chaque nouvelle fonctionnalité importante.
    Chaque étape porte « s » = version où elle est apparue (1 par défaut) :
    les comptes qui ont vu une version plus ancienne voient seulement les nouveautés. */
-var TUTO_V = 3;
+var TUTO_V = 4;
 function tutoSteps() {
   var tiles = '<div class="tv-tiles">' + SUBJECTS.map(function (s) { return '<span style="background:' + col(s.id) + '"><b>' + s.code + '</b><i>' + s.name.split(" ")[0] + '</i></span>'; }).join("") + '</div>';
   return [
@@ -9062,6 +9139,8 @@ function tutoSteps() {
       v: '<div class="tv-list"><span style="--sub:var(--hg)"><b>01</b> La Première Guerre mondiale<i></i></span><span style="--sub:var(--hg)"><b>02</b> Démocraties et totalitarismes<i style="width:40%"></i></span><span style="--sub:var(--hg)"><b>03</b> La Seconde Guerre mondiale<i style="width:15%"></i></span></div>' },
     { s: 2, t: "Le défi du jour 🔥", d: "Chaque jour, <b>10 exercices variés</b> sur tout le programme : QCM, vrai ou faux, réponses à écrire, cartes mentales à compléter, photos à reconnaître, paires à associer. Fais-le tous les jours pour garder ta <b>flamme</b> allumée et allonger ta série. Ton historique est dans le rond avec ton initiale.",
       v: '<div class="tv-defi"><div class="tv-defi-top"><span class="tv-fl">🔥</span><b>3</b><span>jours de suite</span></div><div class="tv-defi-wk">' + WD.map(function (l, k) { return '<span><small>' + l + '</small><i>' + (k < 3 ? "🔥" : "") + '</i></span>'; }).join("") + '</div><span class="tv-defi-btn">Commencer le défi du jour</span></div>' },
+    { s: 4, t: "Les rappels 🔔", d: "Active les rappels dans le rond avec ton initiale : une notification à <b>15 h</b> et à <b>19 h</b>, seulement si ton défi du jour n’est pas fait. Sur iPhone, ajoute d’abord l’appli à l’écran d’accueil.",
+      v: '<div class="tv-notif"><div class="tv-n"><span class="tv-n-ic">' + SUBJECTS.map(function (x) { return '<i style="background:' + col(x.id) + '"></i>'; }).join("") + '</span><div><b>🔥 12 jours de suite !</b><span>C’est l’heure du défi du jour pour garder ta flamme allumée.</span></div><small>15:00</small></div><div class="tv-n"><span class="tv-n-ic">' + SUBJECTS.map(function (x) { return '<i style="background:' + col(x.id) + '"></i>'; }).join("") + '</span><div><b>⏰ Plus que quelques heures !</b><span>Ta série de 12 jours s’éteint à minuit.</span></div><small>19:00</small></div></div>' },
     { t: "Les 6 onglets d’un chapitre", d: "",
       v: '<div class="tv-tabs">' + [["Résumé", "L’essentiel en quelques points"], ["Cours", "Le cours complet, avec exemples corrigés et pièges"], ["Carte", "La carte mentale du chapitre, et son jeu"], ["Schémas", "Photos et schémas, à agrandir d’un toucher"], ["Flash", "Les flashcards du chapitre"], ["Quiz", "Une série de 15 questions corrigées"]].map(function (x, i) { return '<div class="tv-tab' + (i === 1 ? " on" : "") + '"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join("") + '</div>' },
     { t: "Les mots qui s’ouvrent", d: "Dans les cours, certains mots sont spéciaux. Touche-les pour en savoir plus.",
@@ -9147,6 +9226,7 @@ function defiCard() {
       ? '<div class="defi-ok"><b>✓ Défi du jour réussi · ' + sc + '/10</b><span>Reviens demain pour garder ta flamme.</span></div><a class="defi-btn ghost" href="#defi">Voir mon historique</a>'
       : '<a class="defi-btn" href="#defi">' + (store.get("defiRun", {}).d === dayKey() ? "Reprendre le défi du jour" : "Commencer le défi du jour") + '<small>10 questions · environ 5 min</small></a>' +
         (s.n ? '<p class="defi-warn">Fais ton défi aujourd’hui pour ne pas perdre ta série de ' + plural(s.n, "jour") + ' !</p>' : '<p class="defi-warn">Un défi par jour pour allumer ta flamme.</p>')) +
+    (USER && rawGet("brevet:push", null) !== USER.id ? '<button type="button" class="link defi-bell" data-open-acc>🔔 Me rappeler à 15 h et 19 h</button>' : "") +
   '</div>';
 }
 
@@ -9411,6 +9491,7 @@ function countHtml() {
     '<div class="count-bar">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + ';opacity:' + (0.35 + subPct(s.id) / 154).toFixed(2) + '" title="' + s.name + ' : ' + subPct(s.id) + ' %"></i>'; }).join("") + '</div></div>';
 }
 
+document.addEventListener("click", function (e) { if (e.target.closest("[data-open-acc]")) openAccount(); });
 /* ---------- routeur ---------- */
 function setNav(k) {
   Array.prototype.forEach.call(document.querySelectorAll(".nav a, .tabbar a"), function (a) { a.classList.toggle("on", a.dataset.nav === k); });
@@ -9495,6 +9576,7 @@ if (USER) {
   pullNow(true).then(function (changed) { if (changed) { reloadState(); var h = location.hash; if (!/^#?(quiz|flashcards|defi)/.test(h) || !document.querySelector(".df-body, .opt, .fc")) route(); } });
   document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") pushNow(true); else pullNow().then(function (ch) { if (ch) { reloadState(); if (!document.querySelector(".df-body, .opt.is-right, .fc")) route(); } }); });
   window.addEventListener("online", function () { pushNow(); });
+  setTimeout(refreshPush, 2500);
   window.addEventListener("pagehide", function () { pushNow(true); });
 }
 if (USER) { document.getElementById("btn-user").textContent = USER.name.charAt(0).toUpperCase(); route(); var tv = +store.get("tutoDone") || 0; if (!tv) setTimeout(showTuto, 300); else if (tv < TUTO_V) setTimeout(function () { showTuto(true); }, 300); }
