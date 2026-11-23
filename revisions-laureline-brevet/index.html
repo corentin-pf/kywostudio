@@ -665,6 +665,69 @@ mark{background:color-mix(in srgb, #ffd60a 55%, transparent);color:inherit;borde
   .mm-wrap{border-radius:var(--r);max-height:70vh}
   .mm-opts{position:sticky;bottom:calc(72px + env(safe-area-inset-bottom,0px));background:var(--bg);padding:10px 0;border-top:1px solid var(--hair)}
 }
+
+/* ---------- Tutoriel ---------- */
+.tuto{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;outline:none}
+.tuto-card{width:min(480px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--bg);color:var(--fg);border-radius:var(--r-lg);padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.tuto-card.first{animation:tutoIn .25s ease}
+@keyframes tutoIn{from{transform:translateY(12px);opacity:0}}
+.tuto-top{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:var(--mute)}
+.tuto-card h2{font-size:24px;font-weight:800;line-height:1.15}
+.tuto-card > p{font-size:16px;line-height:1.5;color:var(--mute)}
+.tuto-card > p b{color:var(--fg)}
+.tuto-v{background:var(--soft);border-radius:var(--r);padding:16px;min-height:150px;display:flex;align-items:center;justify-content:center}
+.tuto-dots{display:flex;gap:6px;justify-content:center}
+.tuto-dots i{width:7px;height:7px;border-radius:50%;background:var(--hair)}
+.tuto-dots i.on{background:var(--fg);width:20px;border-radius:4px}
+.tuto-nav{display:flex;justify-content:space-between;gap:10px}
+.tuto-nav .btn{flex:1}
+.tv-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+.tv-tiles span{border-radius:12px;color:#fff;padding:10px;display:flex;flex-direction:column;gap:2px}
+.tv-tiles b{font-size:26px;font-weight:800;line-height:1}
+.tv-tiles i{font-style:normal;font-size:11px;font-weight:700;opacity:.9}
+.tv-list{display:flex;flex-direction:column;gap:6px;width:100%}
+.tv-list span{display:grid;grid-template-columns:28px 1fr;gap:4px 10px;align-items:center;background:var(--bg);border-radius:10px;padding:9px 12px;font-size:14px;font-weight:700}
+.tv-list b{color:var(--sub);font-size:18px;grid-row:span 2}
+.tv-list i{display:block;height:4px;border-radius:2px;background:var(--sub);width:80%}
+.tv-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%}
+.tv-tab{background:var(--bg);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.tv-tab b{font-size:14px;font-weight:800}
+.tv-tab span{font-size:12px;color:var(--mute);line-height:1.3}
+.tv-tab.on{background:var(--ma);color:#fff}
+.tv-tab.on span{color:#fff;opacity:.9}
+.tv-words{font-size:15px;line-height:1.5;width:100%}
+.tv-words ul{margin:10px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.tv-carnet{display:flex;flex-direction:column;gap:6px;width:100%}
+.tv-carnet div{background:var(--bg);border-radius:10px;padding:8px 12px;display:flex;flex-direction:column}
+.tv-carnet b{font-size:15px}
+.tv-carnet span{font-size:13px;color:var(--mute)}
+.tv-fc{display:flex;align-items:center;gap:8px;width:100%;justify-content:center}
+.tv-card{width:150px;height:110px;border:2px solid var(--fg);border-radius:16px;background:var(--bg);padding:12px;display:flex;flex-direction:column;justify-content:space-between;transform:rotate(4deg)}
+.tv-card small{font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--mute)}
+.tv-card b{font-size:15px;line-height:1.2}
+.tv-arrow{font-size:12px;font-weight:800;padding:6px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.tv-l{background:var(--ko)}
+.tv-r{background:var(--ok)}
+.tv-quiz{display:flex;flex-direction:column;gap:6px;width:100%}
+.tv-quiz b{font-size:15px;margin-bottom:2px}
+.tv-quiz span{display:flex;gap:10px;align-items:center;background:var(--bg);border:1.5px solid var(--fg);border-radius:10px;padding:7px 10px;font-size:14px;font-weight:600}
+.tv-quiz span i{font-style:normal;width:22px;height:22px;border:1.5px solid currentColor;border-radius:6px;display:grid;place-items:center;font-size:12px;font-weight:800}
+.tv-quiz span.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.tv-mm{width:100%;max-width:320px;background:#fffdf8;border-radius:12px}
+.tv-search{width:100%;display:flex;flex-direction:column;gap:8px}
+.tv-bar{background:var(--bg);border-radius:10px;padding:10px 12px;font-weight:700}
+.tv-res{background:var(--bg);border-left:5px solid var(--ma);border-radius:10px;padding:9px 12px;display:flex;flex-direction:column}
+.tv-res small{font-size:11px;color:var(--mute);font-weight:700}
+.tv-prog{width:100%;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.tv-prog > div{width:100%;display:flex;flex-direction:column;gap:4px;font-size:13px}
+.tv-prog i{display:block;height:7px;border-radius:4px;background:var(--hair)}
+.tv-prog em{display:block;height:100%;border-radius:4px;background:var(--ma)}
+.tv-av{display:grid!important;place-items:center}
+.tv-home{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px;font-weight:700}
+.tv-ico{width:72px;height:72px;border-radius:18px;background:#0b0b0c;display:grid;grid-template-columns:repeat(3,14px);gap:5px;align-content:center;justify-content:center}
+.tv-ico i{width:14px;height:14px;border-radius:4px;display:block}
+.tv-go{font-size:64px}
+@media (max-width:760px){ .tuto{align-items:flex-end;padding:0} .tuto-card{border-radius:var(--r-lg) var(--r-lg) 0 0;max-height:92vh;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))} }
 </style>
 </head>
 <body>
@@ -8226,8 +8289,9 @@ function openAccount() {
   sheet.hidden = false; document.body.classList.add("wk-open");
   sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Connecté sur cet appareil</p></div></div>' +
     '<p class="wk-e">Ta progression (cartes sues, scores, erreurs) est enregistrée dans ce compte, sur cet appareil.</p>' +
-    '<a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a><button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
+    '<button type="button" class="btn" id="btn-tuto">Revoir le tutoriel</button><a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a><button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
   document.getElementById("btn-logout").onclick = logout;
+  document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(); };
 }
 
 /* ---------- recherche ---------- */
@@ -8561,6 +8625,55 @@ function mountMap(root, c) {
   if (COVERS[c.id]) wkFetch(COVERS[c.id]).then(function (d) { var im = wkImg(d); if (im && document.body.contains(root)) { st.img = im; draw(); } });
 }
 
+/* ---------- tutoriel ---------- */
+function tutoSteps() {
+  var tiles = '<div class="tv-tiles">' + SUBJECTS.map(function (s) { return '<span style="background:' + col(s.id) + '"><b>' + s.code + '</b><i>' + s.name.split(" ")[0] + '</i></span>'; }).join("") + '</div>';
+  return [
+    { t: "Bienvenue" + (USER ? ", " + esc(USER.name) : "") + " !", d: "Objectif Brevet regroupe tout le programme de 3e : <b>52 chapitres</b> dans les 6 matières de l’examen. Voici un tour rapide de l’appli, en une minute.", v: tiles },
+    { t: "Choisis une matière, puis un chapitre", d: "Sur l’accueil, touche une case de couleur. Les chapitres s’affichent dans l’ordre du programme, avec une barre qui montre ta progression.",
+      v: '<div class="tv-list"><span style="--sub:var(--hg)"><b>01</b> La Première Guerre mondiale<i></i></span><span style="--sub:var(--hg)"><b>02</b> Démocraties et totalitarismes<i style="width:40%"></i></span><span style="--sub:var(--hg)"><b>03</b> La Seconde Guerre mondiale<i style="width:15%"></i></span></div>' },
+    { t: "Les 6 onglets d’un chapitre", d: "",
+      v: '<div class="tv-tabs">' + [["Résumé", "L’essentiel en quelques points"], ["Cours", "Le cours complet, avec exemples corrigés et pièges"], ["Carte", "La carte mentale du chapitre, et son jeu"], ["Schémas", "Photos et schémas, à agrandir d’un toucher"], ["Flash", "Les flashcards du chapitre"], ["Quiz", "Une série de 15 questions corrigées"]].map(function (x, i) { return '<div class="tv-tab' + (i === 1 ? " on" : "") + '"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join("") + '</div>' },
+    { t: "Les mots qui s’ouvrent", d: "Dans les cours, certains mots sont spéciaux. Touche-les pour en savoir plus.",
+      v: '<div class="tv-words"><p>En 1916, la bataille de <span class="wk">Verdun</span> devient le symbole de la guerre d’<span class="dk">usure</span>.</p><ul><li><span class="wk">Bleu</span> : une photo ou une illustration</li><li><span class="dk">Pointillés</span> : la définition du mot</li><li><b>Appui long</b> sur n’importe quel mot (double-clic sur ordinateur) : le dictionnaire</li></ul></div>' },
+    { t: "Ton carnet de mots", d: "Chaque mot dont tu regardes la définition s’ajoute à ton carnet. Tu peux ensuite les réviser comme des flashcards. Tu le trouves sur l’accueil et dans le rond avec ton initiale.",
+      v: '<div class="tv-carnet"><div><b>usure</b><span>Fait d’épuiser l’ennemi lentement.</span></div><div><b>propagande</b><span>Moyens pour imposer des idées à la population.</span></div><div><b>fatalité</b><span>Destin auquel on ne peut pas échapper.</span></div></div>' },
+    { t: "Les flashcards", d: "Lis la question, réponds dans ta tête, puis <b>touche la carte</b> pour la retourner. <b>Glisse-la à droite</b> si tu savais, <b>à gauche</b> pour la revoir plus tard. Dans l’onglet Flashcards, choisis une matière puis un chapitre, ou tout à la fois.",
+      v: '<div class="tv-fc"><span class="tv-arrow tv-l">← À revoir</span><div class="tv-card"><small>QUESTION</small><b>Date de l’armistice ?</b></div><span class="tv-arrow tv-r">Je sais →</span></div>' },
+    { t: "Les quiz", d: "Dans un chapitre, une série de 15 questions. Dans l’onglet Quiz : séries de 10 ou 20, mode <b>Vrai ou faux</b>, et <b>Mes erreurs</b> pour retravailler ce que tu as raté. Chaque réponse est corrigée et expliquée, et les questions que tu n’as jamais vues passent en priorité.",
+      v: '<div class="tv-quiz"><b>Qui commet le génocide des Arméniens ?</b><span class="ok"><i>A</i> L’Empire ottoman</span><span><i>B</i> L’Allemagne</span><span><i>C</i> La Russie</span></div>' },
+    { t: "La carte mentale et son jeu", d: "Chaque chapitre a sa carte mentale : tout le chapitre en un seul dessin. Zoome avec + et −, touche une branche pour la replier. Puis joue à <b>« Complète la carte »</b> : retrouve les cases cachées.",
+      v: '<svg class="tv-mm" viewBox="0 0 320 150"><path d="M160 75 C120 75 110 35 70 35" stroke="#E5302A" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C120 75 110 115 70 115" stroke="#2FA45C" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C200 75 210 35 250 35" stroke="#2E86DE" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M160 75 C200 75 210 115 250 115" stroke="#F28C28" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="160" cy="75" r="26" fill="#fff" stroke="#C26300" stroke-width="5"/><text x="160" y="81" text-anchor="middle" font-size="18">🌍</text><text x="20" y="28" font-size="11" font-weight="800" fill="#E5302A">Causes</text><text x="20" y="108" font-size="11" font-weight="800" fill="#2FA45C">Fin</text><text x="256" y="28" font-size="11" font-weight="800" fill="#2E86DE">Crises</text><rect x="252" y="98" width="46" height="24" rx="7" fill="#fff" stroke="#F28C28" stroke-dasharray="4 3" stroke-width="2"/><text x="275" y="115" text-anchor="middle" font-size="14" font-weight="800" fill="#F28C28">?</text></svg>' },
+    { t: "La recherche", d: "La <b>loupe</b> en haut de l’écran cherche dans tous les cours et toutes les flashcards. Tape un mot, une date ou une notion, puis touche un résultat pour aller directement à la bonne partie du cours.",
+      v: '<div class="tv-search"><div class="tv-bar">🔍 pythagore</div><div class="tv-res"><small>Mathématiques · Pythagore</small><b>Le théorème de <mark>Pythagore</mark></b></div></div>' },
+    { t: "Ta progression, ton compte", d: "Chaque compte garde sa progression : cartes sues, scores, erreurs, carnet. Elle est enregistrée <b>sur cet appareil</b>. Le rond avec ton initiale, en haut à droite, permet de te déconnecter ou de revoir ce tutoriel. La page <b>L’examen</b> donne le calendrier et un plan de révision.",
+      v: '<div class="tv-prog"><span class="avatar tv-av">' + esc(USER ? USER.name.charAt(0).toUpperCase() : "L") + '</span><div><b>Mathématiques</b><i><em style="width:62%"></em></i></div><div><b>Histoire-Géo</b><i><em style="width:35%;background:var(--hg)"></em></i></div></div>' },
+    { t: "Astuce : comme une vraie appli", d: "Sur iPhone, ouvre le site dans Safari, touche le bouton <b>Partager</b>, puis <b>« Sur l’écran d’accueil »</b>. L’appli s’ouvre alors en plein écran, avec son icône.",
+      v: '<div class="tv-home"><span class="tv-ico">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("") + '</span><b>Brevet</b></div>' },
+    { t: "C’est parti !", d: "Conseil : commence par le <b>Résumé</b> d’un chapitre, lis le <b>Cours</b>, puis vérifie avec les <b>Flashcards</b> et le <b>Quiz</b>. Bonnes révisions !", v: '<div class="tv-go">🎯</div>' }
+  ];
+}
+function showTuto() {
+  var steps = tutoSteps(), i = 0, drawn = false, box = document.createElement("div");
+  box.className = "tuto"; document.body.appendChild(box); document.body.classList.add("wk-open");
+  function close() { store.set("tutoDone", 1); box.remove(); document.body.classList.remove("wk-open"); }
+  function draw() {
+    var s = steps[i], last = i === steps.length - 1;
+    box.innerHTML = '<div class="tuto-card' + (drawn ? "" : " first") + '" role="dialog" aria-modal="true" aria-label="Tutoriel">' +
+      '<div class="tuto-top"><span>' + (i + 1) + ' / ' + steps.length + '</span>' + (last ? "" : '<button type="button" class="link" data-t="skip">Passer</button>') + '</div>' +
+      '<div class="tuto-v">' + s.v + '</div><h2>' + s.t + '</h2>' + (s.d ? '<p>' + s.d + '</p>' : "") +
+      '<div class="tuto-dots">' + steps.map(function (x, k) { return '<i class="' + (k === i ? "on" : "") + '"></i>'; }).join("") + '</div>' +
+      '<div class="tuto-nav">' + (i ? '<button type="button" class="btn" data-t="prev">Précédent</button>' : '<span></span>') + '<button type="button" class="btn btn-fill" data-t="next">' + (last ? "Commencer" : "Suivant") + '</button></div></div>'; drawn = true;
+  }
+  box.onclick = function (e) { var b = e.target.closest("[data-t]"); if (!b) return; var a = b.dataset.t; if (a === "skip") close(); else if (a === "prev") { i--; draw(); } else if (i === steps.length - 1) close(); else { i++; draw(); } };
+  var x0 = null;
+  box.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  box.addEventListener("touchend", function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null; if (dx < -60 && i < steps.length - 1) { i++; draw(); } else if (dx > 60 && i > 0) { i--; draw(); } }, { passive: true });
+  box.tabIndex = -1;
+  box.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" && i < steps.length - 1) { i++; draw(); } else if (e.key === "ArrowLeft" && i > 0) { i--; draw(); } else if (e.key === "Escape") close(); });
+  draw(); box.focus();
+}
+
 /* ---------- routeur ---------- */
 function setNav(k) {
   Array.prototype.forEach.call(document.querySelectorAll(".nav a, .tabbar a"), function (a) { a.classList.toggle("on", a.dataset.nav === k); });
@@ -8636,7 +8749,7 @@ function route() {
 document.getElementById("strip").innerHTML = SUBJECTS.map(function (s) { return '<a href="#' + s.id + '" style="background:' + col(s.id) + '" aria-label="' + s.name + '"></a>'; }).join("");
 document.getElementById("logo-dots").innerHTML = SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("");
 window.addEventListener("hashchange", route);
-if (USER) { document.getElementById("btn-user").textContent = USER.name.charAt(0).toUpperCase(); route(); }
+if (USER) { document.getElementById("btn-user").textContent = USER.name.charAt(0).toUpperCase(); route(); if (!store.get("tutoDone")) setTimeout(showTuto, 300); }
 else showLogin();
 })();
 </script>
