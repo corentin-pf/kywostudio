@@ -24,7 +24,7 @@ img{max-width:100%}
 :root{
   --bg:#ffffff; --fg:#0b0b0c; --mute:#6b6b72; --soft:#f2f2f5; --hair:#e2e2e7; --raise:#ffffff;
   --on:#ffffff; --on-dim:rgba(255,255,255,.32);
-  --fr:#E5302A; --ma:#0A5BD8; --hg:#C26300; --svt:#178A3E; --pc:#8A3FCB; --te:#00808A;
+  --fr:#FF1F3D; --ma:#0057FF; --hg:#FF7A00; --svt:#00C04B; --pc:#A600FF; --te:#00B3D6;
   --ok:#178A3E; --ko:#E5302A;
   --shadow:0 1px 2px rgba(0,0,0,.06), 0 4px 14px rgba(0,0,0,.06);
   --r-xs:8px; --r-sm:12px; --r:16px; --r-lg:22px;
@@ -969,12 +969,19 @@ main#app{overflow-x:clip}
 .defi-bell{align-self:center;font-size:14px;font-weight:700;color:var(--fg);margin-top:-6px}
 .tv-notif{width:100%;display:flex;flex-direction:column;gap:8px}
 .tv-n{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:start;background:var(--bg);border-radius:14px;padding:10px 12px;box-shadow:0 1px 3px rgba(0,0,0,.12)}
-.tv-n-ic{width:34px;height:34px;border-radius:9px;background:#0b0b0c;display:grid;grid-template-columns:repeat(3,7px);gap:2px;align-content:center;justify-content:center}
-.tv-n-ic i{width:7px;height:7px;border-radius:2px;display:block}
+.tv-n-ic{width:34px;height:34px;border-radius:9px;background:#fff;color:#000;display:grid;place-items:center;flex:none}
+.tv-n-ic .glogo{width:24px;height:24px}
 .tv-n div{display:flex;flex-direction:column;font-size:13px;line-height:1.3}
 .tv-n div span{color:var(--mute)}
 .tv-n small{font-size:11px;color:var(--mute)}
 .acc-push > .link{align-self:flex-start}
+
+/* boutons de matière (flashcards, quiz) : le bouton entier prend la couleur de la matière */
+.chip.chip-sub{background:var(--sub);border-color:var(--sub);color:#fff}
+.chip.chip-sub.on{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--fg)}
+.chip.chip-sub.on::before{content:"✓";font-weight:800}
+@media (hover:hover){ .chip.chip-sub:not(.on):hover{background:var(--sub);filter:brightness(1.08)} }
+.chips:has(.chip-sub){padding-block:5px;margin-top:9px}
 </style>
 </head>
 <body>
@@ -992,7 +999,6 @@ main#app{overflow-x:clip}
       <button type="button" class="avatar" id="btn-user" aria-label="Mon compte"></button>
     </div>
   </div>
-  <div class="strip" id="strip"></div>
 </header>
 <main id="app"></main>
 <nav class="tabbar" aria-label="Navigation">
@@ -8420,10 +8426,6 @@ function daysLeft() { return Math.max(0, Math.ceil((EXAM - new Date()) / 864e5))
 
 function viewHome() {
   var nCards = flat(CH, cardsOf).length, nQ = flat(CH, quizOf).length, nDg = CH.reduce(function (a, c) { return a + c.schema.length; }, 0);
-  var review = Object.keys(known).filter(function (k) { return known[k] === 0; }).length;
-  var seen = Object.keys(known).length;
-  var nMiss = Object.keys(missed).filter(function (k) { return CHI[k.split("/")[0]]; }).length;
-  var last = CHI[store.get("last", "")] || CH[0];
   return '' +
   '<section class="wrap hero">' +
     '<div><p class="eyebrow">' + (USER ? 'Bonjour ' + esc(USER.name) + ' · ' : '') + 'Brevet · Session 2027</p>' +
@@ -8438,13 +8440,7 @@ function viewHome() {
       return '<a class="tile" href="#' + s.id + '" style="--sub:' + col(s.id) + '"><span class="tile-code">' + s.code + '</span><span class="tile-name">' + s.name + '</span><span class="tile-meta">' + plural(B[s.id].length, "chapitre") + '</span><span class="bar"><i style="width:' + p + '%"></i></span></a>';
     }).join("") +
   '</div></section>' +
-  '<section class="wrap sec"><div class="sec-h"><h2>Aujourd’hui</h2><span>' + seen + ' / ' + nCards + ' cartes vues</span></div><div class="today">' +
-    '<a class="tcard" href="#flashcards"><b>' + (review || nCards - seen) + '</b><h3>' + (review ? "Cartes à revoir" : "Cartes jamais vues") + '</h3><p>' + (review ? "Les cartes que tu as marquées « à revoir ». Elles reviennent jusqu’à ce que tu les saches." : "Commence par un paquet de flashcards toutes matières confondues.") + '</p><span class="go">Réviser →</span></a>' +
-    (nMiss ? '<a class="tcard" href="#quiz-erreurs"><b>' + nMiss + '</b><h3>Questions ratées</h3><p>Les questions où tu t’es trompée. Une bonne réponse les retire de la liste.</p><span class="go">Les retravailler →</span></a>'
-      : '<a class="tcard" href="#quiz"><b>10</b><h3>Quiz express</h3><p>Dix questions tirées au hasard parmi les ' + nQ + ' du programme, avec la correction expliquée.</p><span class="go">Commencer →</span></a>') +
-    '<a class="tcard" href="#carnet"><b>' + store.get("words", []).length + '</b><h3>Mon carnet de mots</h3><p>Les mots dont tu as regardé la définition, à réviser en flashcards.</p><span class="go">Ouvrir le carnet →</span></a>' +
-    '<a class="tcard" href="#' + last.id + '" style="--sub:' + col(last.sub) + '"><b style="color:var(--sub)">' + pad(last.n) + '</b><h3>' + last.title + '</h3><p>' + S[last.sub].name + ' · ' + (store.get("last", "") ? "Reprends là où tu t’es arrêtée." : "Un bon chapitre pour commencer.") + '</p><span class="go">Ouvrir le chapitre →</span></a>' +
-  '</div>' +
+  '<section class="wrap sec">' +
   '<div class="stats"><div class="stat"><b>' + CH.length + '</b><span>chapitres</span></div><div class="stat"><b>' + nDg + '</b><span>schémas</span></div><div class="stat"><b>' + nCards + '</b><span>flashcards</span></div><div class="stat"><b>' + nQ + '</b><span>questions de quiz</span></div></div>' +
   '</section>';
 }
@@ -8515,7 +8511,7 @@ function drawPanel(c, tab) {
 
 function chips(base, f, ch, count) {
   var out = '<p class="chips-l">Matière</p><div class="chips"><a class="chip all' + (f === "all" ? " on" : "") + '" href="#' + base + '">Toutes les matières</a>' +
-    SUBJECTS.map(function (s) { return '<a class="chip' + (f === s.id ? " on" : "") + '" style="--sub:' + col(s.id) + '" href="#' + base + '-' + s.id + '"><i></i>' + s.name + '</a>'; }).join("") + '</div>';
+    SUBJECTS.map(function (s) { return '<a class="chip chip-sub' + (f === s.id ? " on" : "") + '" style="--sub:' + col(s.id) + '" href="#' + base + '-' + s.id + '">' + s.name + '</a>'; }).join("") + '</div>';
   if (f !== "all") {
     var list = B[f];
     out += '<p class="chips-l">Chapitre</p><div class="chips chaps-pick" style="--sub:' + col(f) + '"><a class="chip' + (!ch ? " on" : "") + '" href="#' + base + '-' + f + '">Tous les chapitres <small>' + list.reduce(function (a, c) { return a + count(c); }, 0) + '</small></a>' +
@@ -8553,7 +8549,7 @@ function viewExam() {
     { d: "Lundi 28 juin 2027", e: [["sci", "8 h – 9 h", "Sciences", "1 h. Deux disciplines sur trois (Physique-Chimie, SVT, Technologie), 30 minutes chacune."], ["ma", "10 h – 12 h", "Mathématiques", "2 h. Exercices sur tout le programme, dont un d’algorithmique (Scratch)."]] },
     { d: "Avant les écrits", e: [["oral", "Date fixée par le collège", "Oral", "15 min. Présentation d’un projet mené au collège, puis entretien avec le jury."]] }
   ];
-  function sw(id) { return id === "sci" ? "linear-gradient(90deg,var(--pc) 33%,var(--svt) 33% 66%,var(--te) 66%)" : id === "oral" ? "var(--fg)" : col(id); }
+  function sw(id) { return id === "sci" || id === "oral" ? "var(--fg)" : col(id); }
   return '<section class="wrap page-h"><p class="eyebrow">Session 2027</p><h1>L’examen</h1><p class="lead">Le calendrier officiel, ce qui t’attend à chaque épreuve, et un plan pour arriver prête.</p></section>' +
   '<section class="wrap"><div class="stats" style="margin-top:0"><div class="stat"><b>' + daysLeft() + '</b><span>jours avant le 24 juin</span></div><div class="stat"><b>5</b><span>épreuves finales</span></div><div class="stat"><b>' + CH.length + '</b><span>chapitres à réviser</span></div><div class="stat"><b>' + Math.ceil(CH.length / Math.max(1, Math.floor(daysLeft() / 7))) + '</b><span>chapitres par semaine pour tout voir</span></div></div></section>' +
   '<section class="wrap sec"><div class="sec-h"><h2>Le calendrier</h2><span>Toutes les épreuves le matin</span></div><div class="days">' +
@@ -9130,7 +9126,7 @@ function mountMap(root, c) {
    TUTO_V : à augmenter à chaque nouvelle fonctionnalité importante.
    Chaque étape porte « s » = version où elle est apparue (1 par défaut) :
    les comptes qui ont vu une version plus ancienne voient seulement les nouveautés. */
-var TUTO_V = 4;
+var TUTO_V = 5;
 function tutoSteps() {
   var tiles = '<div class="tv-tiles">' + SUBJECTS.map(function (s) { return '<span style="background:' + col(s.id) + '"><b>' + s.code + '</b><i>' + s.name.split(" ")[0] + '</i></span>'; }).join("") + '</div>';
   return [
@@ -9140,12 +9136,12 @@ function tutoSteps() {
     { s: 2, t: "Le défi du jour 🔥", d: "Chaque jour, <b>10 exercices variés</b> sur tout le programme : QCM, vrai ou faux, réponses à écrire, cartes mentales à compléter, photos à reconnaître, paires à associer. Fais-le tous les jours pour garder ta <b>flamme</b> allumée et allonger ta série. Ton historique est dans le rond avec ton initiale.",
       v: '<div class="tv-defi"><div class="tv-defi-top"><span class="tv-fl">🔥</span><b>3</b><span>jours de suite</span></div><div class="tv-defi-wk">' + WD.map(function (l, k) { return '<span><small>' + l + '</small><i>' + (k < 3 ? "🔥" : "") + '</i></span>'; }).join("") + '</div><span class="tv-defi-btn">Commencer le défi du jour</span></div>' },
     { s: 4, t: "Les rappels 🔔", d: "Active les rappels dans le rond avec ton initiale : une notification à <b>15 h</b> et à <b>19 h</b>, seulement si ton défi du jour n’est pas fait. Sur iPhone, ajoute d’abord l’appli à l’écran d’accueil.",
-      v: '<div class="tv-notif"><div class="tv-n"><span class="tv-n-ic">' + SUBJECTS.map(function (x) { return '<i style="background:' + col(x.id) + '"></i>'; }).join("") + '</span><div><b>🔥 12 jours de suite !</b><span>C’est l’heure du défi du jour pour garder ta flamme allumée.</span></div><small>15:00</small></div><div class="tv-n"><span class="tv-n-ic">' + SUBJECTS.map(function (x) { return '<i style="background:' + col(x.id) + '"></i>'; }).join("") + '</span><div><b>⏰ Plus que quelques heures !</b><span>Ta série de 12 jours s’éteint à minuit.</span></div><small>19:00</small></div></div>' },
+      v: '<div class="tv-notif"><div class="tv-n"><span class="tv-n-ic">' + GLOGO + '</span><div><b>🔥 12 jours de suite !</b><span>C’est l’heure du défi du jour pour garder ta flamme allumée.</span></div><small>15:00</small></div><div class="tv-n"><span class="tv-n-ic">' + GLOGO + '</span><div><b>⏰ Plus que quelques heures !</b><span>Ta série de 12 jours s’éteint à minuit.</span></div><small>19:00</small></div></div>' },
     { t: "Les 6 onglets d’un chapitre", d: "",
       v: '<div class="tv-tabs">' + [["Résumé", "L’essentiel en quelques points"], ["Cours", "Le cours complet, avec exemples corrigés et pièges"], ["Carte", "La carte mentale du chapitre, et son jeu"], ["Schémas", "Photos et schémas, à agrandir d’un toucher"], ["Flash", "Les flashcards du chapitre"], ["Quiz", "Une série de 15 questions corrigées"]].map(function (x, i) { return '<div class="tv-tab' + (i === 1 ? " on" : "") + '"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join("") + '</div>' },
     { t: "Les mots qui s’ouvrent", d: "Dans les cours, certains mots sont spéciaux. Touche-les pour en savoir plus.",
       v: '<div class="tv-words"><p>En 1916, la bataille de <span class="wk">Verdun</span> devient le symbole de la guerre d’<span class="dk">usure</span>.</p><ul><li><span class="wk">Bleu</span> : une photo ou une illustration</li><li><span class="dk">Pointillés</span> : la définition du mot</li><li><b>Appui long</b> sur n’importe quel mot (double-clic sur ordinateur) : le dictionnaire</li></ul></div>' },
-    { t: "Ton carnet de mots", d: "Chaque mot dont tu regardes la définition s’ajoute à ton carnet. Tu peux ensuite les réviser comme des flashcards. Tu le trouves sur l’accueil et dans le rond avec ton initiale.",
+    { s: 5, t: "Ton carnet de mots", d: "Chaque mot dont tu regardes la définition s’ajoute à ton carnet. Tu peux ensuite les réviser comme des flashcards. Tu le trouves dans le rond avec ton initiale, en haut à droite.",
       v: '<div class="tv-carnet"><div><b>usure</b><span>Fait d’épuiser l’ennemi lentement.</span></div><div><b>propagande</b><span>Moyens pour imposer des idées à la population.</span></div><div><b>fatalité</b><span>Destin auquel on ne peut pas échapper.</span></div></div>' },
     { t: "Les flashcards", d: "Lis la question, réponds dans ta tête, puis <b>touche la carte</b> pour la retourner. <b>Glisse-la à droite</b> si tu savais, <b>à gauche</b> pour la revoir plus tard. Dans l’onglet Flashcards, choisis une matière puis un chapitre, ou tout à la fois.",
       v: '<div class="tv-fc"><span class="tv-arrow tv-l">← À revoir</span><div class="tv-card"><small>QUESTION</small><b>Date de l’armistice ?</b></div><span class="tv-arrow tv-r">Je sais →</span></div>' },
@@ -9487,8 +9483,7 @@ function tickCount() {
 function countHtml() {
   return '<div class="count"><span class="count-l">Avant les écrits du brevet</span>' +
     '<div class="cd" id="cd">' + [["jours"], ["heures"], ["min"], ["s"]].map(function (u) { return '<span><b>–</b><small>' + u[0] + '</small></span>'; }).join("") + '</div>' +
-    '<span class="count-s">Jeudi 24 juin 2027 · 8 h · Épreuve de français</span>' +
-    '<div class="count-bar">' + SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + ';opacity:' + (0.35 + subPct(s.id) / 154).toFixed(2) + '" title="' + s.name + ' : ' + subPct(s.id) + ' %"></i>'; }).join("") + '</div></div>';
+    '<span class="count-s">Jeudi 24 juin 2027 · 8 h · Épreuve de français</span></div>';
 }
 
 document.addEventListener("click", function (e) { if (e.target.closest("[data-open-acc]")) openAccount(); });
@@ -9568,7 +9563,6 @@ function route() {
   });
 }
 
-document.getElementById("strip").innerHTML = SUBJECTS.map(function (s) { return '<a href="#' + s.id + '" style="background:' + col(s.id) + '" aria-label="' + s.name + '"></a>'; }).join("");
 document.getElementById("logo-dots").innerHTML = GLOGO;
 window.addEventListener("hashchange", route);
 function reloadState() { known = store.get("known", {}); scores = store.get("scores", {}); missed = store.get("missed", {}); qmode = store.get("qmode", "10"); }
