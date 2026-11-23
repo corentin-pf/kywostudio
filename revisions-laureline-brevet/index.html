@@ -932,6 +932,16 @@ body.defi-mode .tabbar,body.defi-mode footer{display:none}
 .de-flame{--fs:126px}
 .acc-streak .flame{--fs:32px}
 .de-n{bottom:10px}
+.tv-defi{width:100%;display:flex;flex-direction:column;gap:10px}
+.tv-defi-top{display:flex;align-items:center;gap:8px}
+.tv-defi-top .tv-fl{font-size:34px;line-height:1}
+.tv-defi-top b{font-size:30px;font-weight:800;color:#FF7A1A}
+.tv-defi-top span:last-child{font-size:13px;font-weight:700;color:var(--mute)}
+.tv-defi-wk{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.tv-defi-wk span{display:flex;flex-direction:column;align-items:center;gap:3px}
+.tv-defi-wk small{font-size:10px;font-weight:800;color:var(--mute)}
+.tv-defi-wk i{width:26px;height:26px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-style:normal;font-size:14px}
+.tv-defi-btn{background:#2FB344;color:#fff;border-radius:12px;padding:10px;text-align:center;font-weight:800;font-size:14px;box-shadow:0 3px 0 #1E8A31}
 </style>
 </head>
 <body>
@@ -8495,7 +8505,7 @@ function openAccount() {
     '<div class="acc-streak"><span class="flame' + (streakInfo().today ? "" : " off") + '">' + FLAME + '</span><div><b>' + plural(streakInfo().n, "jour") + ' de suite</b><span>Record : ' + plural(streakInfo().best, "jour") + '</span></div></div>' + defiCal(5) +
     '<button type="button" class="btn" id="btn-tuto">Revoir le tutoriel</button><a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a><button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
   document.getElementById("btn-logout").onclick = logout;
-  document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(); };
+  document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(false); };
 }
 
 /* ---------- recherche ---------- */
@@ -8905,13 +8915,19 @@ function mountMap(root, c) {
   if (COVERS[c.id]) wkFetch(COVERS[c.id]).then(function (d) { var im = wkImg(d); if (im && document.body.contains(root)) { st.img = im; draw(); } });
 }
 
-/* ---------- tutoriel ---------- */
+/* ---------- tutoriel ----------
+   TUTO_V : à augmenter à chaque nouvelle fonctionnalité importante.
+   Chaque étape porte « s » = version où elle est apparue (1 par défaut) :
+   les comptes qui ont vu une version plus ancienne voient seulement les nouveautés. */
+var TUTO_V = 2;
 function tutoSteps() {
   var tiles = '<div class="tv-tiles">' + SUBJECTS.map(function (s) { return '<span style="background:' + col(s.id) + '"><b>' + s.code + '</b><i>' + s.name.split(" ")[0] + '</i></span>'; }).join("") + '</div>';
   return [
     { t: "Bienvenue" + (USER ? ", " + esc(USER.name) : "") + " !", d: "Objectif Brevet regroupe tout le programme de 3e : <b>52 chapitres</b> dans les 6 matières de l’examen. Voici un tour rapide de l’appli, en une minute.", v: tiles },
     { t: "Choisis une matière, puis un chapitre", d: "Sur l’accueil, touche une case de couleur. Les chapitres s’affichent dans l’ordre du programme, avec une barre qui montre ta progression.",
       v: '<div class="tv-list"><span style="--sub:var(--hg)"><b>01</b> La Première Guerre mondiale<i></i></span><span style="--sub:var(--hg)"><b>02</b> Démocraties et totalitarismes<i style="width:40%"></i></span><span style="--sub:var(--hg)"><b>03</b> La Seconde Guerre mondiale<i style="width:15%"></i></span></div>' },
+    { s: 2, t: "Le défi du jour 🔥", d: "Chaque jour, <b>10 exercices variés</b> sur tout le programme : QCM, vrai ou faux, réponses à écrire, cartes mentales à compléter, photos à reconnaître, paires à associer. Fais-le tous les jours pour garder ta <b>flamme</b> allumée et allonger ta série. Ton historique est dans le rond avec ton initiale.",
+      v: '<div class="tv-defi"><div class="tv-defi-top"><span class="tv-fl">🔥</span><b>3</b><span>jours de suite</span></div><div class="tv-defi-wk">' + WD.map(function (l, k) { return '<span><small>' + l + '</small><i>' + (k < 3 ? "🔥" : "") + '</i></span>'; }).join("") + '</div><span class="tv-defi-btn">Commencer le défi du jour</span></div>' },
     { t: "Les 6 onglets d’un chapitre", d: "",
       v: '<div class="tv-tabs">' + [["Résumé", "L’essentiel en quelques points"], ["Cours", "Le cours complet, avec exemples corrigés et pièges"], ["Carte", "La carte mentale du chapitre, et son jeu"], ["Schémas", "Photos et schémas, à agrandir d’un toucher"], ["Flash", "Les flashcards du chapitre"], ["Quiz", "Une série de 15 questions corrigées"]].map(function (x, i) { return '<div class="tv-tab' + (i === 1 ? " on" : "") + '"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join("") + '</div>' },
     { t: "Les mots qui s’ouvrent", d: "Dans les cours, certains mots sont spéciaux. Touche-les pour en savoir plus.",
@@ -8933,10 +8949,17 @@ function tutoSteps() {
     { t: "C’est parti !", d: "Conseil : commence par le <b>Résumé</b> d’un chapitre, lis le <b>Cours</b>, puis vérifie avec les <b>Flashcards</b> et le <b>Quiz</b>. Bonnes révisions !", v: '<div class="tv-go">🎯</div>' }
   ];
 }
-function showTuto() {
-  var steps = tutoSteps(), i = 0, drawn = false, box = document.createElement("div");
+function showTuto(onlyNew) {
+  var seen = +store.get("tutoDone") || 0, steps = tutoSteps();
+  if (onlyNew) {
+    steps = steps.filter(function (x) { return (x.s || 1) > seen; });
+    if (!steps.length) { store.set("tutoDone", TUTO_V); return; }
+    steps = [{ t: "Quoi de neuf ?", d: "L’appli s’est enrichie depuis ta dernière visite. Voici " + (steps.length > 1 ? "les " + steps.length + " nouveautés" : "la nouveauté") + " en quelques secondes.", v: '<div class="tv-go">✨</div>' }].concat(steps)
+      .concat([{ t: "C’est tout !", d: "Tu peux revoir le tutoriel complet à tout moment : touche le rond avec ton initiale, puis « Revoir le tutoriel ».", v: '<div class="tv-go">🎯</div>' }]);
+  }
+  var i = 0, drawn = false, box = document.createElement("div");
   box.className = "tuto"; document.body.appendChild(box); document.body.classList.add("wk-open");
-  function close() { store.set("tutoDone", 1); box.remove(); document.body.classList.remove("wk-open"); }
+  function close() { store.set("tutoDone", TUTO_V); box.remove(); document.body.classList.remove("wk-open"); }
   function draw() {
     var s = steps[i], last = i === steps.length - 1;
     box.innerHTML = '<div class="tuto-card' + (drawn ? "" : " first") + '" role="dialog" aria-modal="true" aria-label="Tutoriel">' +
@@ -9331,7 +9354,7 @@ function route() {
 document.getElementById("strip").innerHTML = SUBJECTS.map(function (s) { return '<a href="#' + s.id + '" style="background:' + col(s.id) + '" aria-label="' + s.name + '"></a>'; }).join("");
 document.getElementById("logo-dots").innerHTML = SUBJECTS.map(function (s) { return '<i style="background:' + col(s.id) + '"></i>'; }).join("");
 window.addEventListener("hashchange", route);
-if (USER) { document.getElementById("btn-user").textContent = USER.name.charAt(0).toUpperCase(); route(); if (!store.get("tutoDone")) setTimeout(showTuto, 300); }
+if (USER) { document.getElementById("btn-user").textContent = USER.name.charAt(0).toUpperCase(); route(); var tv = +store.get("tutoDone") || 0; if (!tv) setTimeout(showTuto, 300); else if (tv < TUTO_V) setTimeout(function () { showTuto(true); }, 300); }
 else showLogin();
 })();
 </script>
