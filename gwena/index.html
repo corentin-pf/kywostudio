@@ -9243,6 +9243,8 @@ var SUBJECTS = [
   { id: "pc", name: "Physique-Chimie", code: "Pc", exam: "Sciences · 30 min", blurb: "Matière, transformations chimiques, mouvement, forces, énergie, électricité et signaux." },
   { id: "te", name: "Technologie", code: "Te", exam: "Sciences · 30 min", blurb: "Analyse fonctionnelle, chaînes d’information et d’énergie, programmation, matériaux et réseaux." }
 ];
+var DA2 = window.GWENA_DA === 2;
+if (DA2) document.body.classList.add("da2");
 var EXAM = new Date(2027, 5, 24, 8, 0, 0); // jeudi 24 juin 2027, 8 h : épreuve de français (BO spécial du 25 août 2026)
 var EX = window.BREVET_EXTRA || {};
 var CO = window.BREVET_COURS || {};
@@ -9793,7 +9795,56 @@ function section(x, k) {
 /* ---------- vues ---------- */
 function daysLeft() { return Math.max(0, Math.floor((EXAM - new Date()) / 864e5)); } /* même calcul que le compte à rebours de l’accueil */
 
+/* ---------- direction artistique n° 2 (en test sur /gwena-da2/) ---------- */
+var JOURS = ["DIMANCHE", "LUNDI", "MARDI", "MERCREDI", "JEUDI", "VENDREDI", "SAMEDI"];
+function shortName(s) { return s.name.split(" ·")[0]; }
+function viewHome2() {
+  var st = streakInfo(), days = defiDays(), sc = days[dayKey()], t = new Date(), j = Math.max(0, Math.floor((EXAM - t) / 864e5));
+  return '<section class="wrap d2">' +
+    '<p class="d2-hi">' + JOURS[t.getDay()] + ' ' + t.getDate() + (USER ? ' · ' + esc(USER.name.split(" ")[0]).toUpperCase() : "") + '</p>' +
+    '<div class="d2-days"><b>AUJOURD’HUI</b>' + [1, 2, 3, 4].map(function (k) { return '<span>' + addDays(t, k).getDate() + '</span>'; }).join("") + '</div>' +
+    '<a class="d2-blk d2-defi' + (st.today ? " is-done" : "") + '" href="#defi"><span class="d2-t">DÉFI DU JOUR</span><span class="d2-sub">' + FLAME + ' ' + st.n + (st.n > 1 ? " JOURS" : " JOUR") + '</span><span class="d2-n">' + (st.today ? sc + "/10" : "10 Q") + '</span></a>' +
+    weekStrip() +
+    '<div class="d2-blk d2-count"><span class="d2-t">J-' + j + '</span><span class="d2-n">BREVET · 24 JUIN</span></div>' +
+    '<p class="d2-lab">MATIÈRES</p>' +
+    SUBJECTS.map(function (s) { var p = subPct(s.id); return '<a class="d2-blk d2-sb' + (p >= 80 ? " is-done" : "") + '" href="#' + s.id + '" style="--sub:' + col(s.id) + '"><span class="d2-t">' + shortName(s).toUpperCase() + '</span><span class="d2-n">' + p + '%</span></a>'; }).join("") +
+  '</section>';
+}
+function viewSubject2(s) {
+  var list = B[s.id], p = subPct(s.id);
+  return '<section class="wrap d2" style="--sub:' + col(s.id) + '">' +
+    '<a class="d2-back" href="' + (PARENT ? "#cours" : "#") + '">← ' + (PARENT ? "COURS" : "MATIÈRES") + '</a>' +
+    '<h1 class="d2-h">' + shortName(s).toUpperCase() + '</h1>' +
+    '<p class="d2-hi">' + plural(list.length, "chapitre").toUpperCase() + (PARENT ? "" : ' · ' + p + ' % MAÎTRISÉ') + '</p>' +
+    '<div class="d2-two"><a class="d2-blk d2-mini" href="#flashcards-' + s.id + '"><span class="d2-t">FLASHCARDS</span></a><a class="d2-blk d2-mini" href="#quiz-' + s.id + '"><span class="d2-t">QUIZ</span></a></div>' +
+    list.map(function (c) { var cp = chapPct(c); return '<a class="d2-blk d2-chap' + (!PARENT && cp >= 80 ? " is-done" : "") + '" href="#' + c.id + '"><span class="d2-num">' + pad(c.n) + '</span><span class="d2-t">' + c.title + '</span>' + (PARENT ? "" : '<span class="d2-n">' + cp + '%</span>') + '</a>'; }).join("") +
+  '</section>';
+}
+var ICO_MENU = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h14M5 15h9"/></svg>', ICO_SRCH = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4-4"/></svg>', ICO_X = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+function setupDA2() {
+  document.body.classList.add("da2");
+  var bar = document.createElement("div"); bar.className = "fab-bar";
+  bar.innerHTML = '<button type="button" class="fab" data-fab="menu" aria-label="Menu">' + ICO_MENU + '</button><button type="button" class="fab" data-fab="search" aria-label="Rechercher">' + ICO_SRCH + '</button>';
+  document.body.appendChild(bar);
+  var nav = document.createElement("div"); nav.className = "d2-nav"; nav.hidden = true; document.body.appendChild(nav);
+  var cols = ["var(--fr)", "var(--ma)", "var(--hg)", "var(--svt)", "var(--pc)", "var(--te)"];
+  var shut = function () { nav.hidden = true; document.body.classList.remove("d2-nav-open"); };
+  bar.onclick = function (e) {
+    var b = e.target.closest("[data-fab]"); if (!b) return;
+    if (b.dataset.fab === "search") { document.getElementById("btn-search").click(); return; }
+    var links = Array.prototype.slice.call(document.querySelectorAll(".tabbar a"));
+    nav.innerHTML = '<div class="d2-nav-in">' + links.map(function (a, k) { return '<a class="d2-blk" style="--sub:' + cols[k % 6] + '" href="' + a.getAttribute("href") + '"><span class="d2-t">' + a.textContent.trim().toUpperCase() + '</span></a>'; }).join("") +
+      '<button type="button" class="d2-blk d2-acc" style="--sub:#fff"><span class="d2-t">MON COMPTE</span><span class="d2-n">' + (USER ? esc(USER.name.charAt(0).toUpperCase()) : "") + '</span></button></div>' +
+      '<button type="button" class="fab d2-close" aria-label="Fermer">' + ICO_X + '</button>';
+    nav.hidden = false; document.body.classList.add("d2-nav-open");
+  };
+  nav.onclick = function (e) {
+    if (e.target.closest(".d2-acc")) { shut(); openAccount(); return; }
+    if (e.target.closest("a") || e.target.closest(".d2-close") || e.target === nav) shut();
+  };
+}
 function viewHome() {
+  if (DA2) return viewHome2();
   var nCards = flat(CH, cardsOf).length, nQ = flat(CH, quizOf).length, nDg = CH.reduce(function (a, c) { return a + c.schema.length; }, 0);
   return '' +
   '<section class="wrap hero">' +
@@ -9815,6 +9866,7 @@ function viewHome() {
 }
 
 function viewSubject(s) {
+  if (DA2) return viewSubject2(s);
   var list = B[s.id], p = subPct(s.id);
   return '' +
   '<section class="band"><div class="wrap band-in">' +
@@ -11332,6 +11384,7 @@ window.addEventListener("hashchange", route);
 function reloadState() { known = store.get("known", {}); scores = store.get("scores", {}); missed = store.get("missed", {}); qmode = store.get("qmode", "10"); }
 function startApp() {
   document.body.classList.add("app-on");
+  if (DA2) setupDA2();
   if (PARENT) { setupParent(); setTimeout(function () { if (!document.querySelector(".tuto")) showRecap(false); }, 1500); document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible") showRecap(false); }); }
   pullNow(true).then(function (r) { setTimeout(ensureNotif, 800); return r; }, function () { setTimeout(ensureNotif, 800); }).then(function (changed) { if (changed) { reloadState(); var h = location.hash; if (!/^#?(quiz|flashcards|defi)/.test(h) || !document.querySelector(".df-body, .opt, .fc")) route(); } });
   document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") pushNow(true); else pullNow().then(function (ch) { if (ch) { reloadState(); if (!document.querySelector(".df-body, .opt.is-right, .fc")) route(); } }); });
