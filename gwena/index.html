@@ -1162,6 +1162,12 @@ main#app{overflow-x:clip}
   .t-long{display:none}
   .t-short{display:inline}
 }
+
+/* fenêtres du bas : le haut du contenu ne passe jamais sous le bouton ✕ */
+.wk-body > :first-child:not(.wk-img){padding-right:46px}
+.acc{padding-right:46px;min-width:0}
+.acc > div{min-width:0}
+.acc h3{overflow-wrap:anywhere;line-height:1.15}
 </style>
 </head>
 <body>
