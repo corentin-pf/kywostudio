@@ -1168,6 +1168,11 @@ main#app{overflow-x:clip}
 .acc{padding-right:46px;min-width:0}
 .acc > div{min-width:0}
 .acc h3{overflow-wrap:anywhere;line-height:1.15}
+
+/* changement de compte rapide */
+.sw-cur b::after{content:" ✓";color:var(--ok)}
+.sw-tag{font-size:12px;font-weight:800;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+#acc-sw > .btn{align-self:flex-start}
 </style>
 </head>
 <body>
@@ -10209,16 +10214,24 @@ function mountSuivi() {
 function loadKid(root) {
   var id = KID;
   return getToken().then(function (t) { return sbReq("/rest/v1/progress?select=data,updated_at&user_id=eq." + id, { token: t }); }).then(function (rows) {
-    if (id !== KID || !document.getElementById("suivi")) return;
+    var cur = document.getElementById("suivi");
+    if (id !== KID || !cur) return;
+    root = cur; /* toujours la zone affichée : la page a pu être redessinée pendant le chargement */
     var r = rows && rows[0], key = id + JSON.stringify(r || null);
-    if (key === suiviLast) { var up = root.querySelector(".sv-upd"); if (up && r) up.textContent = "Dernière activité " + ago(new Date(r.updated_at).getTime()); return; }
-    suiviLast = key;
+    if (key === root.__last) { var up = root.querySelector(".sv-upd"); if (up && r) up.textContent = "Dernière activité " + ago(new Date(r.updated_at).getTime()); return; }
+    root.__last = key;
     var y = window.scrollY;
     root.innerHTML = viewSuivi(r ? r.data || {} : {}, r ? r.updated_at : null);
     window.scrollTo(0, y);
     var rb = root.querySelector("[data-recap]"); if (rb) rb.onclick = function () { showRecap(true); };
-    root.querySelector(".sv-kids") && (root.querySelector(".sv-kids").onclick = function (e) { var b = e.target.closest("[data-k]"); if (!b) return; KID = b.dataset.k; rawSet("brevet:kid:" + USER.id, KID); suiviLast = ""; loadKid(root); });
-  }).catch(function () { var up = root.querySelector(".sv-upd"); if (up) up.textContent = "Hors ligne · dernières données affichées"; });
+    root.querySelector(".sv-kids") && (root.querySelector(".sv-kids").onclick = function (e) { var b = e.target.closest("[data-k]"); if (!b) return; KID = b.dataset.k; rawSet("brevet:kid:" + USER.id, KID); root.__last = ""; loadKid(root); });
+  }).catch(function () {
+    var cur = document.getElementById("suivi"); if (!cur) return;
+    var up = cur.querySelector(".sv-upd");
+    if (up) { up.textContent = "Hors ligne · dernières données affichées"; return; }
+    cur.innerHTML = '<div class="empty"><b>Impossible de charger le suivi.</b><p class="mute">Vérifie ta connexion internet, puis réessaie.</p><button type="button" class="btn" data-retry>Réessayer</button></div>';
+    cur.querySelector("[data-retry]").onclick = mountSuivi;
+  });
 }
 function chapPctD(c, kn, sc) { var cs = cardsOf(c), k = cs.filter(function (x) { return kn[x.id] === 1; }).length; return Math.round(k / cs.length * 50 + (sc[c.id] || 0) / 2); }
 function viewSuivi(d, upd) {
@@ -10371,16 +10384,71 @@ function showLogin() {
   }
   draw();
 }
+/* ---------- changement de compte rapide (activé par le compte admin, sur cet appareil) ---------- */
+function savedAccs() { return rawGet("brevet:accs", {}); }
+function canSwitch() { return ADMIN || !!rawGet("brevet:switcher", 0); }
+function sessCopy(s) { var c = {}; Object.keys(s || {}).forEach(function (k) { if (k !== "_w") c[k] = s[k]; }); return c; }
+function rememberCurrent() {
+  var s = sessGet(); if (!s || !s.id) return;
+  var m = savedAccs(), c = sessCopy(s);
+  c.role = (ACC && ACC.r) || "eleve"; c.admin = !!ADMIN; m[s.id] = c; rawSet("brevet:accs", m);
+}
+function switchTo(id) {
+  rememberCurrent();
+  var t = savedAccs()[id]; if (!t) return;
+  var go = function () { var s = sessCopy(t); delete s.role; delete s.admin; s.exp = Date.now() + SESSION_DAYS * 864e5; s._w = "ls"; sessClear(); sessPut(s); location.hash = ""; location.reload(); };
+  pushNow(true).then(go, go);
+}
+function swBlock() { return canSwitch() ? '<div class="acc-kids" id="acc-sw"><b>🔁 Changer de compte</b><div class="kids-list"></div><button type="button" class="btn" data-sw-add>+ Ajouter un compte</button></div>' : ""; }
+function loadSw() {
+  var box = document.getElementById("acc-sw"); if (!box) return;
+  if (ADMIN) rawSet("brevet:switcher", 1);
+  rememberCurrent();
+  var m = savedAccs(), list = box.querySelector(".kids-list");
+  var lab = function (a) { return a.admin ? "Admin" : a.role === "parent" ? "Parent" : "Élève"; };
+  list.innerHTML = Object.keys(m).map(function (id) {
+    var a = m[id], cur = USER && id === USER.id;
+    return '<div class="adm-row' + (cur ? " sw-cur" : "") + '"><div><b>' + esc(a.name || "?") + '</b><span>' + lab(a) + (cur ? " · compte actuel" : "") + '</span></div><div class="adm-b">' +
+      (cur ? '<span class="sw-tag">Actuel</span>' : '<button type="button" class="btn btn-fill" data-sw="' + id + '">Utiliser</button><button type="button" class="link" data-sw-del="' + id + '" aria-label="Retirer">Retirer</button>') + '</div></div>';
+  }).join("");
+  box.onclick = function (e) {
+    var u = e.target.closest("[data-sw]"); if (u) { u.disabled = true; u.textContent = "…"; switchTo(u.dataset.sw); return; }
+    var d = e.target.closest("[data-sw-del]"); if (d) { var mm = savedAccs(); delete mm[d.dataset.swDel]; rawSet("brevet:accs", mm); loadSw(); return; }
+    var add = e.target.closest("[data-sw-add]"); if (!add) return;
+    add.hidden = true;
+    var f = document.createElement("form"); f.className = "link-f sw-form"; f.noValidate = true;
+    f.innerHTML = '<label class="field">Prénom du compte<input name="n" autocomplete="off" autocapitalize="words"></label><label class="field">Mot de passe<input name="p" type="password" autocomplete="off"></label><button class="btn btn-fill">Ajouter</button><p class="link-msg" hidden></p>';
+    box.appendChild(f); f.querySelector("input").focus();
+    f.onsubmit = function (ev) {
+      ev.preventDefault();
+      var n = f.n.value.trim(), p = f.p.value, b = f.querySelector("button"), msg = f.querySelector(".link-msg");
+      if (!n || !p) { msg.hidden = false; msg.textContent = "Indique le prénom et le mot de passe."; return; }
+      b.disabled = true; b.textContent = "Connexion…";
+      sbReq("/auth/v1/token?grant_type=password", { method: "POST", body: { email: emailOf(n), password: p } }).then(function (j) {
+        var s = sessCopy(tokenFrom(j, null, true, null));
+        return sbReq("/rest/v1/access?select=role,is_admin,status&user_id=eq." + s.id, { token: s.at }).then(function (r) {
+          var row = r && r[0] || {}; s.role = row.role || "eleve"; s.admin = !!row.is_admin;
+          if (row.status) rawSet("brevet:access:" + s.id, { s: row.status, a: s.admin, r: s.role });
+          var mm = savedAccs(); mm[s.id] = s; rawSet("brevet:accs", mm); loadSw();
+        });
+      }).catch(function (err) {
+        b.disabled = false; b.textContent = "Ajouter"; msg.hidden = false;
+        msg.textContent = /invalid/i.test(String(err && err.message)) ? "Prénom ou mot de passe incorrect." : "Connexion impossible pour l’instant.";
+      });
+    };
+  };
+}
 function openAccount(focusAdmin) {
   sheet.hidden = false; document.body.classList.add("wk-open");
   sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Compte en ligne · tous tes appareils</p></div></div>' +
-    '<p class="wk-e acc-sync" id="acc-sync"></p>' +
+    '<p class="wk-e acc-sync" id="acc-sync"></p>' + swBlock() +
     (PARENT ? kidsBlock() : '<div class="acc-streak"><span class="flame' + (streakInfo().today ? "" : " off") + '">' + FLAME + '</span><div><b>' + plural(streakInfo().n, "jour") + ' de suite</b><span>Record : ' + plural(streakInfo().best, "jour") + '</span></div></div>' + defiCal(5) + parentsBlock()) + pushBlock() +
     '<button type="button" class="btn" id="btn-sound">' + (soundOn() ? "🔊 Sons activés" : "🔇 Sons coupés") + '</button><button type="button" class="btn" id="btn-tuto">Revoir le tutoriel</button>' + (PARENT ? "" : '<a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a>') + '<button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
   document.getElementById("btn-logout").onclick = function () { this.disabled = true; this.textContent = "Déconnexion…"; logout(); };
   syncBadge(); pushNow().then(syncBadge); bindPush(sheet.querySelector(".wk-body"));
   document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(false); };
   if (PARENT) loadKidsBlock(); else loadParentsBlock();
+  loadSw();
   if (ADMIN) { var ab = document.createElement("div"); ab.innerHTML = adminBlock(); var acc = sheet.querySelector(".wk-body .acc-push") || sheet.querySelector(".wk-body #btn-sound"); acc.parentNode.insertBefore(ab.firstChild, acc); loadAdmin(focusAdmin); }
   document.getElementById("btn-sound").onclick = function () { var on = !soundOn(); rawSet("brevet:sound", on ? 1 : 0); this.textContent = on ? "🔊 Sons activés" : "🔇 Sons coupés"; if (on) softTap(); };
 }
