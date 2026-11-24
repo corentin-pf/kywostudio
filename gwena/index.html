@@ -9977,7 +9977,8 @@ document.addEventListener("click", function (e) {
   if (dk) { e.preventDefault(); e.stopPropagation(); openDico(dk.dataset.dk, dk.textContent); return; }
   var di = t.closest(".dimg");
   if (di) { e.preventDefault(); e.stopPropagation(); openImg(di.dataset.file, di.dataset.cap); return; }
-  if (t.closest("[data-close]")) { e.preventDefault(); closeWk(); }
+  var dc = t.closest("[data-close]");
+  if (dc) { e.preventDefault(); closeWk(); var hr = dc.tagName === "A" && dc.getAttribute("href"); if (hr && hr.charAt(0) === "#" && hr !== location.hash) location.hash = hr; }
 }, true);
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape" && !sheet.hidden) closeWk();
