@@ -12,7 +12,8 @@
 <meta name="apple-mobile-web-app-title" content="GWENA">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="/gwena/manifest.json">
-<link rel="icon" href="/gwena/icon.svg" type="image/svg+xml">
+<link rel="icon" id="fav" href="/gwena/favicon-noir.png" type="image/png">
+<script>(function(){var m=window.matchMedia&&matchMedia("(prefers-color-scheme: dark)"),l=document.getElementById("fav");function f(){l.href="/gwena/favicon-"+(m&&m.matches?"blanc":"noir")+".png";}f();if(m)(m.addEventListener?m.addEventListener("change",f):m.addListener(f));})();</script>
 <link rel="apple-touch-icon" href="/gwena/apple-touch-icon.png">
 <style>
 :root{padding-top:env(safe-area-inset-top,0px)}
