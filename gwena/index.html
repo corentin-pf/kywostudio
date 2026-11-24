@@ -1173,6 +1173,172 @@ main#app{overflow-x:clip}
 .sw-cur b::after{content:" ✓";color:var(--ok)}
 .sw-tag{font-size:12px;font-weight:800;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
 #acc-sw > .btn{align-self:flex-start}
+
+/* choix du design */
+.dz-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dz-opt{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 8px 12px;border:2px solid var(--hair);border-radius:20px;background:var(--bg);color:var(--fg);font:inherit;cursor:pointer;text-align:center}
+.dz-opt.on{border-color:var(--fg);box-shadow:0 0 0 2px var(--fg)}
+.dz-img{display:block;width:100%;aspect-ratio:393/600;border-radius:14px;overflow:hidden;background:var(--soft)}
+.dz-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.dz-opt b{font-size:15px;font-weight:800;margin-top:4px}
+.dz-opt span:last-child{font-size:12px;color:var(--mute)}
+.dz-opt.on b::after{content:" ✓"}
+.tv-dz{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:280px}
+.tv-dz img{width:100%;aspect-ratio:393/600;object-fit:cover;object-position:top;border-radius:12px;border:1.5px solid var(--hair)}
+/* ===================================================================
+   GWENA · direction artistique n° 2 (test sur /gwena-da2/)
+   Noir permanent, gros titres très gras, blocs pleins de couleur vive,
+   peu de texte, navigation par boutons ronds flottants.
+   =================================================================== */
+body.da2{
+  --bg:#000; --fg:#fff; --mute:#8e8e94; --soft:#161618; --hair:#2b2b2f; --raise:#0e0e10; --on:#000;
+  --shadow:none; --link:#8fb4ff; --r:24px; --r-lg:32px; --r-sm:18px; color-scheme:dark;
+}
+body.da2{background:#000;color:#fff}
+.da2 .top{background:#000;border-bottom:0}
+.da2 .top-in{min-height:58px}
+.da2 .logo{font-weight:800;letter-spacing:-.02em}
+.da2 .srch-btn,.da2 .nav,.da2 .tabbar,.da2 footer{display:none!important}
+.da2 main#app{padding-bottom:120px}
+.da2 .avatar{background:#fff;color:#000}
+
+/* textes d'explication : on allège */
+.da2 .lead,.da2 .hero-lead,.da2 .kbd,.da2 .wk-hint,.da2 .chips-l,.da2 .note,.da2 .dcal-s,.da2 .sv-foot,.da2 .chead-meta{display:none!important}
+
+/* ---------- blocs ---------- */
+.d2{padding-top:10px;display:flex;flex-direction:column;gap:8px}
+.d2-hi{font-size:13px;font-weight:800;color:var(--mute);letter-spacing:.08em;text-transform:uppercase}
+.d2-days{display:flex;align-items:baseline;gap:14px;font-size:clamp(30px,10vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1;margin:4px 0 14px;white-space:nowrap;overflow:hidden}
+.d2-days span{color:#3b3b40}
+.d2-lab{font-size:13px;font-weight:800;color:var(--mute);letter-spacing:.1em;margin:22px 0 4px}
+.d2-blk{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:78px;padding:14px 26px;border:0;border-radius:999px;background:var(--sub);color:#000;text-decoration:none;font:inherit;text-align:left;cursor:pointer;transition:transform .12s}
+.d2-blk:active{transform:scale(.98)}
+.d2-t{flex:1;min-width:0;font-size:clamp(22px,7.4vw,34px);font-weight:800;line-height:1;letter-spacing:-.035em}
+.d2-n{flex:none;font-size:20px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.d2-sub{font-size:15px;font-weight:800;display:inline-flex;align-items:center;gap:6px}
+
+.d2-defi{--sub:#EAF51C;flex-wrap:wrap;align-items:flex-end;border-radius:var(--r-lg);min-height:160px;padding:22px 24px}
+.d2-defi .d2-t{flex-basis:100%;font-size:clamp(38px,12.5vw,56px);line-height:.92;margin-bottom:auto}
+.d2-defi .d2-sub{flex:1}
+.d2-defi .flame-svg{--fs:20px}
+.d2-defi.is-done{--sub:#2f2f33;color:#fff}
+.d2 .wk-strip{margin:6px 4px 8px}
+.d2-count{--sub:#fff;min-height:70px}
+.d2-count .d2-t{font-size:clamp(28px,9vw,40px)}
+.d2-count .d2-n{font-size:13px;font-weight:800;letter-spacing:.06em}
+
+/* matière */
+.d2-back{font-size:13px;font-weight:800;letter-spacing:.08em;color:var(--mute);text-decoration:none;margin-top:6px}
+.d2-h{font-size:clamp(44px,15vw,84px);font-weight:800;letter-spacing:-.05em;line-height:.9;color:var(--sub);margin:8px 0 4px;word-break:break-word}
+.d2-two{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 10px}
+.d2-mini{min-height:58px;padding:12px 18px;justify-content:center;--sub:#fff}
+.d2-mini .d2-t{font-size:18px;text-align:center;flex:none}
+.d2-chap{border-radius:26px;align-items:center;min-height:86px;padding:16px 22px}
+.d2-chap .d2-t{font-size:clamp(19px,5.6vw,24px);line-height:1.08}
+.d2-num{flex:none;font-size:14px;font-weight:800;opacity:.55;align-self:flex-start;margin-top:4px}
+
+/* ---------- boutons flottants et menu ---------- */
+.fab-bar{position:fixed;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;padding:0 18px;z-index:45;pointer-events:none}
+.fab{pointer-events:auto;width:62px;height:62px;border-radius:50%;background:#000;border:2px solid #fff;color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.7);padding:0}
+.fab svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+body.defi-mode .fab-bar,body.wk-open .fab-bar,body.locked .fab-bar,body.d2-nav-open .fab-bar{display:none}
+.d2-nav{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.94);display:flex;align-items:flex-end}
+.d2-nav-in{width:100%;max-width:560px;margin:0 auto;padding:18px 16px calc(100px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px}
+.d2-nav-in .d2-blk{animation:d2in .32s cubic-bezier(.2,.9,.3,1.15) both}
+.d2-nav-in .d2-blk:nth-child(2){animation-delay:.03s}.d2-nav-in .d2-blk:nth-child(3){animation-delay:.06s}.d2-nav-in .d2-blk:nth-child(4){animation-delay:.09s}.d2-nav-in .d2-blk:nth-child(5){animation-delay:.12s}
+@keyframes d2in{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+.d2-close{position:fixed;left:18px;bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+
+/* ---------- pages : titres, onglets, boutons ---------- */
+.da2 .page-h{padding-top:18px}
+.da2 .page-h h1,.da2 .chead h1,.da2 .sv-head h1{font-size:clamp(40px,13vw,80px);letter-spacing:-.05em;line-height:.9;text-transform:uppercase}
+.da2 .eyebrow{color:var(--mute);font-weight:800}
+.da2 .sec-h{border-bottom:0}
+.da2 .sec-h h2{font-size:28px}
+.da2 .btn{border-radius:999px;border-color:#fff}
+.da2 .btn-fill,.da2 .btn-sub{background:#fff;color:#000;border-color:#fff}
+.da2 .chip{border-color:#3a3a3f}
+.da2 .chip.all.on{background:#fff;color:#000;border-color:#fff}
+.da2 .chip.chip-sub{color:#000}
+.da2 .seg{background:var(--soft);border-radius:999px}
+.da2 .seg button{border-radius:999px}
+.da2 .seg button.on{background:#fff;color:#000}
+
+/* chapitre */
+.da2 .chead .crumb{padding-top:14px}
+.da2 .chead-n{border-radius:999px;color:#000;width:84px;height:84px;font-size:38px}
+.da2 .ccover{border-radius:var(--r-lg)}
+.da2 .tabs-wrap{background:#000;border-bottom:0}
+.da2 .tabs{background:none;gap:6px;padding:4px 0}
+.da2 .tab{border:2px solid #333;border-radius:999px;color:#fff;font-weight:800}
+.da2 .tab small{color:inherit;opacity:.6}
+.da2 .tab.on{background:var(--sub);border-color:var(--sub);color:#000}
+.da2 .resume li .rn{border-radius:50%;color:#000}
+.da2 .pn-a{border-radius:var(--r);border-color:#333}
+
+/* flashcards */
+.da2 .fc-face{border:0;border-radius:var(--r-lg)}
+.da2 .fc-front{background:#fff;color:#000}
+.da2 .fc-front .fc-hint{color:#666}
+.da2 .fc-back{background:var(--sub);color:#000}
+.da2 .fc-back .wk,.da2 .fc-back .dk{color:#000;text-decoration-color:#000}
+.da2 .deck-actions .btn{min-height:62px;font-size:17px;font-weight:800}
+.da2 .deck-actions [data-act="no"]{background:#000;color:#fff;border:2px solid #fff}
+.da2 .deck-actions [data-act="yes"]{background:var(--sub,#fff);border-color:var(--sub,#fff);color:#000}
+.da2 .shf i{background:#000;border-color:#fff}
+
+/* quiz */
+.da2 .opt{border:2px solid #333;border-radius:var(--r);background:#0f0f11;font-weight:700}
+.da2 .opt:not(:disabled):hover{border-color:#fff}
+.da2 .qz-bar{background:#222;border-radius:99px}
+.da2 .qz-bar i{background:var(--sub,#fff);border-radius:99px}
+.da2 .qz-pct{font-size:clamp(70px,24vw,120px)}
+
+/* défi du jour */
+.da2 .df-opts .dopt,.da2 .dopt{border-radius:var(--r)}
+.da2 .defi-page{padding-bottom:30px}
+
+/* stats, examen, suivi parent, fenêtres */
+.da2 .stats{border:0;gap:8px;background:none;display:grid}
+.da2 .stat{border:0!important;border-radius:var(--r);background:var(--soft)}
+.da2 .sv-card{border:0;background:#EAF51C;color:#000}
+.da2 .sv-card .defi-n span,.da2 .sv-card .defi-best,.da2 .sv-card .sv-today{color:#000}
+.da2 .sv-card .ws small{color:#000}
+.da2 .sv-sec h2{border-bottom:0;font-size:24px}
+.da2 .sv-sub{border:0;border-radius:999px;background:var(--sub);color:#000;padding:14px 22px}
+.da2 .sv-sub span,.da2 .sv-sub strong{color:#000}
+.da2 .sv-bar{display:none}
+.da2 .sv-row{border:0;background:var(--soft);border-radius:999px;padding:12px 18px}
+.da2 .rc-card,.da2 .wk-sheet,.da2 .tuto-card{background:#0e0e10}
+.da2 .rc-kid{border-color:#333}
+.da2 .day,.da2 .ev{border-color:#333}
+
+/* connexion */
+.da2 .auth h1{font-size:clamp(40px,12vw,64px);letter-spacing:-.05em;line-height:.92;text-transform:uppercase}
+.da2 .auth .field input{background:#0f0f11;border-color:#333;color:#fff;border-radius:18px}
+.da2 .auth-go{border-radius:999px;background:#EAF51C;color:#000;border-color:#EAF51C;min-height:60px;font-size:18px}
+.d2-defi .d2-sub{flex:1;display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:17px}
+.d2-defi .d2-sub .flame-svg{display:inline-block;width:auto!important;height:auto!important;--fs:22px;line-height:1}
+.d2-defi .d2-n{font-size:22px;font-weight:800}
+/* quiz : bonne / mauvaise réponse bien visibles */
+.da2 .opt.is-right{background:#00C04B;border-color:#00C04B;color:#000;opacity:1}
+.da2 .opt.is-wrong{background:#FF1F3D;border-color:#FF1F3D;color:#000;opacity:1}
+.da2 .opt.is-right .k,.da2 .opt.is-wrong .k,.da2 .opt.is-right span,.da2 .opt.is-wrong span{color:#000;border-color:#000}
+.da2 .opt.is-dim{opacity:.35}
+.da2 .qz-fb{border-radius:var(--r-lg);border-color:#333}
+.da2 .auth-note,.da2 .auth-lead{display:none}
+.da2 .auth-seg{border-radius:999px}
+.da2 .auth-seg button{border-radius:999px}
+.da2 .auth-seg button.on{background:#fff;color:#000}
+
+/* DA2 : onglets en gros blocs, titre de chapitre qui ne déborde jamais */
+@media (max-width:760px){
+  .da2 .tab{border:2px solid #2b2b2f;border-radius:20px;background:#0f0f11;color:#fff}
+  .da2 .tab.on{background:var(--sub);border-color:var(--sub);color:#000}
+  .da2 .chead-row{flex-direction:column;align-items:flex-start;gap:12px}
+  .da2 .chead-n{width:62px;height:62px;font-size:28px}
+}
+.da2 .chead h1{font-size:clamp(32px,10vw,72px);hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
 </style>
 </head>
 <body>
@@ -9270,8 +9436,9 @@ var SUBJECTS = [
   { id: "pc", name: "Physique-Chimie", code: "Pc", exam: "Sciences · 30 min", blurb: "Matière, transformations chimiques, mouvement, forces, énergie, électricité et signaux." },
   { id: "te", name: "Technologie", code: "Te", exam: "Sciences · 30 min", blurb: "Analyse fonctionnelle, chaînes d’information et d’énergie, programmation, matériaux et réseaux." }
 ];
-var DA2 = window.GWENA_DA === 2;
-if (DA2) document.body.classList.add("da2");
+/* design choisi (1 = classique, 2 = noir et couleurs) : mémorisé sur l’appareil pour l’affichage immédiat, et avec le compte */
+var DA2 = window.GWENA_DA === 2 || (function () { try { return JSON.parse(localStorage.getItem("brevet:da")) === 2; } catch (e) { return false; } })();
+if (DA2) { document.body.classList.add("da2"); var tcm = document.querySelectorAll('meta[name="theme-color"]'); for (var tci = 0; tci < tcm.length; tci++) tcm[tci].setAttribute("content", "#000000"); }
 var EXAM = new Date(2027, 5, 24, 8, 0, 0); // jeudi 24 juin 2027, 8 h : épreuve de français (BO spécial du 25 août 2026)
 var EX = window.BREVET_EXTRA || {};
 var CO = window.BREVET_COURS || {};
@@ -10318,6 +10485,8 @@ function parentSteps() {
     { t: "Les cours", d: "L’onglet <b>Cours</b> donne accès à tous les résumés, cours, cartes mentales et schémas, pour savoir ce que ton enfant révise.", v: '<div class="tv-go">📚</div>' },
     { s: 9, t: "Notifications et récap 🔔", d: "Tu choisis <b>tes horaires</b> : l’heure de la notification si le défi du jour n’est pas fait, et le <b>jour et l’heure du récap de la semaine</b>, qui s’affiche alors quand tu ouvres l’appli (et reste disponible sur la page Suivi). Modifiable à tout moment dans ton menu.",
       v: '<div class="tv-notif"><div class="tv-n"><span class="tv-n-ic">' + GLOGO + '</span><div><b>🔥 Défi du jour pas encore fait</b><span>Léa n’a pas encore fait le défi du jour. Il reste jusqu’à minuit pour garder la série !</span></div><small>20:00</small></div></div>' },
+{ s: 11, t: "Choisis ton design 🎨", d: "Deux designs au choix, avec exactement les mêmes fonctions : <b>clair et classique</b> ou <b>noir et couleurs vives</b>. Change quand tu veux dans ton menu (rond avec ton initiale) → <b>Design</b>.",
+      v: '<div class="tv-dz"><img src="/gwena/design-1.jpg" alt=""><img src="/gwena/design-2.jpg" alt=""></div>' },
     { s: 10, t: "Installe GWENA comme une vraie appli", d: "Sur iPhone comme sur Android : GWENA s’ouvre alors en plein écran avec son icône. <b>Indispensable sur iPhone</b> pour recevoir les notifications.", v: installHtml() }
   ];
 }
@@ -10438,16 +10607,42 @@ function loadSw() {
     };
   };
 }
+/* ---------- choix du design (même appli, mêmes fonctions) ---------- */
+var DESIGNS = [[1, "Design 1", "Clair et classique"], [2, "Design 2", "Noir et couleurs vives"]];
+function designPref() { return +store.get("da", 0) || 0; }
+function applyDesign(n) { store.set("da", n); rawSet("brevet:da", n); var go = function () { location.reload(); }; pushNow(true).then(go, go); }
+function showDesignPicker(force, done) {
+  if (document.querySelector(".dz-ov")) return;
+  var cur = DA2 ? 2 : 1, sel = cur, ov = document.createElement("div");
+  ov.className = "rc-ov dz-ov"; document.body.appendChild(ov); document.body.classList.add("wk-open");
+  var close = function () { ov.remove(); document.body.classList.remove("wk-open"); if (done) done(); };
+  function draw() {
+    ov.innerHTML = '<div class="rc-card dz-card" role="dialog" aria-modal="true" aria-label="Choisis ton design">' +
+      '<div class="rc-top"><span class="rc-k">🎨 ' + (force ? "Bienvenue sur GWENA" : "Design") + '</span>' + (force ? "" : '<button type="button" class="rc-x" data-dz="close" aria-label="Fermer">✕</button>') + '</div>' +
+      '<h2>Choisis ton design</h2><p class="nt-lead">Les deux ont exactement les mêmes fonctions. Tu pourras changer à tout moment dans ton menu.</p>' +
+      '<div class="dz-grid">' + DESIGNS.map(function (d) { return '<button type="button" class="dz-opt' + (sel === d[0] ? " on" : "") + '" data-dz="' + d[0] + '" aria-pressed="' + (sel === d[0]) + '"><span class="dz-img"><img src="/gwena/design-' + d[0] + '.jpg" alt="Aperçu du ' + d[1] + '" loading="eager"></span><b>' + d[1] + '</b><span>' + d[2] + '</span></button>'; }).join("") + '</div>' +
+      '<div class="rc-nav"><button type="button" class="btn btn-fill" data-dz="ok">' + (!force && sel === cur ? "Garder ce design" : "Continuer avec le design " + sel) + '</button></div></div>';
+  }
+  ov.onclick = function (e) {
+    var b = e.target.closest("[data-dz]"); if (!b) return;
+    var a = b.dataset.dz;
+    if (a === "close") { close(); return; }
+    if (a === "ok") { if (sel === cur) { if (force || designPref() !== sel) { store.set("da", sel); rawSet("brevet:da", sel); } close(); } else { b.disabled = true; b.textContent = "Un instant…"; applyDesign(sel); } return; }
+    sel = +a; draw();
+  };
+  draw();
+}
 function openAccount(focusAdmin) {
   sheet.hidden = false; document.body.classList.add("wk-open");
   sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Compte en ligne · tous tes appareils</p></div></div>' +
     '<p class="wk-e acc-sync" id="acc-sync"></p>' + swBlock() +
     (PARENT ? kidsBlock() : '<div class="acc-streak"><span class="flame' + (streakInfo().today ? "" : " off") + '">' + FLAME + '</span><div><b>' + plural(streakInfo().n, "jour") + ' de suite</b><span>Record : ' + plural(streakInfo().best, "jour") + '</span></div></div>' + defiCal(5) + parentsBlock()) + pushBlock() +
-    '<button type="button" class="btn" id="btn-sound">' + (soundOn() ? "🔊 Sons activés" : "🔇 Sons coupés") + '</button><button type="button" class="btn" id="btn-tuto">Revoir le tutoriel</button>' + (PARENT ? "" : '<a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a>') + '<button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
+    '<button type="button" class="btn" id="btn-design">🎨 ' + (DA2 ? "Design 2 · noir" : "Design 1 · clair") + ' — changer</button><button type="button" class="btn" id="btn-sound">' + (soundOn() ? "🔊 Sons activés" : "🔇 Sons coupés") + '</button><button type="button" class="btn" id="btn-tuto">Revoir le tutoriel</button>' + (PARENT ? "" : '<a class="btn" href="#carnet" data-close>Mon carnet de mots (' + store.get("words", []).length + ')</a>') + '<button type="button" class="btn btn-fill" id="btn-logout">Se déconnecter</button>';
   document.getElementById("btn-logout").onclick = function () { this.disabled = true; this.textContent = "Déconnexion…"; logout(); };
   syncBadge(); pushNow().then(syncBadge); bindPush(sheet.querySelector(".wk-body"));
   document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(false); };
   if (PARENT) loadKidsBlock(); else loadParentsBlock();
+  document.getElementById("btn-design").onclick = function () { closeWk(); showDesignPicker(false); };
   loadSw();
   if (ADMIN) { var ab = document.createElement("div"); ab.innerHTML = adminBlock(); var acc = sheet.querySelector(".wk-body .acc-push") || sheet.querySelector(".wk-body #btn-sound"); acc.parentNode.insertBefore(ab.firstChild, acc); loadAdmin(focusAdmin); }
   document.getElementById("btn-sound").onclick = function () { var on = !soundOn(); rawSet("brevet:sound", on ? 1 : 0); this.textContent = on ? "🔊 Sons activés" : "🔇 Sons coupés"; if (on) softTap(); };
@@ -11003,7 +11198,7 @@ function mountMap(root, c) {
    TUTO_V : à augmenter à chaque nouvelle fonctionnalité importante.
    Chaque étape porte « s » = version où elle est apparue (1 par défaut) :
    les comptes qui ont vu une version plus ancienne voient seulement les nouveautés. */
-var TUTO_V = 10;
+var TUTO_V = 11;
 function tutoSteps() {
   if (PARENT) return parentSteps();
   var tiles = '<div class="tv-tiles">' + SUBJECTS.map(function (s) { return '<span style="background:' + col(s.id) + '"><b>' + s.code + '</b><i>' + s.name.split(" ")[0] + '</i></span>'; }).join("") + '</div>';
@@ -11033,6 +11228,8 @@ function tutoSteps() {
       v: '<div class="tv-prog"><span class="avatar tv-av">' + esc(USER ? USER.name.charAt(0).toUpperCase() : "L") + '</span><div><b>Mathématiques</b><i><em style="width:62%"></em></i></div><div><b>Histoire-Géo</b><i><em style="width:35%;background:var(--hg)"></em></i></div></div>' },
     { s: 7, t: "Un parent peut te suivre 👨‍👩‍👧", d: "Dans le rond avec ton initiale, touche <b>« Inviter un parent »</b> : un code s’affiche. Ton parent le tape dans son compte GWENA pour voir tes séries et tes progrès, <b>sans rien pouvoir modifier</b>. Tu peux le retirer quand tu veux.",
       v: '<div class="tv-code"><small>Code à donner à ton parent</small><b>K7P 2QX</b><span>Valable 24 h, une seule fois</span></div>' },
+{ s: 11, t: "Choisis ton design 🎨", d: "Deux designs au choix, avec exactement les mêmes fonctions : <b>clair et classique</b> ou <b>noir et couleurs vives</b>. Change quand tu veux dans ton menu (rond avec ton initiale) → <b>Design</b>.",
+      v: '<div class="tv-dz"><img src="/gwena/design-1.jpg" alt=""><img src="/gwena/design-2.jpg" alt=""></div>' },
     { s: 10, t: "Installe GWENA comme une vraie appli", d: "Sur iPhone comme sur Android : GWENA s’ouvre alors en plein écran avec son icône. <b>Indispensable sur iPhone</b> pour recevoir tes rappels.",
       v: installHtml() },
     { t: "C’est parti !", d: "Conseil : commence par le <b>Résumé</b> d’un chapitre, lis le <b>Cours</b>, puis vérifie avec les <b>Flashcards</b> et le <b>Quiz</b>. Bonnes révisions !", v: '<div class="tv-go">🎯</div>' }
@@ -11482,15 +11679,18 @@ document.getElementById("logo-dots").innerHTML = GLOGO;
 window.addEventListener("hashchange", route);
 function reloadState() { known = store.get("known", {}); scores = store.get("scores", {}); missed = store.get("missed", {}); qmode = store.get("qmode", "10"); }
 function startApp() {
+  if (window.GWENA_DA !== 2) { var dp = designPref() || 1; if ((dp === 2) !== DA2) { rawSet("brevet:da", dp); location.reload(); return; } }
   document.body.classList.add("app-on");
   if (DA2) setupDA2();
   if (PARENT) { setupParent(); setTimeout(function () { if (!document.querySelector(".tuto")) showRecap(false); }, 1500); document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible") showRecap(false); }); }
-  pullNow(true).then(function (r) { setTimeout(ensureNotif, 800); return r; }, function () { setTimeout(ensureNotif, 800); }).then(function (changed) { if (changed) { reloadState(); var h = location.hash; if (!/^#?(quiz|flashcards|defi)/.test(h) || !document.querySelector(".df-body, .opt, .fc")) route(); } });
+  pullNow(true).then(function (r) { if (window.GWENA_DA !== 2 && designPref() && (designPref() === 2) !== DA2) { rawSet("brevet:da", designPref()); location.reload(); } setTimeout(ensureNotif, 800); return r; }, function () { setTimeout(ensureNotif, 800); }).then(function (changed) { if (changed) { reloadState(); var h = location.hash; if (!/^#?(quiz|flashcards|defi)/.test(h) || !document.querySelector(".df-body, .opt, .fc")) route(); } });
   document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") pushNow(true); else pullNow().then(function (ch) { if (ch) { reloadState(); if (!document.querySelector(".df-body, .opt.is-right, .fc")) route(); } }); });
   window.addEventListener("online", function () { pushNow(); });
   setTimeout(refreshPush, 2500);
   window.addEventListener("pagehide", function () { pushNow(true); });
-  document.getElementById("btn-user").textContent = USER.name.charAt(0).toUpperCase(); route(); var tv = +store.get("tutoDone") || 0; if (!tv) setTimeout(showTuto, 300); else if (tv < TUTO_V) setTimeout(function () { showTuto(true); }, 300);
+  document.getElementById("btn-user").textContent = USER.name.charAt(0).toUpperCase(); route(); var tv = +store.get("tutoDone") || 0;
+  if (!tv && !designPref() && window.GWENA_DA !== 2) setTimeout(function () { showDesignPicker(true, function () { setTimeout(showTuto, 200); }); }, 300);
+  else if (!tv) setTimeout(showTuto, 300); else if (tv < TUTO_V) setTimeout(function () { showTuto(true); }, 300);
   if (location.hash === "#acces" && ADMIN) { history.replaceState(null, "", location.pathname); setTimeout(function () { openAccount(true); }, 400); }
 }
 if (USER) {
