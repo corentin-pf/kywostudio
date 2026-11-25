@@ -1225,6 +1225,9 @@ main#app{overflow-x:clip}
 .cz-dots i{width:10px;height:10px;border-radius:50%;display:block}
 .tv-cz{display:grid;grid-template-columns:repeat(5,40px);gap:10px;justify-content:center;padding:14px 0}
 .tv-cz i{width:40px;height:40px;border-radius:50%;display:block}
+
+a.count{color:inherit;text-decoration:none;cursor:pointer;transition:transform .12s}
+a.count:active{transform:scale(.98)}
 /* ===================================================================
    GWENA · direction artistique n° 2 (test sur /gwena-da2/)
    Noir permanent, gros titres très gras, blocs pleins de couleur vive,
@@ -10053,7 +10056,7 @@ function viewHome2() {
     '<div class="d2-days"><b>AUJOURD’HUI</b>' + [1, 2, 3, 4].map(function (k) { return '<span>' + addDays(t, k).getDate() + '</span>'; }).join("") + '</div>' +
     '<a class="d2-blk d2-defi' + (st.today ? " is-done" : "") + '" href="#defi"><span class="d2-t">DÉFI DU JOUR</span><span class="d2-sub">' + FLAME + ' ' + st.n + (st.n > 1 ? " JOURS" : " JOUR") + '</span><span class="d2-n">' + (st.today ? sc + "/10" : "10 Q") + '</span></a>' +
     weekStrip() +
-    '<div class="d2-blk d2-count"><span class="d2-t">J-' + j + '</span><span class="d2-n">BREVET · 24 JUIN</span></div>' +
+    '<a class="d2-blk d2-count" href="#examen"><span class="d2-t">J-' + j + '</span><span class="d2-n">BREVET · 24 JUIN</span></a>' +
     '<p class="d2-lab">MATIÈRES</p>' +
     SUBJECTS.map(function (s) { var p = subPct(s.id); return '<a class="d2-blk d2-sb' + (p >= 80 ? " is-done" : "") + '" href="#' + s.id + '" style="--sub:' + col(s.id) + ';--ink:' + ink(s.id) + '"><span class="d2-t">' + shortName(s).toUpperCase() + '</span><span class="d2-n">' + p + '%</span></a>'; }).join("") +
   '</section>';
@@ -11704,9 +11707,9 @@ function tickCount() {
   Array.prototype.forEach.call(el.querySelectorAll("b"), function (b, k) { var t = k ? pad(v[k]) : String(v[k]); if (b.textContent !== t) { b.textContent = t; if (k === 3) { b.classList.remove("tk"); void b.offsetWidth; b.classList.add("tk"); } } });
 }
 function countHtml() {
-  return '<div class="count"><span class="count-l">Avant les écrits du brevet</span>' +
+  return '<a class="count" href="#examen" aria-label="Voir la page Examen"><span class="count-l">Avant les écrits du brevet</span>' +
     '<div class="cd" id="cd">' + [["jours"], ["heures"], ["min"], ["s"]].map(function (u) { return '<span><b>–</b><small>' + u[0] + '</small></span>'; }).join("") + '</div>' +
-    '<span class="count-s">Jeudi 24 juin 2027 · 8 h · Épreuve de français</span></div>';
+    '<span class="count-s">Jeudi 24 juin 2027 · 8 h · Épreuve de français</span></a>';
 }
 
 document.addEventListener("click", function (e) { if (e.target.closest("[data-open-acc]")) openAccount(); });
