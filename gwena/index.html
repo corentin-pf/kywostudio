@@ -1258,6 +1258,8 @@ a.count:active{transform:scale(.98)}
 .tv-av{display:grid;place-items:center;padding:22px 0}
 .tv-av-c{position:relative;width:76px;height:76px;border-radius:50%;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-size:34px;font-weight:800}
 .tv-av-c i{position:absolute;right:-4px;bottom:-4px;width:30px;height:30px;border-radius:50%;background:#0A6CFF;color:#fff;border:3px solid var(--raise);display:grid;place-items:center;font-style:normal;font-size:20px;font-weight:700}
+.av-plus svg,.tv-av-c i svg{width:11px;height:11px;display:block;stroke:#fff;stroke-width:2.2;stroke-linecap:round;fill:none}
+.tv-av-c i svg{width:13px;height:13px}
 /* ===================================================================
    GWENA · direction artistique n° 2 (test sur /gwena-da2/)
    Noir permanent, gros titres très gras, blocs pleins de couleur vive,
@@ -10590,7 +10592,7 @@ function parentSteps() {
 { s: 13, t: "Les couleurs de ton enfant", d: "Chaque élève choisit la couleur de ses matières. Ton appli prend automatiquement <b>les couleurs de l’enfant que tu regardes</b> : elles changent quand tu passes d’un enfant à l’autre.",
       v: '<div class="tv-cz">' + PAL.map(function (p) { return '<i style="background:' + p[2] + '"></i>'; }).join("") + '</div>' },
 { s: 14, t: "Ta photo de profil", d: "Facultatif : dans ton menu, touche le petit <b>+</b> sur le rond avec ton initiale, choisis une photo et ajuste-la dans le rond. Pour la changer ensuite, touche simplement ta photo.",
-      v: '<div class="tv-av"><span class="tv-av-c">' + (USER ? esc(USER.name.charAt(0).toUpperCase()) : "G") + '<i>+</i></span></div>' },
+      v: '<div class="tv-av"><span class="tv-av-c">' + (USER ? esc(USER.name.charAt(0).toUpperCase()) : "G") + '<i><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5v9M1.5 6h9"/></svg></i></span></div>' },
     { s: 10, t: "Installe GWENA comme une vraie appli", d: "Sur iPhone comme sur Android : GWENA s’ouvre alors en plein écran avec son icône. <b>Indispensable sur iPhone</b> pour recevoir les notifications.", v: installHtml() }
   ];
 }
@@ -10891,7 +10893,7 @@ function accRow(id, ic, t, v, href) {
 }
 function openAccount(focusAdmin) {
   sheet.hidden = false; document.body.classList.add("wk-open");
-  sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><button type="button" class="acc-av-btn" id="acc-av" aria-label="' + (avatarUrl() ? "Modifier ma photo de profil" : "Ajouter une photo de profil") + '"><b class="acc-av' + (avatarUrl() ? " has-img" : "") + '">' + avHtml() + '</b>' + (avatarUrl() ? "" : '<span class="av-plus" aria-hidden="true">+</span>') + '</button><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Compte en ligne · tous tes appareils</p></div></div>' +
+  sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><button type="button" class="acc-av-btn" id="acc-av" aria-label="' + (avatarUrl() ? "Modifier ma photo de profil" : "Ajouter une photo de profil") + '"><b class="acc-av' + (avatarUrl() ? " has-img" : "") + '">' + avHtml() + '</b>' + (avatarUrl() ? "" : '<span class="av-plus" aria-hidden="true"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5v9M1.5 6h9"/></svg></span>') + '</button><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Compte en ligne · tous tes appareils</p></div></div>' +
     '<p class="wk-e acc-sync" id="acc-sync"></p>' + swBlock() +
     (PARENT ? kidsBlock() : '<div class="acc-streak"><span class="flame' + (streakInfo().today ? "" : " off") + '">' + FLAME + '</span><div><b>' + plural(streakInfo().n, "jour") + ' de suite</b><span>Record : ' + plural(streakInfo().best, "jour") + '</span></div></div>' + defiCal(5) + parentsBlock()) + pushBlock() +
     '<p class="acc-lab">Réglages</p><div class="acc-list">' +
@@ -11498,7 +11500,7 @@ function tutoSteps() {
 { s: 12, t: "Les couleurs de tes matières", d: "Choisis une couleur par matière parmi dix. Elle change partout : accueil, cours, flashcards, quiz. Dans ton menu → <b>Couleurs des matières</b>.",
       v: '<div class="tv-cz">' + PAL.map(function (p) { return '<i style="background:' + p[2] + '"></i>'; }).join("") + '</div>' },
 { s: 14, t: "Ta photo de profil", d: "Facultatif : dans ton menu, touche le petit <b>+</b> sur le rond avec ton initiale, choisis une photo et ajuste-la dans le rond. Pour la changer ensuite, touche simplement ta photo.",
-      v: '<div class="tv-av"><span class="tv-av-c">' + (USER ? esc(USER.name.charAt(0).toUpperCase()) : "G") + '<i>+</i></span></div>' },
+      v: '<div class="tv-av"><span class="tv-av-c">' + (USER ? esc(USER.name.charAt(0).toUpperCase()) : "G") + '<i><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5v9M1.5 6h9"/></svg></i></span></div>' },
     { s: 10, t: "Installe GWENA comme une vraie appli", d: "Sur iPhone comme sur Android : GWENA s’ouvre alors en plein écran avec son icône. <b>Indispensable sur iPhone</b> pour recevoir tes rappels.",
       v: installHtml() },
     { t: "C’est parti !", d: "Conseil : commence par le <b>Résumé</b> d’un chapitre, lis le <b>Cours</b>, puis vérifie avec les <b>Flashcards</b> et le <b>Quiz</b>. Bonnes révisions !", v: '<div class="tv-go">🎯</div>' }
