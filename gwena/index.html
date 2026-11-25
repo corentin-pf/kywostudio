@@ -1228,6 +1228,7 @@ main#app{overflow-x:clip}
 
 a.count{color:inherit;text-decoration:none;cursor:pointer;transition:transform .12s}
 a.count:active{transform:scale(.98)}
+.rc-still,.rc-still .rc-card{animation:none}
 /* ===================================================================
    GWENA · direction artistique n° 2 (test sur /gwena-da2/)
    Noir permanent, gros titres très gras, blocs pleins de couleur vive,
@@ -10676,11 +10677,13 @@ function showDesignPicker(force, done) {
   ov.className = "rc-ov dz-ov"; document.body.appendChild(ov); document.body.classList.add("wk-open");
   var close = function () { ov.remove(); document.body.classList.remove("wk-open"); if (done) done(); };
   function draw() {
+    var oc = ov.querySelector(".rc-card"), st = oc ? oc.scrollTop : 0; if (oc) ov.classList.add("rc-still");
     ov.innerHTML = '<div class="rc-card dz-card" role="dialog" aria-modal="true" aria-label="Choisis ton design">' +
       '<div class="rc-top"><span class="rc-k">🎨 ' + (force ? "Bienvenue sur GWENA" : "Design") + '</span>' + (force ? "" : '<button type="button" class="rc-x" data-dz="close" aria-label="Fermer">✕</button>') + '</div>' +
       '<h2>Choisis ton design</h2><p class="nt-lead">Les deux ont exactement les mêmes fonctions. Tu pourras changer à tout moment dans ton menu.</p>' +
       '<div class="dz-grid">' + DESIGNS.map(function (d) { return '<button type="button" class="dz-opt' + (sel === d[0] ? " on" : "") + '" data-dz="' + d[0] + '" aria-pressed="' + (sel === d[0]) + '"><span class="dz-img"><img src="/gwena/design-' + d[0] + '.jpg" alt="Aperçu du ' + d[1] + '" loading="eager"></span><b>' + d[1] + '</b><span>' + d[2] + '</span></button>'; }).join("") + '</div>' +
       '<div class="rc-nav"><button type="button" class="btn btn-fill" data-dz="ok">' + (!force && sel === cur ? "Garder ce design" : "Continuer avec le design " + sel) + '</button></div></div>';
+    if (st) ov.querySelector(".rc-card").scrollTop = st;
   }
   ov.onclick = function (e) {
     var b = e.target.closest("[data-dz]"); if (!b) return;
@@ -10708,6 +10711,7 @@ function showColorPicker(force, done) {
     ov.remove(); document.body.classList.remove("wk-open"); if (done) done();
   };
   function draw() {
+    var oc = ov.querySelector(".rc-card"), st = oc ? oc.scrollTop : 0; if (oc) ov.classList.add("rc-still");
     var owner = {}; SUBJECTS.forEach(function (s) { owner[m[s.id]] = s; });
     ov.innerHTML = '<div class="rc-card cz-card" role="dialog" aria-modal="true" aria-label="Choisis les couleurs des matières">' +
       '<div class="rc-top"><span class="rc-k">🎨 Couleurs</span>' + (force ? "" : '<button type="button" class="rc-x" data-cz="close" aria-label="Fermer">✕</button>') + '</div>' +
@@ -10717,6 +10721,7 @@ function showColorPicker(force, done) {
       '<div class="cz-pal">' + PAL.map(function (p) { var o = owner[p[0]], on = m[cur] === p[0]; return '<button type="button" class="cz-sw' + (on ? " on" : "") + '" data-cz-c="' + p[0] + '" aria-pressed="' + on + '" aria-label="' + p[1] + (o && !on ? ", déjà prise par " + o.name : "") + '" style="--c:' + p[2] + ';--ci:' + p[3] + '">' + (on ? "✓" : o ? o.code : "") + '</button>'; }).join("") + '</div>' +
       '<p class="cz-h">Une couleur déjà prise ? Les deux matières échangent leurs couleurs.</p>' +
       '<div class="rc-nav cz-nav"><button type="button" class="btn" data-cz="reset">Couleurs d’origine</button><button type="button" class="btn btn-fill" data-cz="ok">Valider</button></div></div>';
+    if (st) ov.querySelector(".rc-card").scrollTop = st;
   }
   ov.onclick = function (e) {
     var b = e.target.closest("[data-cz],[data-cz-s],[data-cz-c]"); if (!b) return;
