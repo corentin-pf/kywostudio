@@ -1229,6 +1229,35 @@ main#app{overflow-x:clip}
 a.count{color:inherit;text-decoration:none;cursor:pointer;transition:transform .12s}
 a.count:active{transform:scale(.98)}
 .rc-still,.rc-still .rc-card{animation:none}
+
+/* photo de profil */
+.avatar{overflow:hidden;padding:0}
+.avatar img,.acc-av img,.d2-n img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.acc-av{overflow:hidden}
+.acc-av.has-img{background:var(--soft)}
+.acc-av-btn{position:relative;flex:none;border:0;padding:0;background:none;color:inherit;cursor:pointer;border-radius:50%;line-height:0}
+.av-plus{position:absolute;right:-5px;bottom:-5px;width:24px;height:24px;border-radius:50%;background:#0A6CFF;color:#fff;border:2.5px solid var(--av-ring,var(--bg));display:grid;place-items:center;font-size:17px;font-weight:700;line-height:1}
+.av-stage{position:relative;width:100%;max-width:300px;aspect-ratio:1;margin:0 auto;border-radius:20px;overflow:hidden;background:#111;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
+.av-stage:active{cursor:grabbing}
+.av-src{position:absolute;left:0;top:0;max-width:none;transform-origin:0 0;pointer-events:none;opacity:0}
+.av-stage.on .av-src{opacity:1}
+.av-mask{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle closest-side,transparent calc(100% - 1px),rgba(0,0,0,.62) 100%)}
+.av-mask::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.9)}
+.av-load{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;color:#fff;font-size:14px}
+.av-stage.on .av-load{display:none}
+.av-zoom{display:flex;align-items:center;gap:12px;max-width:300px;width:100%;margin:0 auto;font-weight:800;font-size:18px;color:var(--mute)}
+.av-zoom input{flex:1;accent-color:var(--fg)}
+.av-prev{display:flex;align-items:center;justify-content:center;gap:14px;font-size:13px;color:var(--mute)}
+.av-prev canvas{border-radius:50%;background:var(--soft)}
+.av-p1{width:52px;height:52px}
+.av-p2{width:38px;height:38px}
+.av-big{width:180px;height:180px;margin:4px auto 0;border-radius:50%;overflow:hidden;background:var(--soft)}
+.av-big img{width:100%;height:100%;object-fit:cover;display:block}
+.av-nav{gap:8px;flex-wrap:wrap}
+.av-nav .btn{flex:1 1 auto}
+.tv-av{display:grid;place-items:center;padding:22px 0}
+.tv-av-c{position:relative;width:76px;height:76px;border-radius:50%;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-size:34px;font-weight:800}
+.tv-av-c i{position:absolute;right:-4px;bottom:-4px;width:30px;height:30px;border-radius:50%;background:#0A6CFF;color:#fff;border:3px solid var(--raise);display:grid;place-items:center;font-style:normal;font-size:20px;font-weight:700}
 /* ===================================================================
    GWENA · direction artistique n° 2 (test sur /gwena-da2/)
    Noir permanent, gros titres très gras, blocs pleins de couleur vive,
@@ -1395,6 +1424,10 @@ body.defi-mode .fab-bar,body.wk-open .fab-bar,body.locked .fab-bar,body.d2-nav-o
 .da2 .acc-push,.da2 .acc-kids,.da2 .acc-adm{border:0;background:#151517;border-radius:24px}
 
 .da2 .cz-sub,.da2 .cz-nav .btn{border-radius:999px}
+.da2 .wk-sheet{--av-ring:#0e0e10}
+.da2 .av-nav .btn{border-radius:999px}
+.da2 .d2-acc .d2-n.has-img{width:44px;height:44px;flex:none}
+.da2 .avatar.has-img{background:#222}
 </style>
 </head>
 <body>
@@ -10086,7 +10119,7 @@ function setupDA2() {
     if (b.dataset.fab === "search") { document.getElementById("btn-search").click(); return; }
     var links = Array.prototype.slice.call(document.querySelectorAll(".tabbar a"));
     nav.innerHTML = '<div class="d2-nav-in">' + links.map(function (a, k) { return '<a class="d2-blk" style="--sub:' + cols[k % 6] + '" href="' + a.getAttribute("href") + '"><span class="d2-t">' + a.textContent.trim().toUpperCase() + '</span></a>'; }).join("") +
-      '<button type="button" class="d2-blk d2-acc" style="--sub:#fff"><span class="d2-t">MON COMPTE</span><span class="d2-n">' + (USER ? esc(USER.name.charAt(0).toUpperCase()) : "") + '</span></button></div>' +
+      '<button type="button" class="d2-blk d2-acc" style="--sub:#fff"><span class="d2-t">MON COMPTE</span><span class="d2-n' + (avatarUrl() ? " has-img" : "") + '">' + avHtml() + '</span></button></div>' +
       '<button type="button" class="fab d2-close" aria-label="Fermer">' + ICO_X + '</button>';
     nav.hidden = false; document.body.classList.add("d2-nav-open");
   };
@@ -10556,6 +10589,8 @@ function parentSteps() {
       v: '<div class="tv-dz"><img src="/gwena/design-1.jpg" alt=""><img src="/gwena/design-2.jpg" alt=""></div>' },
 { s: 13, t: "Les couleurs de ton enfant", d: "Chaque élève choisit la couleur de ses matières. Ton appli prend automatiquement <b>les couleurs de l’enfant que tu regardes</b> : elles changent quand tu passes d’un enfant à l’autre.",
       v: '<div class="tv-cz">' + PAL.map(function (p) { return '<i style="background:' + p[2] + '"></i>'; }).join("") + '</div>' },
+{ s: 14, t: "Ta photo de profil", d: "Facultatif : dans ton menu, touche le petit <b>+</b> sur le rond avec ton initiale, choisis une photo et ajuste-la dans le rond. Pour la changer ensuite, touche simplement ta photo.",
+      v: '<div class="tv-av"><span class="tv-av-c">' + (USER ? esc(USER.name.charAt(0).toUpperCase()) : "G") + '<i>+</i></span></div>' },
     { s: 10, t: "Installe GWENA comme une vraie appli", d: "Sur iPhone comme sur Android : GWENA s’ouvre alors en plein écran avec son icône. <b>Indispensable sur iPhone</b> pour recevoir les notifications.", v: installHtml() }
   ];
 }
@@ -10749,6 +10784,99 @@ function showColorPicker(force, done) {
   };
   draw();
 }
+/* photo de profil (facultative) : image 256 × 256 recadrée en rond, enregistrée avec le compte (data.avatar) */
+function avatarUrl() { var a = USER ? store.get("avatar", null) : null; return typeof a === "string" && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+\/=]+$/.test(a) ? a : null; }
+function avHtml() { var a = avatarUrl(); return a ? '<img src="' + a + '" alt="">' : (USER ? esc(USER.name.charAt(0).toUpperCase()) : ""); }
+function paintAvatars() {
+  if (!USER) return;
+  var a = !!avatarUrl(), b = document.getElementById("btn-user");
+  if (b) { b.innerHTML = avHtml(); b.classList.toggle("has-img", a); }
+  var n = document.querySelector(".d2-acc .d2-n"); if (n) { n.innerHTML = avHtml(); n.classList.toggle("has-img", a); }
+}
+function avSheetBack() { if (!sheet.hidden) { document.body.classList.add("wk-open"); openAccount(); } }
+function pickAvatarFile() {
+  Array.prototype.forEach.call(document.querySelectorAll(".av-file"), function (x) { x.remove(); });
+  var inp = document.createElement("input"); inp.type = "file"; inp.accept = "image/*"; inp.className = "av-file"; inp.style.display = "none";
+  document.body.appendChild(inp);
+  inp.onchange = function () { var f = inp.files && inp.files[0]; inp.remove(); if (f) showAvatarCrop(f); };
+  inp.click();
+}
+function showAvatarMenu() {
+  if (!avatarUrl()) { pickAvatarFile(); return; }
+  var ov = document.createElement("div"); ov.className = "rc-ov av-ov"; document.body.appendChild(ov); document.body.classList.add("wk-open");
+  var close = function () { ov.remove(); document.body.classList.remove("wk-open"); avSheetBack(); };
+  ov.innerHTML = '<div class="rc-card av-card" role="dialog" aria-modal="true" aria-label="Photo de profil">' +
+    '<div class="rc-top"><span class="rc-k">📷 Photo de profil</span><button type="button" class="rc-x" data-av="close" aria-label="Fermer">✕</button></div>' +
+    '<div class="av-big"><img src="' + avatarUrl() + '" alt="Ta photo de profil"></div>' +
+    '<div class="rc-nav av-nav"><button type="button" class="btn" data-av="del">Retirer la photo</button><button type="button" class="btn btn-fill" data-av="pick">Changer la photo</button></div></div>';
+  ov.onclick = function (e) {
+    var b = e.target.closest("[data-av]"); if (!b && e.target !== ov) return;
+    var a = b ? b.dataset.av : "close";
+    if (a === "pick") { ov.remove(); document.body.classList.remove("wk-open"); pickAvatarFile(); return; }
+    if (a === "del") { store.set("avatar", null); paintAvatars(); }
+    close();
+  };
+}
+function showAvatarCrop(file) {
+  var url = URL.createObjectURL(file), img = new Image();
+  var ov = document.createElement("div"); ov.className = "rc-ov av-ov"; document.body.appendChild(ov); document.body.classList.add("wk-open");
+  var close = function (back) { URL.revokeObjectURL(url); ov.remove(); document.body.classList.remove("wk-open"); if (back !== false) avSheetBack(); };
+  ov.innerHTML = '<div class="rc-card av-card" role="dialog" aria-modal="true" aria-label="Ajuste ta photo">' +
+    '<div class="rc-top"><span class="rc-k">📷 Photo de profil</span><button type="button" class="rc-x" data-av="close" aria-label="Fermer">✕</button></div>' +
+    '<h2>Ajuste ta photo</h2><p class="nt-lead">Fais glisser la photo pour la placer dans le rond, et zoome avec le curseur (ou deux doigts).</p>' +
+    '<div class="av-stage"><img class="av-src" alt="" draggable="false"><span class="av-mask"></span><span class="av-load">Chargement…</span></div>' +
+    '<div class="av-zoom"><span aria-hidden="true">−</span><input type="range" min="1" max="4" step="0.01" value="1" aria-label="Zoom"><span aria-hidden="true">+</span></div>' +
+    '<div class="av-prev"><span>Aperçu</span><canvas width="104" height="104" class="av-p1"></canvas><canvas width="76" height="76" class="av-p2"></canvas></div>' +
+    '<div class="rc-nav av-nav"><button type="button" class="btn" data-av="pick">Autre photo</button><button type="button" class="btn btn-fill" data-av="ok" disabled>Valider</button></div></div>';
+  var st = ov.querySelector(".av-stage"), im = ov.querySelector(".av-src"), rg = ov.querySelector("input[type=range]"), okb = ov.querySelector('[data-av="ok"]');
+  var W = 0, H = 0, S = 0, base = 1, z = 1, x = 0, y = 0, ready = false, raf = 0;
+  function sc() { return base * z; }
+  function clamp() { var k = sc(); x = Math.min(0, Math.max(S - W * k, x)); y = Math.min(0, Math.max(S - H * k, y)); }
+  function draw(c, size) { var g = c.getContext("2d"), k = sc(); g.clearRect(0, 0, size, size); g.save(); g.beginPath(); g.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2); g.clip(); g.drawImage(img, -x / k, -y / k, S / k, S / k, 0, 0, size, size); g.restore(); }
+  function paint() {
+    clamp(); im.style.transform = "translate(" + x + "px," + y + "px) scale(" + sc() + ")";
+    cancelAnimationFrame(raf); raf = requestAnimationFrame(function () { draw(ov.querySelector(".av-p1"), 104); draw(ov.querySelector(".av-p2"), 76); });
+  }
+  function zoomTo(nz, cx, cy) {
+    nz = Math.max(1, Math.min(4, nz)); if (cx == null) { cx = S / 2; cy = S / 2; }
+    var k = sc(), px = (cx - x) / k, py = (cy - y) / k; z = nz; x = cx - px * sc(); y = cy - py * sc(); rg.value = z; paint();
+  }
+  img.onload = function () {
+    W = img.naturalWidth; H = img.naturalHeight; S = st.clientWidth; base = S / Math.min(W, H);
+    im.src = url; im.style.width = W + "px"; im.style.height = H + "px";
+    x = (S - W * base) / 2; y = (S - H * base) / 2; ready = true; okb.disabled = false; st.classList.add("on"); paint();
+  };
+  img.onerror = function () { ov.querySelector(".av-load").textContent = "Impossible d’ouvrir cette image. Choisis une autre photo."; };
+  img.src = url;
+  var pts = {}, last = null, pinch = 0;
+  st.addEventListener("pointerdown", function (e) { if (!ready) return; try { st.setPointerCapture(e.pointerId); } catch (er) {} pts[e.pointerId] = [e.clientX, e.clientY]; last = null; pinch = 0; });
+  st.addEventListener("pointermove", function (e) {
+    if (!pts[e.pointerId]) return; pts[e.pointerId] = [e.clientX, e.clientY];
+    var ids = Object.keys(pts), r = st.getBoundingClientRect();
+    if (ids.length >= 2) {
+      var a = pts[ids[0]], b = pts[ids[1]], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
+      if (pinch) zoomTo(z * d / pinch, (a[0] + b[0]) / 2 - r.left, (a[1] + b[1]) / 2 - r.top);
+      pinch = d; last = null; return;
+    }
+    if (last) { x += e.clientX - last[0]; y += e.clientY - last[1]; paint(); }
+    last = [e.clientX, e.clientY];
+  });
+  var up = function (e) { delete pts[e.pointerId]; last = null; pinch = 0; };
+  st.addEventListener("pointerup", up); st.addEventListener("pointercancel", up);
+  st.addEventListener("wheel", function (e) { if (!ready) return; e.preventDefault(); var r = st.getBoundingClientRect(); zoomTo(z * (e.deltaY < 0 ? 1.08 : 1 / 1.08), e.clientX - r.left, e.clientY - r.top); }, { passive: false });
+  rg.oninput = function () { if (ready) zoomTo(+rg.value); };
+  ov.onclick = function (e) {
+    var b = e.target.closest("[data-av]"); if (!b || b.disabled) return;
+    var a = b.dataset.av;
+    if (a === "close") close();
+    else if (a === "pick") { close(false); pickAvatarFile(); }
+    else if (a === "ok") {
+      var c = document.createElement("canvas"), k = sc(); c.width = c.height = 256;
+      var g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, 256, 256); g.drawImage(img, -x / k, -y / k, S / k, S / k, 0, 0, 256, 256);
+      store.set("avatar", c.toDataURL("image/jpeg", 0.85)); paintAvatars(); close();
+    }
+  };
+}
 /* lignes de réglages du menu du compte */
 var ARI = {
   design: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 0 0 17z" fill="currentColor"/></svg>',
@@ -10763,7 +10891,7 @@ function accRow(id, ic, t, v, href) {
 }
 function openAccount(focusAdmin) {
   sheet.hidden = false; document.body.classList.add("wk-open");
-  sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><b class="acc-av">' + esc(USER.name.charAt(0).toUpperCase()) + '</b><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Compte en ligne · tous tes appareils</p></div></div>' +
+  sheet.querySelector(".wk-body").innerHTML = '<div class="acc"><button type="button" class="acc-av-btn" id="acc-av" aria-label="' + (avatarUrl() ? "Modifier ma photo de profil" : "Ajouter une photo de profil") + '"><b class="acc-av' + (avatarUrl() ? " has-img" : "") + '">' + avHtml() + '</b>' + (avatarUrl() ? "" : '<span class="av-plus" aria-hidden="true">+</span>') + '</button><div><h3>' + esc(USER.name) + '</h3><p class="wk-d">Compte en ligne · tous tes appareils</p></div></div>' +
     '<p class="wk-e acc-sync" id="acc-sync"></p>' + swBlock() +
     (PARENT ? kidsBlock() : '<div class="acc-streak"><span class="flame' + (streakInfo().today ? "" : " off") + '">' + FLAME + '</span><div><b>' + plural(streakInfo().n, "jour") + ' de suite</b><span>Record : ' + plural(streakInfo().best, "jour") + '</span></div></div>' + defiCal(5) + parentsBlock()) + pushBlock() +
     '<p class="acc-lab">Réglages</p><div class="acc-list">' +
@@ -10773,6 +10901,7 @@ function openAccount(focusAdmin) {
       (PARENT ? "" : accRow("", "carnet", "Mon carnet de mots", String(store.get("words", []).length), "#carnet")) +
       accRow("btn-tuto", "tuto", "Revoir le tutoriel", "") +
     '</div><button type="button" class="acc-out" id="btn-logout">Se déconnecter</button>';
+  document.getElementById("acc-av").onclick = showAvatarMenu;
   document.getElementById("btn-logout").onclick = function () { this.disabled = true; this.textContent = "Déconnexion…"; logout(); };
   syncBadge(); pushNow().then(syncBadge); bindPush(sheet.querySelector(".wk-body"));
   document.getElementById("btn-tuto").onclick = function () { closeWk(); showTuto(false); };
@@ -11334,7 +11463,7 @@ function mountMap(root, c) {
    TUTO_V : à augmenter à chaque nouvelle fonctionnalité importante.
    Chaque étape porte « s » = version où elle est apparue (1 par défaut) :
    les comptes qui ont vu une version plus ancienne voient seulement les nouveautés. */
-var TUTO_V = 13;
+var TUTO_V = 14;
 function tutoSteps() {
   if (PARENT) return parentSteps();
   var tiles = '<div class="tv-tiles">' + SUBJECTS.map(function (s) { return '<span style="background:' + col(s.id) + '"><b>' + s.code + '</b><i>' + s.name.split(" ")[0] + '</i></span>'; }).join("") + '</div>';
@@ -11368,6 +11497,8 @@ function tutoSteps() {
       v: '<div class="tv-dz"><img src="/gwena/design-1.jpg" alt=""><img src="/gwena/design-2.jpg" alt=""></div>' },
 { s: 12, t: "Les couleurs de tes matières", d: "Choisis une couleur par matière parmi dix. Elle change partout : accueil, cours, flashcards, quiz. Dans ton menu → <b>Couleurs des matières</b>.",
       v: '<div class="tv-cz">' + PAL.map(function (p) { return '<i style="background:' + p[2] + '"></i>'; }).join("") + '</div>' },
+{ s: 14, t: "Ta photo de profil", d: "Facultatif : dans ton menu, touche le petit <b>+</b> sur le rond avec ton initiale, choisis une photo et ajuste-la dans le rond. Pour la changer ensuite, touche simplement ta photo.",
+      v: '<div class="tv-av"><span class="tv-av-c">' + (USER ? esc(USER.name.charAt(0).toUpperCase()) : "G") + '<i>+</i></span></div>' },
     { s: 10, t: "Installe GWENA comme une vraie appli", d: "Sur iPhone comme sur Android : GWENA s’ouvre alors en plein écran avec son icône. <b>Indispensable sur iPhone</b> pour recevoir tes rappels.",
       v: installHtml() },
     { t: "C’est parti !", d: "Conseil : commence par le <b>Résumé</b> d’un chapitre, lis le <b>Cours</b>, puis vérifie avec les <b>Flashcards</b> et le <b>Quiz</b>. Bonnes révisions !", v: '<div class="tv-go">🎯</div>' }
@@ -11815,7 +11946,7 @@ function route() {
 
 document.getElementById("logo-dots").innerHTML = GLOGO;
 window.addEventListener("hashchange", route);
-function reloadState() { applyColors(); known = store.get("known", {}); scores = store.get("scores", {}); missed = store.get("missed", {}); qmode = store.get("qmode", "10"); }
+function reloadState() { applyColors(); paintAvatars(); known = store.get("known", {}); scores = store.get("scores", {}); missed = store.get("missed", {}); qmode = store.get("qmode", "10"); }
 function startApp() {
   if (window.GWENA_DA !== 2) { var dp = designPref() || 1; if ((dp === 2) !== DA2) { rawSet("brevet:da", dp); location.reload(); return; } }
   document.body.classList.add("app-on"); applyColors();
@@ -11826,7 +11957,7 @@ function startApp() {
   window.addEventListener("online", function () { pushNow(); });
   setTimeout(refreshPush, 2500);
   window.addEventListener("pagehide", function () { pushNow(true); });
-  document.getElementById("btn-user").textContent = USER.name.charAt(0).toUpperCase(); route(); var tv = +store.get("tutoDone") || 0;
+  paintAvatars(); route(); var tv = +store.get("tutoDone") || 0;
   /* première ouverture : design, puis couleurs des matières, puis tutoriel (le choix du design peut recharger la page) */
   var firstRun = function () {
     if (!designPref() && window.GWENA_DA !== 2) showDesignPicker(true, firstRun);
