@@ -10958,7 +10958,7 @@ function disablePush() {
 function testPush() {
   return currentSub().then(function (sub) {
     if (!sub) throw new Error("nosub");
-    return fetch(SB_URL + "/functions/v1/rappels", { method: "POST", headers: { "Content-Type": "application/json", apikey: SB_KEY }, body: JSON.stringify({ test: true, kind: PARENT ? "parent" : "eleve", kids: (KIDS || []).map(function (k) { return k.name; }), sub: sub.toJSON(), name: USER ? USER.name : "", days: store.get("defiDays", {}), slot: new Date().getHours() >= 17 ? 19 : 15 }) }).then(function (r) { return r.json(); });
+    return fetch(SB_URL + "/functions/v1/rappels", { method: "POST", headers: { "Content-Type": "application/json", apikey: SB_KEY }, body: JSON.stringify({ test: true, kind: PARENT ? "parent" : "eleve", kids: (KIDS || []).map(function (k) { return k.name; }), sub: sub.toJSON(), name: USER ? USER.name : "", days: store.get("defiDays", {}), slot: Math.random() < 0.5 ? 15 : 19 }) }).then(function (r) { return r.json(); });
   });
 }
 function refreshPush() {
